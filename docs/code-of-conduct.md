@@ -12,14 +12,8 @@ for everybody.
 Need Help?
 ----------
 
-You can reach the course director, Titus Brown, at ctbrown@ucdavis.edu
-or via the cell phone number he has sent out.  You can also talk to
-any of the instructors or TAs if you need immediate help, or (in an
-emergency) call 911.
-
-Sue McClatchy, Susan.McClatchy@jax.org is the person to contact if
-Titus is not available or there are larger problems; she is readily
-available by e-mail.
+You can reach the course director, Titus Brown, at ctbrown@ucdavis.edu. 
+You can also talk to any of the instructors or TAs if you need immediate help. 
 
 The Quick Version
 -----------------
