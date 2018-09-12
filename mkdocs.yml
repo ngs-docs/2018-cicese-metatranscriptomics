@@ -1,0 +1,41 @@
+site_name: 2018-CICESE-Metatranscriptomics-workshop 
+site_url: https://bluegenes.github.io/2018-metatranscriptomics
+repo_name: bluegenes/2018-metatranscriptomics-workshop-dev
+repo_url: https://github.com/bluegenes/2018-metatranscriptomics-workshop-dev
+edit_uri: ""
+
+copyright: 'Copyright &copy; 2018 <a href="http://ivory.idyll.org/lab/">Lab for Data Intensive Biology</a> at UC Davis'
+
+# change directory names here
+docs_dir: docs
+site_dir: site
+
+theme:
+
+  # the next 2 lines are required to use the DIB version
+  name: null
+  custom_dir: 'mkdocs-material-dib/material'
+
+  # pretty colors! see https://squidfunk.github.io/mkdocs-material/getting-started/#primary-colors
+  palette:
+    primary: 'darkblue'
+    accent: 'blue'
+  
+  # fun logos! see https://material.io/icons/
+  logo:
+    icon: 'dns'
+
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+
+# this will add docs/css/custom.css to all your docs
+extra_css:
+  - css/custom.css
+
+# give a title for each page
+pages:
+  - 'Index' : 'index.md'
+  - 'Schedule' : 'schedule.md'
+  # etc...
+
