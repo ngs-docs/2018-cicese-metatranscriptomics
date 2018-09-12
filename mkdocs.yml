@@ -1,6 +1,6 @@
-site_name: 2018-CICESE-Metatranscriptomics-workshop 
+site_name: 2018 CICESE Metatranscriptomics workshop 
 site_url: https://bluegenes.github.io/2018-metatranscriptomics
-repo_name: bluegenes/2018-metatranscriptomics-workshop-dev
+repo_name: 2018-metatranscriptomics-workshop-dev
 repo_url: https://github.com/bluegenes/2018-metatranscriptomics-workshop-dev
 edit_uri: ""
 
@@ -34,7 +34,7 @@ extra_css:
   - css/custom.css
 
 # give a title for each page
-pages:
+nav:
   - 'Index' : 'index.md'
   - 'Schedule' : 'schedule.md'
   # etc...

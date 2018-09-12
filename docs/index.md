@@ -1,3 +1,4 @@
 
 
-Index goes here
+
+Workshop to take place, early Nov 2018
