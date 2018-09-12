@@ -19,7 +19,7 @@ theme:
   # pretty colors! see https://squidfunk.github.io/mkdocs-material/getting-started/#primary-colors
   palette:
     primary: 'teal'
-    accent: 'blue'
+    accent: 'teal'
   
   # fun logos! see https://material.io/icons/
   logo:
@@ -35,7 +35,7 @@ extra_css:
 
 # give a title for each page
 nav:
-  - 'Index' : 'index.md'
   - 'Schedule' : 'schedule.md'
+  - 'Index' : 'index.md'
   # etc...
 
