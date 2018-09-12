@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://bluegenes.github.io/2018-metatranscriptomics/schedule/</loc>
-     <lastmod>2018-09-11</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://bluegenes.github.io/2018-metatranscriptomics/</loc>
      <lastmod>2018-09-11</lastmod>
      <changefreq>daily</changefreq>
