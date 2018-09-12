@@ -35,7 +35,6 @@ extra_css:
 
 # give a title for each page
 nav:
-  - 'Schedule' : 'schedule.md'
   - 'Index' : 'index.md'
   # etc...
 
