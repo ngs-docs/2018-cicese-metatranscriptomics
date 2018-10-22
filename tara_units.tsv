@@ -1,4 +1,4 @@
-Sample_Basename	Read1	Read2	Sequence_Type	Depth	Size_Fraction
+sample	fq1	fq2	seqtype	depth	size_fraction
 TARA_135_DCM_0.8-5	ftp.sra.ebi.ac.uk/vol1/fastq/ERR868/ERR868346/ERR868346_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR868/ERR868346/ERR868346_2.fastq.gz	MetaG	DCM	0.8-5
 TARA_135_DCM_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/006/ERR1726616/ERR1726616_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/006/ERR1726616/ERR1726616_2.fastq.gz	MetaG	DCM	5-20
 TARA_135_DCM_20-180	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/000/ERR1726680/ERR1726680_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/000/ERR1726680/ERR1726680_2.fastq.gz	MetaG	DCM	20-180
