@@ -1,6 +1,6 @@
 
 
-Large-Scale Metatxome Analysis: [A global ocean atlas of eukaryotic gene](https://www.nature.com/articles/s41467-017-02342-1)
+Large-Scale Metatxome Analysis: [A global ocean atlas of eukaryotic genes](https://www.nature.com/articles/s41467-017-02342-1)
 
 Sampling Data info: [Viral to metazoan marine plankton nucleotide sequences from the Tara Oceans expedition](https://www.nature.com/articles/sdata201793)
 
