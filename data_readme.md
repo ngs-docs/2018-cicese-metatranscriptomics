@@ -4,15 +4,14 @@ Large-Scale Metatxome Analysis: [A global ocean atlas of eukaryotic gene](https:
 
 Sampling Data info: [Viral to metazoan marine plankton nucleotide sequences from the Tara Oceans expedition](https://www.nature.com/articles/sdata201793)
 
-*Depth:*
+**Depth:**
 
   - SRF = surface
   - DCM = deep chlorophyll maximum
   - MES = mesopelagic
 
-*Size Fractions:*
-
-``` "In the case of RNA issued from fractions enriched in protists and metazoans (0.8–5 μm (or 0.8–3 μm), 0.8–2,000 μm, 3–2,000 μm, 5–20 μm (or 3–20 μm), 20–180 μm and 180–2,000 μm membrane filters), methods including a poly(A)+ RNA selection step were chosen. Whereas this approach is very efficient in lowering the number of rRNA reads, it does not allow to retrotranscribe mRNAs from prokaryotic species, thus leading to eukaryote-only metatranscriptomes." ```
+**Size Fractions:**   
+  -  "In the case of RNA issued from fractions enriched in protists and metazoans (0.8–5 μm (or 0.8–3 μm), 0.8–2,000 μm, 3–2,000 μm, 5–20 μm (or 3–20 μm), 20–180 μm and 180–2,000 μm membrane filters), methods including a poly(A)+ RNA selection step were chosen. Whereas this approach is very efficient in lowering the number of rRNA reads, it does not allow to retrotranscribe mRNAs from prokaryotic species, thus leading to eukaryote-only metatranscriptomes."
 
 **Sequencing_Type:**  
 
