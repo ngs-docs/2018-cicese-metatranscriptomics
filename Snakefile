@@ -52,7 +52,9 @@ trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = trinity_targs
+#TARGETS = trinity_targs
+TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
+
 
 #find files for fastqc & trimmomatic input
 def get_pretrim_pe(wildcards):
@@ -133,10 +135,24 @@ rule rename_trinity_gene_trans_map:
     log: join(LOGS_DIR, 'trinity/cp_gt_map.log')
     shell: ("cp {input} {output}") 
 
+
+#rule rnaspades:
+#    input:
+#            left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]), 
+#	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
+#    output:
+#        fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
+#        gene_trans_map = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta.gene_trans_map"),
+#    message:
+#        """### Assembling read data with Trinity ### """
+#    params:
+
+
+
+
 # use fastqc & trimmomatic rules from eelpond
 # assemblers! 
   # plass rule
-  # trinity rule -- use eelpond rule
   # megahit rule
   # rnaSpades rule
 #	
