@@ -29,14 +29,14 @@ rule all:
     input: TARGETS
 
 rule get_fq1:
-    input: lambda wildcards: FTP.remote(expand("{file}", file=units.loc[wildcards.sample, "fq1"]), static=True, keep_local=True)
+    input: lambda wildcards: FTP.remote(expand("{file}", file=units.loc[wildcards.sample, "fq1"]), static=True, keep_local=True, immediate_close=True)
 	output: join(DATADIR,"{sample}_1.fq.gz")
-	shell: "cp {input} {output}"
+	shell: "mv {input} {output}"
 
 rule get_fq2:
-    input: lambda wildcards: FTP.remote(expand("{file}", file=units.loc[wildcards.sample, "fq2"]), static=True, keep_local=True)
+    input: lambda wildcards: FTP.remote(expand("{file}", file=units.loc[wildcards.sample, "fq2"]), static=True, keep_local=True, immediate_close=True)
 	output: join(DATADIR,"{sample}_2.fq.gz")
-	shell: "cp {input} {output}"
+	shell: "mv {input} {output}"
 
 # use fastqc & trimmomatic rules from eelpond
 # assemblers! 
