@@ -50,7 +50,9 @@ trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
 trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
 
 
-TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
+#TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
+#TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
+TARGETS = trinity_targs
 
 #find files for fastqc & trimmomatic input
 def get_pretrim_pe(wildcards):
@@ -82,9 +84,9 @@ rule trimmomatic_pe:
     Trim reads from the sequencer by trimming or dropping low-quality reads.
     """
     input:
-	    r1= lambda wildcards: join(DATA_DIR, '{}_{}_1.fq.gz'.format(wildcards.sample,wildcards.unit)),
+	    r1= lambda wildcards: join(DATA_DIR, '{}_{}_1.fq.gz'.format(wildcards.sample,wildcards.unit)), #unpack(get_pretrim_pe) 
 	    r2= lambda wildcards: join(DATA_DIR, '{}_{}_2.fq.gz'.format(wildcards.sample,wildcards.unit))
-#        unpack(get_pretrim_pe)
+
     output:
         r1=join(TRIM_DIR, "{sample}_{unit}_1.trim.fq.gz"),
         r2=join(TRIM_DIR, "{sample}_{unit}_2.trim.fq.gz"),
@@ -99,37 +101,37 @@ rule trimmomatic_pe:
     conda:"trimmomatic-env.yaml"
     script:"trimmomatic-pe.py"
 
-#rule trinity:
-#    input:
-#        left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]), 
-#		right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
-#    output:
-#        fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
-#        gene_trans_map = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta.gene_trans_map"),
-#    message:
-#        """### Assembling read data with Trinity ### """
-#    params:
+rule trinity:
+    input:
+            left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]), 
+	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
+    output:
+        fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
+        gene_trans_map = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta.gene_trans_map"),
+    message:
+        """### Assembling read data with Trinity ### """
+    params:
         #**config['trinity']
         # optional parameters
-#        seqtype='fq',
-#		max_memory='64G',
-    #    extra=""
-    #threads: 4
-    #log: join(LOGS_DIR, 'trinity/trinity.log')
-    #conda: "trinity-env.yaml"
-    #script: "trinity-wrapper.py"
+        seqtype='fq',
+        max_memory='64G',
+        extra=""
+    threads: 4
+    log: join(LOGS_DIR, 'trinity/trinity.log')
+    conda: "trinity-env.yaml"
+    script: "trinity-wrapper.py"
 
-#rule rename_trinity_fasta:
-#    input: rules.trinity.output.fasta
-#    output: join(ASSEMBLY_DIR, base + '_trinity.fasta')
-#    log: join(LOGS_DIR, 'trinity/cp_assembly.log')
-#    shell: ("cp {input} {output}") 
+rule rename_trinity_fasta:
+    input: rules.trinity.output.fasta
+    output: join(ASSEMBLY_DIR, BASE + '_trinity.fasta')
+    log: join(LOGS_DIR, 'trinity/cp_assembly.log')
+    shell: ("cp {input} {output}") 
 
-#rule rename_trinity_gene_trans_map:
-#    input: rules.trinity.output.gene_trans_map
-#    output: join(ASSEMBLY_DIR, base + '_trinity.fasta.gene_trans_map')
-#    log: join(LOGS_DIR, 'trinity/cp_gt_map.log')
-#    shell: ("cp {input} {output}") 
+rule rename_trinity_gene_trans_map:
+    input: rules.trinity.output.gene_trans_map
+    output: join(ASSEMBLY_DIR, BASE + '_trinity.fasta.gene_trans_map')
+    log: join(LOGS_DIR, 'trinity/cp_gt_map.log')
+    shell: ("cp {input} {output}") 
 
 # use fastqc & trimmomatic rules from eelpond
 # assemblers! 
