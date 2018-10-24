@@ -28,7 +28,6 @@ LOGS_DIR = join(OUT_DIR, 'logs')
 TRIM_DIR = join(OUT_DIR,"trimmed")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
 
-#get ftp download targets
 SAMPLES = (samples['sample'] + '_' + samples['unit']).tolist()
 data_targs, trim_targs = [], []
 extensions = ["_1.fq.gz", "_2.fq.gz"]
@@ -51,10 +50,11 @@ trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
 trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
 spades_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_spades.fasta']]
 plass_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_plass.fasta']]
+megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = trinity_targs + spades_targets + plass_targets
+TARGETS = trinity_targs + spades_targets + plass_targets + megahit_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
@@ -154,7 +154,28 @@ rule plass:
     conda: "plass-env.yaml"
     script: "plass-wrapper.py"
 
+rule megahit:
+    input:
+            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
+            right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
+            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
+    output:
+        fasta = join(ASSEMBLY_DIR, 'megahit', BASE + "_megahit.contigs.fa"),
+    message:
+        """### Assembling read data with MEGAHIT ### """
+    params: 
+        memory='.9',
+        extra = ''
+    threads: 16
+    log: join(LOGS_DIR, 'megahit/megahit.log')
+    conda: "megahit-env.yaml"
+    script: "megahit-wrapper.py"
 
-# assemblers! 
-  # megahit rule
-#	
+rule rename_megahit_fasta:
+    input: rules.megahit.output.fasta
+    output: join(ASSEMBLY_DIR, BASE + '_megahit.fasta')
+    log: join(LOGS_DIR, 'megahit/cp_assembly.log')
+    shell: ("cp {input} {output}")
+
+
+
