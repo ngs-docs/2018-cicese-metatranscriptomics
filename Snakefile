@@ -160,7 +160,7 @@ rule megahit:
             right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
             single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
     output:
-        fasta = join(ASSEMBLY_DIR, 'megahit', BASE + "_megahit.contigs.fa"),
+        fasta = join(ASSEMBLY_DIR, 'megahit', BASE + "_megahit.fasta"),
     message:
         """### Assembling read data with MEGAHIT ### """
     params: 

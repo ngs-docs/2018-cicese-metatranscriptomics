@@ -43,7 +43,7 @@ if single:
 out_assembly = snakemake.output[0]
 outdir = path.dirname(out_assembly)
 tmpdir = path.join(outdir, 'tmp')
-output_prefix = path.basename(out_assembly).split('.')[0]
+out_prefix = path.basename(out_assembly).split('.')[0]
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
 shell("megahit {input_cmd} -o {outdir} --out-prefix {out_prefix} -t {snakemake.threads} -m {memory} --continue --tmp-dir {tmpdir} {extra}") 
