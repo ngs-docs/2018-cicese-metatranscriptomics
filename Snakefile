@@ -127,7 +127,7 @@ rule spades:
         fasta = join(ASSEMBLY_DIR, "rnaspades", "transcripts.fasta"),
     message:
         """### Assembling read data with rnaSPADES ### """
-    params:
+    params: extra = ''
     threads: 16
     log: join(LOGS_DIR, 'spades/spades.log')
     conda: "spades-env.yaml"
@@ -148,7 +148,7 @@ rule plass:
         fasta = join(ASSEMBLY_DIR, BASE + "_plass.fasta"),
     message:
         """### Assembling read data with PLASS ### """
-    params:
+    params: extra = ''
     threads: 16
     log: join(LOGS_DIR, 'plass/plass.log')
     conda: "plass-env.yaml"
