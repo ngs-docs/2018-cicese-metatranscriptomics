@@ -27,18 +27,14 @@ if left:
     input_str_left = ' -1 ' + " -1 ".join(left)
     input_str_right = ' -2 ' + " -2 ".join(right)
     input_cmd =  input_cmd + " ".join([input_str_left, input_str_right])
-    num_samples=len(left)
 if interleaved:
     interleaved = [snakemake.input.interleaved] if isinstance(snakemake.input.interleaved, str) else snakemake.input.interleaved
     input_str_interleaved = ' --12 ' + " --12 ".join(interleaved)
     input_cmd =  input_cmd + " ".join([input_str_interleaved])
-    num_samples+=len(interleaved)
 if single:
     single = [snakemake.input.single] if isinstance(snakemake.input.single, str) else snakemake.input.single 
     input_str_single = ' -r ' + " -r ".join(single)
     input_cmd =  input_cmd + " ".join([input_str_single])
-    num_samples += len(single)
-#assert num_samples <=9, "rnaspades can only take 9 input files via the command line interface"
 
 out_assembly = snakemake.output[0]
 outdir = path.dirname(out_assembly)

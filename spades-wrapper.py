@@ -44,6 +44,5 @@ outdir = path.dirname(snakemake.output[0])
 
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
-#shell("Trinity {input_cmd} --CPU {snakemake.threads} --max_memory {max_memory} --seqType {seqtype} --output {outdir} {snakemake.params.extra} {log}")
 shell("spades.py --rna -o {outdir} {input_cmd} -t {snakemake.threads} -m {memory} {extra}") 
 

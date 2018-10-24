@@ -117,7 +117,6 @@ rule rename_trinity_gene_trans_map:
     log: join(LOGS_DIR, 'trinity/cp_gt_map.log')
     shell: ("cp {input} {output}") 
 
-
 rule spades:
     input:
             left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
@@ -176,6 +175,4 @@ rule rename_megahit_fasta:
     output: join(ASSEMBLY_DIR, BASE + '_megahit.fasta')
     log: join(LOGS_DIR, 'megahit/cp_assembly.log')
     shell: ("cp {input} {output}")
-
-
 
