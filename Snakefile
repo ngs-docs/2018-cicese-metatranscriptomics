@@ -69,12 +69,12 @@ rule all:
     input: TARGETS
 
 rule get_fq1:
-    input: lambda wildcards: FTP.remote(expand("{file}", file=samples.loc[[wildcards.sample,wildcards.unit], "fq1"]), static=True, keep_local=True, immediate_close=True)
+    input: lambda wildcards: FTP.remote("{}".format(samples.loc[(wildcards.sample,wildcards.unit), "fq1"]), static=True, keep_local=True, immediate_close=True)
     output: join(DATA_DIR,"{sample}_{unit}_1.fq.gz")
     shell: "mv {input} {output}"
 
 rule get_fq2:
-    input: lambda wildcards: FTP.remote(expand("{file}", file=samples.loc[[wildcards.sample,wildcards.unit], "fq2"]), static=True, keep_local=True, immediate_close=True)
+    input: lambda wildcards: FTP.remote("{}".format(samples.loc[(wildcards.sample,wildcards.unit), "fq2"]), static=True, keep_local=True, immediate_close=True)
     output: join(DATA_DIR,"{sample}_{unit}_2.fq.gz")
     shell: "mv {input} {output}"
 
@@ -96,6 +96,7 @@ rule trimmomatic_pe:
         r2_unpaired=join(TRIM_DIR, "{sample}_{unit}_2.se.trim.fq.gz"),
     message:
         """--- Quality trimming PE read data with Trimmomatic."""
+    threads: 4
     params:
         trimmer = (trim_params['trim_cmd'].format(trim_params['adapter_file']['pe_name'])).split(' '),
         extra = '' 
