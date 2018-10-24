@@ -12,8 +12,14 @@ git clone https://github.com/bluegenes/rna_testdata.git # grab small rna test da
 # test with a dry run:
 snakemake --use-conda --configfile nemaRNA_config.yaml --dryrun
 
-#actually run:
+#actually run test data:
 snakemake --use-conda --configfile nemaRNA_config.yaml
+
+# run with tara data
+# note, you may need to change 'data_directory' within tara_config.yaml
+# 2nd note: ftp download is v. slow 
+snakemake --use-conda --configfile tara_config.yaml 
+
 
 
 
