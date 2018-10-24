@@ -49,11 +49,11 @@ else:
 trinity_extensions = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
 trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
 trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
-
+spades_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_spades.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = trinity_targs
+TARGETS = trinity_targs + spades_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
@@ -117,17 +117,26 @@ rule rename_trinity_gene_trans_map:
     shell: ("cp {input} {output}") 
 
 
-#rule rnaspades:
-#    input:
-#            left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]), 
-#	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
-#    output:
-#        fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
-#        gene_trans_map = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta.gene_trans_map"),
-#    message:
-#        """### Assembling read data with Trinity ### """
-#    params:
+rule spades:
+    input:
+            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
+	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
+            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]), 
+    output:
+        fasta = join(ASSEMBLY_DIR, "rnaspades", "transcripts.fasta"),
+    message:
+        """### Assembling read data with rnaSPADES ### """
+    params:
+    threads: 4
+    log: join(LOGS_DIR, 'spades/spades.log')
+    conda: "spades-env.yaml"
+    script: "spades-wrapper.py"
 
+rule rename_spades_fasta:
+    input: rules.spades.output.fasta
+    output: join(ASSEMBLY_DIR, BASE + '_spades.fasta')
+    log: join(LOGS_DIR, 'spades/cp_assembly.log')
+    shell: ("cp {input} {output}") 
 
 
 
@@ -135,5 +144,4 @@ rule rename_trinity_gene_trans_map:
 # assemblers! 
   # plass rule
   # megahit rule
-  # rnaSpades rule
 #	
