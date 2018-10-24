@@ -50,10 +50,11 @@ trinity_extensions = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
 trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
 trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
 spades_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_spades.fasta']]
+plass_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_plass.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = trinity_targs + spades_targets
+TARGETS = trinity_targs + spades_targets + plass_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
@@ -99,7 +100,7 @@ rule trinity:
         seqtype='fq',
         max_memory='64G',
         extra=""
-    threads: 4
+    threads: 16
     log: join(LOGS_DIR, 'trinity/trinity.log')
     conda: "trinity-env.yaml"
     script: "trinity-wrapper.py"
@@ -127,7 +128,7 @@ rule spades:
     message:
         """### Assembling read data with rnaSPADES ### """
     params:
-    threads: 4
+    threads: 16
     log: join(LOGS_DIR, 'spades/spades.log')
     conda: "spades-env.yaml"
     script: "spades-wrapper.py"
@@ -138,10 +139,22 @@ rule rename_spades_fasta:
     log: join(LOGS_DIR, 'spades/cp_assembly.log')
     shell: ("cp {input} {output}") 
 
+rule plass:
+    input:
+            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
+            right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
+            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
+    output:
+        fasta = join(ASSEMBLY_DIR, BASE + "_plass.fasta"),
+    message:
+        """### Assembling read data with PLASS ### """
+    params:
+    threads: 16
+    log: join(LOGS_DIR, 'plass/plass.log')
+    conda: "plass-env.yaml"
+    script: "plass-wrapper.py"
 
 
-# use fastqc & trimmomatic rules from eelpond
 # assemblers! 
-  # plass rule
   # megahit rule
 #	
