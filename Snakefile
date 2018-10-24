@@ -8,42 +8,43 @@ from snakemake.utils import validate, min_version
 from snakemake.remote import FTP
 FTP = FTP.RemoteProvider()
 
-configfile: "tara_config.yaml"
-
 min_version("5.1.2") #minimum snakemake version
 
 # read in sample info 
-samples = pd.read_table(config["samples"]).set_index(["sample", "unit"], drop=False)
+samples = pd.read_table(config["samples"],dtype=str).set_index(["sample", "unit"], drop=False)
 
 BASE = config.get('basename','tara')
-experiment_suffix = config.get('experiment_suffix', '')
+experiment_suffix = config.get('experiment_suffix')
 
-OUT_DIR = BASE + "_" + experiment_suffix
+if experiment_suffix:
+    OUT_DIR = BASE + "_out_" + experiment_suffix
+else:
+    OUT_DIR = BASE + '_out'
+
+DATA_DIR = config.get('data_directory', join(OUT_DIR, 'data'))
+download_data = config.get('download_data', False)
 
 LOGS_DIR = join(OUT_DIR, 'logs')
-DATA_DIR = join(OUT_DIR, "/tara/data/TS_RNA")
 TRIM_DIR = join(OUT_DIR,"trimmed")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
 
 #get ftp download targets
-SAMPLES = (samples['sample'].astype(str) + '_' + samples['unit'].astype(str)).tolist()
-ftp_targs, trim_targs = [], []
+SAMPLES = (samples['sample'] + '_' + samples['unit']).tolist()
+data_targs, trim_targs = [], []
 extensions = ["_1.fq.gz", "_2.fq.gz"]
 trim_ext = ["_1.trim.fq.gz", "_2.trim.fq.gz", "_1.se.trim.fq.gz", "_2.se.trim.fq.gz"]
 for s in SAMPLES: 
-    ftp_targs = ftp_targs +  [s + e for e in extensions]
+    data_targs = data_targs +  [s + e for e in extensions]
     trim_targs = trim_targs + [s + e for e in trim_ext]
 
 TARGETS = []
 
-# if some of the files are missing, add ftp targets (aka download the files!)
-ftp_targs = [join(DATA_DIR, targ) for targ in ftp_targs] 
-download_targs = []
-if not all([os.path.isfile(f) for f in ftp_targs]):  
-    for f in ftp_targs:
-        if not os.path.isfile(f):
-            download_targs = download_targs + [f] # only download missing files  
+if download_data:
+    include: 'rules/ftp.rule'
+else:
+    include: 'rules/link_data.rule'
 
+#data_targs = [join(DATA_DIR, targ) for targ in data_targs] 
 # Assembly Targets
 trinity_extensions = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
 trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
@@ -52,32 +53,11 @@ trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-#TARGETS = trinity_targs
-TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
-
-
-#find files for fastqc & trimmomatic input
-def get_pretrim_pe(wildcards):
-    # if specifying file locations in csv, rather than download links, use this
-    #return dict(zip(['r1','r2'], samples.loc[(wildcards.sample, wildcards.unit), ["fq1", "fq2"]].dropna()))
-    # if download links are specified, we need to grab the downloaded files instead
-    fq1 = join(DATA_DIR, '{}_{}_1.fq.gz'.format(wildcards.sample,wildcards.unit))
-    fq2 = join(DATA_DIR, '{}_{}_2.fq.gz'.format(wildcards.sample,wildcards.unit))
-    return dict(zip(['r1','r2'],[fq1,fq2]))
+TARGETS = trinity_targs
+#TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
     input: TARGETS
-
-rule get_fq1:
-    input: lambda wildcards: FTP.remote("{}".format(samples.loc[(wildcards.sample,wildcards.unit), "fq1"]), static=True, keep_local=True, immediate_close=True)
-    output: join(DATA_DIR,"{sample}_{unit}_1.fq.gz")
-    shell: "mv {input} {output}"
-
-rule get_fq2:
-    input: lambda wildcards: FTP.remote("{}".format(samples.loc[(wildcards.sample,wildcards.unit), "fq2"]), static=True, keep_local=True, immediate_close=True)
-    output: join(DATA_DIR,"{sample}_{unit}_2.fq.gz")
-    shell: "mv {input} {output}"
-
 
 trim_params = config['trimmomatic']
 

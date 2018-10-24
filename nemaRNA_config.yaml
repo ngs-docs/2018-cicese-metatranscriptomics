@@ -1,7 +1,8 @@
-samples: "taraTSRNA_samples.tsv"
+samples: "nemaRNA_samples.tsv"
 
-data_directory: "/tara/data/TS_RNA"
-download_data: True
+basename: "nemaRNA"
+
+download_data: False
 
 trimmomatic:
   trim_cmd:  "ILLUMINACLIP:{}:2:40:15 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:15 MINLEN:35"
