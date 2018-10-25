@@ -1,19 +1,18 @@
 rule sourmash_compute_reads:
     input:
-         lambda wildcards: join(TRIM_DIR, "{wildcards.sample}_{wildcards.unit}_{end}.trim.fq.gz"),
+         lambda wildcards: join(TRIM_DIR, '{}_{}_{}.trim.fq.gz'.format(wildcards.sample,wildcards.unit, wildcards.end))
     output:
         join(TRIM_DIR, "{sample}_{unit}_{end}.trim.sig")
     log:
-        join(LOGS_DIR, "logs/sourmash/{samples}_{unit}_sourmash_compute.log")
+        join(LOGS_DIR, "logs/sourmash/{sample}_{unit}_{end}_trim_sourmash_compute.log")
     threads: 2
     params:
         # optional parameters
         k = "31",
         scaled = "1000",
         extra = ""
-    conda: 'sourmash-env.yaml' 
+    conda: 'sourmash-env.yaml'
     script: 'sourmash-compute-wrapper.py'
-
 
 rule sourmash_compute_transcriptome:
     input:
@@ -21,7 +20,7 @@ rule sourmash_compute_transcriptome:
     output:
         join(ASSEMBLY_DIR, "{assembly}.sig")
     log:
-        join(LOGS_DIR, "sourmash/{assembly}_sourmash_compute.log"
+        join(LOGS_DIR, "sourmash/{assembly}_sourmash_compute.log")
     threads: 2
     params:
         # optional parameters

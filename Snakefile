@@ -105,6 +105,24 @@ rule sourmash_compute_reads:
     conda: 'sourmash-env.yaml'
     script: 'sourmash-compute-wrapper.py'
 
+rule sourmash_compute_transcriptome:
+    input:
+        join(ASSEMBLY_DIR, "{assembly}.fasta")
+    output:
+        join(ASSEMBLY_DIR, "{assembly}.sig")
+    log:
+        join(LOGS_DIR, "sourmash/{assembly}_sourmash_compute.log")
+    threads: 2
+    params:
+        # optional parameters
+        k = "31",
+        scaled = "1000",
+        extra = ""
+    conda: 'sourmash-env.yaml'
+    script: 'sourmash-compute-wrapper.py'
+    #wrapper:
+    #    "0.27.1/bio/sourmash/compute"
+
 #rule rcorrector_pe:
 #    """
 #    Run Rcorrector
