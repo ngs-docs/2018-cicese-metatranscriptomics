@@ -54,7 +54,7 @@ megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = trinity_targs + spades_targets + plass_targets + megahit_targets
+TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
@@ -85,6 +85,29 @@ rule trimmomatic_pe:
     conda:"trimmomatic-env.yaml"
     script:"trimmomatic-pe.py"
 
+#rule rcorrector_pe:
+#    """
+#    Run Rcorrector
+#    """
+#    input:
+#	    r1= lambda wildcards: join(DATA_DIR, '{}_{}_1.trim.fq.gz'.format(wildcards.sample,wildcards.unit))
+#	    r2= lambda wildcards: join(DATA_DIR, '{}_{}_2.trim.fq.gz'.format(wildcards.sample,wildcards.unit))
+#    output:
+#        r1=join(TRIM_DIR, "{sample}_{unit}_1.rcorr.fq.gz"),
+#        r2=join(TRIM_DIR, "{sample}_{unit}_2.rcorr.fq.gz"),
+#        r1_unpaired=join(TRIM_DIR, "{sample}_{unit}_1.se.rcorr.fq.gz"),
+#        r2_unpaired=join(TRIM_DIR, "{sample}_{unit}_2.se.rcorr.fq.gz"),
+#    message:
+#        """--- PE Rcorrector"""
+#    threads:4
+#    params:
+#        extra = '' 
+#    log:
+#       join(LOGS_DIR, 'rcorrector/{sample}_{unit}_pe.log')
+#    conda: "rcorrector-env.yaml"
+#    script: "rcorrector.py"
+
+
 rule trinity:
     input:
             left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]), 
@@ -98,9 +121,9 @@ rule trinity:
         #**config['trinity']
         # optional parameters
         seqtype='fq',
-        max_memory='64G',
+        max_memory='190G',
         extra=""
-    threads: 16
+    threads: 44
     log: join(LOGS_DIR, 'trinity/trinity.log')
     conda: "trinity-env.yaml"
     script: "trinity-wrapper.py"
@@ -127,7 +150,7 @@ rule spades:
     message:
         """### Assembling read data with rnaSPADES ### """
     params: extra = ''
-    threads: 16
+    threads: 44
     log: join(LOGS_DIR, 'spades/spades.log')
     conda: "spades-env.yaml"
     script: "spades-wrapper.py"
@@ -148,7 +171,7 @@ rule plass:
     message:
         """### Assembling read data with PLASS ### """
     params: extra = ''
-    threads: 16
+    threads: 44
     log: join(LOGS_DIR, 'plass/plass.log')
     conda: "plass-env.yaml"
     script: "plass-wrapper.py"
@@ -165,7 +188,7 @@ rule megahit:
     params: 
         memory='.9',
         extra = ''
-    threads: 16
+    threads: 44
     log: join(LOGS_DIR, 'megahit/megahit.log')
     conda: "megahit-env.yaml"
     script: "megahit-wrapper.py"
