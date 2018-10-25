@@ -29,12 +29,14 @@ TRIM_DIR = join(OUT_DIR,"trimmed")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
 
 SAMPLES = (samples['sample'] + '_' + samples['unit']).tolist()
-data_targs, trim_targs = [], []
+data_targs, trim_targs, sourmash_targs = [], [], []
 extensions = ["_1.fq.gz", "_2.fq.gz"]
 trim_ext = ["_1.trim.fq.gz", "_2.trim.fq.gz", "_1.se.trim.fq.gz", "_2.se.trim.fq.gz"]
+sourmash_ext =  ["_1.trim.sig", "_2.trim.sig"]
 for s in SAMPLES: 
     data_targs = data_targs +  [s + e for e in extensions]
     trim_targs = trim_targs + [s + e for e in trim_ext]
+    sourmash_targs = sourmash_targs + [s + e for e in sourmash_ext]
 
 TARGETS = []
 
@@ -54,8 +56,10 @@ megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs
+#TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs + sourmash_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
+
+TARGETS = [join(TRIM_DIR, targ) for targ in sourmash_targs]
 
 rule all:
     input: TARGETS
@@ -84,6 +88,22 @@ rule trimmomatic_pe:
     log: join(LOGS_DIR, 'trimmomatic/{sample}_{unit}_pe.log')
     conda:"trimmomatic-env.yaml"
     script:"trimmomatic-pe.py"
+
+rule sourmash_compute_reads:
+    input:
+	     lambda wildcards: join(TRIM_DIR, '{}_{}_{}.trim.fq.gz'.format(wildcards.sample,wildcards.unit, wildcards.end))
+    output:
+        join(TRIM_DIR, "{sample}_{unit}_{end}.trim.sig")
+    log:
+        join(LOGS_DIR, "logs/sourmash/{sample}_{unit}_{end}_trim_sourmash_compute.log")
+    threads: 2
+    params:
+        # optional parameters
+        k = "31",
+        scaled = "1000",
+        extra = ""
+    conda: 'sourmash-env.yaml'
+    script: 'sourmash-compute-wrapper.py'
 
 #rule rcorrector_pe:
 #    """
