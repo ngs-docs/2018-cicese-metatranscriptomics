@@ -1,0 +1,34 @@
+rule sourmash_reads:
+    input:
+         join(TRIM_DIR, "{sample}_{unit}_{end}.trim.fq.gz"),
+    output:
+        join(TRIM_DIR, "{sample}_{unit}_{end}.trim.sig")
+    log:
+        join(LOGS_DIR, "logs/sourmash/{samples}_{unit}_sourmash_compute.log")
+    threads: 2
+    params:
+        # optional parameters
+        k = "31",
+        scaled = "1000",
+        extra = ""
+    conda: 'sourmash-env.yaml' 
+    script: 'sourmash-compute.py'
+
+
+rule sourmash_transcriptome:
+    input:
+        join(ASSEMBLY_DIR, "{assembly}.fasta")
+    output:
+        join(ASSEMBLY_DIR, "{assembly}.sig")
+    log:
+        join(LOGS_DIR, "sourmash/{assembly}_sourmash_compute.log"
+    threads: 2
+    params:
+        # optional parameters
+        k = "31",
+        scaled = "1000",
+        extra = ""
+    conda: 'sourmash-env.yaml' 
+    script: 'sourmash-compute.py'
+    #wrapper:
+    #    "0.27.1/bio/sourmash/compute"
