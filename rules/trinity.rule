@@ -1,0 +1,33 @@
+from os.path import join
+
+rule trinity:
+    input:
+            left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]),
+        right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
+    output:
+        fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
+        gene_trans_map = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta.gene_trans_map"),
+    message:
+        """### Assembling read data with Trinity ### """
+    params:
+        #**config['trinity']
+        # optional parameters
+        seqtype='fq',
+        max_memory='190G',
+        extra=""
+    threads: 44
+    log: join(LOGS_DIR, 'trinity/trinity.log')
+    conda: "trinity-env.yaml"
+    script: "trinity-wrapper.py"
+
+rule rename_trinity_fasta:
+    input: rules.trinity.output.fasta
+    output: join(ASSEMBLY_DIR, BASE + '_trinity.fasta')
+    log: join(LOGS_DIR, 'trinity/cp_assembly.log')
+    shell: ("cp {input} {output}")
+
+rule rename_trinity_gene_trans_map:
+    input: rules.trinity.output.gene_trans_map
+    output: join(ASSEMBLY_DIR, BASE + '_trinity.fasta.gene_trans_map')
+    log: join(LOGS_DIR, 'trinity/cp_gt_map.log')
+    shell: ("cp {input} {output}")

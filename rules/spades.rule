@@ -1,0 +1,22 @@
+from os.path import join
+
+rule spades:
+    input:
+        left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
+        right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
+        single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
+    output:
+        fasta = join(ASSEMBLY_DIR, "rnaspades", "transcripts.fasta"),
+    message:
+        """### Assembling read data with rnaSPADES ### """
+    params: extra = ''
+    threads: 44
+    log: join(LOGS_DIR, 'spades/spades.log')
+    conda: "spades-env.yaml"
+    script: "spades-wrapper.py"
+
+rule rename_spades_fasta:
+    input: rules.spades.output.fasta
+    output: join(ASSEMBLY_DIR, BASE + '_spades.fasta')
+    log: join(LOGS_DIR, 'spades/cp_assembly.log')
+    shell: ("cp {input} {output}")
