@@ -12,8 +12,8 @@ rule spades:
     params: extra = ''
     threads: 44
     log: join(LOGS_DIR, 'spades/spades.log')
-    conda: "spades-env.yaml"
-    script: "spades-wrapper.py"
+    conda: join(ENVS_DIR, "spades-env.yaml")
+    script: join(WRAPPERS_DIR, "spades-wrapper.py")
 
 rule rename_spades_fasta:
     input: rules.spades.output.fasta

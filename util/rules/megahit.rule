@@ -14,8 +14,8 @@ rule megahit:
         extra = ''
     threads: 44
     log: join(LOGS_DIR, 'megahit/megahit.log')
-    conda: "megahit-env.yaml"
-    script: "megahit-wrapper.py"
+    conda: join(ENVS_DIR, "megahit-env.yaml")
+    script: join(WRAPPERS_DIR, "megahit-wrapper.py")
 
 rule rename_megahit_fasta:
     input: rules.megahit.output.fasta

@@ -17,8 +17,8 @@ rule trinity:
         extra=""
     threads: 44
     log: join(LOGS_DIR, 'trinity/trinity.log')
-    conda: "trinity-env.yaml"
-    script: "trinity-wrapper.py"
+    conda: join(ENVS_DIR, "trinity-env.yaml")
+    script: join(WRAPPERS_DIR, "trinity-wrapper.py")
 
 rule rename_trinity_fasta:
     input: rules.trinity.output.fasta

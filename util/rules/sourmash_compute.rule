@@ -1,3 +1,5 @@
+from os.path import join
+
 rule sourmash_compute_reads:
     input:
          lambda wildcards: join(TRIM_DIR, '{}_{}_{}.trim.fq.gz'.format(wildcards.sample,wildcards.unit, wildcards.end))
@@ -11,8 +13,8 @@ rule sourmash_compute_reads:
         k = "31",
         scaled = "1000",
         extra = ""
-    conda: 'sourmash-env.yaml'
-    script: 'sourmash-compute-wrapper.py'
+    conda: join(ENVS_DIR, 'sourmash-env.yaml')
+    script: join(ENVS_DIR, 'sourmash-compute-wrapper.py')
 
 rule sourmash_compute_transcriptome:
     input:
@@ -27,7 +29,7 @@ rule sourmash_compute_transcriptome:
         k = "31",
         scaled = "1000",
         extra = ""
-    conda: 'sourmash-env.yaml' 
-    script: 'sourmash-compute-wrapper.py'
+    conda: join(ENVS_DIR, 'sourmash-env.yaml')
+    script: join(ENVS_DIR, 'sourmash-compute-wrapper.py')
     #wrapper:
     #    "0.27.1/bio/sourmash/compute"

@@ -21,6 +21,11 @@ if experiment_suffix:
 else:
     OUT_DIR = BASE + '_out'
 
+
+RULES_DIR = 'utils/rules'
+WRAPPERS_DIR = 'utils/wrappers'
+ENVS_DIR = 'utils/envs'
+
 DATA_DIR = config.get('data_directory', join(OUT_DIR, 'data'))
 download_data = config.get('download_data', False)
 
@@ -41,9 +46,9 @@ for s in SAMPLES:
 TARGETS = []
 
 if download_data:
-    include: 'rules/ftp.rule'
+    include: join(RULES_DIR, 'ftp.rule')
 else:
-    include: 'rules/link_data.rule'
+    include: join(RULES_DIR, 'link_data.rule')
 
 #data_targs = [join(DATA_DIR, targ) for targ in data_targs] 
 # Assembly Targets

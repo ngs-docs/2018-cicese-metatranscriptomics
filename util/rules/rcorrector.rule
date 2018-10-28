@@ -19,5 +19,5 @@ rule rcorrector_pe:
         extra = ''
     log:
        join(LOGS_DIR, 'rcorrector/{sample}_{unit}_pe.log')
-    conda: "rcorrector-env.yaml"
-    script: "rcorrector.py"
+    conda: join(ENVS_DIR, "rcorrector-env.yaml")
+    script: join(WRAPPERS_DIR, "rcorrector-wrapper.py")

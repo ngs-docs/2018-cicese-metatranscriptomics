@@ -12,5 +12,5 @@ rule plass:
     params: extra = ''
     threads: 44
     log: join(LOGS_DIR, 'plass/plass.log')
-    conda: "plass-env.yaml"
-    script: "plass-wrapper.py"
+    conda: join(ENVS_DIR, "plass-env.yaml")
+    script: join(WRAPPERS_DIR, "plass-wrapper.py")
