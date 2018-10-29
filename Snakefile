@@ -149,7 +149,9 @@ rule spades:
         fasta = join(ASSEMBLY_DIR, "rnaspades", "transcripts.fasta"),
     message:
         """### Assembling read data with rnaSPADES ### """
-    params: extra = ''
+    params: 
+        memory = "120",
+        extra = ''
     threads: 44
     log: join(LOGS_DIR, 'spades/spades.log')
     conda: "spades-env.yaml"
