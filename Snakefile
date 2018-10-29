@@ -54,7 +54,7 @@ megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs
+TARGETS = plass_targets + megahit_targets # + spades_targets #+ trinity_targs
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
@@ -167,7 +167,7 @@ rule plass:
             right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
             single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
     output:
-        fasta = join(ASSEMBLY_DIR, BASE + "_plass.fasta"),
+        fasta = join(ASSEMBLY_DIR, "plass", BASE + "_plass.fasta"),
     message:
         """### Assembling read data with PLASS ### """
     params: extra = ''
@@ -175,6 +175,12 @@ rule plass:
     log: join(LOGS_DIR, 'plass/plass.log')
     conda: "plass-env.yaml"
     script: "plass-wrapper.py"
+
+rule rename_plass_fasta:
+    input: rules.plass.output.fasta
+    output: join(ASSEMBLY_DIR, BASE + '_plass.fasta')
+    log: join(LOGS_DIR, 'plass/cp_assembly.log')
+    shell: ("cp {input} {output}")
 
 rule megahit:
     input:
