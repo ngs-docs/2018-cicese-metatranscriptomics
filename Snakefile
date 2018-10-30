@@ -22,9 +22,7 @@ else:
     OUT_DIR = BASE + '_out'
 
 
-RULES_DIR = 'utils/rules'
-WRAPPERS_DIR = 'utils/wrappers'
-ENVS_DIR = 'utils/envs'
+RULES_DIR = 'rules'
 
 DATA_DIR = config.get('data_directory', join(OUT_DIR, 'data'))
 download_data = config.get('download_data', False)
@@ -38,6 +36,7 @@ data_targs, trim_targs, sourmash_targs = [], [], []
 extensions = ["_1.fq.gz", "_2.fq.gz"]
 trim_ext = ["_1.trim.fq.gz", "_2.trim.fq.gz", "_1.se.trim.fq.gz", "_2.se.trim.fq.gz"]
 sourmash_ext =  ["_1.trim.sig", "_2.trim.sig"]
+
 for s in SAMPLES: 
     data_targs = data_targs +  [s + e for e in extensions]
     trim_targs = trim_targs + [s + e for e in trim_ext]
@@ -45,208 +44,49 @@ for s in SAMPLES:
 
 TARGETS = []
 
-if download_data:
-    include: join(RULES_DIR, 'ftp.rule')
-else:
-    include: join(RULES_DIR, 'link_data.rule')
+#def generate_data_targs(outdir, samples, extensions):
+#    target_list = []
+#    for s in samples:
+#        target_list = target_list + [s + e for e in extensions]
+        #target_list = target_list + [join(outdir, s + e) for e in extensions]
+    #return target_list
+#    return [join(outdir, t) for t in target_list]
 
+## working here
+#def generate assembly_targs(outdir, base, extensions):
+#    target_list = target_list + [join(outdir, s + e) for e in extensions]
+
+if download_data:
+    include: join(RULES_DIR, 'general', 'ftp.rule')
+else:
+    include: join(RULES_DIR, 'general', 'link_data.rule')
+
+include: join(RULES_DIR, 'trimmomatic', 'trimmomatic.rule')
 #data_targs = [join(DATA_DIR, targ) for targ in data_targs] 
 # Assembly Targets
+include: join(RULES_DIR, 'trinity', 'trinity.rule')
 trinity_extensions = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
 trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
 trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
+
+include: join(RULES_DIR, 'spades', 'spades.rule')
 spades_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_spades.fasta']]
+
+include: join(RULES_DIR, 'plass', 'plass.rule')
 plass_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_plass.fasta']]
+
+include: join(RULES_DIR, 'megahit', 'megahit.rule')
 megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = plass_targets + megahit_targets + spades_targets #+ trinity_targs
+#TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs + sourmash_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
+include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
 TARGETS = [join(TRIM_DIR, targ) for targ in sourmash_targs]
 
 rule all:
     input: TARGETS
 
-trim_params = config['trimmomatic']
-
-rule trimmomatic_pe:
-    """
-    Trim reads from the sequencer by trimming or dropping low-quality reads.
-    """
-    input:
-	    r1= lambda wildcards: join(DATA_DIR, '{}_{}_1.fq.gz'.format(wildcards.sample,wildcards.unit)), #unpack(get_pretrim_pe) 
-	    r2= lambda wildcards: join(DATA_DIR, '{}_{}_2.fq.gz'.format(wildcards.sample,wildcards.unit))
-
-    output:
-        r1=join(TRIM_DIR, "{sample}_{unit}_1.trim.fq.gz"),
-        r2=join(TRIM_DIR, "{sample}_{unit}_2.trim.fq.gz"),
-        r1_unpaired=join(TRIM_DIR, "{sample}_{unit}_1.se.trim.fq.gz"),
-        r2_unpaired=join(TRIM_DIR, "{sample}_{unit}_2.se.trim.fq.gz"),
-    message:
-        """--- Quality trimming PE read data with Trimmomatic."""
-    threads: 4
-    params:
-        trimmer = (trim_params['trim_cmd'].format(trim_params['adapter_file']['pe_name'])).split(' '),
-        extra = '' 
-    log: join(LOGS_DIR, 'trimmomatic/{sample}_{unit}_pe.log')
-    conda:"trimmomatic-env.yaml"
-    script:"trimmomatic-pe.py"
-
-rule sourmash_compute_reads:
-    input:
-	     lambda wildcards: join(TRIM_DIR, '{}_{}_{}.trim.fq.gz'.format(wildcards.sample,wildcards.unit, wildcards.end))
-    output:
-        join(TRIM_DIR, "{sample}_{unit}_{end}.trim.sig")
-    log:
-        join(LOGS_DIR, "logs/sourmash/{sample}_{unit}_{end}_trim_sourmash_compute.log")
-    threads: 2
-    params:
-        # optional parameters
-        k = "31",
-        scaled = "1000",
-        extra = ""
-    conda: 'sourmash-env.yaml'
-    script: 'sourmash-compute-wrapper.py'
-
-rule sourmash_compute_transcriptome:
-    input:
-        join(ASSEMBLY_DIR, "{assembly}.fasta")
-    output:
-        join(ASSEMBLY_DIR, "{assembly}.sig")
-    log:
-        join(LOGS_DIR, "sourmash/{assembly}_sourmash_compute.log")
-    threads: 2
-    params:
-        # optional parameters
-        k = "31",
-        scaled = "1000",
-        extra = ""
-    conda: 'sourmash-env.yaml'
-    script: 'sourmash-compute-wrapper.py'
-    #wrapper:
-    #    "0.27.1/bio/sourmash/compute"
-
-#rule rcorrector_pe:
-#    """
-#    Run Rcorrector
-#    """
-#    input:
-#	    r1= lambda wildcards: join(DATA_DIR, '{}_{}_1.trim.fq.gz'.format(wildcards.sample,wildcards.unit))
-#	    r2= lambda wildcards: join(DATA_DIR, '{}_{}_2.trim.fq.gz'.format(wildcards.sample,wildcards.unit))
-#    output:
-#        r1=join(TRIM_DIR, "{sample}_{unit}_1.rcorr.fq.gz"),
-#        r2=join(TRIM_DIR, "{sample}_{unit}_2.rcorr.fq.gz"),
-#        r1_unpaired=join(TRIM_DIR, "{sample}_{unit}_1.se.rcorr.fq.gz"),
-#        r2_unpaired=join(TRIM_DIR, "{sample}_{unit}_2.se.rcorr.fq.gz"),
-#    message:
-#        """--- PE Rcorrector"""
-#    threads:4
-#    params:
-#        extra = '' 
-#    log:
-#       join(LOGS_DIR, 'rcorrector/{sample}_{unit}_pe.log')
-#    conda: "rcorrector-env.yaml"
-#    script: "rcorrector.py"
-
-
-rule trinity:
-    input:
-            left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]), 
-	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
-    output:
-        fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
-        gene_trans_map = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta.gene_trans_map"),
-    message:
-        """### Assembling read data with Trinity ### """
-    params:
-        #**config['trinity']
-        # optional parameters
-        seqtype='fq',
-        max_memory='190G',
-        extra=""
-    threads: 44
-    log: join(LOGS_DIR, 'trinity/trinity.log')
-    conda: "trinity-env.yaml"
-    script: "trinity-wrapper.py"
-
-rule rename_trinity_fasta:
-    input: rules.trinity.output.fasta
-    output: join(ASSEMBLY_DIR, BASE + '_trinity.fasta')
-    log: join(LOGS_DIR, 'trinity/cp_assembly.log')
-    shell: ("cp {input} {output}") 
-
-rule rename_trinity_gene_trans_map:
-    input: rules.trinity.output.gene_trans_map
-    output: join(ASSEMBLY_DIR, BASE + '_trinity.fasta.gene_trans_map')
-    log: join(LOGS_DIR, 'trinity/cp_gt_map.log')
-    shell: ("cp {input} {output}") 
-
-rule spades:
-    input:
-            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
-	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
-#            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]), 
-    output:
-        fasta = join(ASSEMBLY_DIR, "rnaspades", "transcripts.fasta"),
-    message:
-        """### Assembling read data with rnaSPADES ### """
-    params: 
-        memory = "120",
-        extra = ''
-    threads: 44
-    log: join(LOGS_DIR, 'spades/spades.log')
-    conda: "spades-env.yaml"
-    script: "spades-wrapper.py"
-
-rule rename_spades_fasta:
-    input: rules.spades.output.fasta
-    output: join(ASSEMBLY_DIR, BASE + '_spades.fasta')
-    log: join(LOGS_DIR, 'spades/cp_assembly.log')
-    shell: ("cp {input} {output}") 
-
-rule plass:
-    input:
-            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
-            right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
-            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
-    output:
-        fasta = join(ASSEMBLY_DIR, "plass", BASE + "_plass.fasta"),
-    message:
-        """### Assembling read data with PLASS ### """
-    params: extra = ''
-    threads: 44
-    log: join(LOGS_DIR, 'plass/plass.log')
-    conda: "plass-env.yaml"
-    script: "plass-wrapper.py"
-
-rule rename_plass_fasta:
-    input: rules.plass.output.fasta
-    output: join(ASSEMBLY_DIR, BASE + '_plass.fasta')
-    log: join(LOGS_DIR, 'plass/cp_assembly.log')
-    shell: ("cp {input} {output}")
-
-rule megahit:
-    input:
-            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
-            right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
-            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
-    output:
-        fasta = join(ASSEMBLY_DIR, 'megahit', BASE + "_megahit.fasta"),
-    message:
-        """### Assembling read data with MEGAHIT ### """
-    params: 
-        memory='.9',
-        extra = ''
-    threads: 44
-    log: join(LOGS_DIR, 'megahit/megahit.log')
-    conda: "megahit-env.yaml"
-    script: "megahit-wrapper.py"
-
-rule rename_megahit_fasta:
-    input: rules.megahit.output.fasta
-    output: join(ASSEMBLY_DIR, BASE + '_megahit.fasta')
-    log: join(LOGS_DIR, 'megahit/cp_assembly.log')
-    shell: ("cp {input} {output}")
 
