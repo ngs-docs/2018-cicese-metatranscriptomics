@@ -54,7 +54,7 @@ megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-TARGETS = plass_targets + megahit_targets # + spades_targets #+ trinity_targs
+TARGETS = plass_targets + megahit_targets + spades_targets #+ trinity_targs
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
 rule all:
@@ -144,7 +144,7 @@ rule spades:
     input:
             left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
 	    right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
-            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]), 
+#            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]), 
     output:
         fasta = join(ASSEMBLY_DIR, "rnaspades", "transcripts.fasta"),
     message:
