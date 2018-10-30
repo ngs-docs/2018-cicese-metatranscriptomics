@@ -22,5 +22,5 @@ rule trimmomatic_pe:
         trimmer = (trim_params['trim_cmd'].format(trim_params['adapter_file']['pe_name'])).split(' '),
         extra = ''
     log: join(LOGS_DIR, 'trimmomatic/{sample}_{unit}_pe.log')
-    conda: join(ENVS_DIR, "trimmomatic-env.yaml")
-    script: join(WRAPPERS_DIR, "trimmomatic-pe.py")
+    conda: "trimmomatic-env.yaml"
+    script: "trimmomatic-pe.py"

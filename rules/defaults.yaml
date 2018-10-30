@@ -1,0 +1,20 @@
+
+BASE = config.get('basename','tara')
+experiment_suffix = config.get('experiment_suffix')
+
+if experiment_suffix:
+    OUT_DIR = BASE + "_out_" + experiment_suffix
+else:
+    OUT_DIR = BASE + '_out'
+
+
+RULES_DIR = 'utils/rules'
+WRAPPERS_DIR = 'utils/wrappers'
+ENVS_DIR = 'utils/envs'
+
+DATA_DIR = config.get('data_directory', join(OUT_DIR, 'data'))
+download_data = config.get('download_data', False)
+
+LOGS_DIR = join(OUT_DIR, 'logs')
+TRIM_DIR = join(OUT_DIR,"trimmed")
+ASSEMBLY_DIR = join(OUT_DIR,"assembly")

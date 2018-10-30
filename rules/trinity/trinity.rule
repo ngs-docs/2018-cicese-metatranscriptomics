@@ -2,7 +2,7 @@ from os.path import join
 
 rule trinity:
     input:
-            left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]),
+        left=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1", "1.se","2.se"]),
         right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES)
     output:
         fasta = join(ASSEMBLY_DIR,"trinity_out_dir/Trinity.fasta"),
@@ -17,8 +17,8 @@ rule trinity:
         extra=""
     threads: 44
     log: join(LOGS_DIR, 'trinity/trinity.log')
-    conda: join(ENVS_DIR, "trinity-env.yaml")
-    script: join(WRAPPERS_DIR, "trinity-wrapper.py")
+    conda: "trinity-env.yaml"
+    script: "trinity-wrapper.py"
 
 rule rename_trinity_fasta:
     input: rules.trinity.output.fasta

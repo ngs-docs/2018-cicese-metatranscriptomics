@@ -22,9 +22,7 @@ else:
     OUT_DIR = BASE + '_out'
 
 
-RULES_DIR = 'utils/rules'
-WRAPPERS_DIR = 'utils/wrappers'
-ENVS_DIR = 'utils/envs'
+RULES_DIR = 'rules'
 
 DATA_DIR = config.get('data_directory', join(OUT_DIR, 'data'))
 download_data = config.get('download_data', False)
@@ -46,26 +44,38 @@ for s in SAMPLES:
 
 TARGETS = []
 
-if download_data:
-    include: join(RULES_DIR, 'ftp.rule')
-else:
-    include: join(RULES_DIR, 'link_data.rule')
+#def generate_data_targs(outdir, samples, extensions):
+#    target_list = []
+#    for s in samples:
+#        target_list = target_list + [s + e for e in extensions]
+        #target_list = target_list + [join(outdir, s + e) for e in extensions]
+    #return target_list
+#    return [join(outdir, t) for t in target_list]
 
-include: join(RULES_DIR, 'trimmomatic.rule')
+## working here
+#def generate assembly_targs(outdir, base, extensions):
+#    target_list = target_list + [join(outdir, s + e) for e in extensions]
+
+if download_data:
+    include: join(RULES_DIR, 'general', 'ftp.rule')
+else:
+    include: join(RULES_DIR, 'general', 'link_data.rule')
+
+include: join(RULES_DIR, 'trimmomatic', 'trimmomatic.rule')
 #data_targs = [join(DATA_DIR, targ) for targ in data_targs] 
 # Assembly Targets
-include: join(RULES_DIR, 'trinity.rule')
+include: join(RULES_DIR, 'trinity', 'trinity.rule')
 trinity_extensions = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
 trinity_targets = ['{}'.format(BASE) + i for i in trinity_extensions]
 trinity_targs = [join(ASSEMBLY_DIR, t) for t in trinity_targets]
 
-include: join(RULES_DIR, 'spades.rule')
+include: join(RULES_DIR, 'spades', 'spades.rule')
 spades_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_spades.fasta']]
 
-include: join(RULES_DIR, 'plass.rule')
+include: join(RULES_DIR, 'plass', 'plass.rule')
 plass_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_plass.fasta']]
 
-include: join(RULES_DIR, 'megahit.rule')
+include: join(RULES_DIR, 'megahit', 'megahit.rule')
 megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
@@ -73,7 +83,7 @@ megahit_targets = [join(ASSEMBLY_DIR, t) for t in [BASE + '_megahit.fasta']]
 #TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs + sourmash_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 
-include: join(RULES_DIR, 'sourmash.rule')
+include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
 TARGETS = [join(TRIM_DIR, targ) for targ in sourmash_targs]
 
 rule all:

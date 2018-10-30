@@ -2,9 +2,9 @@ from os.path import join
 
 rule megahit:
     input:
-            left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
-            right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
-            single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
+        left=expand(join(TRIM_DIR, '{sample}_1.trim.fq.gz'), sample=SAMPLES),
+        right=expand(join(TRIM_DIR, '{sample}_2.trim.fq.gz'), sample=SAMPLES),
+        single=expand(join(TRIM_DIR, '{sample}_{end}.trim.fq.gz'), sample=SAMPLES, end=["1.se","2.se"]),
     output:
         fasta = join(ASSEMBLY_DIR, 'megahit', BASE + "_megahit.fasta"),
     message:
@@ -14,8 +14,8 @@ rule megahit:
         extra = ''
     threads: 44
     log: join(LOGS_DIR, 'megahit/megahit.log')
-    conda: join(ENVS_DIR, "megahit-env.yaml")
-    script: join(WRAPPERS_DIR, "megahit-wrapper.py")
+    conda: "megahit-env.yaml"
+    script: "megahit-wrapper.py"
 
 rule rename_megahit_fasta:
     input: rules.megahit.output.fasta
