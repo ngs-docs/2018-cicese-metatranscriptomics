@@ -62,7 +62,7 @@ trim_ext = [".trim.fq.gz", ".se.trim.fq.gz"]
 trim_targs = generate_data_targs(TRIM_DIR, SAMPLES, trim_ext)
 
 #fastqc of raw, trimmed files
-include: 'rules/fastqc/fastqc.rule'
+include: join(RULES_DIR,'fastqc/fastqc.rule')
 fastqc_ext =  ['_fastqc.zip','_fastqc.html', '.trim_fastqc.zip','.trim_fastqc.html'] 
 fastqc_targs = generate_data_targs(QC_DIR, SAMPLES, fastqc_ext)
 
@@ -86,11 +86,6 @@ include: join(RULES_DIR, 'megahit', 'megahit.rule')
 megahit_ext = ['_megahit.fasta']
 megahit_targs = generate_base_targs(ASSEMBLY_DIR, BASE, megahit_ext)
 
-#TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
-#TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
-#TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs + sourmash_targets
-#TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
-
 # generate sourmash signatures of trimmed reads and assemblies
 include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
 sourmash_read_ext =  [".trim.sig"] 
@@ -98,7 +93,12 @@ sourmash_targs = generate_data_targs(TRIM_DIR, SAMPLES, sourmash_read_ext)
 sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
 sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
 
-TARGETS = fastqc_targs + sourmash_targs
+#TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
+#TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
+#TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs + sourmash_targets
+#TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
+#TARGETS = fastqc_targs + sourmash_targs
+TARGETS =  trinity_targs # + spades_targs
 
 rule all:
     input: TARGETS
