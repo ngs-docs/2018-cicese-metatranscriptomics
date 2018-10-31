@@ -11,10 +11,11 @@ FTP = FTP.RemoteProvider()
 min_version("5.1.2") #minimum snakemake version
 
 #util functions (to do: move elsewhere)
-def generate_data_targs(outdir, samples, extensions):
+def generate_data_targs(outdir, samples, extensions, ends = ["_1", "_2"]):
     target_list = []
+    exts = [x+y for x in ends for y in extensions]
     for s in samples:
-        target_list = target_list + [join(outdir, s + e) for e in extensions]
+        target_list = target_list + [join(outdir, s + e) for e in exts]
     return target_list
 
 def generate_base_targs(outdir, basename, extensions):
@@ -39,6 +40,7 @@ download_data = config.get('download_data', False)
 
 LOGS_DIR = join(OUT_DIR, 'logs')
 TRIM_DIR = join(OUT_DIR,"trimmed")
+QC_DIR = join(OUT_DIR, "read_qc")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
 
 SAMPLES = (samples['sample'] + '_' + samples['unit']).tolist()
@@ -51,13 +53,18 @@ if download_data:
 else:
     include: join(RULES_DIR, 'general', 'link_data.rule')
 
-data_ext = ["_1.fq.gz", "_2.fq.gz"]
+data_ext = [".fq.gz", ".fq.gz"]
 data_targs = generate_data_targs(DATA_DIR, SAMPLES, data_ext)
 
 #trimmomatic trimming
 include: join(RULES_DIR, 'trimmomatic', 'trimmomatic.rule')
-trim_ext = ["_1.trim.fq.gz", "_2.trim.fq.gz", "_1.se.trim.fq.gz", "_2.se.trim.fq.gz"]
+trim_ext = [".trim.fq.gz", ".se.trim.fq.gz"]
 trim_targs = generate_data_targs(TRIM_DIR, SAMPLES, trim_ext)
+
+#fastqc of raw, trimmed files
+include: 'rules/fastqc/fastqc.rule'
+fastqc_ext =  ['_fastqc.zip','_fastqc.html', '.trim_fastqc.zip','.trim_fastqc.html'] 
+fastqc_targs = generate_data_targs(QC_DIR, SAMPLES, fastqc_ext)
 
 # trinity assembly
 include: join(RULES_DIR, 'trinity', 'trinity.rule')
@@ -86,12 +93,12 @@ megahit_targs = generate_base_targs(ASSEMBLY_DIR, BASE, megahit_ext)
 
 # generate sourmash signatures of trimmed reads and assemblies
 include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
-sourmash_read_ext =  ["_1.trim.sig", "_2.trim.sig"] 
+sourmash_read_ext =  [".trim.sig"] 
 sourmash_targs = generate_data_targs(TRIM_DIR, SAMPLES, sourmash_read_ext)
 sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
 sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
 
-TARGETS = sourmash_targs
+TARGETS = fastqc_targs + sourmash_targs
 
 rule all:
     input: TARGETS
