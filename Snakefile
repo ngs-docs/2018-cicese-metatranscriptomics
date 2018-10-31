@@ -13,6 +13,7 @@ min_version("5.1.2") #minimum snakemake version
 #util functions (to do: move elsewhere)
 def generate_data_targs(outdir, samples, extensions, ends = ["_1", "_2"]):
     target_list = []
+    # to do: add paired vs single end check here to generate `ends`
     exts = [x+y for x in ends for y in extensions]
     for s in samples:
         target_list = target_list + [join(outdir, s + e) for e in exts]
