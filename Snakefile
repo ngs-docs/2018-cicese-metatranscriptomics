@@ -11,6 +11,9 @@ FTP = FTP.RemoteProvider()
 min_version("5.1.2") #minimum snakemake version
 
 #util functions (to do: move elsewhere)
+def is_single_end(sample, unit, end = ''):
+    return pd.isnull(samples.loc[(sample, unit), "fq2"])
+
 def generate_data_targs(outdir, samples, extensions, ends = ["_1", "_2"]):
     target_list = []
     # to do: add paired vs single end check here to generate `ends`
@@ -63,9 +66,22 @@ trim_ext = [".trim.fq.gz", ".se.trim.fq.gz"]
 trim_targs = generate_data_targs(TRIM_DIR, SAMPLES, trim_ext)
 
 #fastqc of raw, trimmed files
-include: join(RULES_DIR,'fastqc/fastqc.rule')
-fastqc_ext =  ['_fastqc.zip','_fastqc.html', '.trim_fastqc.zip','.trim_fastqc.html'] 
-fastqc_targs = generate_data_targs(QC_DIR, SAMPLES, fastqc_ext)
+#include: join(RULES_DIR,'fastqc/fastqc.rule')
+#fastqc_pretrim_ext =  ['_fastqc.zip','_fastqc.html'] 
+#fastqc_trim_ext =  ['_trimmed_fastqc.zip','_trimmed_fastqc.html'] 
+#fastqc_pretrim_targs = [] #generate_data_targs(QC_DIR, SAMPLES, fastqc_pretrim_ext)
+#fastqc_trim_targs = generate_data_targs(QC_DIR, SAMPLES, fastqc_trim_ext)
+#fastqc_targs = fastqc_pretrim_targs + fastqc_trim_targs
+
+#correct reads with rcorrector
+include: join(RULES_DIR,'rcorrector/rcorrector.rule')
+rcorr_ext =  ['.rcorr.fq.gz', '.se.rcorr.fq.gz']
+rcorr_targs = generate_data_targs(TRIM_DIR, SAMPLES, rcorr_ext)
+
+# error trim with khmer
+include: join(RULES_DIR, 'khmer/khmer.rule')
+khmer_pe_ext = ['_1.khmer.fq.gz', '_2.khmer.fq.gz', '.paired.khmer.fq.gz', '.single.khmer.fq.gz']
+khmer_targs = generate_data_targs(TRIM_DIR, SAMPLES, khmer_pe_ext, ends = [""])
 
 # trinity assembly
 include: join(RULES_DIR, 'trinity', 'trinity.rule')
@@ -99,7 +115,9 @@ sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourma
 #TARGETS = spades_targets + plass_targets + megahit_targets #+ trinity_targs + sourmash_targets
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 #TARGETS = fastqc_targs + sourmash_targs
+#TARGETS  =  khmer_targs
 TARGETS =  trinity_targs # + spades_targs
+#TARGETS = fastqc_targs
 
 rule all:
     input: TARGETS
