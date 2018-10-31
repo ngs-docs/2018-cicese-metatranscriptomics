@@ -6,24 +6,20 @@ __license__ = "MIT"
 from os import path
 from snakemake.shell import shell
 
-## TO DO: add support for interleaved reads (-i)
-
 extra = snakemake.params.get("extra", "")
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
-outdir = path.dirname(snakemake.output.get(r1))
-#outdir = path.dirname(snakemake.output[0])
 k_size = snakemake.params.get("k", "31")
 
 r1 = snakemake.input.get("r1")
 r2 = snakemake.input.get("r2")
-r1_out = snakemake.output.get("r1")
-r2_out = snakemake.output.get("r2")
+#r1_out = snakemake.output.get("r1")
+#r2_out = snakemake.output.get("r2")
 
 ileav = snakemake.input.get("i")
-ileav_out = snakemake.output.get("i")
+#ileav_out = snakemake.output.get("i")
 
 unp = snakemake.input.get('s')
-unp_out = snakemake.output.get("s")
+#unp_out = snakemake.output.get("s")
 
 
 # maybe generate output tuples here: (default_outfile, desired_outfile)
@@ -38,40 +34,60 @@ def generate_default_output(infiles):
         outfiles = outfiles + [default_outname]
     return outfiles
 
-assert (r1_in is not None and r2_in is not None) or ileaf_in is not None or single is not None, "either r1 and r2 (paired), or i (interleaved) are required as input"
+assert (r1_in is not None and r2_in is not None) or ileaf_in is not None or unp is not None, "either r1 and r2 (paired), or i (interleaved) are required as input"
 
 if r1_in:
-    r1 = [snakemake.input.r1] if isinstance(snakemake.input.r1, str) else snakemake.input.r1
+    # make sure we're handling list version of input/output
+	r1 = [snakemake.input.r1] if isinstance(snakemake.input.r1, str) else snakemake.input.r1
     r2 = [snakemake.input.r2] if isinstance(snakemake.input.r2, str) else snakemake.input.r2
-    assert len(r1) == len(r2), "input-> equal number of files required for r1 and r2"
+    r1_out = [snakemake.output.r1_out] if isinstance(snakemake.output.r1_out, str) else snakemake.output.r1_out
+    r2_out = [snakemake.output.r2_out] if isinstance(snakemake.output.r2_out, str) else snakemake.output.r2_out
+    #set outdir
+    outdir = path.dirname(r1[0])
+    # check number of input/output files
+	assert len(r1) == len(r2), "input-> equal number of files required for r1 and r2"
     assert len(r1) == len(r1_out), "requires equal # output files as input files"
-    assert len(r1) == len(r2_out), "requires equal # output files as input files" 
-    r1_cmd = ' -1 ' + " -1 ".join(r1)
+    assert len(r1) == len(r2_out), "requires equal # output files as input files"
+    # generate command line for read input
+	r1_cmd = ' -1 ' + " -1 ".join(r1)
     r2_cmd = ' -2 ' + " -2 ".join(r2)
     read_cmd = " ".join([r1_cmd,r2_cmd])
     # generate intermediate output names
-    r1_out = generate_default_output(r1)
-    r2_out = generate_default_output(r2)
+    r1_default_out = generate_default_output(r1)
+    r2_default_out = generate_default_output(r2)
 if i:
-    assert r1 is None and r2 is None and unp is None, "cannot mix paired, unpaired, and interleaved input" #to do: check this! 
+    assert r1 is None and r2 is None and unp is None, "cannot mix paired, unpaired, and interleaved input" #to do: check this!
     ileav = [snakemake.input.i] if isinstance(snakemake.input.i, str) else snakemake.input.i
+    ileav_out = [snakemake.output.i] if isinstance(snakemake.output.i, str) else snakemake.output.i
+    #set outdir
+    outdir = path.dirname(ileav[0])
     read_cmd = ' -i ' + " -i ".join(ileav)
     assert len(r1) == len(ileav_out), "requires equal # output files as input files"
-    ileav_out = generate_default_output(ileav)
+    ileav_default_out = generate_default_output(ileav)
 if s:
-    assert r1 is None and r2 is None and i is None, "cannot mix paired, unpaired, and interleaved input" #to do: check this! 
+    assert r1 is None and r2 is None and i is None, "cannot mix paired, unpaired, and interleaved input" #to do: check this!
     unp = [snakemake.input.s] if isinstance(snakemake.input.s, str) else snakemake.input.s
+    unp_out = [snakemake.output.s] if isinstance(snakemake.output.s, str) else snakemake.output.s
+    #set outdir
+    outdir = path.dirname(unp[0])
     read_cmd = ' -s ' + " -s ".join(unp)
     assert len(unp) == len(unp_out), "requires equal # output files as input files"
-    s_out = generate_default_output(unp)
+    unp_default_out = generate_default_output(unp)
 
-
+# run rcorrector
 shell("rcorrector {read_cmd} -od {outdir} -k {k_size} -t {snakemake.threads} {snakemake.params.extra} {log}")
 
+# move default output to desired output name and location
+if r1_default_out:
+	for f_default, f_out in zip(r1_default_out, r1_out):
+        shell("mv -f {f_default} {f_out}")
+	for f_default, f_out in zip(r2_default_out, r2_out):
+        shell("mv -f {f_default} {f_out}")
 
-# need function to move default output to desired output:
-# ** generate tuples above, then for each tuple in the out list, mv {default} to {desired}**
+if ileav_default_out:
+	for f_default, f_out in zip(ileav_default_out, ileav_out):
+        shell("mv -f {f_default} {f_out}")
 
-
-#    shell("mv {rcor_default_r1} {snakemake.output.r1}")
-#    shell("mv {rcor_default_r2} {snakemake.output.r2}")
+if unp_default_out:
+	for f_default, f_out in zip(unp_default_out, unp_out):
+        shell("mv -f {f_default} {f_out}")
