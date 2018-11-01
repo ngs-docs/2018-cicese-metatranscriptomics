@@ -111,9 +111,9 @@ sourmash_targs = generate_data_targs(TRIM_DIR, SAMPLES, sourmash_read_ext)
 sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
 sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
 
-#include: join(RULES_DIR, 'paladin/paladin.rule')
-#paladin_ext =  [".bwt"] 
-#paladin_targs =  generate_base_targs(PALADIN_DIR, BASE, paladin_ext)
+include: join(RULES_DIR, 'paladin/paladin.rule')
+paladin_ext =  ["_plass.fasta.bwt", "_plass_x_trim.bam", "_plass_x_trim.sort.bam", "_plass_x_trim.sort.bam.bai"] 
+paladin_targs =  generate_base_targs(PALADIN_DIR, BASE, paladin_ext)
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
@@ -121,8 +121,9 @@ sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourma
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 #TARGETS = fastqc_targs + sourmash_targs
 #TARGETS  =  khmer_targs
-TARGETS =  trinity_targs # + spades_targs
+#TARGETS =  trinity_targs # + spades_targs
 #TARGETS = fastqc_targs
+TARGETS = paladin_targs
 
 rule all:
     input: TARGETS
