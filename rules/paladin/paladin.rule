@@ -1,36 +1,34 @@
 import os
 from os.path import join
 
-rule paladin_index:
+
+rule cp_assemb_for_paladin:
     input: join(ASSEMBLY_DIR, "{assembly}.fasta"),
-    output: join(ASSEMBLY_DIR, "{assembly}.fasta.bwt")
+    output: join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta")
+    shell:"""
+    cp {input} {output}
+    """
+
+rule paladin_index:
+    input: join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta")
+    output: join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta.bwt"),
     conda: "paladin-env.yaml"
     shell: """
     paladin index -r3 {input}
-    """
-
-rule mv_paladin_index:
-    input: join(ASSEMBLY_DIR, "{assembly}.fasta.bwt"),
-    output:
-        bwt = join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta.bwt"),
-        baseN=join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta")
-    run: 
-        outdir = os.path.dirname(str(output))
-        index_glob = str(input).rsplit('.bwt')[0] + '*'
-        shell( "mv {index_glob} {outdir}")
-
+#    """
     
 # to improve: merge reads with PEAR before mapping with paladin
 
 rule paladin_align:
     input:  
         reads= lambda wildcards: join(TRIM_DIR, '{}_{}_{}.trim.fq.gz'.format(wildcards.sample,wildcards.unit, wildcards.end)),
-        index = rules.mv_paladin_index.output.baseN
-#        index = join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta")
+        index = join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta.bwt")
     output: join(PALADIN_DIR + '_{assembly}', "{sample}_{unit}_{end}_trim.paladin.bam") 
+    params: 
+        index=join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta")
     conda: "paladin-env.yaml"
     shell:"""
-    paladin align -f 125 -t {threads} {input.index} {input.reads} | samtools view -Sb - > {output}
+    paladin align -f 125 -t {threads} {params.index} {input.reads} | samtools view -Sb - > {output}
     """
     
 rule samtools_sort_paladin:
