@@ -15,7 +15,7 @@ rule paladin_index:
     conda: "paladin-env.yaml"
     shell: """
     paladin index -r3 {input}
-#    """
+    """
     
 # to improve: merge reads with PEAR before mapping with paladin
 
