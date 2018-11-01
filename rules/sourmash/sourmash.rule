@@ -12,7 +12,7 @@ rule sourmash_compute_reads:
         # optional parameters
         k = "31",
         scaled = "1000",
-        extra = ""
+        extra = " --track-abundance "
     conda: 'sourmash-env.yaml'
     script: 'sourmash-compute-wrapper.py'
 
