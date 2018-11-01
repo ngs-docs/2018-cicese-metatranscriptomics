@@ -155,8 +155,9 @@ if input_assembly:
 if mapping:
     include: join(RULES_DIR, 'paladin/paladin.rule')
     paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.bai"] 
-    paladin_targs =  generate_base_targs(PALADIN_DIR, BASE + '_plass', [".fasta.bwt"])
-    paladin_targs += generate_data_targs(PALADIN_DIR, SAMPLES, paladin_read_ext)
+    assemb_name =BASE + '_plass'
+    paladin_targs =  generate_base_targs(PALADIN_DIR + '_' + assemb_name, assemb_name, [".fasta", ".fasta.bwt"])
+    paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
 #    print(paladin_targs)
 
 
