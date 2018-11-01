@@ -31,7 +31,7 @@ rule khmer_read_processing_pe:
         k = '20',
         Z = '18', #20
         C = '3', #4
-        memory = '4e9',#60e9
+        memory = '20e9',#60e9
         cov = '20',
         extra = ''
     threads: 2

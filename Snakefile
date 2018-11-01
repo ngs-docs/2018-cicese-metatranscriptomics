@@ -24,7 +24,7 @@ def generate_data_targs(outdir, samples, extensions, ends = ["_1", "_2"]):
 
 def generate_base_targs(outdir, basename, extensions):
     target_list = []
-    target_list = [join(outdir, BASE + e) for e in extensions]
+    target_list = [join(outdir, basename + e) for e in extensions]
     return target_list
 
 # set up dirs, basename
@@ -127,7 +127,7 @@ if assembly:
     trinity_ext = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
     trinity_targs = generate_base_targs(ASSEMBLY_DIR, BASE, trinity_ext)
     
-	# spades assembly
+    # spades assembly
     include: join(RULES_DIR, 'spades', 'spades.rule')
     spades_ext = ['_spades.fasta']
     spades_targs = generate_base_targs(ASSEMBLY_DIR, BASE, spades_ext)
@@ -149,12 +149,15 @@ if assembly:
 
 if input_assembly:
     include: 'rules/assemblyinput/assemblyinput.rule'
-    assemblyinput_targs = generate_base_targs(ASSEMBLY_DIR, BASE, ['_plass.fasta'])
+    assemb = BASE + str(config['assembly_input']['assembly_ext'])
+    assemblyinput_targs = generate_base_targs(ASSEMBLY_DIR, assemb, ['.fasta'])
 
 if mapping:
     include: join(RULES_DIR, 'paladin/paladin.rule')
-    paladin_ext =  ["_plass.fasta.bwt", "_plass_x_trim.bam", "_plass_x_trim.sort.bam", "_plass_x_trim.sort.bam.bai"] 
-    paladin_targs =  generate_base_targs(PALADIN_DIR, BASE, paladin_ext)
+    paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.bai"] 
+    paladin_targs =  generate_base_targs(PALADIN_DIR, BASE + '_plass', [".fasta.bwt"])
+    paladin_targs += generate_data_targs(PALADIN_DIR, SAMPLES, paladin_read_ext)
+#    print(paladin_targs)
 
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
