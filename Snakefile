@@ -46,6 +46,7 @@ LOGS_DIR = join(OUT_DIR, 'logs')
 TRIM_DIR = join(OUT_DIR,"trimmed")
 QC_DIR = join(OUT_DIR, "read_qc")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
+PALADIN_DIR = join(OUT_DIR,"paladin")
 
 SAMPLES = (samples['sample'] + '_' + samples['unit']).tolist()
 
@@ -109,6 +110,10 @@ sourmash_read_ext =  [".trim.sig"]
 sourmash_targs = generate_data_targs(TRIM_DIR, SAMPLES, sourmash_read_ext)
 sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
 sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
+
+#include: join(RULES_DIR, 'paladin/paladin.rule')
+#paladin_ext =  [".bwt"] 
+#paladin_targs =  generate_base_targs(PALADIN_DIR, BASE, paladin_ext)
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]

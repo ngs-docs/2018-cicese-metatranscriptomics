@@ -1,0 +1,113 @@
+rule paladin_index:
+	input: join(ASSEMBLY_DIR, "{assembly}.fasta")
+	output: join(PALADIN_DIR, "{assembly}/{assembly}.fasta.bwt")
+    #output: join(PALADIN_DIR, "outputs/plass/{nbhd}.{trim}trim.plass.c100.cut.dup.fa.bwt"
+    #input: join(ASSEMBLY_DIR, "{nbhd}.{trim}trim.plass.c100.cut.dup.fa"
+    conda: "paladin-env.yaml"
+    shell:'''
+    paladin index -r3 {input}
+    '''
+
+	rule paladin_align:
+    #output: "outputs/paladin/{nbhd}.{trim}trim.sam"
+    output: join(PALADIN_DIR, "{assembly}.bam") #"outputs/paladin/{nbhd}.{trim}trim.sam"
+    input:
+	output: 
+	    index=join(PALADIN_DIR, {assembly}.fasta.bwt),
+        #indx="outputs/plass/{nbhd}.{trim}trim.plass.c100.cut.dup.fa.bwt",
+        reads="inputs/reads/{nbhd}.{trim}trim.reads.gz"
+    params:
+        indx="outputs/plass/{nbhd}.{trim}trim.plass.c100.cut.dup.fa"
+    conda: ENV
+    shell:'''
+    # paladin align -f 125 -t 2 {params.indx} {input.reads} > {output}
+    paladin align -f 125 -t 2 {params.indx} {input.reads} | samtools view -Sb - > {output}
+    '''
+
+	rule samtools_flagstat_paladin:
+    output: "outputs/paladin/{nbhd}.{trim}trim.sam.flagstat"
+    input: "outputs/paladin/{nbhd}.{trim}trim.sam"
+    conda: ENV
+    shell:'''
+    samtools flagstat {input} > {output}
+    '''
+
+	rule samtools_view_paladin:
+    output: "outputs/paladin/{nbhd}.{trim}trim.bam"
+    input: "outputs/paladin/{nbhd}.{trim}trim.sam"
+    conda: ENV
+    shell:'''
+    samtools view -b {input} > {output}
+    '''
+
+	rule samtools_sort_paladin:
+    output: "outputs/paladin/{nbhd}.{trim}trim.sort.bam"
+    input: "outputs/paladin/{nbhd}.{trim}trim.bam"
+    conda: ENV
+    shell:'''
+    samtools sort {input} > {output}
+    '''
+
+	rule samtools_index_paladin:
+    output: "outputs/paladin/{nbhd}.{trim}trim.sort.bam.bai"
+    input: "outputs/paladin/{nbhd}.{trim}trim.sort.bam"
+    conda: ENV
+    shell:'''
+    samtools index {input}
+    '''
+
+	rule extract_plass_readnames_from_bam:
+# extract names of reads for each aa seq bam section that matched
+# PFAM domain of interest
+    output: dynamic("outputs/bam_subsets/{plass_match}-NAMES.txt")
+    input:
+        plass_names = expand("outputs/hmmscan/{nbhd}.{trim}trim.plass.{pfam_base}-hmmscanT100-NAMES.txt", nbhd = NBHD, trim = TRIM, pfam_base=PFAM_BASE),
+        bai = expand("outputs/paladin/{nbhd}.{trim}trim.sort.bam.bai", nbhd = NBHD, trim = TRIM),
+        bam = expand("outputs/paladin/{nbhd}.{trim}trim.sort.bam", nbhd = NBHD, trim = TRIM)
+    run:
+        import pysam
+        import re
+
+        with open(str(input.plass_names)) as f:
+            plass_hmmscan_matches = f.readlines()
+
+        plass_hmmscan_matches = [x.strip() for x in plass_hmmscan_matches]
+
+        samfile = pysam.AlignmentFile(str(input.bam), 'rb')
+
+        for match in plass_hmmscan_matches:
+            reads = []
+            for read in samfile.fetch(match):
+                name = re.sub('.*:', '', read.qname)
+                reads.append(name)
+                with open(f"outputs/bam_subsets/{match}-NAMES.txt", 'w') as outfile:
+                    for s in reads:
+                        outfile.write("%s\n" % s)
+        samfile.close()
+
+
+rule grab_plass_reads:
+    output: "outputs/bam_subsets/{plass_match}.fa" # loses fq info
+    input:
+        names = "outputs/bam_subsets/{plass_match}-NAMES.txt",
+        reads=expand("inputs/reads/{nbhd}.{trim}trim.reads.gz", nbhd = NBHD, trim = TRIM)
+    conda: ENV
+    shell:'''
+    ./extract-hmmscan-matches.py {input.names} {input.reads}  > {output}
+    '''
+
+rule calc_plass_read_sigs:
+    output: "outputs/bam_subsets/{plass_match}.sig"
+    input: "outputs/bam_subsets/{plass_match}.fa"
+    conda: ENV
+    shell:'''
+    sourmash compute -k 31 --scaled 1 -o {output} {input}
+    '''
+
+rule compare_plass_read_sigs:
+    output: "outputs/comp/{nbhd}_{trim}trim_{pfam_base}_k31.csv"
+    input: dynamic("outputs/bam_subsets/{plass_match}.sig")
+    conda: ENV
+    shell:'''
+    sourmash compare -k 31 --csv {output} {input}
+    '''
