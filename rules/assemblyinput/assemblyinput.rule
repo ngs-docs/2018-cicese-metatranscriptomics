@@ -1,0 +1,9 @@
+from os.path import join
+
+rule cp_input_assembly:
+    input: config['assembly_input']['assembly']
+    output: join(ASSEMBLY_DIR, BASE + config['assembly_input']['assembly_ext'] + '.fasta')
+    log: join(LOGS_DIR, 'cp_assembly.log')
+    shell:"""
+	cp {input} {output}
+	"""
