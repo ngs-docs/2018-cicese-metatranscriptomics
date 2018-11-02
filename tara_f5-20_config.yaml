@@ -6,11 +6,12 @@ data_directory: "/tara/data/TS_RNA"
 #download_data: True
 download_data: False
 
-workflow: "mapping"
+workflow: "assembly"
+#workflow: "mapping"
 
-assembly_input:
-  assembly: "tara_f5-20_plass.fasta"
-  assembly_ext: "_plass"
+#assembly_input:
+#  assembly: "tara_f5-20_plass.fasta"
+#  assembly_ext: "_plass"
 
 trimmomatic:
   trim_cmd:  "ILLUMINACLIP:{}:2:40:15 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:15 MINLEN:35"

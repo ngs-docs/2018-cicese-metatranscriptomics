@@ -16,7 +16,7 @@ rule trinity:
         # optional parameters
         seqtype='fq',
         max_memory='190G',
-        extra=""
+        extra=" --no_normalize_reads "
     threads: 44
     log: join(LOGS_DIR, 'trinity/trinity.log')
     conda: "trinity-env.yaml"

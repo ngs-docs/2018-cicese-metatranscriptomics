@@ -81,18 +81,15 @@ else:
 TARGETS = []
 include: 'rules/common.rule'
 
-#download_data = config.get('download_data', False)
-
-# download or softlink data
-if config.get('download_data', False):
-    include: join(RULES_DIR, 'general', 'ftp.rule')
-else:
-    include: join(RULES_DIR, 'general', 'link_data.rule')
-
-data_ext = [".fq.gz", ".fq.gz"]
-data_targs = generate_data_targs(DATA_DIR, SAMPLES, data_ext)
-
 if read_processing:
+    # download or softlink data
+    if config.get('download_data', False):
+        include: join(RULES_DIR, 'general', 'ftp.rule')
+    else:
+        include: join(RULES_DIR, 'general', 'link_data.rule')
+
+    data_ext = [".fq.gz", ".fq.gz"]
+    data_targs = generate_data_targs(DATA_DIR, SAMPLES, data_ext)
     #fastqc of raw, trimmed files
     #include: join(RULES_DIR,'fastqc/fastqc.rule')
     #fastqc_pretrim_ext =  ['_fastqc.zip','_fastqc.html'] 
@@ -108,7 +105,7 @@ if read_processing:
 
     #correct reads with rcorrector
     include: join(RULES_DIR,'rcorrector/rcorrector.rule')
-    rcorr_ext =  ['.rcorr.fq.gz'] #, '.se.rcorr.fq.gz']
+    rcorr_ext =  ['.rcorr.fq.gz']
     rcorr_targs = generate_data_targs(TRIM_DIR, SAMPLES, rcorr_ext)
 
     # error trim with khmer
@@ -153,6 +150,12 @@ if input_assembly:
     assemblyinput_targs = generate_base_targs(ASSEMBLY_DIR, assemb, ['.fasta'])
 
 if mapping:
+    #PEAR: merge pe reads for paladin
+#    include: join(RULES_DIR, 'pear/pear.rule')
+#    pear_ext = ['.pear_merged.fq.gz']
+#    pear_targs = generate_data_targs(TRIM_DIR, SAMPLES, pear_ext, ends = [""])
+    #paladin_read_ext =  ["_pear.paladin.bam", "_pear.paladin.sort.bam", "_pear.paladin.sort.bam.bai"] 
+    # PALADIN: map reads in AA space
     include: join(RULES_DIR, 'paladin/paladin.rule')
     paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.bai"] 
     assemb_name =BASE + '_plass'
@@ -166,10 +169,11 @@ if mapping:
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 #TARGETS = fastqc_targs + sourmash_targs
 #TARGETS  =  khmer_targs
-#TARGETS =  trinity_targs # + spades_targs
+TARGETS =  trinity_targs # + spades_targs
 #TARGETS = fastqc_targs
-TARGETS = paladin_targs
+#TARGETS = paladin_targs
 #TARGETS = rcorr_targs 
+#TARGETS = plass_targs
 
 rule all:
     input: TARGETS
