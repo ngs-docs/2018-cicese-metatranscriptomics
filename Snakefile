@@ -108,7 +108,7 @@ if read_processing:
 
     #correct reads with rcorrector
     include: join(RULES_DIR,'rcorrector/rcorrector.rule')
-    rcorr_ext =  ['.rcorr.fq.gz', '.se.rcorr.fq.gz']
+    rcorr_ext =  ['.rcorr.fq.gz'] #, '.se.rcorr.fq.gz']
     rcorr_targs = generate_data_targs(TRIM_DIR, SAMPLES, rcorr_ext)
 
     # error trim with khmer
@@ -158,7 +158,6 @@ if mapping:
     assemb_name =BASE + '_plass'
     paladin_targs =  generate_base_targs(PALADIN_DIR + '_' + assemb_name, assemb_name, [".fasta", ".fasta.bwt"])
     paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
-#    print(paladin_targs)
 
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
@@ -170,6 +169,7 @@ if mapping:
 #TARGETS =  trinity_targs # + spades_targs
 #TARGETS = fastqc_targs
 TARGETS = paladin_targs
+#TARGETS = rcorr_targs 
 
 rule all:
     input: TARGETS
