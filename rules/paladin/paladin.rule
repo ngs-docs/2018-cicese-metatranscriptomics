@@ -27,6 +27,7 @@ rule paladin_align:
     params: 
         index=join(PALADIN_DIR + '_{assembly}', "{assembly}.fasta")
     conda: "paladin-env.yaml"
+    threads: 20
     shell:"""
     paladin align -f 125 -t {threads} {params.index} {input.reads} | samtools view -Sb - > {output}
     """
@@ -35,8 +36,9 @@ rule samtools_sort_paladin:
     input:  join(PALADIN_DIR + '_{assembly}', "{sample}_{unit}_{end}_trim.paladin.bam") 
     output:  join(PALADIN_DIR + '_{assembly}', "{sample}_{unit}_{end}_trim.paladin.sort.bam") 
     conda: "paladin-env.yaml"
+    threads: 5
     shell:"""
-    samtools sort {input} -o {output}
+    samtools sort -@ {threads} {input} -o {output}
     """
 
 rule samtools_flagstat_paladin:
