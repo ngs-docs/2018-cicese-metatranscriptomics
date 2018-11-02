@@ -27,7 +27,7 @@ def generate_default_output(infiles, outD):
     outfiles = []
     for f_in in infiles:
         base = path.basename(f_in.rsplit('.f')[0])
-        default_outname = base + '.rcor.fq'
+        default_outname = base + '.cor.fq'
         # Rcorrector outputs gzipped files IF input files are gzipped
         if f_in.endswith('.gz'):
             default_outname = default_outname + '.gz'
