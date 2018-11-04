@@ -1,4 +1,4 @@
-# Jetstream: working with bioconda.
+# Software Installation with Bioconda 
 
 Learning objectives:
 * learn what bioconda is
