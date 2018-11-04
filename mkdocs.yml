@@ -38,8 +38,19 @@ nav:
   - 'Overview':
       - 'Schedule' : 'index.md'
       - 'Code of Conduct': 'code-of-conduct.md'
+
   - 'Day 1':
+      - 'Cluster login': 'cicese-cluster.md'
       - 'Bioconda': 'working-with-bioconda.md'
+      - 'TARA Sample Data': 'tara-sample-data.md'
+      - 'Read QC': 'short-read-quality-control.md'
+      - 'Assembly': 'metatranscriptome-assembly.md'
+      - 'Evaluation': 'metatranscriptome-evaluation.md'
       - 'Count Transcriptomes': 'count_transcriptomes.md'
-  # etc...
+
+  - 'Day 2':
+     - 'Annotation': 'metatranscriptome-annotation.md'
+     - 'Mapping': 'read-mapping.md'
+     - 'Taxonomic Classification': 'sourmash-taxonomic-classification.md'
+     - 'Visualize with anvio': 'anvio.md'
 
