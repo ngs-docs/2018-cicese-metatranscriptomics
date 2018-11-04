@@ -43,6 +43,7 @@ TRIM_DIR = join(OUT_DIR,"trimmed")
 QC_DIR = join(OUT_DIR, "read_qc")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
 PALADIN_DIR = join(OUT_DIR,"paladin")
+QUANT_DIR = join(OUT_DIR, 'quant')
 
 # read in sample info 
 samples = pd.read_table(config["samples"],dtype=str).set_index(["sample", "unit"], drop=False)
@@ -61,6 +62,7 @@ if flow == 'full':
     diffexp = True
 elif flow =='assembly':
 #    read_processing = True
+    mapping = True
     assembly = True
     quality = True
 else:
@@ -119,29 +121,35 @@ if read_processing:
     sourmash_targs = generate_data_targs(TRIM_DIR, SAMPLES, sourmash_read_ext)
 
 if assembly:
+    assemblies = []
     # trinity assembly
     include: join(RULES_DIR, 'trinity', 'trinity.rule')
     trinity_ext = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
     trinity_targs = generate_base_targs(ASSEMBLY_DIR, BASE, trinity_ext)
+    assemblies+=['trinity']
     
     # spades assembly
     include: join(RULES_DIR, 'spades', 'spades.rule')
     spades_ext = ['_spades.fasta']
     spades_targs = generate_base_targs(ASSEMBLY_DIR, BASE, spades_ext)
+    assemblies+=['spades']
 
     # plass assembly
     include: join(RULES_DIR, 'plass', 'plass.rule')
     plass_ext = ['_plass.fasta']
     plass_targs = generate_base_targs(ASSEMBLY_DIR, BASE, plass_ext)
+    assemblies+=['plass']
 
     # megahit assembly
     include: join(RULES_DIR, 'megahit', 'megahit.rule')
     megahit_ext = ['_megahit.fasta']
     megahit_targs = generate_base_targs(ASSEMBLY_DIR, BASE, megahit_ext)
+    assemblies+=['megahit']
 
     # generate sourmash signatures of assemblies
     include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
-    sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
+    #sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
+    sourmash_assemb_ext = ['_' + x + '.sig' for x in assemblies]
     sourmash_assemb_targs = generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
 
 if input_assembly:
@@ -157,11 +165,18 @@ if mapping:
     #paladin_read_ext =  ["_pear.paladin.bam", "_pear.paladin.sort.bam", "_pear.paladin.sort.bam.bai"] 
     # PALADIN: map reads in AA space
     include: join(RULES_DIR, 'paladin/paladin.rule')
-    paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.bai"] 
+    paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.flagstat" , "_trim.paladin.sort.bam.bai"] 
     assemb_name =BASE + '_plass'
     paladin_targs =  generate_base_targs(PALADIN_DIR + '_' + assemb_name, assemb_name, [".fasta", ".fasta.bwt"])
     paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
-
+    include: join(RULES_DIR, 'salmon/salmon.rule')
+    salmon_read_ext = ['/quant.sf', '/lib_format_counts.json']
+    #sourmash_assemb_ext = ['_' + x + '.sig' for x in assemblies]
+    # to do: use assemblies list to generate dirs, targs for each assembly
+    salmon_read_targs = generate_data_targs(join(QUANT_DIR, BASE + '_megahit'), SAMPLES, salmon_read_ext, ends = [""])
+    #assembly_bases = [BASE + e for e in ['_megahit']]
+    assembly_bases = BASE + '_megahit'
+    salmon_index_targs = generate_base_targs(join(QUANT_DIR, BASE + '_megahit'), BASE + '_megahit', ['_salmon']) 
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
@@ -171,10 +186,11 @@ if mapping:
 #TARGETS  =  khmer_targs
 #TARGETS =  trinity_targs # + spades_targs
 #TARGETS = fastqc_targs
-#TARGETS = paladin_targs
+TARGETS = paladin_targs + salmon_read_targs
 #TARGETS = rcorr_targs 
 #TARGETS = megahit_targs
-TARGETS = plass_targs + megahit_targs
+#TARGETS = plass_targs + megahit_targs
+#TARGETS = salmon_read_targs
 
 rule all:
     input: TARGETS
