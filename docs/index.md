@@ -15,41 +15,37 @@ Morning:
   - [Logging into the cluster](cicese-cluster.md) 
   - [Bioconda for software installation](working-with-bioconda.md)
   - [Short read quality control](short-read-quality-control.md)
+  - **If time:** [Metatrancriptome Assembly](metatranscriptome-assembly.md)
 
 Lunch 
 
-Afternoon:  _bump some to Day 2_
+Afternoon: 
 
   - Metatranscriptomic workflows and considerations
   - [Intro to TARA Oceans sanple data](tara-sample-data.md)
-  - [Assembling your metatrancriptome](metatranscriptome-assembly.md)
-  - Assessing your Assembly:
-    - [Counting transcriptomes](count_transcriptomes.md)
-    - [Assessing assembly quality](metatranscriptome-evaluation.md)
-    - [Taxonomic classification with sourmash gather](sourmash-taxonomic-classification.md)
+  - [Assessing assembly quality](metatranscriptome-evaluation.md)
+  - **If time:** [Annotating your assembly](metatranscriptome-annotation.md)
 
 
 Day 2: Nov 9, 2018
 
 Morning:  
-
+  
+  - [Counting transcriptomes](count_transcriptomes.md)
+  - [Taxonomic classification with sourmash gather](sourmash-taxonomic-classification.md)
   - [Read mapping and quantification](read-mapping.md)
-  - [Annotating your assembly](metatranscriptome-annotation.md)
-  - Quantifying abundance across samples with Salmon
 
 Lunch 
 
 Afternoon:  
 
-  - [Putting it all together with Anvi’o](anvio.md))
+  - Differential Expression?
+  - CLUST for co-expressed gene clusters!?
+  - [Putting it all together with Anvi’o](anvio.md)
   - A brief discussion of workflows & repeatability
 
 
-Readings:  
-  - Binning genomes out of your metagenome
 
-  - Read the Critical Assessment of Metagenome Interpretation (CAMI) Paper;
-  - Read Hu et al. 2016. This is the paper from which we pulled all of our sample data.
 
 Additional Resources:  
 
@@ -58,4 +54,7 @@ Additional Resources:
   - Data Carpentry
   - DIB Summer Institute
 
+CICESE 2017 readings:  
+  - Read the Critical Assessment of Metagenome Interpretation (CAMI) Paper;
+  - Read Hu et al. 2016. This is the paper from which we pulled all of our sample data.
 
