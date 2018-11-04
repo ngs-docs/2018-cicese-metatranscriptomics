@@ -14,8 +14,9 @@ conda install -c conda-forge ghp-import
 ```
 
 Build docs folder into site/
+
 ```
-mkdocs build to update the docs
+mkdocs build
 ```
 
 View changes locally:
@@ -29,7 +30,7 @@ ghp-import site -p
 ```
 
 
-#### Inital Setup 
+#### If setting up mkdocs:
 
 Grab the mkdocs repo, dib lab flavor, and follow setup instructions
 ```
