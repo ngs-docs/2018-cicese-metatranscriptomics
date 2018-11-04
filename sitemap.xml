@@ -6,7 +6,17 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://bluegenes.github.io/2018-metatranscriptomics/code-of-conduct/</loc>
+     <lastmod>2018-11-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://bluegenes.github.io/2018-metatranscriptomics/working-with-bioconda/</loc>
+     <lastmod>2018-11-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://bluegenes.github.io/2018-metatranscriptomics/count_transcriptomes/</loc>
      <lastmod>2018-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
