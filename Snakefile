@@ -60,7 +60,7 @@ if flow == 'full':
     quantification = True
     diffexp = True
 elif flow =='assembly':
-    read_processing = True
+#    read_processing = True
     assembly = True
     quality = True
 else:
@@ -142,7 +142,7 @@ if assembly:
     # generate sourmash signatures of assemblies
     include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
     sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
-    sourmash_targs = sourmash_targs + generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
+    sourmash_assemb_targs = generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
 
 if input_assembly:
     include: 'rules/assemblyinput/assemblyinput.rule'
@@ -169,11 +169,12 @@ if mapping:
 #TARGETS = [join(TRIM_DIR, targ) for targ in trim_targs]
 #TARGETS = fastqc_targs + sourmash_targs
 #TARGETS  =  khmer_targs
-TARGETS =  trinity_targs # + spades_targs
+#TARGETS =  trinity_targs # + spades_targs
 #TARGETS = fastqc_targs
 #TARGETS = paladin_targs
 #TARGETS = rcorr_targs 
-#TARGETS = plass_targs
+#TARGETS = megahit_targs
+TARGETS = plass_targs + megahit_targs
 
 rule all:
     input: TARGETS
