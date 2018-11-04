@@ -63,7 +63,7 @@ if flow == 'full':
 elif flow =='assembly':
 #    read_processing = True
     mapping = True
-#    assembly = True
+    assembly = True
     quality = True
 else:
     input_assembly = True
@@ -121,35 +121,35 @@ if read_processing:
     sourmash_targs = generate_data_targs(TRIM_DIR, SAMPLES, sourmash_read_ext)
 
 if assembly:
-	assemblies = []
+    assemblies = []
     # trinity assembly
     include: join(RULES_DIR, 'trinity', 'trinity.rule')
     trinity_ext = ['_trinity.fasta', '_trinity.fasta.gene_trans_map']
     trinity_targs = generate_base_targs(ASSEMBLY_DIR, BASE, trinity_ext)
-	assemblies+=['trinity']
+    assemblies+=['trinity']
     
     # spades assembly
     include: join(RULES_DIR, 'spades', 'spades.rule')
     spades_ext = ['_spades.fasta']
     spades_targs = generate_base_targs(ASSEMBLY_DIR, BASE, spades_ext)
-	assemblies+=['spades']
+    assemblies+=['spades']
 
     # plass assembly
     include: join(RULES_DIR, 'plass', 'plass.rule')
     plass_ext = ['_plass.fasta']
     plass_targs = generate_base_targs(ASSEMBLY_DIR, BASE, plass_ext)
-	assemblies+=['plass']
+    assemblies+=['plass']
 
     # megahit assembly
     include: join(RULES_DIR, 'megahit', 'megahit.rule')
     megahit_ext = ['_megahit.fasta']
     megahit_targs = generate_base_targs(ASSEMBLY_DIR, BASE, megahit_ext)
-	assemblies+=['megahit']
+    assemblies+=['megahit']
 
     # generate sourmash signatures of assemblies
     include: join(RULES_DIR, 'sourmash', 'sourmash.rule')
     #sourmash_assemb_ext = ['_megahit.sig', '_trinity.sig', '_plass.sig', '_spades.sig']
-	sourmash_assemb_ext = ['_' + x + '.sig' for x in assemblies]
+    sourmash_assemb_ext = ['_' + x + '.sig' for x in assemblies]
     sourmash_assemb_targs = generate_base_targs(ASSEMBLY_DIR, BASE, sourmash_assemb_ext)
 
 if input_assembly:
@@ -171,7 +171,7 @@ if mapping:
     paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
     include: join(RULES_DIR, 'salmon/salmon.rule')
     salmon_read_ext = ['/quant.sf', '/lib_format_counts.json']
-	#sourmash_assemb_ext = ['_' + x + '.sig' for x in assemblies]
+    #sourmash_assemb_ext = ['_' + x + '.sig' for x in assemblies]
     # to do: use assemblies list to generate dirs, targs for each assembly
     salmon_read_targs = generate_data_targs(join(QUANT_DIR, BASE + '_megahit'), SAMPLES, salmon_read_ext, ends = [""])
     #assembly_bases = [BASE + e for e in ['_megahit']]
