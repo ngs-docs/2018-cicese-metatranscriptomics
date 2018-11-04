@@ -1,4 +1,26 @@
 from os.path import join
+# use if you don't want to collapse technical replicates ("units" column; deseq2 not supported)
+def get_trimmed(wildcards):
+    readsD = {}
+    if not is_single_end(**wildcards):
+        readsD['r1'] = expand(join(TRIM_DIR, '{sample}_{unit}_1.trim.fq.gz'),**wildcards)
+        readsD['r2'] = expand(join(TRIM_DIR, '{sample}_{unit}_2.trim.fq.gz'),**wildcards)
+        return readsD
+    readsD['r'] = expand(join(TRIM_DIR, '{sample}_{unit}_se.trim.fq.gz'),**wildcards)
+    return readsD
+
+def get_trimmed_combined_pe(wildcards):
+    readsD = {}
+    r1,r2 = [],[]
+    unit_list = units.groupby(level=0).get_group(wildcards.sample)['unit'].tolist()
+    for unit in unit_list:
+        if not is_single_end(wildcards.sample, unit):
+            r1 += [join(TRIM_DIR, wildcards.sample +'_' + unit + '_1.trim.fq.gz')]
+            r2 += [join(TRIM_DIR, wildcards.sample +'_' + unit + '_2.trim.fq.gz')]
+    if r1:
+        readsD['r1'] = r1
+        readsD['r2'] = r2
+        return readsD
 
 rule salmon_index:
     """
@@ -7,7 +29,7 @@ rule salmon_index:
     input: lambda wildcards: join(ASSEMBLY_DIR, f'{wildcards.assembly}.fasta')
         #join(ASSEMBLY_DIR, BASE + ".fasta")
     output:
-        directory(join(QUANT_DIR, "{assembly}_salmon"))
+        directory(join(QUANT_DIR, "{assembly}", "{assembly}_salmon"))
     message:
         """--- Indexing the transcriptome with Salmon ---"""
     threads: 2
@@ -25,19 +47,20 @@ rule salmon_quant_reads_pe:
     Quantify transcripts with Salmon
     """
     input: 
-    #    unpack(get_trimmed_combined_pe),
-        index = join(QUANT_DIR, "{assembly}_salmon")
+        r1 = lambda wildcards: join(TRIM_DIR, f'{wildcards.sample}_{wildcards.unit}_1.trim.fq.gz'),
+        r2 = lambda wildcards: join(TRIM_DIR, f'{wildcards.sample}_{wildcards.unit}_2.trim.fq.gz'),
+#    unpack(get_trimmed_combined_pe),
+        index = join(QUANT_DIR, "{assembly}", "{assembly}_salmon")
     output:
-        quant = join(QUANT_DIR, "{sample}_pe_x_{assembly}","quant.sf"),
-        lib = join(QUANT_DIR, "{sample}_pe_x_{assembly}","lib_format_counts.json")
+        quant = join(QUANT_DIR,"{assembly}", "{sample}_{unit}","quant.sf"),
+        lib = join(QUANT_DIR, "{assembly}", "{sample}_{unit}","lib_format_counts.json")
     message:
         """--- Quantifying transcripts with Salmon ---"""
     params:
         libtype= 'A', # maybe set in config file 
         extra = '' 
     threads: 2
-    log:
-        qual_log = join(LOGS_DIR, 'salmon/{sample}_pe_x_{assembly}.log')
+    log: join(LOGS_DIR, 'salmon/{sample}_{unit}_x_{assembly}.log')
     conda: "salmon-env.yaml"
     script: "quant-wrapper.py"
 	#wrapper:

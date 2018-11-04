@@ -43,6 +43,7 @@ TRIM_DIR = join(OUT_DIR,"trimmed")
 QC_DIR = join(OUT_DIR, "read_qc")
 ASSEMBLY_DIR = join(OUT_DIR,"assembly")
 PALADIN_DIR = join(OUT_DIR,"paladin")
+QUANT_DIR = join(OUT_DIR, 'quant')
 
 # read in sample info 
 samples = pd.read_table(config["samples"],dtype=str).set_index(["sample", "unit"], drop=False)
@@ -61,6 +62,7 @@ if flow == 'full':
     diffexp = True
 elif flow =='assembly':
 #    read_processing = True
+    mapping = True
     assembly = True
     quality = True
 else:
@@ -163,10 +165,12 @@ if mapping:
     paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
     include: join(RULES_DIR, 'salmon/salmon.rule')
     salmon_read_ext = ['/quant.sf', '/lib_format_counts.json']
-    #salmon_targs = generate_data_targs(SALMON_DIR, 
+    salmon_read_targs = generate_data_targs(join(QUANT_DIR, BASE + '_megahit'), SAMPLES, salmon_read_ext, ends = [""])
     #assembly_bases = [BASE + e for e in ['_megahit']]
-    assembly_bases = BASE = '_megahit'
-    salmon_index_targs = generate_base_targs(QUANT_DIR, assembly_bases, ['_salmon']) 
+    assembly_bases = BASE + '_megahit'
+    salmon_index_targs = generate_base_targs(join(QUANT_DIR, BASE + '_megahit'), BASE + '_megahit', ['_salmon']) 
+    print(salmon_index_targs)
+    print(salmon_read_targs)
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
@@ -180,7 +184,7 @@ if mapping:
 #TARGETS = rcorr_targs 
 #TARGETS = megahit_targs
 #TARGETS = plass_targs + megahit_targs
-TARGETS = salmon_index_targs
+TARGETS = salmon_read_targs
 
 rule all:
     input: TARGETS
