@@ -1,0 +1,68 @@
+from os.path import join
+
+rule salmon_index:
+    """
+    Index the transcriptome for salmon quantification
+    """
+    input: lambda wildcards: join(ASSEMBLY_DIR, f'{wildcards.assembly}.fasta')
+        #join(ASSEMBLY_DIR, BASE + ".fasta")
+    output:
+        directory(join(QUANT_DIR, "{assembly}_salmon"))
+    message:
+        """--- Indexing the transcriptome with Salmon ---"""
+    threads: 2
+    params:
+        extra = ''
+    log:
+        qual_log = join(LOGS_DIR, 'salmon/{assembly}_index.log')
+    conda: "salmon-env.yaml"
+	script: "index-wrapper.py"
+	#wrapper:
+    #    '0.25.0/bio/salmon/index'
+
+rule salmon_quant_reads_pe:
+    """
+    Quantify transcripts with Salmon
+    """
+    input: 
+    #    unpack(get_trimmed_combined_pe),
+        index = join(QUANT_DIR, "{assembly}_salmon")
+    output:
+        quant = join(QUANT_DIR, "{sample}_pe_x_{assembly}","quant.sf"),
+        lib = join(QUANT_DIR, "{sample}_pe_x_{assembly}","lib_format_counts.json")
+    message:
+        """--- Quantifying transcripts with Salmon ---"""
+    params:
+        libtype= 'A', # maybe set in config file 
+        extra = '' 
+    threads: 2
+    log:
+        qual_log = join(LOGS_DIR, 'salmon/{sample}_pe_x_{assembly}.log')
+    conda: "salmon-env.yaml"
+    script: "quant-wrapper.py"
+	#wrapper:
+    #    '0.25.0/bio/salmon/quant/quant-reads'
+
+#rule salmon_quant_reads_se:
+#    """
+#    Quantify transcripts with Salmon
+#    """
+#    input: 
+#        unpack(get_trimmed_combined_se),
+  #      index = join(QUANT_DIR, base + "_salmon")
+  #  output:
+  #      quant = join(QUANT_DIR, "{sample}_se_x_" + base,"quant.sf"),
+  #      lib = join(QUANT_DIR, "{sample}_se_x_" + base,"lib_format_counts.json")
+  #  message:
+  #      """--- Quantifying transcripts with Salmon ---"""
+  #  params:
+  #      libtype= 'A', 
+  #      extra = '' 
+  #  threads: 2
+  #  log:
+  #      qual_log = join(LOGS_DIR, 'salmon/{sample}_se_x_' + base + '.log')
+   # conda: "salmon-env.yaml"
+   # script: "quant-wrapper.py"
+	#wrapper:
+    #    '0.25.0/bio/salmon/quant/quant-reads'
+

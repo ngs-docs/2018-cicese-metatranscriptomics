@@ -161,7 +161,12 @@ if mapping:
     assemb_name =BASE + '_plass'
     paladin_targs =  generate_base_targs(PALADIN_DIR + '_' + assemb_name, assemb_name, [".fasta", ".fasta.bwt"])
     paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
-
+    include: join(RULES_DIR, 'salmon/salmon.rule')
+    salmon_read_ext = ['/quant.sf', '/lib_format_counts.json']
+    #salmon_targs = generate_data_targs(SALMON_DIR, 
+    #assembly_bases = [BASE + e for e in ['_megahit']]
+    assembly_bases = BASE = '_megahit'
+    salmon_index_targs = generate_base_targs(QUANT_DIR, assembly_bases, ['_salmon']) 
 
 #TARGETS = TARGETS + download_targs + [join(TRIM_DIR, targ) for targ in trim_targs] #+ trinity_targs
 #TARGETS =  [join(TRIM_DIR, targ) for targ in trim_targs]
@@ -174,7 +179,8 @@ if mapping:
 #TARGETS = paladin_targs
 #TARGETS = rcorr_targs 
 #TARGETS = megahit_targs
-TARGETS = plass_targs + megahit_targs
+#TARGETS = plass_targs + megahit_targs
+TARGETS = salmon_index_targs
 
 rule all:
     input: TARGETS
