@@ -22,7 +22,7 @@ Lunch
 Afternoon: 
 
   - Metatranscriptomic workflows and considerations
-  - [Intro to TARA Oceans sanple data](tara-sample-data.md)
+  - [Intro to TARA Oceans sample data](tara-sample-data.md)
   - [Assessing assembly quality](metatranscriptome-evaluation.md)
   - **If time:** [Annotating your assembly](metatranscriptome-annotation.md)
 
@@ -47,14 +47,16 @@ Afternoon:
 
 
 
-Additional Resources:  
+#### Additional Resources:  
 
   - SEQ Answers
   - Biostars
   - Data Carpentry
   - DIB Summer Institute
 
-CICESE 2017 readings:  
+
+#### CICESE 2017 readings:  
+
   - Read the Critical Assessment of Metagenome Interpretation (CAMI) Paper;
   - Read Hu et al. 2016. This is the paper from which we pulled all of our sample data.
 
