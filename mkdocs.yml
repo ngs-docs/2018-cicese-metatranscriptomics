@@ -35,9 +35,11 @@ extra_css:
 
 # give a title for each page
 nav:
-  - 'Overview' : 'index.md'
-  - 'Code of Conduct': 'code-of-conduct.md'
-  - 'Bioconda': 'working-with-bioconda.md'
-  - 'Count Transcriptomes': 'count_transcriptomes.md'
+  - 'Overview':
+      - 'Schedule' : 'index.md'
+      - 'Code of Conduct': 'code-of-conduct.md'
+  - 'Day 1':
+      - 'Bioconda': 'working-with-bioconda.md'
+      - 'Count Transcriptomes': 'count_transcriptomes.md'
   # etc...
 
