@@ -1,0 +1,2 @@
+sample	unit	fq1	fq2	seqtype	depth	size_fraction
+TARA_135_DCM_5-20	rep1	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/007/ERR1719497/ERR1719497_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/007/ERR1719497/ERR1719497_2.fastq.gz	TS_RNA	DCM	5-20
