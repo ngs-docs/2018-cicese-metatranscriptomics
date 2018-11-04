@@ -5,7 +5,9 @@ To use mkdocs to deploy lessons:
 #### If mkdocs is already set up
 
 All docs should be written in md in the `docs` folder,
-and committed to the repo as usual.
+and committed to the repo as usual. If you added new 
+documentation, be sure to add it into the site navigation 
+in `mkdocs.yml`, or link to it from another doc.
 
 Install `mkdocs` and `ghp-import` if necessary:
 ```
