@@ -63,7 +63,7 @@ if flow == 'full':
 elif flow =='assembly':
 #    read_processing = True
     mapping = True
-    assembly = True
+#    assembly = True
     quality = True
 else:
     input_assembly = True
@@ -180,11 +180,11 @@ if mapping:
 #TARGETS  =  khmer_targs
 #TARGETS =  trinity_targs # + spades_targs
 #TARGETS = fastqc_targs
-#TARGETS = paladin_targs
+TARGETS = paladin_targs + salmon_read_targs
 #TARGETS = rcorr_targs 
 #TARGETS = megahit_targs
 #TARGETS = plass_targs + megahit_targs
-TARGETS = salmon_read_targs
+#TARGETS = salmon_read_targs
 
 rule all:
     input: TARGETS
