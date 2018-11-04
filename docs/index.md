@@ -5,14 +5,15 @@ These are the online materials for the environmental metatranscriptomics worksho
 
 This workshop runs under a [Code of Conduct](code-of-conduct.md). Please respect it and be excellent to each other!
 
-*Currently just a condensed version of 2017 metagenomics workshop at CICESE*
 
-Day 1: Nov X, 2018
+Day 1: Nov 8, 2018
 
 Morning:  
 
-  - Logging into cloud compute (aws?)  
-  - Working on the command line  
+  - 8:00-9:00am Introduction and Metatranscriptomics overview 
+  - Logging into the cluster
+  - [Bioconda for software installation](working-with-bioconda.md)
+  - Working on the command line 
   - Evaluating short-read quality  
 
 Lunch 
