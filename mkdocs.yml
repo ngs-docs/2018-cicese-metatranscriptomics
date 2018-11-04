@@ -36,5 +36,6 @@ extra_css:
 # give a title for each page
 nav:
   - 'Index' : 'index.md'
+  - 'Bioconda': 'working-with-bioconda.md'
   # etc...
 
