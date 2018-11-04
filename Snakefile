@@ -157,7 +157,7 @@ if mapping:
     #paladin_read_ext =  ["_pear.paladin.bam", "_pear.paladin.sort.bam", "_pear.paladin.sort.bam.bai"] 
     # PALADIN: map reads in AA space
     include: join(RULES_DIR, 'paladin/paladin.rule')
-    paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.bai"] 
+    paladin_read_ext =  ["_trim.paladin.bam", "_trim.paladin.sort.bam", "_trim.paladin.sort.bam.flagstat" , "_trim.paladin.sort.bam.bai"] 
     assemb_name =BASE + '_plass'
     paladin_targs =  generate_base_targs(PALADIN_DIR + '_' + assemb_name, assemb_name, [".fasta", ".fasta.bwt"])
     paladin_targs += generate_data_targs(PALADIN_DIR + '_' + assemb_name , SAMPLES, paladin_read_ext)
