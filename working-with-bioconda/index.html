@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://bluegenes.github.io/2018-metatranscriptomics/">
+        <link rel="canonical" href="https://bluegenes.github.io/2018-metatranscriptomics/working-with-bioconda/">
       
       
       
@@ -33,18 +33,18 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href=".">
+      <link rel="shortcut icon" href="..">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.3">
     
     
       
-        <title>2018 CICESE Metatranscriptomics workshop</title>
+        <title>Jetstream: working with bioconda. - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -53,7 +53,7 @@
       
     
     
-      <script src="assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -62,9 +62,9 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
-      <link rel="stylesheet" href="css/custom.css">
+      <link rel="stylesheet" href="../css/custom.css">
     
     
   </head>
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#environmental-metatranscriptomics-nov-2018" tabindex="1" class="md-skip">
+      <a href="../#jetstream-working-with-bioconda" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Index
+                Jetstream: working with bioconda.
               </span>
             
           
@@ -242,20 +242,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="." title="Index" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href=".." title="Index" class="md-nav__link">
       Index
     </a>
-    
   </li>
 
     
@@ -276,6 +267,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-bioconda" title="What is bioconda?" class="md-nav__link">
+    What is bioconda?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-problems-does-conda-and-therefore-bioconda-solve" title="What problems does conda (and therefore bioconda) solve?" class="md-nav__link">
+    What problems does conda (and therefore bioconda) solve?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-conda-and-enabling-bioconda" title="Installing conda and enabling bioconda" class="md-nav__link">
+    Installing conda and enabling bioconda
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#meditations-on-reproducibility-and-provenance" title="Meditations on reproducibility and provenance" class="md-nav__link">
+    Meditations on reproducibility and provenance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-it-on-your-own-compute-system-laptop-or-hpc" title="Using it on your own compute system (laptop or HPC)" class="md-nav__link">
+    Using it on your own compute system (laptop or HPC)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -287,53 +328,151 @@
               
                 
                 
-                <h1 id="environmental-metatranscriptomics-nov-2018">Environmental Metatranscriptomics, Nov 2018</h1>
-<p>These are the online materials for the environmental metatranscriptomics workshop to be run at <a href="https://www.cicese.edu.mx/">CICESE</a>.</p>
-<p>This workshop runs under a <a href="code-of-conduct/">Code of Conduct</a>. Please respect it and be excellent to each other!</p>
-<p>Day 1: Nov 8, 2018</p>
-<p>Morning:  </p>
+                <h1 id="jetstream-working-with-bioconda">Jetstream: working with bioconda.</h1>
+<p>Learning objectives:
+<em> learn what bioconda is
+</em> understand basic <code>conda</code> commands
+<em> learn how to list installed software packages 
+</em> learn how to manage multiple installation environments</p>
+<h2 id="what-is-bioconda">What is bioconda?</h2>
+<p>See <a href="https://www.biorxiv.org/content/early/2017/10/27/207092">the bioconda paper</a> and the <a href="http://bioconda.github.io">bioconda web site</a>.</p>
+<p>Bioconda is a community-enabled repository of 3,000+ bioinformatics packages, installable via the <code>conda</code> package
+manager.  It consists of a set of recipes, <a href="https://github.com/bioconda/bioconda-recipes/blob/master/recipes/sourmash/meta.yaml">like this one, for sourmash</a>, that are maintained by the community.</p>
+<p>It just works, and it's effin' magic!!</p>
+<h2 id="what-problems-does-conda-and-therefore-bioconda-solve">What problems does conda (and therefore bioconda) solve?</h2>
+<p>Conda tracks installed packages and their versions, 
+and makes sure that different installed packages don't have
+conflicting dependencies (we'll explain this below).</p>
+<h2 id="installing-conda-and-enabling-bioconda">Installing conda and enabling bioconda</h2>
+<p>Download and install miniconda in your home directory:</p>
+<pre><code>cd 
+curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3 #install in $HOME directory
+echo export PATH=$PATH:/$HOME/miniconda3/bin &gt;&gt; ~/.bashrc
+
+
+Then, run the following command (or start a new terminal session) in order to activate the conda environment:
+
+</code></pre>
+
+<p>source ~/.bashrc</p>
+<pre><code>
+Configure channels for installing software.
+Note: It is important to add them in this order so that 
+the priority is set correctly (that is, conda-forge is highest priority).
+</code></pre>
+
+<p>conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge</p>
+<pre><code>
+Try installing something:
+
+</code></pre>
+
+<p>conda install sourmash</p>
+<pre><code>
+and running it --
+</code></pre>
+
+<p>sourmash</p>
+<pre><code>will produce some output. (We'll tell you more about sourmash later.)
+
+yay!
+
+## Using conda
+
+Conda is a &quot;package manager&quot; or software installer. See [the full list of commands](https://conda.io/docs/commands.html).
+
+`conda install` to install a package.
+
+`conda list` to list installed packages.
+
+`conda search` to search packages. Note that you'll see one package for every version of the software and for every version of Python (e.g. `conda search sourmash`).
+
+## Using bioconda
+
+bioconda is a channel for conda, which just means that you
+can &quot;add&quot; it to conda as a source of packages. That's what the `conda config` above does.
+
+Note, Bioconda supports only 64-bit Linux and Mac OSX.
+
+You can check out [the bioconda site](https://bioconda.github.io/).
+
+### Finding bioconda packages
+
+You can use `conda search`, or you can use google, or you can go visit [the list of recipes](https://bioconda.github.io/recipes.html#recipes).
+
+### Freezing an environment
+
+This will save the list of **conda-installed** software you have in a particular
+environment to the file `packages.txt`:
+</code></pre>
+
+<p>conda list --export packages.txt</p>
+<pre><code>(it will not record the software versions for software not installed by conda.)
+
+</code></pre>
+
+<p>conda install --file=packages.txt</p>
+<pre><code>will install those packages in your local environment.
+
+### Constructing and using multiple environments
+
+A feature that we do not use much here, but that can be very
+handy in some circumstances, is different environments.
+
+&quot;Environments&quot; are multiple different collections of installed software. There are two reasons you might want to do this:
+
+* first, you might want to try to exactly replicate a specific software install, so that you can replicate a paper or an old condition.
+* second, you might be working with incompatible software, e.g. sometimes different software pipelines need different version of the same software. An example of this is older bioinformatics software that needs python2, while other software needs python3.
+
+To create a new environment named `pony`, type:
+
+</code></pre>
+
+<p>conda create -n pony</p>
+<pre><code>
+Then to activate (switch to) that environment, type:
+
+</code></pre>
+
+<p>source activate pony</p>
+<pre><code>
+And now when you run `conda install`, it will install packages into this new environment, e.g.
+</code></pre>
+
+<p>conda install -y checkm-genome</p>
+<pre><code>(note here that checkm-genome *requires* python 2).
+
+To list environments, type:
+</code></pre>
+
+<p>conda env list</p>
+<pre><code>and you will see that you have two environments, `base` and
+`pony`, and `pony` has a `*` next to it because that's your
+current environment.
+
+And finally, to switch back to your base environment, do:
+
+</code></pre>
+
+<p>source activate base
+```
+and you'll be back in the original environment.</p>
+<h3 id="meditations-on-reproducibility-and-provenance">Meditations on reproducibility and provenance</h3>
+<p>If you want to impress reviewers and also keep track of
+what your software versions are, you can:</p>
 <ul>
-<li>8:00-9:00am Introduction and Metatranscriptomics overview </li>
-<li>Logging into the cluster</li>
-<li><a href="working-with-bioconda/">Bioconda for software installation</a></li>
-<li>Working on the command line </li>
-<li>Evaluating short-read quality  </li>
+<li>manage all your software inside of conda</li>
+<li>use <code>conda list --export software.txt</code> to create a list of all your software and put it in your supplementary material.</li>
 </ul>
-<p>Lunch </p>
-<p>Afternoon:  </p>
-<ul>
-<li>Metatranscriptomic workflows and considerations</li>
-<li>Assembling your short read data set with MEGAHIT</li>
-<li>Evaluating your assemblies</li>
-</ul>
-<p>Day 2: Nov X, 2018</p>
-<p>Morning:  </p>
-<ul>
-<li>Mapping short reads to the assembly time permitting</li>
-<li>Sourmash compare</li>
-<li>Annotating your assembly with Prokka</li>
-<li>Binning genomes out of your metagenome</li>
-</ul>
-<p>Lunch </p>
-<p>Afternoon:  </p>
-<ul>
-<li>Quantifying abundance across samples with Salmon</li>
-<li>Taxonomic classification with sourmash gather</li>
-<li><a href="anvio/">Putting it all together with Anvi’o</a>)</li>
-<li>A brief discussion of workflows &amp; repeatability</li>
-</ul>
-<p>Readings:  </p>
-<ul>
-<li>Read the Critical Assessment of Metagenome Interpretation (CAMI) Paper;</li>
-<li>Read Hu et al. 2016. This is the paper from which we pulled all of our sample data.</li>
-</ul>
-<p>Additional Resources:  </p>
-<ul>
-<li>SEQ Answers</li>
-<li>Biostars</li>
-<li>Data Carpentry</li>
-<li>DIB Summer Institute</li>
-</ul>
+<p>This is also something that you can record for yourself, so that if you are trying to exactly reproduce </p>
+<h3 id="using-it-on-your-own-compute-system-laptop-or-hpc">Using it on your own compute system (laptop or HPC)</h3>
+<p>conda works on Windows, Mac, and Linux.</p>
+<p>bioconda works on Mac and Linux.</p>
+<p>It does not require admin privileges to install, so you can
+install it on your own local cluster quite easily.</p>
                 
                   
                 
@@ -375,11 +514,11 @@
       
     </div>
     
-      <script src="assets/javascripts/application.e72fd936.js"></script>
+      <script src="../assets/javascripts/application.e72fd936.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
-        <script src="search/main.js"></script>
+        <script src="../search/main.js"></script>
       
     
     
