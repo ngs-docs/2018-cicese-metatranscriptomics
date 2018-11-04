@@ -40,7 +40,7 @@ Lunch
 Afternoon:  
 
   - Differential Expression?
-  - CLUST for co-expressed gene clusters!?
+  - CLUST for co-expressed gene clusters!? [CLUST paper](https://www.biorxiv.org/content/early/2018/02/13/221309)
   - [Putting it all together with Anvi’o](anvio.md)
   - A brief discussion of workflows & repeatability
 
