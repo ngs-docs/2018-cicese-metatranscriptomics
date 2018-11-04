@@ -322,6 +322,18 @@
 
 
   <li class="md-nav__item">
+    <a href="cicese-cluster/" title="Cluster login" class="md-nav__link">
+      Cluster login
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="working-with-bioconda/" title="Bioconda" class="md-nav__link">
       Bioconda
     </a>
@@ -334,8 +346,128 @@
 
 
   <li class="md-nav__item">
+    <a href="tara-sample-data/" title="TARA Sample Data" class="md-nav__link">
+      TARA Sample Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="short-read-quality-control/" title="Read QC" class="md-nav__link">
+      Read QC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="metatranscriptome-assembly/" title="Assembly" class="md-nav__link">
+      Assembly
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="metatranscriptome-evaluation/" title="Evaluation" class="md-nav__link">
+      Evaluation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
       Count Transcriptomes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Day 2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Day 2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="metatranscriptome-annotation/" title="Annotation" class="md-nav__link">
+      Annotation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="read-mapping/" title="Mapping" class="md-nav__link">
+      Mapping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-nav__link">
+      Taxonomic Classification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="anvio/" title="Visualize with anvio" class="md-nav__link">
+      Visualize with anvio
     </a>
   </li>
 
@@ -376,39 +508,43 @@
                 <h1 id="environmental-metatranscriptomics-nov-2018">Environmental Metatranscriptomics, Nov 2018</h1>
 <p>These are the online materials for the environmental metatranscriptomics workshop to be run at <a href="https://www.cicese.edu.mx/">CICESE</a>.</p>
 <p>This workshop runs under a <a href="code-of-conduct/">Code of Conduct</a>. Please respect it and be excellent to each other!</p>
+<p><em>Tentative Schedule</em></p>
 <p>Day 1: Nov 8, 2018</p>
 <p>Morning:  </p>
 <ul>
-<li>8:00-9:00am Introduction and Metatranscriptomics overview </li>
-<li>Logging into the cluster</li>
+<li>Introduction and Metatranscriptomics overview </li>
+<li><a href="cicese-cluster/">Logging into the cluster</a> </li>
 <li><a href="working-with-bioconda/">Bioconda for software installation</a></li>
-<li>Working on the command line </li>
-<li>Evaluating short-read quality  </li>
+<li><a href="short-read-quality-control/">Short read quality control</a></li>
 </ul>
 <p>Lunch </p>
-<p>Afternoon:  </p>
+<p>Afternoon:  <em>bump some to Day 2</em></p>
 <ul>
 <li>Metatranscriptomic workflows and considerations</li>
-<li>Assembling your short read data set with MEGAHIT</li>
-<li>Evaluating your assemblies</li>
+<li><a href="tara-sample-data/">Intro to TARA Oceans sanple data</a></li>
+<li><a href="metatranscriptome-assembly/">Assembling your metatrancriptome</a></li>
+<li>Assessing your Assembly:<ul>
+<li><a href="count_transcriptomes/">Counting transcriptomes</a></li>
+<li><a href="metatranscriptome-evaluation/">Assessing assembly quality</a></li>
+<li><a href="sourmash-taxonomic-classification/">Taxonomic classification with sourmash gather</a></li>
 </ul>
-<p>Day 2: Nov X, 2018</p>
+</li>
+</ul>
+<p>Day 2: Nov 9, 2018</p>
 <p>Morning:  </p>
 <ul>
-<li>Mapping short reads to the assembly time permitting</li>
-<li>Sourmash compare</li>
-<li>Annotating your assembly with Prokka</li>
-<li>Binning genomes out of your metagenome</li>
+<li><a href="read-mapping/">Read mapping and quantification</a></li>
+<li><a href="metatranscriptome-annotation/">Annotating your assembly</a></li>
+<li>Quantifying abundance across samples with Salmon</li>
 </ul>
 <p>Lunch </p>
 <p>Afternoon:  </p>
 <ul>
-<li>Quantifying abundance across samples with Salmon</li>
-<li>Taxonomic classification with sourmash gather</li>
 <li><a href="anvio/">Putting it all together with Anvi’o</a>)</li>
 <li>A brief discussion of workflows &amp; repeatability</li>
 </ul>
-<p>Readings:  </p>
+<p>Readings:<br />
+  - Binning genomes out of your metagenome</p>
 <ul>
 <li>Read the Critical Assessment of Metagenome Interpretation (CAMI) Paper;</li>
 <li>Read Hu et al. 2016. This is the paper from which we pulled all of our sample data.</li>
