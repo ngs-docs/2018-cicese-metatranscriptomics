@@ -1,7 +1,0 @@
-sample  fq1 fq2 seqtype depth   size_fraction
-TARA_135_SRF_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/008/ERR1726888/ERR1726888_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/008/ERR1726888/ERR1726888_2.fastq.gz	MetaG	SRF	5-20
-TARA_135_SRF_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/002/ERR1726702/ERR1726702_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/002/ERR1726702/ERR1726702_2.fastq.gz	MetaG	SRF	5-20
-TARA_135_DCM_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/006/ERR1726616/ERR1726616_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/006/ERR1726616/ERR1726616_2.fastq.gz	MetaG	DCM	5-20
-TARA_136_SRF_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/003/ERR1726723/ERR1726723_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/003/ERR1726723/ERR1726723_2.fastq.gz	MetaG	SRF	5-20
-TARA_137_DCM_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/003/ERR1726583/ERR1726583_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/003/ERR1726583/ERR1726583_2.fastq.gz	MetaG	DCM	5-20
-TARA_137_SRF_5-20	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/009/ERR1726669/ERR1726669_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/ERR172/009/ERR1726669/ERR1726669_2.fastq.gz	MetaG	SRF	5-20
