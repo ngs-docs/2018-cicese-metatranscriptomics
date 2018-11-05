@@ -24,21 +24,13 @@ cd ${PROJECT}/trim
 
 for filename in *_1.qc.fq.gz
 do
-# first, make the base by removing fastq
-  baseR1=$(basename $filename .qc.fq.gz)
-  echo $baseR1
-
-# now, construct the R2 filename by replacing R1 with R2
-  baseR2=${baseR1/1m_1/1m_2}
-  echo $baseR2
-
-# construct a shared basename for the interleaved file:
-  base=${baseR1/1m_1/1m}
+  #Use the program basename to remove _1.qc.fq.gz to generate the base
+  base=$(basename $filename _1.qc.fq.gz)
   echo $base
 
-# finally, run khmer trimming
-  interleave-reads.py ${baseR1}.qc.fq.gz ${baseR2}.qc.fq.gz | \
-  trim-low-abund.py --gzip -V -M 8e9 -C 3 -Z 10 - -o ${base}.khmer.fq 
+  #Run khmer trimming
+  interleave-reads.py ${base}_1.qc.fq.gz ${base}_2.qc.fq.gz | \
+  trim-low-abund.py --gzip -V -M 8e9 -C 3 -Z 10 - -o ${base}.khmer.fq.gz
 
 done
 ```

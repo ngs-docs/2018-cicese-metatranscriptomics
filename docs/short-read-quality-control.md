@@ -213,31 +213,24 @@ See excellent paper on trimming from [MacManes 2014](http://journal.frontiersin.
 Run:
 
 ```
-for filename in *1*.fq.gz
+for filename in *1.fq.gz
 do
-# first, make the base by removing fastq
-  base=$(basename $filename .fq.gz)
-  echo $base
+#Use the program basename to remove _1.fq.gz to generate the base
+base=$(basename $filename _1.fq.gz)
+echo $base
 
-# now, construct the R2 filename by replacing R1 with R2
-  baseR2=${base/1m_1/1m_2}
-  echo $baseR2
-
-# finally, run Trimmomatic
-  trimmomatic PE ${base}.fq.gz ${baseR2}.fq.gz \
-    ${base}.qc.fq.gz s1_se.gz \
-    ${baseR2}.qc.fq.gz s2_se.gz \
-    ILLUMINACLIP:combined.fa:2:40:15 \
-    LEADING:2 TRAILING:2 \
-    SLIDINGWINDOW:4:2 \
-    MINLEN:25
-
-# save the orphans
-  zcat s1_se.gz s2_se.gz >> orphans.qc.fq.gz
-  rm -f s1_se.gz s2_se.gz
+# run Trimmomatic
+trimmomatic PE ${base}_1.fq.gz \
+              ${base}_2.fq.gz \
+     ${base}_1.qc.fq.gz ${base}_s1_se \
+     ${base}_2.qc.fq.gz ${base}_s2_se \
+     ILLUMINACLIP:combined.fa:2:40:15 \
+     LEADING:2 TRAILING:2 \
+     SLIDINGWINDOW:4:2 \
+     MINLEN:25
 done
-
 ```
+
 
 Now, run fastqc again on trimmed files:
 ```
