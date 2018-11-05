@@ -38,7 +38,7 @@ chmod u-w */*fq.gz
 To make life easier, let's define a variable for the location
 of this tara working directory:
 ```
- export PROJECT= ~/work
+ export PROJECT=~/work
 ```
 
 Check that your data is where it should be

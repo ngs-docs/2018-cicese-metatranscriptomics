@@ -36,9 +36,9 @@ ls
 ```
 ## Run the assembler
 
-Let's run an assembly on one set of samples
+Let's run an assembly on one sample
 ```
-time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz  --memory .7 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer
+time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer
 ```
 
 This will take about X minutes; at the end you should see output like
