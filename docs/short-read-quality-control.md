@@ -1,10 +1,7 @@
 # Short Read Quality Control
 
-_lesson changes in progress_  
-to do:  
-  * use Rstudio server to view files still? OR?
-  * change names in all downstream steps  
-  * multiqc  
+still to do:  
+  * viewing fastqc files (use Rstudio server to view files still? OR scp?)
 
 You should now be logged into your cluster! If not, go back 
 to [Cluster Login](cicese-cluster.md)
@@ -207,8 +204,8 @@ Setup trim directory:
 cd ..
 mkdir -p trim
 cd trim
-ln -s ../data/*.fq.gz .
-cat ~/miniconda3/share/trimmomatic*/adapters/* > combined.fa
+ln -s ../data/*/*.fq.gz .
+cat ~/miniconda3/envs/tara/share/trimmomatic*/adapters/* > combined.fa
 ```
 
 See excellent paper on trimming from [MacManes 2014](http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full).
@@ -216,18 +213,18 @@ See excellent paper on trimming from [MacManes 2014](http://journal.frontiersin.
 Run:
 
 ```
-for filename in *_R1_*.fastq
+for filename in *1*.fq.gz
 do
 # first, make the base by removing fastq
-  base=$(basename $filename .fastq)
+  base=$(basename $filename .fq.gz)
   echo $base
 
 # now, construct the R2 filename by replacing R1 with R2
-  baseR2=${base/_R1_/_R2_}
+  baseR2=${base/1m_1/1m_2}
   echo $baseR2
 
 # finally, run Trimmomatic
-  trimmomatic PE ${base}.fastq ${baseR2}.fastq \
+  trimmomatic PE ${base}.fq.gz ${baseR2}.fq.gz \
     ${base}.qc.fq.gz s1_se.gz \
     ${baseR2}.qc.fq.gz s2_se.gz \
     ILLUMINACLIP:combined.fa:2:40:15 \
