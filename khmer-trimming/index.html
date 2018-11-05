@@ -263,6 +263,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../welcome/" title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href=".." title="Schedule" class="md-nav__link">
       Schedule
     </a>
@@ -397,6 +409,13 @@
         <li class="md-nav__item">
   <a href="#set-up-workspace-and-install-khmer" title="Set up workspace and install khmer" class="md-nav__link">
     Set up workspace and install khmer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assess-changes-in-kmer-abundance" title="Assess changes in kmer abundance" class="md-nav__link">
+    Assess changes in kmer abundance
   </a>
   
 </li>
@@ -587,6 +606,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#assess-changes-in-kmer-abundance" title="Assess changes in kmer abundance" class="md-nav__link">
+    Assess changes in kmer abundance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#to-do-decide-whether-to-include-this-or-not-edit-if-yes" title="to do: decide whether to include this or not ( &amp; edit if yes)" class="md-nav__link">
     to do: decide whether to include this or not ( &amp; edit if yes)
   </a>
@@ -666,16 +692,18 @@ do
 done
 </code></pre>
 
+<h2 id="assess-changes-in-kmer-abundance">Assess changes in kmer abundance</h2>
 <p>To see how many k-mers we removed, you can examine the distribution as above,
 or use the <code>unique-kmers.py</code> script. Let's compare kmers for one sample.</p>
 <pre><code>unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
 unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz
 </code></pre>
 
+<hr />
 <h2 id="to-do-decide-whether-to-include-this-or-not-edit-if-yes">to do: decide whether to include this or not ( &amp; edit if yes)</h2>
 <h3 id="better-walk-through-and-explanation-from-2017-cicese-workshop-edit-add-if-time">Better walk-through and explanation from 2017 cicese workshop (edit &amp; add if time)</h3>
 <p>Let's plot a kmer abundance histogram of one sample</p>
-<pre><code>  cd $PROJECT
+<pre><code>cd $PROJECT
 abundance-dist-single.py -M 1e9 -k 21 SRR1976948_1.fastq.gz SRR1976948_1.fastq.gz.dist
 
 </code></pre>
