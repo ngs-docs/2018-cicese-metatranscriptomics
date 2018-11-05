@@ -10,8 +10,9 @@ _Tentative Schedule_
 Day 1: Nov 8, 2018
 
 Morning:  
-
+  
   - Introduction and Metatranscriptomics overview 
+  - [Bienvenidos!](welcome.md)
   - [Logging into the cluster](cicese-cluster.md) 
   - [Bioconda for software installation](working-with-bioconda.md)
   - [Short read quality control](short-read-quality-control.md)

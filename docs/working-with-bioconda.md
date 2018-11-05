@@ -1,10 +1,11 @@
 # Software Installation with Bioconda 
 
-Learning objectives:
-* learn what bioconda is
-* understand basic `conda` commands
-* learn how to list installed software packages 
-* learn how to manage multiple installation environments
+Learning objectives:  
+
+  * learn what bioconda is
+  * understand basic `conda` commands
+  * learn how to list installed software packages 
+  * learn how to manage multiple installation environments
 
 ## What is bioconda?
 
