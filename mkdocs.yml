@@ -36,6 +36,7 @@ extra_css:
 # give a title for each page
 nav:
   - 'Overview':
+      - 'Welcome': 'welcome.md'
       - 'Schedule' : 'index.md'
       - 'Code of Conduct': 'code-of-conduct.md'
 
@@ -44,7 +45,7 @@ nav:
       - 'Bioconda': 'working-with-bioconda.md'
       - 'TARA Sample Data': 'tara-sample-data.md'
       - 'Read QC': 'short-read-quality-control.md'
-	  - 'Error Trimming': 'khmer-trimming.md'
+      - 'Error Trimming': 'khmer-trimming.md'
       - 'Assembly': 'metatranscriptome-assembly.md'
       - 'Evaluation': 'metatranscriptome-evaluation.md'
       - 'Count Transcriptomes': 'count_transcriptomes.md'

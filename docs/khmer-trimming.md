@@ -12,11 +12,12 @@ the assembler (by removing data) and to decrease the memory requirements
 of the assembler (by removing a number of k-mers).
 
 ## Set up workspace and install khmer 
+
 ```
 conda install khmer
 ```
 
-To run error trimming, use the khmer script ``trim-low-abund.py``:
+To run error trimming, use the khmer script `trim-low-abund.py`:
 
 ```
 cd ${PROJECT}/trim
@@ -42,13 +43,19 @@ do
 done
 ```
 
+## Assess changes in kmer abundance
+
 To see how many k-mers we removed, you can examine the distribution as above,
-or use the ``unique-kmers.py`` script. Let's compare kmers for one sample.
+or use the `unique-kmers.py` script. Let's compare kmers for one sample.
 
 ```
 unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
 unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz
-```
+```  
+
+-----
+
+
 
 ## to do: decide whether to include this or not ( & edit if yes)
 
@@ -57,7 +64,7 @@ unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz
 
 Let's plot a kmer abundance histogram of one sample
 ```
-  cd $PROJECT
+cd $PROJECT
 abundance-dist-single.py -M 1e9 -k 21 SRR1976948_1.fastq.gz SRR1976948_1.fastq.gz.dist
 
 ```
