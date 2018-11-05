@@ -357,9 +357,52 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Read QC
+      </label>
+    
     <a href="./" title="Read QC" class="md-nav__link md-nav__link--active">
       Read QC
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-source" title="Data source" class="md-nav__link">
+    Data source
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-workspace-and-download-the-data" title="Set up workspace and download the data" class="md-nav__link">
+    Set up workspace and download the data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-trimming-and-light-quality-filtering" title="Quality trimming and light quality filtering" class="md-nav__link">
+    Quality trimming and light quality filtering
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -494,6 +537,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-source" title="Data source" class="md-nav__link">
+    Data source
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-workspace-and-download-the-data" title="Set up workspace and download the data" class="md-nav__link">
+    Set up workspace and download the data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-trimming-and-light-quality-filtering" title="Quality trimming and light quality filtering" class="md-nav__link">
+    Quality trimming and light quality filtering
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -506,10 +579,206 @@
                 
                 
                 <h1 id="short-read-quality-control">Short Read Quality Control</h1>
+<p><em>lesson changes in progress</em>
+todo:
+<em> change download links
+</em> change names in all downstream steps
+* add back in multiqc</p>
+<p>You should now be logged into your cluster! If not, go back 
+to <a href="../cicese-cluster/">Cluster Login</a></p>
+<h2 id="data-source">Data source</h2>
+<p>We will be using RNAseq reads from a small subset of data from the <a href="https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans">TARA Oceans Expedition</a> 
+and analyzed as part of <a href="https://www.nature.com/articles/s41467-017-02342-1">A global ocean atlas of eukaryotic genes</a>.</p>
+<h2 id="set-up-workspace-and-download-the-data">Set up workspace and download the data</h2>
+<p>First, make some directories to work in:</p>
+<pre><code>cd
+mdkir -p tara/data
+</code></pre>
+
+<p>Next, change into the data dir and download the data subsets:</p>
+<pre><code>cd tara/data
+#curl -L https://osf.io/365fg/download -o tara135_5-20_1m.zip
+#curl -L https://osf.io/9tf2g/download -o tara136-137_5-20_1m.zip 
+#unzip tara135_5-20_1m.zip
+#unzip tara136-137_5-20_1m.zip
+</code></pre>
+
+<p>To make our lives easier, define a variable for the location
+of this tara working directory:</p>
+<pre><code> export PROJECT= ~/tara
+</code></pre>
+
+<p>Check that your data is where it should be</p>
+<pre><code>ls $PROJECT/data
+</code></pre>
+
+<p>If you see all the files you think you should, good!  Otherwise, debug.</p>
+<p>These are FASTQ files -- let's take a look at them:</p>
+<pre><code>#less 0Hour_ATCACG_L002_R1_001.fastq
+</code></pre>
+
+<p>(use the spacebar to scroll down, and type 'q' to exit 'less')</p>
+<p>Question:</p>
 <ul>
-<li>FastQC</li>
-<li>Trimmomatic</li>
-<li>MultiQC</li>
+<li>where does the filename come from?</li>
+<li>why are there 1 and 2 in the file names?</li>
+</ul>
+<p>Links:</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/FASTQ_format">FASTQ Format</a></li>
+</ul>
+<h2 id="quality-trimming-and-light-quality-filtering">Quality trimming and light quality filtering</h2>
+<p>Make sure you've got the PROJECT location defined, and your data is there:</p>
+<pre><code>set -u
+printf &quot;\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fastq | wc -l) files\n\n&quot;
+set +u
+</code></pre>
+
+<p><em>Important:</em> If you get an error above or the count of files is wrong...STOP!! Revisit the installation instructions!</p>
+<h1 id="from-seatac-lesson">FROM SEATAC LESSON:</h1>
+<h3 id="link-your-data-into-your-working-directory">Link your data into your working directory</h3>
+<p>Change into your project directory and make a workspace for quality trimming:</p>
+<pre><code>cd ${PROJECT}
+mkdir -p quality
+cd quality
+</code></pre>
+
+<p>Now, link the data files into your new workspace</p>
+<pre><code>ln -s ../data/*.fastq .
+</code></pre>
+
+<p>(Linking with <code>ln</code> avoids having to make a copy of the files, which will take up storage space.)</p>
+<p>Check to make sure it worked</p>
+<pre><code>printf &quot;I see $(ls -1 *.fastq | wc -l) files here.\n&quot;
+</code></pre>
+
+<p>You can also do an <code>ls</code> to list the files.</p>
+<p>If you see only one entry, <code>*.fastq</code>, then the ln command above didn't work properly.  One possibility is that your files aren't in your data directory; another is that their names don't end with
+<code>.fastq</code>.</p>
+<h3 id="fastqc">FastQC</h3>
+<p>We're going to use
+<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>
+summarize the data. We already installed 'fastqc' on our computer for
+you.</p>
+<p>Now, run FastQC on two files:</p>
+<pre><code>fastqc *.fastq
+</code></pre>
+
+<p>After this finishes running (has to run on each file so might take a while), type 'ls':</p>
+<pre><code>ls -d *fastqc.zip*
+</code></pre>
+
+<p>to list the files, and you should see a number of files with the extensions <code>.fastqc.zip</code>.</p>
+<p>Inside each of the fatqc directories you will find reports from the fastqc. You can download these files using your RStudio Server console, if you like. To install and run an RStudio Server, go <a href="https://angus.readthedocs.io/en/2017/visualizing-blast-scores-with-RStudio.html#installing-and-running-rstudio-on-jetstream">here</a>.</p>
+<p>Questions:</p>
+<ul>
+<li>What should you pay attention to in the FastQC report?</li>
+<li>Which is "better", file 1 or file 2? And why?</li>
+</ul>
+<p>Links:</p>
+<ul>
+<li><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a></li>
+<li><a href="http://www.youtube.com/watch?v=bz93ReOv87Y">FastQC tutorial video</a></li>
+<li><a href="http://angus.readthedocs.io/en/2015/_static/2015-lecture2-sequencing.pptx.pdf">Examples of fastqc after technical sequencer problems</a>(starting on slide 40)</li>
+</ul>
+<p>There are several caveats about FastQC - the main one is that it only calculates certain statistics (like duplicated sequences) for subsets
+of the data (e.g. duplicate sequences are only analyzed for the first 100,000 sequences in each file.</p>
+<h3 id="multiqc">MultiQC</h3>
+<p>If you would like to aggregate all of your fastqc reports across many samples, <a href="http://multiqc.info/">MultiQC</a> will do this into a single report for easy comparison.</p>
+<p>Run MultiQC:</p>
+<pre><code>multiqc .
+</code></pre>
+
+<p>The terminal output should look like this:</p>
+<pre><code>[INFO   ]         multiqc : This is MultiQC v1.6
+[INFO   ]         multiqc : Template    : default
+[INFO   ]         multiqc : Searching '.'
+[INFO   ]          fastqc : Found 20 reports
+[INFO   ]         multiqc : Compressing plot data
+[INFO   ]         multiqc : Report      : multiqc_report.html
+[INFO   ]         multiqc : Data        : multiqc_data
+[INFO   ]         multiqc : MultiQC complete
+</code></pre>
+
+<p>You can also view this output <a href="_static/multiqc_report.html">here</a></p>
+<h4 id="view-your-files-on-your-own-computer">View your files on your own computer</h4>
+<p>As an alternative to viewing the files on the Rstudio server, we can secure copy (scp) these files to our own laptops, and view them from there.</p>
+<pre><code>mkdir ~/Desktop/nema_fastqc  # make a directory for these files
+scp username@ip.address:/work/quality/*html ~/Desktop/nema_fastqc
+</code></pre>
+
+<p>where the first argument after <code>scp</code> is your login and path for the files we want to copy (from the jetstream instance), and the second argument is the path to place the files on our own computer.</p>
+<p>If you are unable to use scp though a terminal output, you can see the fastqc html output <a href="_static/6Hour_CGATGT_L002_R2_003.extract_fastqc.html">here</a></p>
+<h3 id="adapter-trim-each-pair-of-files">Adapter trim each pair of files</h3>
+<p>Setup trim directory:</p>
+<pre><code>cd ..
+mkdir trim
+cd trim
+ln -s ../data/*.fastq .
+cat /opt/miniconda3/share/trimmomatic*/adapters/* &gt; combined.fa
+</code></pre>
+
+<p>See excellent paper on trimming from <a href="http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full">MacManes 2014</a>.</p>
+<p>Run:</p>
+<pre><code>for filename in *_R1_*.fastq
+do
+# first, make the base by removing fastq
+  base=$(basename $filename .fastq)
+  echo $base
+
+# now, construct the R2 filename by replacing R1 with R2
+  baseR2=${base/_R1_/_R2_}
+  echo $baseR2
+
+# finally, run Trimmomatic
+  trimmomatic PE ${base}.fastq ${baseR2}.fastq \
+    ${base}.qc.fq.gz s1_se.gz \
+    ${baseR2}.qc.fq.gz s2_se.gz \
+    ILLUMINACLIP:combined.fa:2:40:15 \
+    LEADING:2 TRAILING:2 \
+    SLIDINGWINDOW:4:2 \
+    MINLEN:25
+
+# save the orphans
+  zcat s1_se.gz s2_se.gz &gt;&gt; orphans.qc.fq.gz
+  rm -f s1_se.gz s2_se.gz
+done
+
+</code></pre>
+
+<p>Now, run fastqc again on trimmed files:</p>
+<pre><code>fastqc *.qc.fq.gz
+multiqc .
+</code></pre>
+
+<p>The paired sequences output by this set of commands will be in the files ending in <code>.qc.fq.gz</code>, with any orphaned sequences all together
+in <code>orphans.qc.fq.gz</code>.</p>
+<p>Make these trimmed reads read-only and keep them, as we will reuse them later.</p>
+<pre><code>chmod a-w ${PROJECT}/trim/*.qc.fq.gz
+</code></pre>
+
+<p>Questions:</p>
+<ul>
+<li>How do you figure out what the parameters mean?</li>
+<li>How do you figure out what parameters to use?</li>
+<li>What adapters do you use?</li>
+<li>What version of Trimmomatic are we using here? (And FastQC?)</li>
+<li>Do you think parameters are different for RNAseq and genomic data sets?</li>
+<li>What's with these annoyingly long and complicated filenames?</li>
+<li>why are we running R1 and R2 together?</li>
+</ul>
+<p>For a discussion of optimal trimming strategies, see
+<a href="http://journal.frontiersin.org/Journal/10.3389/fgene.2014.00013/abstract">MacManes, 2014</a>
+-- it's about RNAseq but similar arguments should apply to metagenome
+assembly.</p>
+<p>Links:</p>
+<ul>
+<li><a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a></li>
+</ul>
+<p>Questions:</p>
+<ul>
+<li>is the quality trimmed data "better" than before?</li>
+<li>Does it matter that you still have adapters!?</li>
 </ul>
                 
                   
