@@ -83,24 +83,9 @@ You can check out [the bioconda site](https://bioconda.github.io/).
 
 You can use `conda search`, or you can use google, or you can go visit [the list of recipes](https://bioconda.github.io/recipes.html#recipes).
 
-### Freezing an environment
-
-This will save the list of **conda-installed** software you have in a particular
-environment to the file `packages.txt`:
-```
-conda list --export packages.txt
-```
-(it will not record the software versions for software not installed by conda.)
-
-```
-conda install --file=packages.txt
-```
-will install those packages in your local environment.
-
 ### Constructing and using multiple environments
 
-A feature that we do not use much here, but that can be very
-handy in some circumstances, is different environments.
+A feature that we do not use much here, but that can be very handy in some circumstances, is different environments.
 
 "Environments" are multiple different collections of installed software. There are two reasons you might want to do this:
 
@@ -125,6 +110,21 @@ conda install -y checkm-genome
 ```
 (note here that checkm-genome *requires* python 2).
 
+
+### Freezing an environment
+
+This will save the list of **conda-installed** software you have in a particular
+environment to the file `packages.txt`:
+
+```
+conda list --export packages.txt
+```
+(it will not record the software versions for software not installed by conda.)
+
+```
+conda install --file=packages.txt
+```
+will install those packages in your local environment.
 To list environments, type:
 ```
 conda env list
@@ -133,10 +133,12 @@ and you will see that you have two environments, `base` and
 `pony`, and `pony` has a `*` next to it because that's your
 current environment.
 
+### Leaving an environment
+
 And finally, to switch back to your base environment, do:
 
 ```
-source activate base
+source deactivate
 ```
 and you'll be back in the original environment.
 
