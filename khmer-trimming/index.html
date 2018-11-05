@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://bluegenes.github.io/2018-metatranscriptomics/read-mapping/">
+        <link rel="canonical" href="https://bluegenes.github.io/2018-metatranscriptomics/khmer-trimming/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Mapping - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Error Trimming - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#mapping-reads-to-a-metatranscriptome" tabindex="1" class="md-skip">
+      <a href="../#k-mer-error-trimming" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Mapping
+                Error Trimming
               </span>
             
           
@@ -290,10 +290,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Day 1
@@ -357,11 +359,83 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../khmer-trimming/" title="Error Trimming" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Error Trimming
+      </label>
+    
+    <a href="./" title="Error Trimming" class="md-nav__link md-nav__link--active">
       Error Trimming
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-or-why-not-do-k-mer-trimming" title="Why (or why not) do k-mer trimming?" class="md-nav__link">
+    Why (or why not) do k-mer trimming?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-workspace-and-install-khmer" title="Set up workspace and install khmer" class="md-nav__link">
+    Set up workspace and install khmer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-do-decide-whether-to-include-this-or-not-edit-if-yes" title="to do: decide whether to include this or not ( &amp; edit if yes)" class="md-nav__link">
+    to do: decide whether to include this or not ( &amp; edit if yes)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#better-walk-through-and-explanation-from-2017-cicese-workshop-edit-add-if-time" title="Better walk-through and explanation from 2017 cicese workshop (edit &amp; add if time)" class="md-nav__link">
+    Better walk-through and explanation from 2017 cicese workshop (edit &amp; add if time)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-or-why-not-do-k-mer-trimming_1" title="Why (or why not) do k-mer trimming?" class="md-nav__link">
+    Why (or why not) do k-mer trimming?
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -410,12 +484,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Day 2
@@ -443,20 +515,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Mapping" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../read-mapping/" title="Mapping" class="md-nav__link">
       Mapping
     </a>
-    
   </li>
 
         
@@ -506,6 +569,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-or-why-not-do-k-mer-trimming" title="Why (or why not) do k-mer trimming?" class="md-nav__link">
+    Why (or why not) do k-mer trimming?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-workspace-and-install-khmer" title="Set up workspace and install khmer" class="md-nav__link">
+    Set up workspace and install khmer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-do-decide-whether-to-include-this-or-not-edit-if-yes" title="to do: decide whether to include this or not ( &amp; edit if yes)" class="md-nav__link">
+    to do: decide whether to include this or not ( &amp; edit if yes)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#better-walk-through-and-explanation-from-2017-cicese-workshop-edit-add-if-time" title="Better walk-through and explanation from 2017 cicese workshop (edit &amp; add if time)" class="md-nav__link">
+    Better walk-through and explanation from 2017 cicese workshop (edit &amp; add if time)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-or-why-not-do-k-mer-trimming_1" title="Why (or why not) do k-mer trimming?" class="md-nav__link">
+    Why (or why not) do k-mer trimming?
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -517,7 +630,125 @@
               
                 
                 
-                <h1 id="mapping-reads-to-a-metatranscriptome">Mapping reads to a metatranscriptome</h1>
+                <h1 id="k-mer-error-trimming">K-mer Error Trimming</h1>
+<p>(Optional)</p>
+<p>khmer documentation: http://khmer.readthedocs.io/en/latest</p>
+<h2 id="why-or-why-not-do-k-mer-trimming">Why (or why not) do k-mer trimming?</h2>
+<p>If you can assemble your data set without k-mer trimming, there's no
+reason to do it.  The reason we're error trimming here is to speed up
+the assembler (by removing data) and to decrease the memory requirements
+of the assembler (by removing a number of k-mers).</p>
+<h2 id="set-up-workspace-and-install-khmer">Set up workspace and install khmer</h2>
+<pre><code>conda install khmer
+</code></pre>
+
+<p>To run error trimming, use the khmer script <code>trim-low-abund.py</code>:</p>
+<pre><code>cd ${PROJECT}/trim
+
+for filename in *_1.qc.fq.gz
+do
+# first, make the base by removing fastq
+  baseR1=$(basename $filename .qc.fq.gz)
+  echo $baseR1
+
+# now, construct the R2 filename by replacing R1 with R2
+  baseR2=${baseR1/1m_1/1m_2}
+  echo $baseR2
+
+# construct a shared basename for the interleaved file:
+  base=${baseR1/1m_1/1m}
+  echo $base
+
+# finally, run khmer trimming
+  interleave-reads.py ${baseR1}.qc.fq.gz ${baseR2}.qc.fq.gz | \
+  trim-low-abund.py --gzip -V -M 8e9 -C 3 -Z 10 - -o ${base}.khmer.fq 
+
+done
+</code></pre>
+
+<p>To see how many k-mers we removed, you can examine the distribution as above,
+or use the <code>unique-kmers.py</code> script. Let's compare kmers for one sample.</p>
+<pre><code>unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
+unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz
+</code></pre>
+
+<h2 id="to-do-decide-whether-to-include-this-or-not-edit-if-yes">to do: decide whether to include this or not ( &amp; edit if yes)</h2>
+<h3 id="better-walk-through-and-explanation-from-2017-cicese-workshop-edit-add-if-time">Better walk-through and explanation from 2017 cicese workshop (edit &amp; add if time)</h3>
+<p>Let's plot a kmer abundance histogram of one sample</p>
+<pre><code>  cd $PROJECT
+abundance-dist-single.py -M 1e9 -k 21 SRR1976948_1.fastq.gz SRR1976948_1.fastq.gz.dist
+
+</code></pre>
+
+<p>If you plot a k-mer abundance histogram of the samples, you'll
+notice something: there's an awful lot of unique (abundance=1) k-mers.
+These are erroneous k-mers caused by sequencing errors.</p>
+<p>and in another cell::</p>
+<p>%matplotlib inline
+  import numpy
+  from pylab import *
+  dist1 = numpy.loadtxt('SRR1976948_1.fastq.gz.dist', skiprows=1, delimiter=',')
+  plot(dist1[:,0], dist1[:,1])
+  axis(xmax=50)</p>
+<p>Many of these errors remain even after you do the Trimmomatic run; you can
+see this with::</p>
+<p>!abundance-dist-single.py -M 1e9 -k 21 SRR1976948_1.qc.fq.gz SRR1976948_1.qc.fq.gz.dist</p>
+<p>and then plot::</p>
+<p>dist2 = numpy.loadtxt('SRR1976948_1.qc.fq.gz.dist', skiprows=1, delimiter=',')
+  plot(dist1[:,0], dist1[:,1], label='untrimmed')
+  plot(dist2[:,0], dist2[:,1], label='trimmed')
+  legend(loc='upper right')
+  axis(xmax=50)</p>
+<p>This is for
+two reasons:</p>
+<p>First, Trimmomatic trims based solely on the quality score, which is
+a statistical statement about the correctness of a base - a Q score
+of 30 means that, of 1000 bases with that Q score, 1 of those
+bases will be wrong.  So, a base can have a high Q score and still
+be wrong! (and <strong>many</strong> bases will have a low Q score and still be
+correct)</p>
+<p>Second, we trimmed <strong>very</strong> lightly - only bases that had a very low
+quality were removed.  This was intentional because with assembly,
+you want to retain as much coverage as possible, and the assembler
+will generally figure out what the "correct" base is from the coverage.</p>
+<p>An alternative to trimming based on the quality scores is to trim based on
+k-mer abundance - this is known as k-mer spectral error trimming.  K-mer
+spectral error trimming <em>always</em> beats quality score trimming in terms
+of eliminating errors; e.g. look at this table from <code>Zhang et al., 2014 &lt;http://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0101271&gt;</code>__:</p>
+<p>.. thumbnail:: files/2014-zhang.png
+   :width: 40%</p>
+<p>The basic logic is this: if you see low abundance k-mers in a high
+coverage data set, those k-mers are almost certainly the result of
+errors.  (Caveat: strain variation could also create them.)</p>
+<p>In metagenomic data sets we do have the problem that we may have very
+low and very high coverage data.  So we don't necessarily want to get
+rid of all low-abundance k-mers, because they may represent truly low
+abundance (but useful) data.</p>
+<p>As part of the khmer project in my lab, we have developed an approach
+that sorts reads into high abundance and low abundance reads, and only
+error trims the high abundance reads.</p>
+<p>.. thumbnail:: files/kmer-trimming.png
+   :width: 40%</p>
+<p>This does mean that many errors may get left in the data set, because we
+have no way of figuring out if they are errors or simply low coverage,
+but that's OK (and you can always trim them off if you really care).</p>
+<p>.. Error profile@@</p>
+<p>To run such error trimming, use the command <code>trim-low-abund.py</code>
+(at the command line, or prefix with a '!' in the notebook)::</p>
+<p>interleave-reads.py SRR1976948_1.qc.fq.gz SRR1976948_2.qc.fq.gz |
+     trim-low-abund.py -V -M 8e9 -C 3 -Z 10 - -o SRR1976948.trim.fq</p>
+<h2 id="why-or-why-not-do-k-mer-trimming_1">Why (or why not) do k-mer trimming?</h2>
+<p>If you can assemble your data set without k-mer trimming, there's no
+reason to do it.  The reason we're error trimming here is to speed up
+the assembler (by removing data) and to decrease the memory requirements
+of the assembler (by removing a number of k-mers).</p>
+<p>To see how many k-mers we removed, you can examine the distribution as above,
+or use the <code>unique-kmers.py</code> script::</p>
+<pre><code>unique-kmers.py SRR1976948_1.qc.fq.gz SRR1976948_2.qc.fq.gz
+unique-kmers.py SRR1976948.trim.fq
+</code></pre>
+<hr />
+<p>Next: :doc:<code>assemble</code></p>
                 
                   
                 
@@ -539,7 +770,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../metatranscriptome-annotation/" title="Annotation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../short-read-quality-control/" title="Read QC" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -548,19 +779,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Annotation
+                Read QC
               </span>
             </div>
           </a>
         
         
-          <a href="../sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../metatranscriptome-assembly/" title="Assembly" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Taxonomic Classification
+                Assembly
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -31,6 +31,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://bluegenes.github.io/2018-metatranscriptomics/khmer-trimming/</loc>
+     <lastmod>2018-11-05</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://bluegenes.github.io/2018-metatranscriptomics/metatranscriptome-assembly/</loc>
      <lastmod>2018-11-05</lastmod>
      <changefreq>daily</changefreq>

@@ -359,6 +359,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../khmer-trimming/" title="Error Trimming" class="md-nav__link">
+      Error Trimming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -369,9 +381,59 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Assembly
+      </label>
+    
     <a href="./" title="Assembly" class="md-nav__link md-nav__link--active">
       Assembly
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#link-in-the-trimmed-data" title="Link in the trimmed data" class="md-nav__link">
+    Link in the trimmed data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-the-assembler" title="Run the assembler" class="md-nav__link">
+    Run the assembler
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#looking-at-the-assembly" title="Looking at the assembly" class="md-nav__link">
+    Looking at the assembly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggestions-for-next-steps" title="Suggestions for next steps" class="md-nav__link">
+    Suggestions for next steps
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -494,6 +556,43 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#link-in-the-trimmed-data" title="Link in the trimmed data" class="md-nav__link">
+    Link in the trimmed data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-the-assembler" title="Run the assembler" class="md-nav__link">
+    Run the assembler
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#looking-at-the-assembly" title="Looking at the assembly" class="md-nav__link">
+    Looking at the assembly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggestions-for-next-steps" title="Suggestions for next steps" class="md-nav__link">
+    Suggestions for next steps
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -506,6 +605,117 @@
                 
                 
                 <h1 id="assembling-a-metatranscriptome">Assembling a Metatranscriptome</h1>
+<p>Learning objectives:</p>
+<ul>
+<li>What is metatranscriptome assembly?</li>
+<li>How do assemblers work?</li>
+<li>Checking the quality of assembly</li>
+<li>Understanding metatranscriptome assembly</li>
+</ul>
+<p>When working with environmental samples, </p>
+<p>The answer is <em>de novo</em> assembly. The basic idea with <em>de novo</em> transcriptome assembly is you feed in your reads and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a  <em>de novo</em> transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA.</p>
+<p>Trinity, one of the leading <em>de novo</em> transcriptome assemblers, was developed at the <a href="http://www.broadinstitute.org/">Broad Institute</a> and the <a href="http://www.cs.huji.ac.il/">Hebrew University of Jerusalem</a>. We will be losely following steps from the <a href="https://eel-pond.readthedocs.io/en/latest">Eel pond protocol</a> for our guide to doing RNA-seq assembly.</p>
+<h2 id="link-in-the-trimmed-data">Link in the trimmed data</h2>
+<p>We will be using the same set of TARA oceans mRNAseq reads that we trimmed in the last lesson from <a href="https://www.nature.com/articles/sdata201793#t1">Alberti et al., 2017</a>.</p>
+<p>The following commands will create a new folder <code>assembly</code> and link the trimmed data we prepared earlier in the newly created folder:</p>
+<pre><code>cd ..
+mkdir assembly
+cd assembly
+
+ln -fs ${PROJECT}/trim/*.qc.fq.gz .
+ls
+</code></pre>
+
+<p>Combine all fq into 2 files (left.fq and right.fq)</p>
+<pre><code>cat *R1*.qc.fq.gz orphans.qc.fq.gz &gt; left.fq.gz
+cat *R2*.qc.fq.gz &gt; right.fq.gz
+</code></pre>
+
+<h2 id="run-the-assembler">Run the assembler</h2>
+<p>Trinity works both with paired-end reads as well as single-end reads (including simultaneously both types at the same time). In the general case, the paired-end files are defined as <code>--left left.fq</code> and <code>--right right.fq</code> respectively. The single-end reads (a.k.a <em>orphans</em>) are defined by the flag <code>--single</code>.</p>
+<p>So let's run the assembler as follows:</p>
+<pre><code>time Trinity --seqType fq --max_memory 30G --CPU 10 --left left.fq.gz --right right.fq.gz --output nema_trinity
+</code></pre>
+
+<p>(This will take about 5 minutes)</p>
+<p>You should see something like:</p>
+<pre><code>** Harvesting all assembled transcripts into a single multi-fasta file...
+
+Thursday, October 25, 2018: 21:55:15    CMD: find /home/dibbears/work/assembly/nema_trinity/read_partitions/ -name '*inity.fasta'  | /opt/miniconda3/opt/trinity-2.8.4/util/support_scripts/partitioned_trinity_aggregator.pl --token_prefix TRINITY_DN --output_prefix /home/dibbears/work/assembly/nema_trinity/Trinity.tmp
+-relocating Trinity.tmp.fasta to /home/dibbears/work/assembly/nema_trinity/Trinity.fasta
+Thursday, October 25, 2018: 21:55:15    CMD: mv Trinity.tmp.fasta /home/dibbears/work/assembly/nema_trinity/Trinity.fasta
+
+
+###################################################################
+Trinity assemblies are written to /home/dibbears/work/assembly/nema_trinity/Trinity.fasta
+###################################################################
+
+
+Thursday, October 25, 2018: 21:55:15    CMD: /opt/miniconda3/opt/trinity-2.8.4/util/support_scripts/get_Trinity_gene_to_trans_map.pl /home/dibbears/work/assembly/nema_trinity/Trinity.fasta &gt; /home/dibbears/work/assembly/nema_trinity/Trinity.fasta.gene_trans_map
+
+real    7m7.692s
+user    23m59.929s
+sys 13m32.485s
+</code></pre>
+
+<p>at the end.</p>
+<h2 id="looking-at-the-assembly">Looking at the assembly</h2>
+<p>First, save the assembly:</p>
+<pre><code>cp nema_trinity/Trinity.fasta nema-transcriptome-assembly.fa
+</code></pre>
+
+<p>Now, look at the beginning:</p>
+<pre><code>head nema-transcriptome-assembly.fa
+</code></pre>
+
+<p>These are the transcripts! Yay!</p>
+<p>Let's capture also some statistics of the Trinity assembly. Trinity provides a handy tool to do exactly that:</p>
+<pre><code>TrinityStats.pl nema-transcriptome-assembly.fa
+</code></pre>
+
+<p>The output should look something like the following:</p>
+<pre><code>################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':  217
+Total trinity transcripts:  220
+Percent GC: 48.24
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+    Contig N10: 1763
+    Contig N20: 819
+    Contig N30: 548
+    Contig N40: 407
+    Contig N50: 320
+
+    Median contig length: 245.5
+    Average contig: 351.60
+    Total assembled bases: 77353
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+    Contig N10: 1034
+    Contig N20: 605
+    Contig N30: 454
+    Contig N40: 357
+    Contig N50: 303
+
+    Median contig length: 245
+    Average contig: 328.43
+    Total assembled bases: 71270
+</code></pre>
+
+<p>This is a set of summary stats about your assembly. Are they good? Bad? How would you know?</p>
+<h2 id="suggestions-for-next-steps">Suggestions for next steps</h2>
+<p>After generating a <em>de novo</em> transcriptome assembly:
+<em> <a href="https://angus.readthedocs.io/en/2018/dammit_annotation.html">annotation</a>
+</em> <a href="https://dibsi-rnaseq.readthedocs.io/en/latest/evaluation.html">evaluation</a></p>
                 
                   
                 
@@ -527,7 +737,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../short-read-quality-control/" title="Read QC" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../khmer-trimming/" title="Error Trimming" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -536,7 +746,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Read QC
+                Error Trimming
               </span>
             </div>
           </a>
