@@ -412,6 +412,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#install-megahit" title="Install Megahit" class="md-nav__link">
+    Install Megahit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#link-in-the-trimmed-data" title="Link in the trimmed data" class="md-nav__link">
     Link in the trimmed data
   </a>
@@ -572,6 +579,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#install-megahit" title="Install Megahit" class="md-nav__link">
+    Install Megahit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#link-in-the-trimmed-data" title="Link in the trimmed data" class="md-nav__link">
     Link in the trimmed data
   </a>
@@ -624,32 +638,46 @@
 <li>Checking the quality of assembly</li>
 <li>Understanding metatranscriptome assembly</li>
 </ul>
-<p>When working with environmental samples, </p>
-<p>The answer is <em>de novo</em> assembly. The basic idea with <em>de novo</em> transcriptome assembly is you feed in your reads and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a  <em>de novo</em> transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA.</p>
-<p>Trinity, one of the leading <em>de novo</em> transcriptome assemblers, was developed at the <a href="http://www.broadinstitute.org/">Broad Institute</a> and the <a href="http://www.cs.huji.ac.il/">Hebrew University of Jerusalem</a>. We will be losely following steps from the <a href="https://eel-pond.readthedocs.io/en/latest">Eel pond protocol</a> for our guide to doing RNA-seq assembly.</p>
+<p>The basic idea with any transcriptome assembly is you feed in your reads and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA. </p>
+<p>Unlike single-organism RNAseq, these contigs will represent transcripts that come from all the eukaryotic organisms (poly-A mRNAseq reads) found in each environmental sample.</p>
+<h2 id="install-megahit">Install Megahit</h2>
+<p>We already installed megahit during <a href="../setting-up-tara-environment/">setup</a>, but here's the installation command for future reference.</p>
+<pre><code>conda install megahit
+</code></pre>
+
 <h2 id="link-in-the-trimmed-data">Link in the trimmed data</h2>
 <p>We will be using the same set of TARA oceans mRNAseq reads that we trimmed in the last lesson from <a href="https://www.nature.com/articles/sdata201793#t1">Alberti et al., 2017</a>.</p>
 <p>The following commands will create a new folder <code>assembly</code> and link the trimmed data we prepared earlier in the newly created folder:</p>
-<pre><code>cd ..
-mkdir assembly
+<pre><code>cd $PROJECT
+mkdir -p assembly
 cd assembly
 
-ln -fs ${PROJECT}/trim/*.qc.fq.gz .
+ln -fs ${PROJECT}/trim/*.khmer.fq.gz .
+ # if you didn't error trim, use the trimmomatic-trimmed reads:
 ls
 </code></pre>
 
-<p>Combine all fq into 2 files (left.fq and right.fq)</p>
-<pre><code>cat *R1*.qc.fq.gz orphans.qc.fq.gz &gt; left.fq.gz
-cat *R2*.qc.fq.gz &gt; right.fq.gz
-</code></pre>
-
 <h2 id="run-the-assembler">Run the assembler</h2>
-<p>Trinity works both with paired-end reads as well as single-end reads (including simultaneously both types at the same time). In the general case, the paired-end files are defined as <code>--left left.fq</code> and <code>--right right.fq</code> respectively. The single-end reads (a.k.a <em>orphans</em>) are defined by the flag <code>--single</code>.</p>
-<p>So let's run the assembler as follows:</p>
-<pre><code>time Trinity --seqType fq --max_memory 30G --CPU 10 --left left.fq.gz --right right.fq.gz --output nema_trinity
+<p>Let's run an assembly on one set of samples</p>
+<pre><code>time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz  --memory .7 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer
 </code></pre>
 
-<p>(This will take about 5 minutes)</p>
+<p>This will take about X minutes; at the end you should see output like
+this:</p>
+<pre><code>   ... 7713 contigs, total 13168567 bp, min 200 bp, max 54372 bp, avg 1707 bp, N50 4305 bp
+   ... ALL DONE. Time elapsed: 899.612093 seconds
+</code></pre>
+
+<p>The output assembly will be in <code>combined/final.contigs.fa</code>.</p>
+<p>You could alt run these on qc reads:</p>
+<pre><code># ln -fs ${PROJECT}/trim/*.qc.fq.gz .
+ # non-khmer trimmed reads
+ #time megahit -1 TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz -2 TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz  --memory .7 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_qc
+</code></pre>
+
+<pre><code>#time Trinity --seqType fq --max_memory 30G --CPU 10 --left left.fq.gz --right right.fq.gz --output nema_trinity
+</code></pre>
+
 <p>You should see something like:</p>
 <pre><code>** Harvesting all assembled transcripts into a single multi-fasta file...
 
