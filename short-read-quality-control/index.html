@@ -673,11 +673,8 @@
                 
                 
                 <h1 id="short-read-quality-control">Short Read Quality Control</h1>
-<p><em>lesson changes in progress</em><br />
-to do:<br />
-  * use Rstudio server to view files still? OR?
-  * change names in all downstream steps<br />
-  * multiqc  </p>
+<p>still to do:<br />
+  * viewing fastqc files (use Rstudio server to view files still? OR scp?)</p>
 <p>You should now be logged into your cluster! If not, go back 
 to <a href="../cicese-cluster/">Cluster Login</a></p>
 <h2 id="data-source">Data source</h2>
@@ -823,24 +820,24 @@ scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
 <pre><code>cd ..
 mkdir -p trim
 cd trim
-ln -s ../data/*.fq.gz .
-cat ~/miniconda3/share/trimmomatic*/adapters/* &gt; combined.fa
+ln -s ../data/*/*.fq.gz .
+cat ~/miniconda3/envs/tara/share/trimmomatic*/adapters/* &gt; combined.fa
 </code></pre>
 
 <p>See excellent paper on trimming from <a href="http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full">MacManes 2014</a>.</p>
 <p>Run:</p>
-<pre><code>for filename in *_R1_*.fastq
+<pre><code>for filename in *1*.fq.gz
 do
 # first, make the base by removing fastq
-  base=$(basename $filename .fastq)
+  base=$(basename $filename .fq.gz)
   echo $base
 
 # now, construct the R2 filename by replacing R1 with R2
-  baseR2=${base/_R1_/_R2_}
+  baseR2=${base/1m_1/1m_2}
   echo $baseR2
 
 # finally, run Trimmomatic
-  trimmomatic PE ${base}.fastq ${baseR2}.fastq \
+  trimmomatic PE ${base}.fq.gz ${baseR2}.fq.gz \
     ${base}.qc.fq.gz s1_se.gz \
     ${baseR2}.qc.fq.gz s2_se.gz \
     ILLUMINACLIP:combined.fa:2:40:15 \
