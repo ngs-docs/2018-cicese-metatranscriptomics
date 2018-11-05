@@ -1,7 +1,7 @@
 site_name: 2018 CICESE Metatranscriptomics workshop 
-site_url: https://bluegenes.github.io/2018-metatranscriptomics
-repo_name: 2018-metatranscriptomics-workshop-dev
-repo_url: https://github.com/bluegenes/2018-metatranscriptomics-workshop-dev
+site_url: https://ngs-docs.github.io/2018-cicese-metatranscriptomics
+repo_name: 2018-cicese-metatranscriptomics
+repo_url: https://github.com/ngs-docs/2018-cicese-metatranscriptomics
 edit_uri: ""
 
 copyright: 'Copyright &copy; 2018 <a href="http://ivory.idyll.org/lab/">Lab for Data Intensive Biology</a> at UC Davis'
