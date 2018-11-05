@@ -8,8 +8,8 @@ to [Cluster Login](cicese-cluster.md)
 
 ## Data source
 
-We will be using RNAseq reads from a small subset of data from the [TARA Oceans Expedition](https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans) 
-and analyzed as part of [A global ocean atlas of eukaryotic genes](https://www.nature.com/articles/s41467-017-02342-1).
+We will be using RNAseq reads from a small subset of data from the [TARA Oceans Expedition](https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans), 
+from [Alberti et al., 2017](https://www.nature.com/articles/sdata201793#t1) and analyzed as part of [A global ocean atlas of eukaryotic genes](https://www.nature.com/articles/s41467-017-02342-1).
 
 ## Set up workspace and download the data 
 

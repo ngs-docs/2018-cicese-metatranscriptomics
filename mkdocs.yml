@@ -44,6 +44,7 @@ nav:
       - 'Bioconda': 'working-with-bioconda.md'
       - 'TARA Sample Data': 'tara-sample-data.md'
       - 'Read QC': 'short-read-quality-control.md'
+	  - 'Error Trimming': 'khmer-trimming.md'
       - 'Assembly': 'metatranscriptome-assembly.md'
       - 'Evaluation': 'metatranscriptome-evaluation.md'
       - 'Count Transcriptomes': 'count_transcriptomes.md'
