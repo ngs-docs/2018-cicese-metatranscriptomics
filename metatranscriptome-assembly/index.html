@@ -447,8 +447,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#suggestions-for-next-steps" title="Suggestions for next steps" class="md-nav__link">
-    Suggestions for next steps
+  <a href="#assembly-statistics" title="Assembly Statistics" class="md-nav__link">
+    Assembly Statistics
   </a>
   
 </li>
@@ -621,8 +621,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#suggestions-for-next-steps" title="Suggestions for next steps" class="md-nav__link">
-    Suggestions for next steps
+  <a href="#assembly-statistics" title="Assembly Statistics" class="md-nav__link">
+    Assembly Statistics
   </a>
   
 </li>
@@ -694,61 +694,16 @@ done
 
 <h2 id="looking-at-the-assembly">Looking at the assembly</h2>
 <p>First, let's copy the assembly to a better location:</p>
-<pre><code>cp nema_trinity/Trinity.fasta nema-transcriptome-assembly.fa
+<pre><code>cp ./TARA_135_SRF_5-20_rep1_khmer/*contigs.fa tara135_SRF_megahit.fasta
 </code></pre>
 
 <p>Now, look at the beginning:</p>
-<pre><code>head nema-transcriptome-assembly.fa
+<pre><code>head tara135_SRF_megahit.fasta 
 </code></pre>
 
 <p>These are the transcripts! Yay!</p>
-<p>Let's capture also some statistics of the Trinity assembly. Trinity provides a handy tool to do exactly that:</p>
-<pre><code>TrinityStats.pl nema-transcriptome-assembly.fa
-</code></pre>
-
-<p>The output should look something like the following:</p>
-<pre><code>################################
-## Counts of transcripts, etc.
-################################
-Total trinity 'genes':  217
-Total trinity transcripts:  220
-Percent GC: 48.24
-
-########################################
-Stats based on ALL transcript contigs:
-########################################
-
-    Contig N10: 1763
-    Contig N20: 819
-    Contig N30: 548
-    Contig N40: 407
-    Contig N50: 320
-
-    Median contig length: 245.5
-    Average contig: 351.60
-    Total assembled bases: 77353
-
-
-#####################################################
-## Stats based on ONLY LONGEST ISOFORM per 'GENE':
-#####################################################
-
-    Contig N10: 1034
-    Contig N20: 605
-    Contig N30: 454
-    Contig N40: 357
-    Contig N50: 303
-
-    Median contig length: 245
-    Average contig: 328.43
-    Total assembled bases: 71270
-</code></pre>
-
-<p>This is a set of summary stats about your assembly. Are they good? Bad? How would you know?</p>
-<h2 id="suggestions-for-next-steps">Suggestions for next steps</h2>
-<p>After generating a <em>de novo</em> transcriptome assembly:
-<em> <a href="https://angus.readthedocs.io/en/2018/dammit_annotation.html">annotation</a>
-</em> <a href="https://dibsi-rnaseq.readthedocs.io/en/latest/evaluation.html">evaluation</a></p>
+<h2 id="assembly-statistics">Assembly Statistics</h2>
+<p>Let's look at some statistics of the Megahit assembly:</p>
                 
                   
                 
