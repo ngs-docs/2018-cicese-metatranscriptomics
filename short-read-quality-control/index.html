@@ -734,7 +734,7 @@ of this tara working directory:</p>
 
 <p>If you see all the files you think you should, good!  Otherwise, debug.</p>
 <p>These are FASTQ files -- let's take a look at them:</p>
-<pre><code>zless data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
+<pre><code>zless $PROJECT/data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 </code></pre>
 
 <p>(use the spacebar to scroll down, and type 'q' to exit 'zless')</p>
@@ -841,7 +841,7 @@ scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
 </code></pre>
 
 <p>Setup trim directory:</p>
-<pre><code>cd ..
+<pre><code>cd $PROJECT
 mkdir -p trim
 cd trim
 ln -s ../data/*/*.fq.gz .
