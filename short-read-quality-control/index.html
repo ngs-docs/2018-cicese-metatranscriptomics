@@ -712,15 +712,13 @@ mdkir -p work/data
 
 <p>Next, change into the data dir and download the data subsets:</p>
 <pre><code>cd work/data
-curl -L https://osf.io/76s3r/download -o tara135_5-20_1m.zip
-curl -L https://osf.io/smcyf/download -o tara136-137_5-20_1m.zip 
+curl -L https://osf.io/jqda5/download -o tara135_250k.zip
 </code></pre>
 
 <p>Now, let's unzip and make the files difficult to delete</p>
-<pre><code>unzip tara135_5-20_1m.zip
-unzip tara136-137_5-20_1m.zip
+<pre><code>unzip tara135_250k.zip 
 
-chmod u-w */*fq.gz
+chmod u-w *fq.gz
 </code></pre>
 
 <p>To make life easier, let's define a variable for the location
@@ -729,12 +727,12 @@ of this tara working directory:</p>
 </code></pre>
 
 <p>Check that your data is where it should be</p>
-<pre><code>ls $PROJECT/data/*/
+<pre><code>ls $PROJECT/data/
 </code></pre>
 
 <p>If you see all the files you think you should, good!  Otherwise, debug.</p>
 <p>These are FASTQ files -- let's take a look at them:</p>
-<pre><code>zless $PROJECT/data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
+<pre><code>zless $PROJECT/data//TARA_135_DCM_5-20_rep1_250k_1.fq.gz
 </code></pre>
 
 <p>(use the spacebar to scroll down, and type 'q' to exit 'zless')</p>
@@ -750,7 +748,7 @@ of this tara working directory:</p>
 <h2 id="quality-trimming-and-light-quality-filtering">Quality trimming and light quality filtering</h2>
 <p>Make sure you've got the PROJECT location defined, and your data is there:</p>
 <pre><code>set -u
-printf &quot;\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*/*.fq.gz | wc -l) files\n\n&quot;
+printf &quot;\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fq.gz | wc -l) files\n\n&quot;
 set +u
 </code></pre>
 
@@ -763,7 +761,7 @@ cd quality
 </code></pre>
 
 <p>Now, link the data files into your new workspace</p>
-<pre><code>ln -s ../data/*/*.fq.gz ./
+<pre><code>ln -s ../data/*.fq.gz ./
 </code></pre>
 
 <p>(Linking with <code>ln</code> avoids having to make a copy of the files, which will take up storage space.)</p>
@@ -819,7 +817,7 @@ of the data (e.g. duplicate sequences are only analyzed for the first 100,000 se
 <pre><code>[INFO   ]         multiqc : This is MultiQC v1.6
 [INFO   ]         multiqc : Template    : default
 [INFO   ]         multiqc : Searching '.'
-[INFO   ]          fastqc : Found 16 reports
+[INFO   ]          fastqc : Found 8 reports
 [INFO   ]         multiqc : Compressing plot data
 [INFO   ]         multiqc : Report      : multiqc_report.html
 [INFO   ]         multiqc : Data        : multiqc_data
