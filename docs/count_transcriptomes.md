@@ -15,43 +15,56 @@ detect between the three sequences to estimate the number of transcriptomes in o
 We will first search for these proteins in the amino acid sequences 
 derived from our de novo assembly of our metatranscriptome. We will use
 [Pfam](https://pfam.xfam.org/) domains and a tool called [HMMER](http://hmmer.org/) 
-to help us locate all of the matching sequences. Then, we will XXX. Because we are only searching in our assembly, this method only captures the number of transcriptomes that assembled.
+to help us locate all of the matching sequences. Then, we will XXX. Because we are only 
+searching in our assembly, this method only captures the number of transcriptomes that 
+assembled.
 
 ## 
 
-First let's download some Pfam domains. 
+First let's make a new directory and link in our annotation file. 
 ```
-wget
+mkdir -p ~/count-transcriptomes
+cd ~/count-transcriptomes
+```
+
+
+Next let's download some Pfam domains. 
+```
+wget -O PF00177-full.sto http://pfam.xfam.org/family/PF00177/alignment/full
 ```
 
 Next we'll build a HMM profile of the Pfam domains. 
 ```
-hmmbuild
+hmmbuild PF00177-full.hmm PF00177-full.sto
+hmmpress PF00177.hmm
 ```
 
 We then use the HMM profile to search the proteins from our assembly
 ```
-hmmscan
+hmmscan -T 100 --tblout PF00177-full-tbl.txt --domtblout PF00177-full-domtbl.txt PF00177-full.hmm TARA_135_DCM_5-20_rep1_250k.contigs.fa.transdecoder.pep
 ```
 
 Let's take a look at one of the files output by this search
 ```
-less -S
+less -S PF00177-full-tbl.txt
 ```
 
-The xx column contains the names of our protein sequences that matched
+The third column contains the names of our protein sequences that matched
 these domains. We can use those names to extract our matches from 
 our assembly
 
 ```
 # Grab the names
+cat PF00177-full-tbl.txt | Rscript -e 'writeLines(noquote(read.table("stdin", stringsAsFactors = F)$V3))' > PF00177-names.txt
 
 # extract the matches
+wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/extract-hmmscan-matches.py
+python extract-hmmscan-matches.py PF00177-names.txt TARA_135_DCM_5-20_rep1_250k.contigs.fa.transdecoder.pep > PF00177.faa
 ```
 
 Let's count the number of sequences that matched 
 ```
-grep ">" XXX | wc -l
+grep ">" PF00177.faa | wc -l
 ```
 
 Some matches are quite similar to each other. Let's cluster our sequences
