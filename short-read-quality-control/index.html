@@ -725,19 +725,19 @@ chmod u-w */*fq.gz
 
 <p>To make life easier, let's define a variable for the location
 of this tara working directory:</p>
-<pre><code> export PROJECT= ~/work
+<pre><code> export PROJECT=~/work
 </code></pre>
 
 <p>Check that your data is where it should be</p>
-<pre><code>ls $PROJECT/data
+<pre><code>ls $PROJECT/data/*/
 </code></pre>
 
 <p>If you see all the files you think you should, good!  Otherwise, debug.</p>
 <p>These are FASTQ files -- let's take a look at them:</p>
-<pre><code>less TARA_137_DCM_5-20_rep2_1m_1.fq.gz
+<pre><code>zless data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 </code></pre>
 
-<p>(use the spacebar to scroll down, and type 'q' to exit 'less')</p>
+<p>(use the spacebar to scroll down, and type 'q' to exit 'zless')</p>
 <p>Question:</p>
 <ul>
 <li>where does the filename come from?</li>
@@ -750,7 +750,7 @@ of this tara working directory:</p>
 <h2 id="quality-trimming-and-light-quality-filtering">Quality trimming and light quality filtering</h2>
 <p>Make sure you've got the PROJECT location defined, and your data is there:</p>
 <pre><code>set -u
-printf &quot;\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fq.gz | wc -l) files\n\n&quot;
+printf &quot;\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*/*.fq.gz | wc -l) files\n\n&quot;
 set +u
 </code></pre>
 
