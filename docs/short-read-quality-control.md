@@ -44,7 +44,7 @@ of this tara working directory:
 Check that your data is where it should be
 
 ```
-ls $PROJECT/data
+ls $PROJECT/data/*/
 ```
 
 If you see all the files you think you should, good!  Otherwise, debug.
@@ -52,9 +52,9 @@ If you see all the files you think you should, good!  Otherwise, debug.
 These are FASTQ files -- let's take a look at them:
 
 ```
-less TARA_137_DCM_5-20_rep2_1m_1.fq.gz
+zless data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 ```
-(use the spacebar to scroll down, and type 'q' to exit 'less')
+(use the spacebar to scroll down, and type 'q' to exit 'zless')
 
 Question:
 
@@ -73,7 +73,7 @@ Make sure you've got the PROJECT location defined, and your data is there:
 
 ```
 set -u
-printf "\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fq.gz | wc -l) files\n\n"
+printf "\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*/*.fq.gz | wc -l) files\n\n"
 set +u
 ```
 *Important:* If you get an error above or the count of files is wrong...STOP!! Revisit the download & unzip instructions!
