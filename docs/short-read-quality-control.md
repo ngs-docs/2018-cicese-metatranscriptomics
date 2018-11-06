@@ -23,16 +23,14 @@ mdkir -p work/data
 Next, change into the data dir and download the data subsets:
 ```
 cd work/data
-curl -L https://osf.io/76s3r/download -o tara135_5-20_1m.zip
-curl -L https://osf.io/smcyf/download -o tara136-137_5-20_1m.zip 
+curl -L https://osf.io/jqda5/download -o tara135_250k.zip
 ```
 
 Now, let's unzip and make the files difficult to delete
 ```
-unzip tara135_5-20_1m.zip
-unzip tara136-137_5-20_1m.zip
+unzip tara135_250k.zip 
 
-chmod u-w */*fq.gz
+chmod u-w *fq.gz
 ```
 
 To make life easier, let's define a variable for the location
@@ -44,7 +42,7 @@ of this tara working directory:
 Check that your data is where it should be
 
 ```
-ls $PROJECT/data/*/
+ls $PROJECT/data/
 ```
 
 If you see all the files you think you should, good!  Otherwise, debug.
@@ -52,7 +50,7 @@ If you see all the files you think you should, good!  Otherwise, debug.
 These are FASTQ files -- let's take a look at them:
 
 ```
-zless $PROJECT/data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
+zless $PROJECT/data//TARA_135_DCM_5-20_rep1_250k_1.fq.gz
 ```
 (use the spacebar to scroll down, and type 'q' to exit 'zless')
 
@@ -73,7 +71,7 @@ Make sure you've got the PROJECT location defined, and your data is there:
 
 ```
 set -u
-printf "\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*/*.fq.gz | wc -l) files\n\n"
+printf "\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fq.gz | wc -l) files\n\n"
 set +u
 ```
 *Important:* If you get an error above or the count of files is wrong...STOP!! Revisit the download & unzip instructions!
@@ -91,7 +89,7 @@ cd quality
 Now, link the data files into your new workspace
 
 ```
-ln -s ../data/*/*.fq.gz ./
+ln -s ../data/*.fq.gz ./
 ```
 
 (Linking with `ln` avoids having to make a copy of the files, which will take up storage space.)
@@ -172,7 +170,7 @@ The terminal output should look like this:
 [INFO   ]         multiqc : This is MultiQC v1.6
 [INFO   ]         multiqc : Template    : default
 [INFO   ]         multiqc : Searching '.'
-[INFO   ]          fastqc : Found 16 reports
+[INFO   ]          fastqc : Found 8 reports
 [INFO   ]         multiqc : Compressing plot data
 [INFO   ]         multiqc : Report      : multiqc_report.html
 [INFO   ]         multiqc : Data        : multiqc_data
