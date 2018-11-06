@@ -52,7 +52,7 @@ If you see all the files you think you should, good!  Otherwise, debug.
 These are FASTQ files -- let's take a look at them:
 
 ```
-zless data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
+zless $PROJECT/data/tara135_5-20_1m/TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 ```
 (use the spacebar to scroll down, and type 'q' to exit 'zless')
 
@@ -201,7 +201,7 @@ conda install trimmomatic
 
 Setup trim directory:
 ```
-cd ..
+cd $PROJECT
 mkdir -p trim
 cd trim
 ln -s ../data/*/*.fq.gz .

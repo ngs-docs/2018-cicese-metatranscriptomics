@@ -29,8 +29,9 @@ do
   echo $base
 
   #Run khmer trimming
-  interleave-reads.py ${base}_1.qc.fq.gz ${base}_2.qc.fq.gz | \
-  trim-low-abund.py --gzip -V -M 8e9 -C 3 -Z 10 - -o ${base}.khmer.fq.gz
+  (interleave-reads.py ${base}_1.qc.fq.gz ${base}_2.qc.fq.gz )| \
+  (trim-low-abund.py - -V -Z 10 -C 3 -o - --gzip -M 8e9) | \ 
+  (extract-paired-reads.py --gzip -p ${base}.khmer.pe.fq.gz -s ${base}.khmer.se.fq.gz)
 
 done
 ```
@@ -42,7 +43,7 @@ or use the `unique-kmers.py` script. Let's compare kmers for one sample.
 
 ```
 unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
-unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.fq.gz
+unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
 ```  
 
 -----
