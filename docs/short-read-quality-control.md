@@ -1,8 +1,5 @@
 # Short Read Quality Control
 
-still to do:  
-  * viewing fastqc files (use Rstudio server to view files still? OR scp?)
-
 You should now be logged into your cluster! If not, go back 
 to [Cluster Login](cicese-cluster.md)
 
@@ -18,7 +15,6 @@ First, make some directories to work in:
 cd
 mdkir -p work/data
 ```
-
 
 Next, change into the data dir and download the data subsets:
 ```
@@ -177,10 +173,9 @@ The terminal output should look like this:
 [INFO   ]         multiqc : MultiQC complete
 ```
 
-You can also view this output [here](files/multiqc_report.html)
+You can view this report [here](files/multiqc_report.html)
 
 #### View your files on your own computer
-As an alternative to viewing the files on the Rstudio server, we can secure copy (scp) these files to our own laptops, and view them from there.
 ```
 mkdir ~/Desktop/tara_fastqc  # make a directory for these files
 scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
@@ -220,12 +215,16 @@ echo $base
 # run Trimmomatic
 trimmomatic PE ${base}_1.fq.gz \
               ${base}_2.fq.gz \
-     ${base}_1.qc.fq.gz ${base}_s1_se \
-     ${base}_2.qc.fq.gz ${base}_s2_se \
+     ${base}_1.qc.fq.gz s1_se \
+     ${base}_2.qc.fq.gz s2_se \
      ILLUMINACLIP:combined.fa:2:40:15 \
      LEADING:2 TRAILING:2 \
      SLIDINGWINDOW:4:2 \
      MINLEN:25
+# save the orphans
+gzip -9c s1_se s2_se >> orphans.qc.fq.gz
+rm -f s1_se s2_se
+
 done
 ```
 
