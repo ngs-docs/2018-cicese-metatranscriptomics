@@ -71,67 +71,22 @@ done
 First, let's copy the assembly to a better location:
 
 ```
-cp nema_trinity/Trinity.fasta nema-transcriptome-assembly.fa
+cp ./TARA_135_SRF_5-20_rep1_khmer/*contigs.fa tara135_SRF_megahit.fasta
 ```
 
 Now, look at the beginning:
 
 ```
-head nema-transcriptome-assembly.fa
+head tara135_SRF_megahit.fasta 
 ```
 
 These are the transcripts! Yay!
 
-Let's capture also some statistics of the Trinity assembly. Trinity provides a handy tool to do exactly that:
 
-```
-TrinityStats.pl nema-transcriptome-assembly.fa
-```
+## Assembly Statistics
 
-The output should look something like the following:
-
-```
-################################
-## Counts of transcripts, etc.
-################################
-Total trinity 'genes':	217
-Total trinity transcripts:	220
-Percent GC: 48.24
-
-########################################
-Stats based on ALL transcript contigs:
-########################################
-
-	Contig N10: 1763
-	Contig N20: 819
-	Contig N30: 548
-	Contig N40: 407
-	Contig N50: 320
-
-	Median contig length: 245.5
-	Average contig: 351.60
-	Total assembled bases: 77353
+Let's look at some statistics of the Megahit assembly:
 
 
-#####################################################
-## Stats based on ONLY LONGEST ISOFORM per 'GENE':
-#####################################################
 
-	Contig N10: 1034
-	Contig N20: 605
-	Contig N30: 454
-	Contig N40: 357
-	Contig N50: 303
 
-	Median contig length: 245
-	Average contig: 328.43
-	Total assembled bases: 71270
-```
-
-This is a set of summary stats about your assembly. Are they good? Bad? How would you know?
-
-## Suggestions for next steps
-
-After generating a *de novo* transcriptome assembly:
-* [annotation](https://angus.readthedocs.io/en/2018/dammit_annotation.html)
-* [evaluation](https://dibsi-rnaseq.readthedocs.io/en/latest/evaluation.html)
