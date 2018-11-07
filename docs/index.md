@@ -15,17 +15,17 @@ Morning:
   - [Bienvenidos!](welcome.md)
   - [Logging into the cluster](cicese-cluster.md) 
   - [Bioconda for software installation](working-with-bioconda.md)
+  - [Intro to TARA Oceans sample data](tara-sample-data.md)
   - [Short read quality control](short-read-quality-control.md)
-  - **If time:** [Metatrancriptome Assembly](metatranscriptome-assembly.md)
 
 Lunch 
 
 Afternoon: 
 
+  - [Metatrancriptome Assembly](megahit-assembly.md)
   - Metatranscriptomic workflows and considerations
-  - [Intro to TARA Oceans sample data](tara-sample-data.md)
-  - [Assessing assembly quality](metatranscriptome-evaluation.md)
-  - **If time:** [Annotating your assembly](metatranscriptome-annotation.md)
+  - [Assessing assembly quality](evaluation.md)
+  - [Annotating your assembly](metatranscriptome-annotation.md)
 
 
 Day 2: Nov 9, 2018
