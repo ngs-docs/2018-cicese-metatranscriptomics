@@ -38,7 +38,7 @@
     
     
       
-        <title>Mapping - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Mapping reads to the Assembly - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Mapping
+                Mapping reads to the Assembly
               </span>
             
           
@@ -407,8 +407,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
-      Count Transcriptomes
+    <a href="../annotation/" title="Assembly Annotation" class="md-nav__link">
+      Assembly Annotation
     </a>
   </li>
 
@@ -445,8 +445,32 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-annotation/" title="Annotation" class="md-nav__link">
-      Annotation
+    <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
+      Count Transcriptomes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-nav__link">
+      Taxonomic Classification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sample-comparison/" title="Comparing Samples" class="md-nav__link">
+      Comparing Samples
     </a>
   </li>
 
@@ -466,11 +490,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Mapping
+        Mapping reads to the Assembly
       </label>
     
-    <a href="./" title="Mapping" class="md-nav__link md-nav__link--active">
-      Mapping
+    <a href="./" title="Mapping reads to the Assembly" class="md-nav__link md-nav__link--active">
+      Mapping reads to the Assembly
     </a>
     
       
@@ -491,15 +515,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-the-assembly" title="Index the Assembly" class="md-nav__link">
-    Index the Assembly
+  <a href="#create-a-directory-to-work-in" title="Create a directory to work in" class="md-nav__link">
+    Create a directory to work in
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-quantification" title="Run quantification" class="md-nav__link">
-    Run quantification
+  <a href="#link-an-assembly" title="Link an assembly" class="md-nav__link">
+    Link an assembly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-salmon" title="Run Salmon" class="md-nav__link">
+    Run Salmon
   </a>
   
 </li>
@@ -512,18 +543,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-nav__link">
-      Taxonomic Classification
-    </a>
   </li>
 
         
@@ -572,15 +591,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-the-assembly" title="Index the Assembly" class="md-nav__link">
-    Index the Assembly
+  <a href="#create-a-directory-to-work-in" title="Create a directory to work in" class="md-nav__link">
+    Create a directory to work in
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-quantification" title="Run quantification" class="md-nav__link">
-    Run quantification
+  <a href="#link-an-assembly" title="Link an assembly" class="md-nav__link">
+    Link an assembly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-salmon" title="Run Salmon" class="md-nav__link">
+    Run Salmon
   </a>
   
 </li>
@@ -603,33 +629,107 @@
                 
                 
                 <h1 id="mapping-reads-to-a-metatranscriptome">Mapping reads to a metatranscriptome</h1>
+<p>We will use <a href="http://salmon.readthedocs.org/en/latest/">Salmon</a> to
+quantify expression. Salmon is a new breed of software for quantifying RNAseq reads that is both really fast and takes
+transcript length into consideration (<a href="https://www.nature.com/articles/nmeth.4197">Patro et al. 2017</a>).</p>
+<p>For further reading, see</p>
+<ul>
+<li>Intro blog post: http://robpatro.com/blog/?p=248</li>
+<li>A 2016 blog post evaluating and comparing methods <a href="https://cgatoxford.wordpress.com/2016/08/17/why-you-should-stop-using-featurecounts-htseq-or-cufflinks2-and-start-using-kallisto-salmon-or-sailfish/">here</a></li>
+<li>Salmon github repo <a href="https://github.com/COMBINE-lab/salmon">here</a></li>
+<li>2018 paper: <a href="https://www.biorxiv.org/content/early/2018/10/16/444620">A direct comparison of genome alignment and transcriptome pseudoalignment</a></li>
+</ul>
 <h2 id="quantification-with-salmon">Quantification with Salmon</h2>
-<p><em>testing</em></p>
-<h2 id="index-the-assembly">Index the Assembly</h2>
-<pre><code>#for assembly in *_megahit.fasta
+<p>Check that salmon is available and see run options:</p>
+<pre><code>salmon -h
+</code></pre>
 
-for assembly in *.contigs.fa
+<p>Now let's check that we still have the trimmed data we created day 1:</p>
+<pre><code>set -u
+printf &quot;\nMy trimmed data is in $PROJECT/quality/, and consists of $(ls -1 ${PROJECT}/quality/*.qc.fq.gz | wc -l) files\n\n&quot;
+set +u
+
+</code></pre>
+
+<p>where set -u should let you know if you have any unset variables, i.e. if the <code>$PROJECT</code> variable is not defined. </p>
+<p>If you see <code>-bash: PROJECT: unbound variable</code>, then you need to set the $PROJECT variable.  </p>
+<pre><code>export PROJECT= ~/work
+</code></pre>
+
+<p>and then re-run the <code>printf</code> code block.</p>
+<p>NOTE: if you do not have files, please rerun quality trimming steps <a href="../short-read-quality-control/">here</a></p>
+<h2 id="create-a-directory-to-work-in">Create a directory to work in</h2>
+<pre><code>   cd ${PROJECT}
+   mkdir -p quant
+   cd quant
+</code></pre>
+
+<h2 id="link-an-assembly">Link an assembly</h2>
+<p>We link a full assembly to use for mapping. This assembly was made with all TARA_135 SRF reads, rather than the subset we used in the <a href="../megahit-assembly/">assembly</a> tutorial.</p>
+<pre><code>ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_full_megahit.fasta ./
+</code></pre>
+
+<p>Note: if you prefer, you can use the annotated assembly we generated with the read subsets instead</p>
+<pre><code>    #ln -s ${PROJECT}/annotation/tara_f135_SRF.fasta.dammit/tara_f135_SRF.fasta.dammit.fasta ./tara_f135_SRF_annot.fasta 
+</code></pre>
+
+<h2 id="run-salmon">Run Salmon</h2>
+<p>Build an index for your new transcriptome:</p>
+<pre><code>    salmon index --index tara135 --transcripts tara_f135_full_megahit.fasta
+</code></pre>
+
+<p>Next, link in the QC reads (produced in <a href="../short-read-quality-control/">quality</a>:</p>
+<pre><code>   ln -s ../quality/*.qc.fq.gz ./
+</code></pre>
+
+<p>Then, run the salmon command:</p>
+<pre><code>for sample in *1.qc.fq.gz
 do
-  base=$(basename $assembly .contigs.fa)
+  base=$(basename $sample _1.fq.gz)
   echo $base
-
-  salmon index -t ${base}.contigs.fa -i ${base}_salmon --threads 2
-  #salmon index -t ${base}.fasta -i ${base}_salmon --threads 2
+  salmon quant -i tara135 -p 2 -l A -1 ${base}_1.qc.fq.gz -2 ${base}_2.qc.fq.gz -o ${base}_quant
 done
 </code></pre>
 
-<h2 id="run-quantification">Run quantification</h2>
-<pre><code>for filename in *_1.qc.fq.gz
-do
-  base=$(basename $filename _1.qc.fq.gz)
-  echo $base
-
-  for assembly_index in *_salmon
-    do
-    time salmon quant -i ${assembly_index} -l A -1 ${base}_1.qc.fq.gz -2 ${base}_2.qc.fq.gz -o ${base}_quant  -p 2
-    done
-done
+<p>This will create a bunch of directories named something like
+<code>TARA_135_SRF_5-20_rep1_quant</code>, containing a bunch of files. Take a
+look at what files there are:</p>
+<p>You should see:</p>
+<pre><code>   aux_info
+   cmd_info.json
+   lib_format_counts.json
+   libParams
+   logs
+   quant.sf
 </code></pre>
+
+<p>The two most interesting files are <code>quant.sf</code>, which contains the counts,
+and <code>salmon_quant.log</code> (in the <code>logs</code> directory), which contains a
+log from the salmon run.</p>
+<h1 id="working-with-the-counts">Working with the counts</h1>
+<p>The <code>quant.sf</code> files actually contain the relevant information about
+expression -- take a look</p>
+<pre><code>   head -20 TARA_135_SRF_5-20_rep1_1m_quant/quant.sf 
+</code></pre>
+
+<p>You should see output that looks like this:</p>
+<pre><code>Name    Length  EffectiveLength TPM NumReads
+k119_5  212 63.757  0.000000    0.000
+k119_10 231 75.730  0.000000    0.000
+k119_14 261 97.683  0.000000    0.000
+k119_16 301 130.690 11.736728   1.000
+k119_18 302 131.560 0.000000    0.000
+k119_21 203 58.357  0.000000    0.000
+k119_22 308 136.790 0.000000    0.000
+</code></pre>
+
+<p>The first column contains the transcript names, and the
+fifth column is the "raw counts", which is what many 
+differential expression programs need.</p>
+<h1 id="other-useful-tutorials-and-references">Other useful tutorials and references</h1>
+<p>https://github.com/ngs-docs/2015-nov-adv-rna/blob/master/salmon.rst
+http://angus.readthedocs.io/en/2016/rob_quant/tut.html
+https://2016-aug-nonmodel-rnaseq.readthedocs.io/en/latest/quantification.html</p>
                 
                   
                 
@@ -651,7 +751,7 @@ done
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../metatranscriptome-annotation/" title="Annotation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../sample-comparison/" title="Comparing Samples" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -660,19 +760,19 @@ done
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Annotation
+                Comparing Samples
               </span>
             </div>
           </a>
         
         
-          <a href="../sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../anvio/" title="Visualize with anvio" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Taxonomic Classification
+                Visualize with anvio
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

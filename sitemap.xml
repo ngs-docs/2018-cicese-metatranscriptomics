@@ -51,22 +51,27 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/annotation/</loc>
+     <lastmod>2018-11-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/count_transcriptomes/</loc>
      <lastmod>2018-11-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/metatranscriptome-annotation/</loc>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/sourmash-taxonomic-classification/</loc>
+     <lastmod>2018-11-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/sample-comparison/</loc>
      <lastmod>2018-11-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/read-mapping/</loc>
-     <lastmod>2018-11-06</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/sourmash-taxonomic-classification/</loc>
      <lastmod>2018-11-06</lastmod>
      <changefreq>daily</changefreq>
     </url>

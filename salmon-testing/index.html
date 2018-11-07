@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/2017-metaG-metaspades-assembly/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/salmon-testing/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Assembly with metaSPAdes - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Salmon testing - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#assembly-with-metaspades" tabindex="1" class="md-skip">
+      <a href="../#index-the-assembly" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Assembly with metaSPAdes
+                Salmon testing
               </span>
             
           
@@ -516,8 +516,29 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index-the-assembly" title="Index the Assembly" class="md-nav__link">
+    Index the Assembly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-quantification" title="Run quantification" class="md-nav__link">
+    Run quantification
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
   
 </nav>
                   </div>
@@ -530,31 +551,32 @@
               
                 
                 
-                <h1 id="assembly-with-metaspades">Assembly with metaSPAdes</h1>
-<p>Here are the instructions for assembling the metagenomic data with a different assembler. Here we are showing <a href="https://www.ncbi.nlm.nih.gov/pubmed/28298430">metaSPAdes</a>, one of the  assembler options highlighted in the <a href="https://www.biorxiv.org/content/early/2017/06/12/099127">CAMI</a> paper.</p>
-<p>metaSPAdes takes longer than MEGAHIT to run the assembly, so we will not be running it during the course. Rather it is available for download <a href="LINK">here</a>. If you are interested in running the assembly yourself, however, please see below.</p>
-<p>Install metaSPAdes:</p>
-<pre><code>wget http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz
-tar -xzf SPAdes-3.10.1-Linux.tar.gz
-export PATH=$PATH:~/SPAdes-3.10.1-Linux/bin/
-</code></pre>
+                  <h1>Salmon testing</h1>
+                
+                <h2 id="index-the-assembly">Index the Assembly</h2>
+<pre><code>#for assembly in *_megahit.fasta
 
-<p>Concatenate the two sets of reads:</p>
-<pre><code>cd ~/data
-for x in *gz
+for assembly in *.contigs.fa
 do
-  gunzip $x
+  base=$(basename $assembly .contigs.fa)
+  echo $base
+
+  salmon index -t ${base}.contigs.fa -i ${base}_salmon --threads 2
+  #salmon index -t ${base}.fasta -i ${base}_salmon --threads 2
 done
-
-cat *fq &gt; coassembly.fq
-
-cd ~
-mkdir assembly-spades
-cd assembly-spades
 </code></pre>
 
-<p>And assemble with metaSPAdes:</p>
-<pre><code>metaspades.py --12 ~/data/coassembly.fq -o metaS-assembly
+<h2 id="run-quantification">Run quantification</h2>
+<pre><code>for filename in *_1.qc.fq.gz
+do
+  base=$(basename $filename _1.qc.fq.gz)
+  echo $base
+
+  for assembly_index in *_salmon
+    do
+    time salmon quant -i ${assembly_index} -l A -1 ${base}_1.qc.fq.gz -2 ${base}_2.qc.fq.gz -o ${base}_quant  -p 2
+    done
+done
 </code></pre>
                 
                   

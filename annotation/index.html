@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/metatranscriptome-annotation/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/annotation/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Annotation - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Assembly Annotation - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Annotation
+                Assembly Annotation
               </span>
             
           
@@ -290,10 +290,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Day 1
@@ -405,11 +407,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
-      Count Transcriptomes
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Assembly Annotation" class="md-nav__link md-nav__link--active">
+      Assembly Annotation
     </a>
+    
   </li>
 
         
@@ -422,12 +433,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Day 2
@@ -443,31 +452,10 @@
           
           
 
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Annotation" class="md-nav__link md-nav__link--active">
-      Annotation
-    </a>
-    
-  </li>
-
-        
-          
-          
-          
-
 
   <li class="md-nav__item">
-    <a href="../read-mapping/" title="Mapping" class="md-nav__link">
-      Mapping
+    <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
+      Count Transcriptomes
     </a>
   </li>
 
@@ -480,6 +468,30 @@
   <li class="md-nav__item">
     <a href="../sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-nav__link">
       Taxonomic Classification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sample-comparison/" title="Comparing Samples" class="md-nav__link">
+      Comparing Samples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../read-mapping/" title="Mapping reads to the Assembly" class="md-nav__link">
+      Mapping reads to the Assembly
     </a>
   </li>
 
@@ -533,6 +545,7 @@
 <p>Our assembly contains a set of contigs that represent transcripts, or 
 fragments of transcripts. To get at the functional content of these 
 transcripts, we must first find the most likely open reading frames (ORFs)</p>
+<p>dammit annotation: modify from https://github.com/ngs-docs/2017-dibsi-rnaseq/blob/master/dammit_annotation.md</p>
                 
                   
                 
@@ -554,7 +567,7 @@ transcripts, we must first find the most likely open reading frames (ORFs)</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../evaluation/" title="Assembly Evaluation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -563,19 +576,19 @@ transcripts, we must first find the most likely open reading frames (ORFs)</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Count Transcriptomes
+                Assembly Evaluation
               </span>
             </div>
           </a>
         
         
-          <a href="../read-mapping/" title="Mapping" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Mapping
+                Count Transcriptomes
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
