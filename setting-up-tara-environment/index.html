@@ -359,8 +359,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../short-read-quality-control/" title="Read QC" class="md-nav__link">
-      Read QC
+    <a href="../short-read-quality-control/" title="Short Read Quality Control" class="md-nav__link">
+      Short Read Quality Control
     </a>
   </li>
 
@@ -371,8 +371,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../khmer-trimming/" title="Error Trimming" class="md-nav__link">
-      Error Trimming
+    <a href="../khmer-trimming/" title="Khmer Error Trimming" class="md-nav__link">
+      Khmer Error Trimming
     </a>
   </li>
 
@@ -383,8 +383,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-assembly/" title="Assembly" class="md-nav__link">
-      Assembly
+    <a href="../megahit-assembly/" title="Assembly with Megahit" class="md-nav__link">
+      Assembly with Megahit
     </a>
   </li>
 
@@ -395,8 +395,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-evaluation/" title="Evaluation" class="md-nav__link">
-      Evaluation
+    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
+      Assembly Evaluation
     </a>
   </li>
 
@@ -533,6 +533,13 @@
 #conda install dammit
 </code></pre>
 
+<p>To make sure you have access to these conda-installed programs, run the following:</p>
+<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH&quot; &gt;&gt; ~/.bashrc
+</code></pre>
+
+<p>and either 
+  1. logout and log back in again, or
+  2. source your bash profile to let the changes take effect: <code>source ~/.bashrc</code></p>
 <p>Conda works for most of the software we'll use in the workshop. However, there are some exceptions&gt;</p>
 <p>To install transrate, follow the instructions <a href="http://hibberdlab.com/transrate/installation.html">here</a>.</p>
 <pre><code>cd &lt;location to put transrate&gt;
@@ -542,6 +549,15 @@ tar xvf transrate-1.0.3-linux-x86_64.tar.gz
 
 <p>We installed transrate into the <code>/LUSTRE/apps/workshop/</code> directory, so it can be used as follows:</p>
 <pre><code>/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64/transrate -h 
+</code></pre>
+
+<p>To put transrate in your path, you can execute:</p>
+<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<p>Then check that transrate is properly installed with </p>
+<pre><code>transrate -h
 </code></pre>
                 
                   

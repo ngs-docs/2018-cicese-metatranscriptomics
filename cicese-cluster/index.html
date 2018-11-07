@@ -362,6 +362,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-the-installed-software" title="Using the Installed Software" class="md-nav__link">
+    Using the Installed Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#future-cluster-use" title="Future Cluster Use" class="md-nav__link">
     Future Cluster Use
   </a>
@@ -409,8 +416,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../short-read-quality-control/" title="Read QC" class="md-nav__link">
-      Read QC
+    <a href="../short-read-quality-control/" title="Short Read Quality Control" class="md-nav__link">
+      Short Read Quality Control
     </a>
   </li>
 
@@ -421,8 +428,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../khmer-trimming/" title="Error Trimming" class="md-nav__link">
-      Error Trimming
+    <a href="../khmer-trimming/" title="Khmer Error Trimming" class="md-nav__link">
+      Khmer Error Trimming
     </a>
   </li>
 
@@ -433,8 +440,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-assembly/" title="Assembly" class="md-nav__link">
-      Assembly
+    <a href="../megahit-assembly/" title="Assembly with Megahit" class="md-nav__link">
+      Assembly with Megahit
     </a>
   </li>
 
@@ -445,8 +452,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-evaluation/" title="Evaluation" class="md-nav__link">
-      Evaluation
+    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
+      Assembly Evaluation
     </a>
   </li>
 
@@ -573,6 +580,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-the-installed-software" title="Using the Installed Software" class="md-nav__link">
+    Using the Installed Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#future-cluster-use" title="Future Cluster Use" class="md-nav__link">
     Future Cluster Use
   </a>
@@ -605,13 +619,25 @@ and a distributed file storage with lustre filesystem, mounted
 on /LUSTRE mount point.</p>
 <p>Jobs management and scheduler is slurm software.</p>
 <p>For this course, we will be installing all software into:</p>
-<p><code>/LUSTRE/apps/workshop</code></p>
-<p>and will keep test data in:
- <code>/LUSTRE/bioinformatica_data/bioinformatica2018</code></p>
+<pre><code> /LUSTRE/apps/workshop
+</code></pre>
+
+<p>and will keep test data in:</p>
+<pre><code>/LUSTRE/bioinformatica_data/bioinformatica2018
+</code></pre>
+
 <h2 id="logging-in">Logging In</h2>
 <p>To log in via ssh:</p>
-<p><code>ssh &lt;usuario&gt;@omica.cicese.mx</code>
- You will need to enter your password. </p>
+<pre><code>ssh &lt;usuario&gt;@omica.cicese.mx
+</code></pre>
+
+<p>You will need to enter your password. </p>
+<h2 id="using-the-installed-software">Using the Installed Software</h2>
+<p>To use the software we have previously installed you'll need to execute the following:</p>
+<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH&quot; &gt;&gt; ~/.bashrc
+echo &quot;export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
+</code></pre>
+
 <h2 id="future-cluster-use">Future Cluster Use</h2>
 <p>Normally, apps are installed on: <code>/LUSTRE/apps</code> and <code>/LUSTRE/bioinformatica</code></p>
 <p>Working directories are created by each user on;

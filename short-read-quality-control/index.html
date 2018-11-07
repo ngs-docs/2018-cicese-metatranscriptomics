@@ -38,7 +38,7 @@
     
     
       
-        <title>Read QC - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Short Read Quality Control - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Read QC
+                Short Read Quality Control
               </span>
             
           
@@ -370,11 +370,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Read QC
+        Short Read Quality Control
       </label>
     
-    <a href="./" title="Read QC" class="md-nav__link md-nav__link--active">
-      Read QC
+    <a href="./" title="Short Read Quality Control" class="md-nav__link md-nav__link--active">
+      Short Read Quality Control
     </a>
     
       
@@ -472,8 +472,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../khmer-trimming/" title="Error Trimming" class="md-nav__link">
-      Error Trimming
+    <a href="../khmer-trimming/" title="Khmer Error Trimming" class="md-nav__link">
+      Khmer Error Trimming
     </a>
   </li>
 
@@ -484,8 +484,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-assembly/" title="Assembly" class="md-nav__link">
-      Assembly
+    <a href="../megahit-assembly/" title="Assembly with Megahit" class="md-nav__link">
+      Assembly with Megahit
     </a>
   </li>
 
@@ -496,8 +496,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../metatranscriptome-evaluation/" title="Evaluation" class="md-nav__link">
-      Evaluation
+    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
+      Assembly Evaluation
     </a>
   </li>
 
@@ -697,8 +697,6 @@
                 
                 
                 <h1 id="short-read-quality-control">Short Read Quality Control</h1>
-<p>still to do:<br />
-  * viewing fastqc files (use Rstudio server to view files still? OR scp?)</p>
 <p>You should now be logged into your cluster! If not, go back 
 to <a href="../cicese-cluster/">Cluster Login</a></p>
 <h2 id="data-source">Data source</h2>
@@ -824,9 +822,8 @@ of the data (e.g. duplicate sequences are only analyzed for the first 100,000 se
 [INFO   ]         multiqc : MultiQC complete
 </code></pre>
 
-<p>You can also view this output <a href="../files/multiqc_report.html">here</a></p>
+<p>You can view this report <a href="../files/multiqc_report.html">here</a></p>
 <h4 id="view-your-files-on-your-own-computer">View your files on your own computer</h4>
-<p>As an alternative to viewing the files on the Rstudio server, we can secure copy (scp) these files to our own laptops, and view them from there.</p>
 <pre><code>mkdir ~/Desktop/tara_fastqc  # make a directory for these files
 scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
 </code></pre>
@@ -857,12 +854,16 @@ echo $base
 # run Trimmomatic
 trimmomatic PE ${base}_1.fq.gz \
               ${base}_2.fq.gz \
-     ${base}_1.qc.fq.gz ${base}_s1_se \
-     ${base}_2.qc.fq.gz ${base}_s2_se \
+     ${base}_1.qc.fq.gz s1_se \
+     ${base}_2.qc.fq.gz s2_se \
      ILLUMINACLIP:combined.fa:2:40:15 \
      LEADING:2 TRAILING:2 \
      SLIDINGWINDOW:4:2 \
      MINLEN:25
+# save the orphans
+gzip -9c s1_se s2_se &gt;&gt; orphans.qc.fq.gz
+rm -f s1_se s2_se
+
 done
 </code></pre>
 
@@ -936,13 +937,13 @@ assembly.</p>
           </a>
         
         
-          <a href="../khmer-trimming/" title="Error Trimming" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../khmer-trimming/" title="Khmer Error Trimming" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Error Trimming
+                Khmer Error Trimming
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
