@@ -47,25 +47,21 @@ NOTE: if you do not have files, please rerun quality trimming steps [here](short
 
 ## Link an assembly
 
-We link a full assembly to use for mapping. This assembly was made with all TARA_135 SRF reads, rather than the subset we used in the [assembly](megahit-assembly.md) tutorial.
+We use a full assembly to use for mapping. This assembly was made with all TARA_135 SRF reads, rather than the subset we used in the [assembly](megahit-assembly.md) tutorial.
 
 
 ```
 ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_full_megahit.fasta ./
 ```
 
-Note: if you prefer, you can use the annotated assembly we generated with the read subsets instead
-```
-    #ln -s ${PROJECT}/annotation/tara_f135_SRF.fasta.dammit/tara_f135_SRF.fasta.dammit.fasta ./tara_f135_SRF_annot.fasta 
-```
-
 ## Run Salmon
 
-Build an index for your new transcriptome:
+Build an index for the metatranscriptome:
 
 ```
     salmon index --index tara135 --transcripts tara_f135_full_megahit.fasta
 ```
+
 Next, link in the QC reads (produced in [quality](short-read-quality-control.md):
 
 ```
@@ -73,7 +69,7 @@ Next, link in the QC reads (produced in [quality](short-read-quality-control.md)
 ```
 
 
-Then, run the salmon command:
+Then, run the salmon mapping:
 
 ```
 for sample in *1.qc.fq.gz
@@ -102,10 +98,10 @@ The two most interesting files are `quant.sf`, which contains the counts,
 and `salmon_quant.log` (in the `logs` directory), which contains a
 log from the salmon run.
 
-# Working with the counts
+# Looking at count data 
 
-The `quant.sf` files actually contain the relevant information about
-expression -- take a look
+The `quant.sf` files contain the relevant information about
+contig expression -- take a look
 
 ```
    head -20 TARA_135_SRF_5-20_rep1_1m_quant/quant.sf 
@@ -123,11 +119,35 @@ k119_21	203	58.357	0.000000	0.000
 k119_22	308	136.790	0.000000	0.000
 ```
 
-
-
 The first column contains the transcript names, and the
 fifth column is the "raw counts", which is what many 
 differential expression programs need.
+
+# Assess Mapping rate
+
+Okay, we got some numbers for woo much the transcripts were expressed, but how well did the reads map overall? 
+Let's go look at one of the log files to see.
+
+```
+less TARA_135_SRF_5-20_rep1_1m_quant/logs/salmon_quant.log
+
+```
+
+How well did the reads map to the metatranscriptome?
+
+Let's see how the rest of the files mapped. We can 
+look at the mapping rate in each log file by executing
+the following:
+
+```
+grep Mapping *quant/logs/*
+```
+
+grep is a handy program that finds and prints lines in files that match a pattern. In this case, 
+the pattern we're searching for is the word 'Mapping', and we're searching in any directory that 
+ends in `quant` and has a logs directory with at least one file in it.
+
+How do the mapping rates compare? What does this tell us about our metatranscriptome?
 
 
 # Other useful tutorials and references

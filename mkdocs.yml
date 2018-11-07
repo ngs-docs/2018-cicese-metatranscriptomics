@@ -48,12 +48,12 @@ nav:
       - 'Khmer Error Trimming': 'khmer-trimming.md'
       - 'Assembly with Megahit': 'megahit-assembly.md'
       - 'Assembly Evaluation': 'evaluation.md'
+      - 'Mapping reads to the Assembly': 'read-mapping.md'
       - 'Assembly Annotation': 'annotation.md'
 
   - 'Day 2':
       - 'Count Transcriptomes': 'count_transcriptomes.md'
       - 'Taxonomic Classification': 'sourmash-taxonomic-classification.md'
       - 'Comparing Samples': 'sample-comparison.md'
-      - 'Mapping reads to the Assembly': 'read-mapping.md'
       - 'Visualize with anvio': 'anvio.md'
 
