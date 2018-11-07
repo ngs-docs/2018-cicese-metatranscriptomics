@@ -594,25 +594,27 @@ Although our samples were poly-A selected, inevitably a some ribosomal RNA is al
 given its abundance in samples. We can estimate the number of species in our metatranscriptome
 by counting the unique number of ribosomal protein sequences we see. There are many ribosomal
 proteins one could use for this analysis, and we provide a table of these at the bottom of 
-this lesson. We will use three sequences here, and average the number of unique sequences we 
-detect between the three sequences to estimate the number of transcriptomes in our sample.</p>
-<p>We will first search for these proteins in the amino acid sequences 
+this lesson. We will use one sequence here, however if we were to use more we would average 
+the number of unique sequences we detect between the total sequences to estimate the number 
+of transcriptomes in our sample.</p>
+<p>We will first search for our protein in the amino acid sequences 
 derived from our de novo assembly of our metatranscriptome. We will use
 <a href="https://pfam.xfam.org/">Pfam</a> domains and a tool called <a href="http://hmmer.org/">HMMER</a> 
-to help us locate all of the matching sequences. Then, we will XXX. Because we are only 
-searching in our assembly, this method only captures the number of transcriptomes that 
-assembled.</p>
+to help us locate all of the matching sequences. Then, we will extract our matches and 
+filter those that are highly similar. </p>
+<p>Because we are only searching in our assembly, this method only captures the number of 
+transcriptomes that assembled.</p>
 <h2 id="_1"></h2>
 <p>First let's make a new directory and link in our annotation file. </p>
 <pre><code>mkdir -p ~/count-transcriptomes
 cd ~/count-transcriptomes
 </code></pre>
 
-<p>Next let's download some Pfam domains. </p>
+<p>Next let's download our Pfam domain. </p>
 <pre><code>wget -O PF00177-full.sto http://pfam.xfam.org/family/PF00177/alignment/full
 </code></pre>
 
-<p>Next we'll build a HMM profile of the Pfam domains. </p>
+<p>Next we'll build a HMM profile of the Pfam domain. </p>
 <pre><code>hmmbuild PF00177-full.hmm PF00177-full.sto
 hmmpress PF00177.hmm
 </code></pre>
@@ -634,6 +636,7 @@ cat PF00177-full-tbl.txt | Rscript -e 'writeLines(noquote(read.table(&quot;stdin
 # extract the matches
 wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/extract-hmmscan-matches.py
 python extract-hmmscan-matches.py PF00177-names.txt TARA_135_DCM_5-20_rep1_250k.contigs.fa.transdecoder.pep &gt; PF00177.faa
+# python extract-hmmscan-matches.py PF00177-names.txt tara_f135_megahit.fasta.transdecoder_dir/longest_orfs.pep &gt; PF00177.faa
 </code></pre>
 
 <p>Let's count the number of sequences that matched </p>
@@ -643,11 +646,19 @@ python extract-hmmscan-matches.py PF00177-names.txt TARA_135_DCM_5-20_rep1_250k.
 <p>Some matches are quite similar to each other. Let's cluster our sequences
 at 97% similarity and see how this changes the number of unique proteins
 we detect. </p>
-<pre><code>cdhit ...
+<pre><code>cd-hit -i PF00177.faa -o PF00177-c97.faa -c .97
 </code></pre>
 
-<p>From this, we estimate there are XX transcriptomes assembled from our
+<p>Let's see how much clustering at 97% reduced our estimate!</p>
+<pre><code>grep &quot;&gt;&quot; PF00177-c97.faa | wc -l
+</code></pre>
+
+<p>From this, we estimate there are 82 transcriptomes assembled from our
 metatranscriptome.</p>
+<p>Given that this protein is highly conserved, we could BLAST these 
+sequences against NCBI nr/nt database to see if there are any matches. 
+We could then compare it to our sourmash results and see how much overlap 
+vs. how much we are missing from each!</p>
 <p>This technique can also be used to find any Pfam domain of interest. 
 For instance, if you are interested in photosynthesis, you could
 extract all photosynthetic proteins by searching with the Pfam domains.</p>

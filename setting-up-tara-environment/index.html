@@ -529,7 +529,19 @@
 </code></pre>
 
 <p>Now, let's install the software!</p>
-<pre><code>conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon
+<pre><code>conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon transrate-tools
+#conda install dammit
+</code></pre>
+
+<p>Conda works for most of the software we'll use in the workshop. However, there are some exceptions&gt;</p>
+<p>To install transrate, follow the instructions <a href="http://hibberdlab.com/transrate/installation.html">here</a>.</p>
+<pre><code>cd &lt;location to put transrate&gt;
+wget https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
+tar xvf transrate-1.0.3-linux-x86_64.tar.gz
+</code></pre>
+
+<p>We installed transrate into the <code>/LUSTRE/apps/workshop/</code> directory, so it can be used as follows:</p>
+<pre><code>/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64/transrate -h 
 </code></pre>
                 
                   

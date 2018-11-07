@@ -405,9 +405,51 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Evaluation
+      </label>
+    
     <a href="./" title="Evaluation" class="md-nav__link md-nav__link--active">
       Evaluation
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#generate-assembly-statistics-with-transrate" title="Generate assembly statistics with TransRate" class="md-nav__link">
+    Generate assembly statistics with TransRate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assembly-evaluation-with-rnaquast" title="Assembly evaluation with rnaQUAST" class="md-nav__link">
+    Assembly evaluation with rnaQUAST
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -518,6 +560,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#generate-assembly-statistics-with-transrate" title="Generate assembly statistics with TransRate" class="md-nav__link">
+    Generate assembly statistics with TransRate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assembly-evaluation-with-rnaquast" title="Assembly evaluation with rnaQUAST" class="md-nav__link">
+    Assembly evaluation with rnaQUAST
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -530,6 +601,26 @@
                 
                 
                 <h1 id="evaluating-a-metatranscriptome">Evaluating a Metatranscriptome</h1>
+<h2 id="generate-assembly-statistics-with-transrate">Generate assembly statistics with TransRate</h2>
+<p>We have installed transrate for you. However, if you need to install it in the future, the current installation instructions can be found <a href="../setting-up-tara-environment/">here</a></p>
+<p>See options for running transrate:</p>
+<pre><code>/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64/transrate -h
+</code></pre>
+
+<p>Run transrate in <code>assembly</code> mode:</p>
+<pre><code>/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64/transrate --assembly
+</code></pre>
+
+<hr />
+<h4 id="assembly-evaluation-with-rnaquast">Assembly evaluation with rnaQUAST</h4>
+<p>rnaQUAST has some dependencies that conflict with other programs we have installed in the <code>tara</code> environment. To handle this, we'll create a new conda environment to run <code>rnaQUAST</code></p>
+<pre><code>conda create -n rnaquast
+source activate rnaquast
+conda install rnaquast
+</code></pre>
+
+<pre><code>python /LUSTRE/apps/workshop/miniconda3/envs/rnaquast/bin/rnaQUAST.py --transcripts final.contigs.fa -o rnaquast_results
+</code></pre>
                 
                   
                 

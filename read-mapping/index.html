@@ -606,13 +606,15 @@
 <h2 id="quantification-with-salmon">Quantification with Salmon</h2>
 <p><em>testing</em></p>
 <h2 id="index-the-assembly">Index the Assembly</h2>
-<pre><code>for assembly in *_megahit.fasta
+<pre><code>#for assembly in *_megahit.fasta
+
+for assembly in *.contigs.fa
 do
-  base=$(basename $assembly .fasta)
+  base=$(basename $assembly .contigs.fa)
   echo $base
 
-  #salmon index -t ${base}.contigs.fa -i ${base}_salmon --threads 2
-  salmon index -t ${base}.fasta -i ${base}_salmon --threads 2
+  salmon index -t ${base}.contigs.fa -i ${base}_salmon --threads 2
+  #salmon index -t ${base}.fasta -i ${base}_salmon --threads 2
 done
 </code></pre>
 
