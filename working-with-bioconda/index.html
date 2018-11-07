@@ -382,8 +382,50 @@
     Installing conda and enabling bioconda
   </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-conda" title="Using conda" class="md-nav__link">
+    Using conda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-bioconda" title="Using bioconda" class="md-nav__link">
+    Using bioconda
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-bioconda-packages" title="Finding bioconda packages" class="md-nav__link">
+    Finding bioconda packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructing-and-using-multiple-environments" title="Constructing and using multiple environments" class="md-nav__link">
+    Constructing and using multiple environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freezing-an-environment" title="Freezing an environment" class="md-nav__link">
+    Freezing an environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leaving-an-environment" title="Leaving an environment" class="md-nav__link">
+    Leaving an environment
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#meditations-on-reproducibility-and-provenance" title="Meditations on reproducibility and provenance" class="md-nav__link">
@@ -603,8 +645,50 @@
     Installing conda and enabling bioconda
   </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-conda" title="Using conda" class="md-nav__link">
+    Using conda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-bioconda" title="Using bioconda" class="md-nav__link">
+    Using bioconda
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-bioconda-packages" title="Finding bioconda packages" class="md-nav__link">
+    Finding bioconda packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructing-and-using-multiple-environments" title="Constructing and using multiple environments" class="md-nav__link">
+    Constructing and using multiple environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freezing-an-environment" title="Freezing an environment" class="md-nav__link">
+    Freezing an environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leaving-an-environment" title="Leaving an environment" class="md-nav__link">
+    Leaving an environment
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#meditations-on-reproducibility-and-provenance" title="Meditations on reproducibility and provenance" class="md-nav__link">
@@ -665,119 +749,86 @@ conflicting dependencies (we'll explain this below).</p>
 curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3 #install in $HOME directory
 echo export PATH=$PATH:/$HOME/miniconda3/bin &gt;&gt; ~/.bashrc
-
-
-Then, run the following command (or start a new terminal session) in order to activate the conda environment:
-
 </code></pre>
 
-<p>source ~/.bashrc</p>
-<pre><code>
-Configure channels for installing software.
+<p>Then, run the following command (or start a new terminal session) in order to activate the conda environment:</p>
+<pre><code>source ~/.bashrc
+</code></pre>
+
+<p>Configure channels for installing software.
 Note: It is important to add them in this order so that 
-the priority is set correctly (that is, conda-forge is highest priority).
-</code></pre>
-
-<p>conda config --add channels defaults
+the priority is set correctly (that is, conda-forge is highest priority).</p>
+<pre><code>conda config --add channels defaults
 conda config --add channels bioconda
-conda config --add channels conda-forge</p>
-<pre><code>
-Try installing something:
-
+conda config --add channels conda-forge
 </code></pre>
 
-<p>conda install sourmash</p>
-<pre><code>
-and running it --
+<p>Try installing something:</p>
+<pre><code>conda install sourmash
 </code></pre>
 
-<p>sourmash</p>
-<pre><code>will produce some output. (We'll tell you more about sourmash later.)
-
-yay!
-
-## Using conda
-
-Conda is a &quot;package manager&quot; or software installer. See [the full list of commands](https://conda.io/docs/commands.html).
-
-`conda install` to install a package.
-
-`conda list` to list installed packages.
-
-`conda search` to search packages. Note that you'll see one package for every version of the software and for every version of Python (e.g. `conda search sourmash`).
-
-## Using bioconda
-
-bioconda is a channel for conda, which just means that you
-can &quot;add&quot; it to conda as a source of packages. That's what the `conda config` above does.
-
-Note, Bioconda supports only 64-bit Linux and Mac OSX.
-
-You can check out [the bioconda site](https://bioconda.github.io/).
-
-### Finding bioconda packages
-
-You can use `conda search`, or you can use google, or you can go visit [the list of recipes](https://bioconda.github.io/recipes.html#recipes).
-
-### Constructing and using multiple environments
-
-A feature that we do not use much here, but that can be very handy in some circumstances, is different environments.
-
-&quot;Environments&quot; are multiple different collections of installed software. There are two reasons you might want to do this:
-
-* first, you might want to try to exactly replicate a specific software install, so that you can replicate a paper or an old condition.
-* second, you might be working with incompatible software, e.g. sometimes different software pipelines need different version of the same software. An example of this is older bioinformatics software that needs python2, while other software needs python3.
-
-To create a new environment named `pony`, type:
-
+<p>and running it --</p>
+<pre><code>sourmash
 </code></pre>
 
-<p>conda create -n pony</p>
-<pre><code>
-Then to activate (switch to) that environment, type:
-
+<p>will produce some output. (We'll tell you more about sourmash later.)</p>
+<p>yay!</p>
+<h2 id="using-conda">Using conda</h2>
+<p>Conda is a "package manager" or software installer. See <a href="https://conda.io/docs/commands.html">the full list of commands</a>.</p>
+<p><code>conda install</code> to install a package.</p>
+<p><code>conda list</code> to list installed packages.</p>
+<p><code>conda search</code> to search packages. Note that you'll see one package for every version of the software and for every version of Python (e.g. <code>conda search sourmash</code>).</p>
+<h2 id="using-bioconda">Using bioconda</h2>
+<p>bioconda is a channel for conda, which just means that you
+can "add" it to conda as a source of packages. That's what the <code>conda config</code> above does.</p>
+<p>Note, Bioconda supports only 64-bit Linux and Mac OSX.</p>
+<p>You can check out <a href="https://bioconda.github.io/">the bioconda site</a>.</p>
+<h3 id="finding-bioconda-packages">Finding bioconda packages</h3>
+<p>You can use <code>conda search</code>, or you can use google, or you can go visit <a href="https://bioconda.github.io/recipes.html#recipes">the list of recipes</a>.</p>
+<h3 id="constructing-and-using-multiple-environments">Constructing and using multiple environments</h3>
+<p>A feature that we do not use much here, but that can be very handy in some circumstances, is different environments.</p>
+<p>"Environments" are multiple different collections of installed software. There are two reasons you might want to do this:</p>
+<ul>
+<li>first, you might want to try to exactly replicate a specific software install, so that you can replicate a paper or an old condition.</li>
+<li>second, you might be working with incompatible software, e.g. sometimes different software pipelines need different version of the same software. An example of this is older bioinformatics software that needs python2, while other software needs python3.</li>
+</ul>
+<p>To create a new environment named <code>pony</code>, type:</p>
+<pre><code>conda create -n pony
 </code></pre>
 
-<p>source activate pony</p>
-<pre><code>
-And now when you run `conda install`, it will install packages into this new environment, e.g.
+<p>Then to activate (switch to) that environment, type:</p>
+<pre><code>source activate pony
 </code></pre>
 
-<p>conda install -y checkm-genome</p>
-<pre><code>(note here that checkm-genome *requires* python 2).
-
-
-### Freezing an environment
-
-This will save the list of **conda-installed** software you have in a particular
-environment to the file `packages.txt`:
-
+<p>And now when you run <code>conda install</code>, it will install packages into this new environment, e.g.</p>
+<pre><code>conda install -y checkm-genome
 </code></pre>
 
-<p>conda list --export packages.txt</p>
-<pre><code>(it will not record the software versions for software not installed by conda.)
-
+<p>(note here that checkm-genome <em>requires</em> python 2).</p>
+<h3 id="freezing-an-environment">Freezing an environment</h3>
+<p>This will save the list of <strong>conda-installed</strong> software you have in a particular
+environment to the file <code>packages.txt</code>:</p>
+<pre><code>conda list --export packages.txt
 </code></pre>
 
-<p>conda install --file=packages.txt</p>
-<pre><code>will install those packages in your local environment.
-To list environments, type:
+<p>(it will not record the software versions for software not installed by conda.)</p>
+<pre><code>conda install --file=packages.txt
 </code></pre>
 
-<p>conda env list</p>
-<pre><code>and you will see that you have two environments, `base` and
-`pony`, and `pony` has a `*` next to it because that's your
-current environment.
-
-### Leaving an environment
-
-And finally, to switch back to your base environment, do:
-
+<p>will install those packages in your local environment.
+To list environments, type:</p>
+<pre><code>conda env list
 </code></pre>
 
-<p>source deactivate
-```
-and you'll be back in the original environment.</p>
+<p>and you will see that you have two environments, <code>base</code> and
+<code>pony</code>, and <code>pony</code> has a <code>*</code> next to it because that's your
+current environment.</p>
+<h3 id="leaving-an-environment">Leaving an environment</h3>
+<p>And finally, to switch back to your base environment, do:</p>
+<pre><code>source deactivate
+</code></pre>
+
+<p>and you'll be back in the original environment.</p>
 <h3 id="meditations-on-reproducibility-and-provenance">Meditations on reproducibility and provenance</h3>
 <p>If you want to impress reviewers and also keep track of
 what your software versions are, you can:</p>
