@@ -14,7 +14,7 @@ For this workshop, we chose TARA Stations 135, 136, and 137 in the eastern pacif
 full data via [Open science resources for the discovery and analysis of Tara Oceans data](https://www.nature.com/articles/sdata201523#f2).
 
 
-[![](files/tara-station-map.jpg)]((https://www.nature.com/articles/sdata201523#f2))
+[![](files/tara-station-map.jpg)](https://www.nature.com/articles/sdata201523#f2)
 
 
 
