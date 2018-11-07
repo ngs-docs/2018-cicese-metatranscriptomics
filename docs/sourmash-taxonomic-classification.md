@@ -132,21 +132,24 @@ csv and compare the results from the assembly and from the reads.
 
 First, download the gather results from the raw reads. 
 
-### TO DO:
-
-+ finish interleaving reads.
-+ run sourmash with scaled 10k on interleaved reads
-+ post file to repo for download. 
-+ write a script to compare the two
-
 ```
-wget -O 
+wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/docs/files/ERR1719497_paired_gather_all.csv 
 ```
 
+Let's also download a script that we will use to plot the results. 
+There are many visualizations we could use, however here we will 
+use an upset plot. Upset plots are similar to Venn diagrams, but will
+work with many samples. 
+
+```
+wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot_gather_matches.py
+```
+
+We can see that the reads have more matches than the assembly. 
 
 ## Other notes
 
-We will use the raw reads to do taxonomic classification. Although the errors
+We used the raw reads to do taxonomic classification. Although the errors
 present in the raw reads may slow sourmash down a little, there is a chance 
 when error trimming transcriptomes that real biological variation is removed. 
 Because sourmash is so specific, the errors don't give false positives and so 
