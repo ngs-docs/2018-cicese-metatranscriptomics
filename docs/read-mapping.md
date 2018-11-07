@@ -66,7 +66,7 @@ Build an index for your new transcriptome:
 ```
     salmon index --index tara135 --transcripts tara_f135_full_megahit.fasta
 ```
-Next, link in the QC reads (produced in [quality](short-read-quality-trimming.md):
+Next, link in the QC reads (produced in [quality](short-read-quality-control.md):
 
 ```
    ln -s ../quality/*.qc.fq.gz ./
