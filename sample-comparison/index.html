@@ -551,12 +551,26 @@ do
 done
 </code></pre>
 
-<p>Now we can calculate signatures for each of the files</p>
-<pre><code>for infile in *gz
+<p>Now we can calculate signatures for each of the files. This will take 5 or 10 minutes to run</p>
+<pre><code>for infile in *.fq.gz
 do
-    sourmash compute -k 21,31,51 --scaled 2000 --track-abundance -o ${infile}.si ${infile}
+    sourmash compute -k 31 --scaled 10000 --track-abundance -o ${infile}.si ${infile}
 done
 </code></pre>
+
+<p>We can now compare our signatures</p>
+<pre><code>sourmash compare -k 31 --scaled 10000 -o tara.comp *sig
+</code></pre>
+
+<p>Now let's plot!</p>
+<pre><code>sourmash plot --labels tara.comp
+</code></pre>
+
+<p>Now we need to transfer these files to our own computers to visualize the results.</p>
+<pre><code></code></pre>
+
+<p>We see that our samples cluster by site and then by depth. We will see if differential
+expression recapitulates this pattern!</p>
                 
                   
                 
