@@ -10,13 +10,15 @@ _testing_
 ## Index the Assembly
 
 ```
-for assembly in *_megahit.fasta
+#for assembly in *_megahit.fasta
+
+for assembly in *.contigs.fa
 do
-  base=$(basename $assembly .fasta)
+  base=$(basename $assembly .contigs.fa)
   echo $base
 
-  #salmon index -t ${base}.contigs.fa -i ${base}_salmon --threads 2
-  salmon index -t ${base}.fasta -i ${base}_salmon --threads 2
+  salmon index -t ${base}.contigs.fa -i ${base}_salmon --threads 2
+  #salmon index -t ${base}.fasta -i ${base}_salmon --threads 2
 done
 ```
 
