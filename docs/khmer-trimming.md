@@ -1,5 +1,4 @@
 
-khmer documentation: http://khmer.readthedocs.io/en/latest
 
 ## Why (or why not) do k-mer trimming?
 
@@ -9,6 +8,9 @@ the assembler (by removing data) and to decrease the memory requirements
 of the assembler (by removing a number of k-mers).
 
 ## Set up workspace and install khmer 
+
+[khmer documentation](http://khmer.readthedocs.io/en/latest)
+
 
 ```
 conda install khmer

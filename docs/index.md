@@ -23,7 +23,8 @@ Lunch
   
   - [Metatrancriptome Assembly](megahit-assembly.md)
   - [Assessing assembly quality](evaluation.md)
-  - [Annotating your assembly](annotation.md)
+  - [Read mapping and quantification](read-mapping.md)
+  - if time: [Annotating your assembly](annotation.md)
 
 
 ## Day 2: Nov 9, 2018
@@ -41,7 +42,6 @@ Lunch
 
 **Afternoon:** 
 
-  - [Read mapping and quantification](read-mapping.md)
   - Differential Expression?
   - CLUST for co-expressed gene clusters!? [CLUST paper](https://www.biorxiv.org/content/early/2018/02/13/221309)
   - [Putting it all together with Anvi’o](anvio.md)
