@@ -1,7 +1,7 @@
 # Intro to sample dataset: TARA Oceans
 
-The [TARA Oceans Expedition](https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans/) (2009–2013) sampled contrasting ecosystems of the world oceans, collecting environmental data and plankton, from viruses to metazoans, for later analysis using modern sequencing and state-of-the-art imaging technologies. It surveyed 210 ecosystems in 20 biogeographic provinces, collecting over 35,000 samples of seawater and plankton [Pesant et al.
-2015](https://www.nature.com/articles/sdata201523#f2).
+The [TARA Oceans Expedition](https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans/) (2009–2013) sampled contrasting ecosystems of the world oceans, collecting environmental data and plankton, from viruses to metazoans, for later analysis using modern sequencing and state-of-the-art imaging technologies. It surveyed 210 ecosystems in 20 biogeographic provinces, collecting over 35,000 samples of seawater and plankton ([Pesant et al.
+2015](https://www.nature.com/articles/sdata201523#f2)).
 
 
 [![Tara Oceans Map](files/TARAOCEANS-CARTE-1024x462.jpg)](https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans/)
@@ -21,6 +21,6 @@ full data via [Open science resources for the discovery and analysis of Tara Oce
 
 Recommended Reading:
 
-[A global ocean atlas of eukaryotic genes](https://www.nature.com/articles/s41467-017-02342-1)
-[Open science resources for the discovery and analysis of Tara Oceans data](https://www.nature.com/articles/sdata201523#f2)
+  * [A global ocean atlas of eukaryotic genes](https://www.nature.com/articles/s41467-017-02342-1)
+  * [Open science resources for the discovery and analysis of Tara Oceans data](https://www.nature.com/articles/sdata201523#f2)
 
