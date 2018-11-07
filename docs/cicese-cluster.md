@@ -12,23 +12,33 @@ For this course, we will be installing all software into:
 
 ```
  /LUSTRE/apps/workshop
- ```
+```
 
  and will keep test data in:
- ```
+
+```
 /LUSTRE/bioinformatica_data/bioinformatica2018
- ```
+```
 
 
 ## Logging In
 
  To log in via ssh:
 
- ```
- ssh <usuario>@omica.cicese.mx
- ```
+```
+ssh <usuario>@omica.cicese.mx
+```
  You will need to enter your password. 
 
+
+## Using the Installed Software
+
+To use the software we have previously installed you'll need to execute the following:
+
+```
+echo "export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH" >> ~/.bashrc
+echo "export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH" >> ~/.bashrc
+```
 
 
 ## Future Cluster Use

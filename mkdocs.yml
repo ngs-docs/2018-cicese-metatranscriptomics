@@ -44,10 +44,10 @@ nav:
       - 'Cluster login': 'cicese-cluster.md'
       - 'Bioconda': 'working-with-bioconda.md'
       - 'TARA Sample Data': 'tara-sample-data.md'
-      - 'Read QC': 'short-read-quality-control.md'
-      - 'Error Trimming': 'khmer-trimming.md'
-      - 'Assembly': 'metatranscriptome-assembly.md'
-      - 'Evaluation': 'metatranscriptome-evaluation.md'
+      - 'Short Read Quality Control': 'short-read-quality-control.md'
+      - 'Khmer Error Trimming': 'khmer-trimming.md'
+      - 'Assembly with Megahit': 'megahit-assembly.md'
+      - 'Assembly Evaluation': 'evaluation.md'
       - 'Count Transcriptomes': 'count_transcriptomes.md'
 
   - 'Day 2':

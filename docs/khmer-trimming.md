@@ -1,6 +1,3 @@
-# K-mer Error Trimming
-
-(Optional)
 
 khmer documentation: http://khmer.readthedocs.io/en/latest
 

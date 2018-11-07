@@ -10,11 +10,11 @@ Learning objectives:
 
 The basic idea with any transcriptome assembly is you feed in your reads and you get out a bunch of *contigs* that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA. 
 
-Unlike single-organism RNAseq, these contigs will represent transcripts that come from all the eukaryotic organisms (poly-A mRNAseq reads) found in each environmental sample.
+These contigs will represent transcripts that come from the eukaryotic organisms (poly-A mRNAseq reads) found in each environmental sample.
 
 ## Install Megahit
 
-We already installed megahit during [setup](setting-up-tara-environment.md), but here's the installation command for future reference.
+We already installed megahit for you, but [setup](setting-up-tara-environment.md), but here's the installation command for future reference.
 
 ```
 conda install megahit
@@ -81,12 +81,6 @@ head tara135_SRF_megahit.fasta
 ```
 
 These are the transcripts! Yay!
-
-
-## Assembly Statistics
-
-Let's look at some statistics of the Megahit assembly:
-
 
 
 
