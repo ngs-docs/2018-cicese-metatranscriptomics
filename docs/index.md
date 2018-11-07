@@ -23,7 +23,7 @@ Lunch
   
   - [Metatrancriptome Assembly](megahit-assembly.md)
   - [Assessing assembly quality](evaluation.md)
-  - [Annotating your assembly](metatranscriptome-annotation.md)
+  - [Annotating your assembly](annotation.md)
 
 
 ## Day 2: Nov 9, 2018

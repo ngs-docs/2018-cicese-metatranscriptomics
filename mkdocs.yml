@@ -48,7 +48,7 @@ nav:
       - 'Khmer Error Trimming': 'khmer-trimming.md'
       - 'Assembly with Megahit': 'megahit-assembly.md'
       - 'Assembly Evaluation': 'evaluation.md'
-      - 'Assembly Annotation': 'metatranscriptome-annotation.md'
+      - 'Assembly Annotation': 'annotation.md'
 
   - 'Day 2':
       - 'Count Transcriptomes': 'count_transcriptomes.md'
