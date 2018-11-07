@@ -1,6 +1,3 @@
-Logging into the CICESE Cluster:
-
-
 ## About your "omica" cluster 
  
  "omica" is a small cluster, with master and login node 'omica',

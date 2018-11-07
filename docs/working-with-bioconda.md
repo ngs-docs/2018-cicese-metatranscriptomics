@@ -30,7 +30,7 @@ cd
 curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3 #install in $HOME directory
 echo export PATH=$PATH:/$HOME/miniconda3/bin >> ~/.bashrc
-
+```
 
 Then, run the following command (or start a new terminal session) in order to activate the conda environment:
 
