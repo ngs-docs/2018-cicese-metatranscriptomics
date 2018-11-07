@@ -48,11 +48,11 @@ time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz  --memory 8e9 --num-c
 This will take about 10 minutes; at the end you should see output like this:
 
 ```
-   ... 7713 contigs, total 13168567 bp, min 200 bp, max 54372 bp, avg 1707 bp, N50 4305 bp
-   ... ALL DONE. Time elapsed: 899.612093 seconds
+--- [STAT] 11733 contigs, total 5202861 bp, min 200 bp, max 4235 bp, avg 443 bp, N50 465 bp
+--- [Wed Nov  7 02:13:12 2018] ALL DONE. Time elapsed: 431.097547 seconds ---
 ```
 
-The output assembly will be in `combined/final.contigs.fa`.
+The output assembly will be `TARA_135_SRF_5-20_rep1_khmer/TARA_135_SRF_5-20.contigs.fa`.
 
 
 ## If we have time, we can run all the assemblies: 
