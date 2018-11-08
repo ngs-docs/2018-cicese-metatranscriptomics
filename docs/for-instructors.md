@@ -1,8 +1,14 @@
 # For Instructors:
 
+
+## Editing Schedule and Sidebar Navigation:
+
+ * schedule: edit `docs/index.md`
+ * side nav: edit `mkdocs.yml`
+
 To use mkdocs to deploy lessons:
 
-#### If mkdocs is already set up
+## If mkdocs is already set up
 
 All docs should be written in md in the `docs` folder,
 and committed to the repo as usual. If you added new 
@@ -32,7 +38,7 @@ ghp-import site -p
 ```
 
 
-#### If setting up mkdocs:
+## If setting up mkdocs for a new repo:
 
 Grab the mkdocs repo, dib lab flavor, and follow setup instructions
 ```
