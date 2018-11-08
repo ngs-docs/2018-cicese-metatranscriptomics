@@ -24,11 +24,13 @@ use protein-based analyses to do searches across larger evolutionary distances
 
 Let's get started!
 
-First, let's make a directory and link in our raw reads.
+First, let's make a directory and link in our assembly. You can use your assembly
+from earlier, but here we link in a copy that we placed on the cluster already. 
+
 ```
-mkdir -p ~/sourmash-gather
-cd ~/sourmash-gather
-ln -s ... .
+mkdir -p ${PROJECT}/sourmash-gather
+cd ${PROJECT}/sourmash-gather
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara135_SRF_megahit.fasta .
 ```
 
 Next, let's make a signature of our assembly.

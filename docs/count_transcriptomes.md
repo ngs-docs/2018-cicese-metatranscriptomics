@@ -26,8 +26,8 @@ transcriptomes that assembled.
 
 First let's make a new directory and link in our annotation file. 
 ```
-mkdir -p ~/count-transcriptomes
-cd ~/count-transcriptomes
+mkdir -p ${PROJECT}/count-transcriptomes
+cd ${PROJECT}/count-transcriptomes
 ```
 
 
