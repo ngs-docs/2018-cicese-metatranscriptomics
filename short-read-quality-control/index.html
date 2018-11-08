@@ -416,19 +416,6 @@
     MultiQC
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#view-your-files-on-your-own-computer" title="View your files on your own computer" class="md-nav__link">
-    View your files on your own computer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -664,19 +651,6 @@
     MultiQC
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#view-your-files-on-your-own-computer" title="View your files on your own computer" class="md-nav__link">
-    View your files on your own computer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -722,11 +696,13 @@ mkdir -p work/data
 
 <p>Next, change into the data dir and download the data subsets:</p>
 <pre><code>cd work/data
-curl -L https://osf.io/jqda5/download -o tara135_250k.zip
+wget https://osf.io/76qm3/download -O tara135_1m.zip
+wget https://osf.io/y5dfh/download -O tara136-137_1m.zip
 </code></pre>
 
 <p>Now, let's unzip and make the files difficult to delete</p>
-<pre><code>unzip tara135_250k.zip 
+<pre><code>unzip tara135_1m.zip
+unzip tara136-137_1m.zip
 
 chmod u-w *fq.gz
 </code></pre>
@@ -742,7 +718,7 @@ of this tara working directory:</p>
 
 <p>If you see all the files you think you should, good!  Otherwise, debug.</p>
 <p>These are FASTQ files -- let's take a look at them:</p>
-<pre><code>zless $PROJECT/data//TARA_135_DCM_5-20_rep1_250k_1.fq.gz
+<pre><code>zless $PROJECT/data//TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 </code></pre>
 
 <p>(use the spacebar to scroll down, and type 'q' to exit 'zless')</p>
@@ -799,7 +775,7 @@ Note: make sure you've followed the <a href="../working-with-bioconda/">conda se
 </code></pre>
 
 <p>to list the files, and you should see a number of files with the extensions <code>.fastqc.zip</code>.</p>
-<p>Inside each of the fastqc directories you will find reports from the fastqc. You can download these files using your RStudio Server console, if you like. To install and run an RStudio Server, go <a href="https://angus.readthedocs.io/en/2017/visualizing-blast-scores-with-RStudio.html#installing-and-running-rstudio-on-jetstream">here</a>.</p>
+<p>Inside each of the fastqc directories you will find reports from the fastqc. You can download these files using a technique we'll show you later.</p>
 <p>Questions:</p>
 <ul>
 <li>What should you pay attention to in the FastQC report?</li>
@@ -835,12 +811,6 @@ of the data (e.g. duplicate sequences are only analyzed for the first 100,000 se
 </code></pre>
 
 <p>You can view this report <a href="../files/multiqc_report.html">here</a></p>
-<h4 id="view-your-files-on-your-own-computer">View your files on your own computer</h4>
-<pre><code>mkdir ~/Desktop/tara_fastqc  # make a directory for these files
-scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
-</code></pre>
-
-<p>where the first argument after <code>scp</code> is your login and path for the files we want to copy (from the jetstream instance), and the second argument is the path to place the files on our own computer.</p>
 <p>If you are unable to use scp though a terminal output, you can see the fastqc html output <a href="../files/TARA_135_DCM_5-20_rep1_1m_1_fastqc.html">here</a></p>
 <h3 id="adapter-trim-each-pair-of-files">Adapter trim each pair of files</h3>
 <p>Install Trimmomatic:</p>
