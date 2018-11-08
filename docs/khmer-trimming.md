@@ -15,11 +15,21 @@ requirements (although many assemblers have built in k-mer trimming mechanisms a
 conda install khmer
 ```
 
+Now, let's create a directory to work in:
+```
+cd ${PROJECT}
+mkdir -p khmer_trim
+cd khmer_trim
+```
+
+And link int the `qc` trimmed files.
+```
+ln -s ${PROJECT}/trim/*qc.fq.gz ./
+```
+
 To run error trimming, use the khmer script `trim-low-abund.py`:
 
 ```
-cd ${PROJECT}/trim
-
 for filename in *_1.qc.fq.gz
 do
   #Use the program basename to remove _1.qc.fq.gz to generate the base
@@ -78,6 +88,4 @@ Are these samples any different than the untrimmed reads?
 
 
 
-
-
- 
+For more info and some neat visualization of kmer trimming, go [here](https://2017-cicese-metagenomics.readthedocs.io/en/latest/kmer_trimming.html)
