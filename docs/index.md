@@ -13,6 +13,7 @@ This workshop runs under a [Code of Conduct](code-of-conduct.md). Please respect
   - Introduction and Metatranscriptomics overview 
   - [Bienvenidos!](welcome.md)
   - [Logging into the cluster](cicese-cluster.md) 
+  - [Setting up the software](setting-up-tara-environment.md)
   - [Intro to TARA Oceans sample data](tara-sample-data.md)
   - [Short read quality control](short-read-quality-control.md)
 

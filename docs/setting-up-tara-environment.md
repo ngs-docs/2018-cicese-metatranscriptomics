@@ -17,8 +17,7 @@ source activate tara
 Now, let's install the software!
 
 ```
-conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon transrate-tools
-#conda install dammit
+conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon r dammit
 ```
 
 To make sure you have access to these conda-installed programs, run the following:
