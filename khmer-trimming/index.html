@@ -639,7 +639,7 @@ mkdir -p khmer_trim
 cd khmer_trim
 </code></pre>
 
-<p>And link int the <code>qc</code> trimmed files.</p>
+<p>And link in the <code>qc</code> trimmed files.</p>
 <pre><code>ln -s ${PROJECT}/trim/*qc.fq.gz ./
 </code></pre>
 
@@ -661,8 +661,8 @@ done
 <h2 id="assess-changes-in-kmer-abundance">Assess changes in kmer abundance</h2>
 <p>To see how many k-mers we removed, you can examine the distribution as above,
 or use the <code>unique-kmers.py</code> script. Let's compare kmers for one sample.</p>
-<pre><code>unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
-unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
+<pre><code>unique-kmers.py TARA_135_SRF_5-20_rep1_250k_1.qc.fq.gz TARA_135_SRF_5-20_rep1_250k_2.qc.fq.gz
+unique-kmers.py TARA_135_SRF_5-20_rep1_250k.khmer.pe.fq.gz
 </code></pre>
 
 <h2 id="how-does-kmer-trimming-impact-sample-distances">How does kmer trimming impact sample distances?</h2>
