@@ -42,6 +42,7 @@ nav:
   - 'Day 1':
       - 'Bienvenidos': 'welcome.md'
       - 'Cluster login': 'cicese-cluster.md'
+      - 'Software setup': 'setting-up-tara-environment.md'
       - 'TARA Sample Data': 'tara-sample-data.md'
       - 'Short Read Quality Control': 'short-read-quality-control.md'
       - 'Sourmash Taxonomic Classification': 'sourmash-taxonomic-classification.md'
