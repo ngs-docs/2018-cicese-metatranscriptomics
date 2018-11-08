@@ -60,7 +60,7 @@ Here the strength is we used all of our reads to calculate these distances.
 
 To make an MDS plot, run:
 ```
-ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/mds_plot.R
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/mds_plot.R . 
 Rscript mds_plot.R tara-trimmed.comp.csv tara-trimmed-comp-mds.pdf 
 ```
 

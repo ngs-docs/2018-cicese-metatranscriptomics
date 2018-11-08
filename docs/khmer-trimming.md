@@ -86,7 +86,7 @@ sourmash compare -k 31 --csv tara.comp.csv *sig
 And make another MDS plot:
 
 ```
-wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/mds_plot.R . 
 Rscript mds_plot.R tara.comp.csv tara-comp-mds.pdf 
 ```
 
