@@ -66,19 +66,19 @@ wouldn't expect to find mouse RNA in the ocean, but it is a commonly sequenced o
 and thus if you find it, if may be a contaminant). 
 
 ```
-wget -O genbank-rna-vertebrate_other-k31.tar.gz https://osf.io/qgyax/download
-wget -O genbank-rna-vertebrate_mammalian-k31.tar.gz https://osf.io/6c9uy/download
-wget -O genbank-rna-invertebrate-k31.tar.gz https://osf.io/7v8ck/download
-wget -O genbank-rna-fungi-k31.tar.gz https://osf.io/g6mcr/download
-wget -O genbank-rna-plant-k31.tar.gz https://osf.io/kctus/download
-wget -O genbank-rna-protozoa-k31.tar.gz https://osf.io/fnu2q/download
-wget -O mmetsp-k31-named.tar.gz https://osf.io/cdvqn/download
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank-rna-vertebrate_other-k31.tar.gz .
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank-rna-vertebrate_mammalian-k31.tar.gz .
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank-rna-invertebrate-k31.tar.gz .
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank-rna-fungi-k31.tar.gz .
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank-rna-plant-k31.tar.gz .
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank-rna-protozoa-k31.tar.gz .
+ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/mmetsp-k31-named.tar.gz .
 ```
 
 Next, we need to uncompress the databases:
 
 ```
-for infile in *tar.gz
+for infile in *.tar.gz
 do
     tar xf ${infile}
 done
@@ -157,10 +157,10 @@ python plot-gather.py
 
 this will produce a file 'plot-gather.png' that we need to download in order
 to visualize.
+[Here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/plot-gather.png) is a copy of this output
+visualization.
 
 We can see that the reads have more matches than the assembly. 
-[Here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/plot-gather.png) is a copy of the output
-visualization.
 
 ## Other notes
 
