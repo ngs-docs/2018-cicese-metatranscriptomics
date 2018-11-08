@@ -38,7 +38,7 @@ ghp-import site -p
 ```
 
 
-## If setting up mkdocs:
+## If setting up mkdocs for a new repo:
 
 Grab the mkdocs repo, dib lab flavor, and follow setup instructions
 ```
