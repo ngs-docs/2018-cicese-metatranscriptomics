@@ -146,6 +146,8 @@ wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/
 ```
 
 We can see that the reads have more matches than the assembly. 
+[Here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/plot-gather.png) is a copy of the output
+visualization.
 
 ## Other notes
 
