@@ -561,8 +561,8 @@ similar than they really are). </p>
 section, we have made pre-trimmed and subsampled files available for you to download.
 We will use these to calculate signatures with. </p>
 <p>First, let's make a directory and download the k-mer trimmed reads for each of our samples:</p>
-<pre><code>mkdir -p ~/sourmash-compare
-cd ~/sourmash-compare
+<pre><code>mkdir -p ${PROJECT}/sourmash-compare
+cd ${PROJECT}/sourmash-compare
 wget -O tara135.zip https://osf.io/zvnug/download
 wget -O tara136-137.zip https://osf.io/7eydv/download
 </code></pre>
@@ -577,21 +577,33 @@ done
 <p>Now we can calculate signatures for each of the files. This will take 5 or 10 minutes to run</p>
 <pre><code>for infile in *.fq.gz
 do
-    sourmash compute -k 31 --scaled 10000 --track-abundance -o ${infile}.si ${infile}
+    sourmash compute -k 31 --scaled 10000 --track-abundance -o ${infile}.sig ${infile}
 done
 </code></pre>
 
 <p>We can now compare our signatures</p>
-<pre><code>sourmash compare -k 31 --scaled 10000 -o tara.comp *sig
+<pre><code>sourmash compare -k 31 -o tara.comp *sig
 </code></pre>
 
-<p>Now let's plot!</p>
+<p>Now let's plot! Sourmash has a built in plot utility that we can take advantage of.
+The output is a heatmap. </p>
 <pre><code>sourmash plot --labels tara.comp
 </code></pre>
 
-<p>Now we need to transfer these files to our own computers to visualize the results.</p>
-<pre><code></code></pre>
+<p>We can also use the output of sourmash compare to calculate an MDS plot. Let's 
+rerun <code>sourmash compare</code>, this time saving the output in csv format.</p>
+<pre><code>sourmash compare -k 31 --csv tara.comp.csv *sig 
+</code></pre>
 
+<p>We can use this output to make a Multidimensional Scaling plot. MDS plots are 
+commonly used in transcriptome workflows to visualize distance between samples. 
+Here the strength is we used all of our reads to calculate these distances. </p>
+<p>To make an MDS plot, run:</p>
+<pre><code>wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R
+Rscript mds_plot.R tara.comp.csv tara-comp-mds.pdf 
+</code></pre>
+
+<p>You can see what that visualization looks like <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/compare-mds-plot.pdf">here</a>.</p>
 <p>We see that our samples cluster by site and then by depth. We will see if differential
 expression recapitulates this pattern!</p>
                 

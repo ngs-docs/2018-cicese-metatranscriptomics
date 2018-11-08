@@ -606,10 +606,11 @@ that. It seems to be particularly good at strain-level analysis. You should
 use protein-based analyses to do searches across larger evolutionary distances
 (e.g. with a tool like <a href="https://www.kegg.jp/ghostkoala/">KEGG GhostKOALA</a>).</p>
 <p>Let's get started!</p>
-<p>First, let's make a directory and link in our raw reads.</p>
-<pre><code>mkdir -p ~/sourmash-gather
-cd ~/sourmash-gather
-ln -s ... .
+<p>First, let's make a directory and link in our assembly. You can use your assembly
+from earlier, but here we link in a copy that we placed on the cluster already. </p>
+<pre><code>mkdir -p ${PROJECT}/sourmash-gather
+cd ${PROJECT}/sourmash-gather
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara135_SRF_megahit.fasta .
 </code></pre>
 
 <p>Next, let's make a signature of our assembly.</p>
