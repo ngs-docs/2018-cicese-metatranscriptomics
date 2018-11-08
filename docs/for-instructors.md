@@ -3,8 +3,8 @@
 
 ## Editing Schedule and Sidebar Navigation:
 
-schedule: edit `docs/index.md`
-side nav: edit `mkdocs.yml`
+ * schedule: edit `docs/index.md`
+ * side nav: edit `mkdocs.yml`
 
 To use mkdocs to deploy lessons:
 
