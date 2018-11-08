@@ -26,7 +26,7 @@ For this course, we will be installing all software into:
 
 If you're on a windows machine, open `PUTTY` and log into the `omica` cluster:
 
-``
+```
 ip: 158.97.9.9
 port: 22
 ```
