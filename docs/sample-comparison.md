@@ -60,9 +60,11 @@ Here the strength is we used all of our reads to calculate these distances.
 
 To make an MDS plot, run:
 ```
-wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/mds_plot.R
 Rscript mds_plot.R tara-trimmed.comp.csv tara-trimmed-comp-mds.pdf 
 ```
+
+In the future, you can use the script that is [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R)
 
 You can see what that visualization looks like [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed-comp-mds.pdf).
 
