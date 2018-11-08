@@ -1,4 +1,3 @@
-
 ## What is conda?
 
 Conda is a "package manager" or software installer. See [the full list of commands](https://conda.io/docs/commands.html).
@@ -112,3 +111,20 @@ Then check that transrate is properly installed with
 ```
 transrate -h
 ```
+
+## Finally --
+
+Run 
+
+```
+~/works18
+```
+
+and then
+
+```
+source activate tara
+```
+
+so that we are all working on different distinct computers on the
+`omica` cluster.
