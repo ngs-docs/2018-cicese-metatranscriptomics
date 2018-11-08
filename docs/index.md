@@ -27,7 +27,7 @@ Lunch
   - [Taxonomic classification with sourmash gather](sourmash-taxonomic-classification.md)
   - [Sample Comparison](sample-comparison.md)
   - [Error Trimming](khmer-trimming.md)
-  - [Metatrancriptome Assembly](megahit-assembly.md)
+  - [Metatranscriptome Assembly](megahit-assembly.md)
   - [Counting transcriptomes](count_transcriptomes.md)
   
 
