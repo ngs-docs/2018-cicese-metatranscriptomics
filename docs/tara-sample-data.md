@@ -16,8 +16,9 @@ full data via [Open science resources for the discovery and analysis of Tara Oce
 
 [![TARA Oceans station map](files/tara-station-map.jpg)](https://www.nature.com/articles/sdata201523#f2)
 
-
-
+Note that we will show you how to get some of the same kinds of answers from
+your data as the TARA paper, above, did! (It will be on a smaller scale
+because we need to run these at the workshop!)
 
 Recommended Reading:
 
