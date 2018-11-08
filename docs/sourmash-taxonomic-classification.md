@@ -88,14 +88,8 @@ And now we can perform taxonomic classification!
 
 ```
 sourmash gather -k 31 --scaled 10000 -o tara_f135_full_megahit.csv \
-    tara135_SRF_megahit.sig \
-    mmetsp-k31-named.sbt.json \
-    fungi/fungi-k31.sbt.json \
-    protozoa/protozoa-k31.sbt.json \
-    vertebrate_mammalian/vertebrate_mammalian-k31.sbt.json \
-    vertebrate_other/vertebrate_other-k31.sbt.json \
-    plant/plant-k31.sbt.json \
-    invertebrate/invertebrate-k31.sbt.json
+    tara_f135_full_megahit.sig \
+    *.sbt.json */*.sbt.json
 ```
 
 You should see an output that looks something like this:
