@@ -16,11 +16,21 @@ of the assembler (by removing a number of k-mers).
 conda install khmer
 ```
 
+Now, let's create a directory to work in:
+```
+cd ${PROJECT}
+mkdir -p khmer_trim
+cd khmer_trim
+```
+
+And link int the `qc` trimmed files.
+```
+ln -s ${PROJECT}/trim/*qc.fq.gz ./
+```
+
 To run error trimming, use the khmer script `trim-low-abund.py`:
 
 ```
-cd ${PROJECT}/trim
-
 for filename in *_1.qc.fq.gz
 do
   #Use the program basename to remove _1.qc.fq.gz to generate the base
@@ -45,3 +55,4 @@ unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2
 unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
 ```  
 
+For more info and some neat visualization of kmer trimming, go [here](https://2017-cicese-metagenomics.readthedocs.io/en/latest/kmer_trimming.html)

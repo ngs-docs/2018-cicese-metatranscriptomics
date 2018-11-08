@@ -13,7 +13,7 @@ This workshop runs under a [Code of Conduct](code-of-conduct.md). Please respect
   - Introduction and Metatranscriptomics overview 
   - [Bienvenidos!](welcome.md)
   - [Logging into the cluster](cicese-cluster.md) 
-  - [Bioconda for software installation](working-with-bioconda.md)
+  - [Setting up the software](setting-up-tara-environment.md)
   - [Intro to TARA Oceans sample data](tara-sample-data.md)
   - [Short read quality control](short-read-quality-control.md)
 
@@ -21,10 +21,13 @@ Lunch
 
 **Afternoon:**
   
+  
+  - [Taxonomic classification with sourmash gather](sourmash-taxonomic-classification.md)
+  - [Sample Comparison](sample-comparison.md)
+  - [Error Trimming](khmer-trimming.md)
   - [Metatrancriptome Assembly](megahit-assembly.md)
-  - [Assessing assembly quality](evaluation.md)
-  - [Read mapping and quantification](read-mapping.md)
-  - if time: [Annotating your assembly](annotation.md)
+  - [Counting transcriptomes](count_transcriptomes.md)
+  
 
 
 ## Day 2: Nov 9, 2018
@@ -33,16 +36,18 @@ Lunch
 
 Working with Reads
   
-  - [Counting transcriptomes](count_transcriptomes.md)
-  - [Taxonomic classification with sourmash gather](sourmash-taxonomic-classification.md)
-  - [Sample Comparison](sample-comparison.md)
+  - [Assessing assembly quality](evaluation.md)
+  - [Read mapping and quantification](read-mapping.md)
+  - if time: [Annotating your assembly](annotation.md)
+  
   - Metatranscriptomic workflows and considerations
 
 Lunch 
 
 **Afternoon:** 
 
-  - Differential Expression?
+  - [Bioconda for software installation](working-with-bioconda.md)
+  - Snakemake, bioconda etc? 
   - CLUST for co-expressed gene clusters!? [CLUST paper](https://www.biorxiv.org/content/early/2018/02/13/221309)
   - [Putting it all together with Anvi’o](anvio.md)
   - A brief discussion of workflows & repeatability
