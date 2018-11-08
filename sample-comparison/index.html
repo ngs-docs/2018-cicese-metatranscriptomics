@@ -577,7 +577,9 @@ The output is a heatmap. </p>
 <pre><code>sourmash plot --labels tara-trimmed.comp
 </code></pre>
 
-<p>You can see the heatmap <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed.comp.matrix.png">here</a></p>
+<p>This produces a file, <code>tara-trimmed.comp.matrix.png</code>, that contains a
+similarity matrix.
+You can see the heatmap <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed.comp.matrix.png">here</a></p>
 <p>We can also use the output of sourmash compare to calculate an MDS plot. Let's 
 rerun <code>sourmash compare</code>, this time saving the output in csv format.</p>
 <pre><code>sourmash compare -k 31 --csv tara-trimmed.comp.csv *sig 
@@ -591,10 +593,13 @@ Here the strength is we used all of our reads to calculate these distances. </p>
 Rscript mds_plot.R tara-trimmed.comp.csv tara-trimmed-comp-mds.pdf 
 </code></pre>
 
-<p>In the future, you can use the script that is <a href="https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R">here</a></p>
-<p>You can see what that visualization looks like <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed-comp-mds.pdf">here</a>.</p>
-<p>We see that our samples cluster by site and then by depth. </p>
-<p>However, throughout this lesson we have been working with raw reads. 
+<p>The script source is <a href="https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R">here</a> if you are interested!</p>
+<p>This outputs a file <code>tara-trimmed-comp-mds.pdf</code>.  You can see what
+that visualization looks like
+<a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed-comp-mds.pdf">here</a>.</p>
+<p>We see that our samples cluster by site (<code>TARA_135</code> vs <code>TARA_136</code>) and
+then by depth (SRF for surface vs DCM for deep cholorophyl maximum).</p>
+<p>Throughout this lesson we have been working with raw reads. 
 Raw reads contain a lot of errors, and these errors are included in the
 signatures. Next we will learn to k-mer trim our reads, and then re-run 
 <code>compare</code> to see if makes a difference!</p>
