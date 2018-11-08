@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/tara-sample-data/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/plass-assembly/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>TARA Sample Data - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Assembling with PLASS - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#intro-to-sample-dataset-tara-oceans" tabindex="1" class="md-skip">
+      <a href="../#assembling-with-plass" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                TARA Sample Data
+                Assembling with PLASS
               </span>
             
           
@@ -290,12 +290,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       Day 1
@@ -347,20 +345,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="TARA Sample Data" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../tara-sample-data/" title="TARA Sample Data" class="md-nav__link">
       TARA Sample Data
     </a>
-    
   </li>
 
         
@@ -542,6 +531,63 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-plass" title="Install PLASS" class="md-nav__link">
+    Install PLASS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#link-in-the-trimmed-data" title="Link in the trimmed data" class="md-nav__link">
+    Link in the trimmed data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-the-assembler" title="Run the assembler" class="md-nav__link">
+    Run the assembler
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-megahit-assembly" title="from megahit assembly" class="md-nav__link">
+    from megahit assembly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-we-have-time-we-can-run-all-the-assemblies" title="If we have time, we can run all the assemblies:" class="md-nav__link">
+    If we have time, we can run all the assemblies:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#looking-at-the-assembly" title="Looking at the assembly" class="md-nav__link">
+    Looking at the assembly
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -553,22 +599,59 @@
               
                 
                 
-                <h1 id="intro-to-sample-dataset-tara-oceans">Intro to sample dataset: TARA Oceans</h1>
-<p>The <a href="https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans/">TARA Oceans Expedition</a> (2009–2013) sampled contrasting ecosystems of the world oceans, collecting environmental data and plankton, from viruses to metazoans, for later analysis using modern sequencing and state-of-the-art imaging technologies. It surveyed 210 ecosystems in 20 biogeographic provinces, collecting over 35,000 samples of seawater and plankton (<a href="https://www.nature.com/articles/sdata201523#f2">Pesant et al.
-2015</a>).</p>
-<p><a href="https://oceans.taraexpeditions.org/en/m/about-tara/les-expeditions/tara-oceans/"><img alt="TARA Oceans Map" src="../files/TARAOCEANS-CARTE-1024x462.jpg" /></a></p>
-<p>We chose data analyzed as part of <a href="https://www.nature.com/articles/s41467-017-02342-1">A global ocean atlas of eukaryotic genes (Carradec et al. 2018)</a>. This paper used a metatranscriptomics approach on the TARA Oceans data to generate a global ocean reference catalog of genes from planktonic eukaryotes and to explore their expression patterns with respect to biogeography and environmental conditions.</p>
-<p>For this workshop, we chose TARA Stations 135, 136, and 137 in the eastern pacific, which you can see on the map below. We analyze data from mRNAseq samples (poly-A selected and thus likely to contain mostly eukaryotic sequences) in the 5-20µm size fraction, as this fraction had good replication across our chosen TARA stations. For most of the tutorials, we use small subsets of these data, to make program runtimes feasible during the workshop. You can find the
-full data via <a href="https://www.nature.com/articles/sdata201523#f2">Open science resources for the discovery and analysis of Tara Oceans data (Pesant et al. 2015)</a>.</p>
-<p><a href="https://www.nature.com/articles/sdata201523#f2"><img alt="TARA Oceans station map" src="../files/tara-station-map.jpg" /></a></p>
-<p>Note that we will show you how to get some of the same kinds of answers from
-your data as the TARA paper, above, did! (It will be on a smaller scale
-because we need to run these at the workshop!)</p>
-<p>Recommended Reading:</p>
-<ul>
-<li><a href="https://www.nature.com/articles/s41467-017-02342-1">A global ocean atlas of eukaryotic genes</a></li>
-<li><a href="https://www.nature.com/articles/sdata201523#f2">Open science resources for the discovery and analysis of Tara Oceans data</a></li>
-</ul>
+                <h1 id="assembling-with-plass">Assembling with PLASS</h1>
+<p>The basic idea with any transcriptome assembly is you feed in your reads and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA. We used Megahit earlier to build this sort of assembly.</p>
+<p><a href="https://plass.mmseqs.org">PLASS</a> is a new type of assembler tha works in protein space. First, </p>
+<p>These contigs will represent protein sequences that come from the eukaryotic organisms found in each environmental sample.</p>
+<h2 id="install-plass">Install PLASS</h2>
+<p>We already installed plass for you, but <a href="../setting-up-tara-environment/">setup</a>, but here's the installation command for future reference.</p>
+<pre><code>conda install plass
+</code></pre>
+
+<h2 id="link-in-the-trimmed-data">Link in the trimmed data</h2>
+<p>We will be using the same set of TARA oceans mRNAseq reads that we trimmed in the last lesson from <a href="https://www.nature.com/articles/sdata201793#t1">Alberti et al., 2017</a>.</p>
+<p>Create a new folder <code>assembly</code> to work in </p>
+<pre><code>cd $PROJECT
+mkdir -p assembly_plass
+cd assembly_plass
+</code></pre>
+
+<p>Link the khmer-trimmed data we prepared earlier in the newly created folder:</p>
+<pre><code>ln -fs ${PROJECT}/trim/*.khmer.fq.gz .
+ls
+</code></pre>
+
+<h2 id="run-the-assembler">Run the assembler</h2>
+<p>Let's run an assembly:</p>
+<pre><code>plass assemble 
+</code></pre>
+
+<h4 id="from-megahit-assembly">from megahit assembly</h4>
+<p>This will take about 10 minutes; at the end you should see output like this:</p>
+<pre><code>--- [STAT] 11733 contigs, total 5202861 bp, min 200 bp, max 4235 bp, avg 443 bp, N50 465 bp
+--- [Wed Nov  7 02:13:12 2018] ALL DONE. Time elapsed: 431.097547 seconds ---
+</code></pre>
+
+<p>The output assembly will be <code>TARA_135_SRF_5-20_rep1_khmer/TARA_135_SRF_5-20.contigs.fa</code>.</p>
+<h2 id="if-we-have-time-we-can-run-all-the-assemblies">If we have time, we can run all the assemblies:</h2>
+<pre><code>for filename in *khmer.pe.fq.gz
+do
+  base=$(basename $filename .khmer.pe.fq.gz)
+  echo $base
+  megahit --12 ${base}.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix $base --out-dir ${base}_khmer 
+done
+</code></pre>
+
+<h2 id="looking-at-the-assembly">Looking at the assembly</h2>
+<p>First, let's copy the assembly to a better location:</p>
+<pre><code>cp ./TARA_135_SRF_5-20_rep1_khmer/*contigs.fa tara135_SRF_megahit.fasta
+</code></pre>
+
+<p>Now, look at the beginning:</p>
+<pre><code>head tara135_SRF_megahit.fasta 
+</code></pre>
+
+<p>These are the transcripts! Yay!</p>
                 
                   
                 
@@ -586,41 +669,6 @@ because we need to run these at the workshop!)</p>
         
 <footer class="md-footer">
   
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../setting-up-tara-environment/" title="Software setup" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Software setup
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../short-read-quality-control/" title="Short Read Quality Control" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Short Read Quality Control
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

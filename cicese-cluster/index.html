@@ -25,11 +25,11 @@
       
         <meta name="lang:search.pipeline.trimmer" content="True">
       
-        <meta name="lang:search.result.none" content="No matching pages">
+        <meta name="lang:search.result.none" content="No matching documents">
       
-        <meta name="lang:search.result.one" content="1 matching page">
+        <meta name="lang:search.result.one" content="1 matching document">
       
-        <meta name="lang:search.result.other" content="# matching page">
+        <meta name="lang:search.result.other" content="# matching documents">
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
@@ -143,7 +143,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search this site" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -153,7 +153,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="result">
           <div class="md-search-result__meta">
-            Type to start searching this site
+            Type to start searching
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -174,6 +174,12 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -216,6 +222,12 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -345,13 +357,6 @@
         <li class="md-nav__item">
   <a href="#logging-in" title="Logging In" class="md-nav__link">
     Logging In
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-the-installed-software" title="Using the Installed Software" class="md-nav__link">
-    Using the Installed Software
   </a>
   
 </li>
@@ -592,13 +597,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-installed-software" title="Using the Installed Software" class="md-nav__link">
-    Using the Installed Software
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#future-cluster-use" title="Future Cluster Use" class="md-nav__link">
     Future Cluster Use
   </a>
@@ -639,18 +637,48 @@ on /LUSTRE mount point.</p>
 </code></pre>
 
 <h2 id="logging-in">Logging In</h2>
-<p>To log in via ssh:</p>
-<pre><code>ssh &lt;usuario&gt;@omica.cicese.mx
+<p>If you're on a windows machine, open <code>PUTTY</code> and log into the <code>omica</code> cluster:</p>
+<p>``
+ip: 158.97.9.9
+port: 22</p>
+<pre><code>You will need to enter your password. 
+
+
+If you have a mac, log in via ssh instead:
+
 </code></pre>
 
-<p>You will need to enter your password. </p>
-<h2 id="using-the-installed-software">Using the Installed Software</h2>
-<p>To use the software we have previously installed you'll need to execute the following:</p>
-<pre><code>echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' &gt;&gt; ~/.bashrc
+<p>ssh <usuario>@omica.cicese.mx</p>
+<pre><code> You will need to enter your password. 
+
+
+
+## Using the Installed Software
+
+To use the software we have previously installed you'll need to execute the following:
+
+</code></pre>
+
+<p>echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' &gt;&gt; ~/.bashrc
 echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' &gt;&gt; ~/.bashrc
-source ~/.bashrc
+source ~/.bashrc</p>
+<pre><code>
+
+## Working on the cluster
+
+After logging in, make sure to switch to a node:
+
 </code></pre>
 
+<p>~/.works18</p>
+<pre><code>Your prompt should now look like this: `[&lt;usuario&gt;@nodo11]`
+
+Now, to enter our `conda` environment, run:
+
+</code></pre>
+
+<p>source activate tara
+```</p>
 <h2 id="future-cluster-use">Future Cluster Use</h2>
 <p>Normally, apps are installed on: <code>/LUSTRE/apps</code> and <code>/LUSTRE/bioinformatica</code></p>
 <p>Working directories are created by each user on;
