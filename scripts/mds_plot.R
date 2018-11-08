@@ -23,6 +23,6 @@ plt <- ggplot(fit, aes(x = V1, y = V2)) +
         theme_minimal() +
         ggtitle("MDS plot of sourmash compare on reads")
 
-pdf(file = "compare-mds-plot.pdf", width = 6, height = 5)
+pdf(file = args[2], width = 6, height = 5)
 plt
 dev.off()
