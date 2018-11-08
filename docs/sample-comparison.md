@@ -46,7 +46,7 @@ The output is a heatmap.
 sourmash plot --labels tara-trimmed.comp
 ```
 
-You can see the heatmap [here]()
+You can see the heatmap [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed.comp.matrix.png)
 
 We can also use the output of sourmash compare to calculate an MDS plot. Let's 
 rerun `sourmash compare`, this time saving the output in csv format.
@@ -64,7 +64,7 @@ wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/
 Rscript mds_plot.R tara-trimmed.comp.csv tara-trimmed-comp-mds.pdf 
 ```
 
-You can see what that visualization looks like [here]().
+You can see what that visualization looks like [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed-comp-mds.pdf).
 
 We see that our samples cluster by site and then by depth. 
 
