@@ -136,19 +136,21 @@ gather on a sample this size would take about an hour or two. We ran sourmash li
 we did above, but with the reads, before this workshop. We will now download the
 csv and compare the results from the assembly and from the reads. 
 
-First, download the gather results from the raw reads. 
+First, link in the gather results from the raw reads. In the future, you can download them
+from [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/docs/files/ERR1719497_paired_gather_all.csv)
 
 ```
-wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/docs/files/ERR1719497_paired_gather_all.csv 
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/ERR1719497_paired_gather_all.csv .  
 ```
 
 Let's also download a script that we will use to plot the results. 
 There are many visualizations we could use, however here we will 
 use an upset plot. Upset plots are similar to Venn diagrams, but will
-work with many samples. 
+work with many samples. In the future, you can download this script from 
+[here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot-gather.py)
 
 ```
-wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot-gather.py
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/plot-gather.py .
 
 python plot-gather.py
 ```
