@@ -129,7 +129,7 @@ ls -d *fastqc.zip*
 
 to list the files, and you should see a number of files with the extensions `.fastqc.zip`.
 
-Inside each of the fastqc directories you will find reports from the fastqc. You can download these files using your RStudio Server console, if you like. To install and run an RStudio Server, go [here](https://angus.readthedocs.io/en/2017/visualizing-blast-scores-with-RStudio.html#installing-and-running-rstudio-on-jetstream).
+Inside each of the fastqc directories you will find reports from the fastqc. You can download these files using a technique we'll show you later.
 
 Questions:
 
@@ -176,13 +176,6 @@ The terminal output should look like this:
 ```
 
 You can view this report [here](files/multiqc_report.html)
-
-#### View your files on your own computer
-```
-mkdir ~/Desktop/tara_fastqc  # make a directory for these files
-scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
-```
-where the first argument after `scp` is your login and path for the files we want to copy (from the jetstream instance), and the second argument is the path to place the files on our own computer.
 
 If you are unable to use scp though a terminal output, you can see the fastqc html output [here](files/TARA_135_DCM_5-20_rep1_1m_1_fastqc.html)
 
