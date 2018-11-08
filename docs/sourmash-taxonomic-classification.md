@@ -33,7 +33,7 @@ with a metatranscriptome assembly that we'll show you how to run later - here we
 ```
 mkdir -p ${PROJECT}/sourmash-gather
 cd ${PROJECT}/sourmash-gather
-ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara135_SRF_megahit.fasta .
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_full_megahit.fasta .
 ```
 
 Next, let's make a signature of our assembly.
@@ -52,7 +52,7 @@ how often it sees a k-mer. This is meaningful for transcriptomic data because
 expression levels are variable.  
 
 ```
-sourmash compute -k 21,31,51 --scaled 10000 --track-abundance -o tara135_SRF_megahit.sig tara135_SRF_megahit.fasta
+sourmash compute -k 21,31,51 --scaled 10000 --track-abundance -o tara_f135_full_megahit.sig tara_f135_full_megahit.fasta
 ```
 
 Now let's download some databases that contain signatures from transcriptomes of 
@@ -87,7 +87,7 @@ done
 And now we can perform taxonomic classification!
 
 ```
-sourmash gather -k 31 --scaled 10000 -o tara135_SRF_megahit_gather.csv \
+sourmash gather -k 31 --scaled 10000 -o tara_f135_full_megahit.csv \
     tara135_SRF_megahit.sig \
     mmetsp-k31-named.sbt.json \
     fungi/fungi-k31.sbt.json \
