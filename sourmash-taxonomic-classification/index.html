@@ -25,11 +25,11 @@
       
         <meta name="lang:search.pipeline.trimmer" content="True">
       
-        <meta name="lang:search.result.none" content="No matching documents">
+        <meta name="lang:search.result.none" content="No matching pages">
       
-        <meta name="lang:search.result.one" content="1 matching document">
+        <meta name="lang:search.result.one" content="1 matching page">
       
-        <meta name="lang:search.result.other" content="# matching documents">
+        <meta name="lang:search.result.other" content="# matching page">
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
@@ -143,7 +143,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="Search this site" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -153,7 +153,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="result">
           <div class="md-search-result__meta">
-            Type to start searching
+            Type to start searching this site
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -174,12 +174,6 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -222,12 +216,6 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -600,9 +588,10 @@
                 
                 <h1 id="taxonomic-classification-with-sourmash">Taxonomic Classification with Sourmash</h1>
 <p>Knowing what species are in our metatranscriptome allows us to take
-advantage of other resources already developed for those species. 
-We will use a tool called <a href="https://sourmash.readthedocs.io/en/latest/">sourmash</a>.
-Sourmash works by calculating a "signature" for a sequence. For taxonomic 
+advantage of other resources already developed for those species, such
+as genome sequences and genome annotations.</p>
+<p>We will use a tool called <a href="https://sourmash.readthedocs.io/en/latest/">sourmash</a> to get a first pass look at what's in our metatranscriptome.</p>
+<p>Sourmash works by calculating a "signature" for a sequence. For taxonomic 
 classification, you can then compare that signature to signatures made
 from publicly available data. To make this comparison faster, we put the
 publicly available sequences in a database that we can compare against. </p>
@@ -611,18 +600,18 @@ as well as the MMETSP transcriptomes that
 <a href="https://figshare.com/articles/Marine_Microbial_Eukaryotic_Transcriptome_Sequencing_Project_re-assemblies/3840153">were recently reassembled</a>. 
 After making signatures for our assembly, we will search against all of 
 our databases at once. </p>
-<p>sourmash cannot find matches across large evolutionary distances.
+<p>Note that sourmash cannot find matches across large evolutionary distances.
 sourmash seems to work well to search and compare data sets for matches 
 at the species and genus level, but does not have much sensitivity beyond 
 that. It seems to be particularly good at strain-level analysis. You should 
 use protein-based analyses to do searches across larger evolutionary distances
 (e.g. with a tool like <a href="https://www.kegg.jp/ghostkoala/">KEGG GhostKOALA</a>).</p>
 <p>Let's get started!</p>
-<p>First, let's make a directory and link in our assembly. You can use your assembly
-from earlier, but here we link in a copy that we placed on the cluster already. </p>
+<p>First, let's make a directory and link in our assembly. We are going to work
+with a metatranscriptome assembly that we'll show you how to run later - here we link in a copy that we placed on the cluster already. </p>
 <pre><code>mkdir -p ${PROJECT}/sourmash-gather
 cd ${PROJECT}/sourmash-gather
-ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara135_SRF_megahit.fasta .
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_full_megahit.fasta .
 </code></pre>
 
 <p>Next, let's make a signature of our assembly.</p>
@@ -636,7 +625,7 @@ consistent across signatures. </p>
 <p>Lastly, we use the <code>--track-abundance</code> flag. This tells sourmash to keep track of
 how often it sees a k-mer. This is meaningful for transcriptomic data because 
 expression levels are variable.  </p>
-<pre><code>sourmash compute -k 21,31,51 --scaled 10000 --track-abundance -o tara135_SRF_megahit.sig tara135_SRF_megahit.fasta
+<pre><code>sourmash compute -k 21,31,51 --scaled 10000 --track-abundance -o tara_f135_full_megahit.sig tara_f135_full_megahit.fasta
 </code></pre>
 
 <p>Now let's download some databases that contain signatures from transcriptomes of 
@@ -665,15 +654,9 @@ done
 </code></pre>
 
 <p>And now we can perform taxonomic classification!</p>
-<pre><code>sourmash gather -k 31 --scaled 10000 -o tara135_SRF_megahit_gather.csv \
-    tara135_SRF_megahit.sig \
-    mmetsp-k31-named.sbt.json \
-    fungi/fungi-k31.sbt.json \
-    protozoa/protozoa-k31.sbt.json \
-    vertebrate_mammalian/vertebrate_mammalian-k31.sbt.json \
-    vertebrate_other/vertebrate_other-k31.sbt.json \
-    plant/plant-k31.sbt.json \
-    invertebrate/invertebrate-k31.sbt.json
+<pre><code>sourmash gather -k 31 --scaled 10000 -o tara_f135_full_megahit.csv \
+    tara_f135_full_megahit.sig \
+    *.sbt.json */*.sbt.json
 </code></pre>
 
 <p>You should see an output that looks something like this:</p>
@@ -698,8 +681,14 @@ the recovered matches hit 4.9% of the query
 </code></pre>
 
 <p>This will take about 5 to 10 minutes to run.</p>
+<p>The two columns to pay attention to are <code>p_query</code> and <code>p_match</code>.
+<code>p_query</code> is the percent of the metatranscriptome assembly that is
+(estimated to be) from the named organism.  <code>p_match</code> is the percent
+of the matched transcriptome that is found in the query.  These numbers
+are decreased by both evolutionary distance AND by low coverage of the
+organism's gene set (low sequencing coverage, or little expression).</p>
 <p>sourmash also outputs a csv with this and other information. We will use this csv
-to visualize our results. </p>
+to visualize our results later.</p>
 <p>We just ran sourmash on our assembly to give us an idea of the taxonomic 
 make up of our sample in relation to known sequences. We could also run 
 sourmash on our raw reads. This would give us an idea of the number of 
@@ -716,7 +705,7 @@ csv and compare the results from the assembly and from the reads. </p>
 There are many visualizations we could use, however here we will 
 use an upset plot. Upset plots are similar to Venn diagrams, but will
 work with many samples. </p>
-<pre><code>wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot_gather_matches.py
+<pre><code>wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot-gather.py
 </code></pre>
 
 <p>We can see that the reads have more matches than the assembly. 
