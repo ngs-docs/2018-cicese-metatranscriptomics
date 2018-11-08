@@ -46,6 +46,8 @@ The output is a heatmap.
 sourmash plot --labels tara-trimmed.comp
 ```
 
+This produces a file, `tara-trimmed.comp.matrix.png`, that contains a
+similarity matrix.
 You can see the heatmap [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed.comp.matrix.png)
 
 We can also use the output of sourmash compare to calculate an MDS plot. Let's 
@@ -64,13 +66,16 @@ ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/scripts/mds_plot.R .
 Rscript mds_plot.R tara-trimmed.comp.csv tara-trimmed-comp-mds.pdf 
 ```
 
-In the future, you can use the script that is [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R)
+The script source is [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/mds_plot.R) if you are interested!
 
-You can see what that visualization looks like [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed-comp-mds.pdf).
+This outputs a file `tara-trimmed-comp-mds.pdf`.  You can see what
+that visualization looks like
+[here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/tara-trimmed-comp-mds.pdf).
 
-We see that our samples cluster by site and then by depth. 
+We see that our samples cluster by site (`TARA_135` vs `TARA_136`) and
+then by depth (SRF for surface vs DCM for deep cholorophyl maximum).
 
-However, throughout this lesson we have been working with raw reads. 
+Throughout this lesson we have been working with raw reads. 
 Raw reads contain a lot of errors, and these errors are included in the
 signatures. Next we will learn to k-mer trim our reads, and then re-run 
 `compare` to see if makes a difference!
