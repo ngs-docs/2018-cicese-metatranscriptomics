@@ -362,6 +362,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-the-installed-software" title="Using the Installed Software" class="md-nav__link">
+    Using the Installed Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-on-the-cluster" title="Working on the cluster" class="md-nav__link">
+    Working on the cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#future-cluster-use" title="Future Cluster Use" class="md-nav__link">
     Future Cluster Use
   </a>
@@ -597,6 +611,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-the-installed-software" title="Using the Installed Software" class="md-nav__link">
+    Using the Installed Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-on-the-cluster" title="Working on the cluster" class="md-nav__link">
+    Working on the cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#future-cluster-use" title="Future Cluster Use" class="md-nav__link">
     Future Cluster Use
   </a>
@@ -638,47 +666,34 @@ on /LUSTRE mount point.</p>
 
 <h2 id="logging-in">Logging In</h2>
 <p>If you're on a windows machine, open <code>PUTTY</code> and log into the <code>omica</code> cluster:</p>
-<p>``
-ip: 158.97.9.9
-port: 22</p>
-<pre><code>You will need to enter your password. 
-
-
-If you have a mac, log in via ssh instead:
-
+<pre><code>ip: 158.97.9.9
+port: 22
 </code></pre>
 
-<p>ssh <usuario>@omica.cicese.mx</p>
-<pre><code> You will need to enter your password. 
-
-
-
-## Using the Installed Software
-
-To use the software we have previously installed you'll need to execute the following:
-
+<p>You will need to enter your password. </p>
+<p>If you have a mac, log in via ssh instead:</p>
+<pre><code>ssh &lt;usuario&gt;@omica.cicese.mx
 </code></pre>
 
-<p>echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' &gt;&gt; ~/.bashrc
+<p>You will need to enter your password. </p>
+<h2 id="using-the-installed-software">Using the Installed Software</h2>
+<p>To use the software we have previously installed you'll need to execute the following:</p>
+<pre><code>echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' &gt;&gt; ~/.bashrc
 echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' &gt;&gt; ~/.bashrc
-source ~/.bashrc</p>
-<pre><code>
+source ~/.bashrc
+</code></pre>
 
-## Working on the cluster
-
-After logging in, make sure to switch to a node:
+<h2 id="working-on-the-cluster">Working on the cluster</h2>
+<p>After logging in, make sure to switch to a node:</p>
+<pre><code>~/.works18
 
 </code></pre>
 
-<p>~/.works18</p>
-<pre><code>Your prompt should now look like this: `[&lt;usuario&gt;@nodo11]`
-
-Now, to enter our `conda` environment, run:
-
+<p>Your prompt should now look like this: <code>[&lt;usuario&gt;@nodo11]</code></p>
+<p>Now, to enter our <code>conda</code> environment, run:</p>
+<pre><code>source activate tara
 </code></pre>
 
-<p>source activate tara
-```</p>
 <h2 id="future-cluster-use">Future Cluster Use</h2>
 <p>Normally, apps are installed on: <code>/LUSTRE/apps</code> and <code>/LUSTRE/bioinformatica</code></p>
 <p>Working directories are created by each user on;
