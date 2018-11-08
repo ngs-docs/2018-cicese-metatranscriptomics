@@ -13,7 +13,7 @@ from [Alberti et al., 2017](https://www.nature.com/articles/sdata201793#t1) and 
 First, make some directories to work in:
 ```
 cd
-mdkir -p work/data
+mkdir -p work/data
 ```
 
 Next, change into the data dir and download the data subsets:
@@ -197,11 +197,11 @@ Setup trim directory:
 cd $PROJECT
 mkdir -p trim
 cd trim
-ln -s ../data/*/*.fq.gz .
-cat ~/miniconda3/envs/tara/share/trimmomatic*/adapters/* > combined.fa
+ln -s ../data/*.fq.gz .
+cat /LUSTRE/apps/workshop/miniconda3/envs/tara/share/trimmomatic*/adapters/* > combined.fa
 ```
 
-See excellent paper on trimming from [MacManes 2014](http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full).
+See this excellent paper on trimming from [MacManes 2014](http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full).
 
 Run:
 
