@@ -42,18 +42,18 @@ nav:
   - 'Day 1':
       - 'Bienvenidos': 'welcome.md'
       - 'Cluster login': 'cicese-cluster.md'
-      - 'Bioconda': 'working-with-bioconda.md'
       - 'TARA Sample Data': 'tara-sample-data.md'
       - 'Short Read Quality Control': 'short-read-quality-control.md'
+      - 'Sourmash Taxonomic Classification': 'sourmash-taxonomic-classification.md'
+      - 'Comparing Samples': 'sample-comparison.md'
       - 'Khmer Error Trimming': 'khmer-trimming.md'
       - 'Assembly with Megahit': 'megahit-assembly.md'
+      - 'Count Transcriptomes': 'count_transcriptomes.md'
+
+  - 'Day 2':
       - 'Assembly Evaluation': 'evaluation.md'
       - 'Mapping reads to the Assembly': 'read-mapping.md'
       - 'Assembly Annotation': 'annotation.md'
-
-  - 'Day 2':
-      - 'Count Transcriptomes': 'count_transcriptomes.md'
-      - 'Taxonomic Classification': 'sourmash-taxonomic-classification.md'
-      - 'Comparing Samples': 'sample-comparison.md'
       - 'Visualize with anvio': 'anvio.md'
+      - 'Bioconda': 'working-with-bioconda.md'
 
