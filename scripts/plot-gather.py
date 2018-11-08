@@ -12,5 +12,8 @@ for file in glob.glob('*csv'):
     x=file.split('.')[0]
     genus_dict[x]=df
 
+genus_dict['reads'] = genus_dict.pop('ERR1719497_paired_gather_all')
+genus_dict['assembly'] = genus_dict.pop('tara_f135_megahit_all_gather-scaled10k-k31')
+
 pplot=pyu.plot(genus_dict, unique_keys = ['name'])
-pplot['figure'].savefig('test.png')
+pplot['figure'].savefig('plot-gather.png')
