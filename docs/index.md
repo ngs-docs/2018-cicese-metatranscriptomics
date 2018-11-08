@@ -46,10 +46,9 @@ Lunch
 
 **Afternoon:** 
 
+  - tbd
   - [Bioconda for software installation](working-with-bioconda.md)
-  - Snakemake, bioconda etc? 
-  - CLUST for co-expressed gene clusters!? [CLUST paper](https://www.biorxiv.org/content/early/2018/02/13/221309)
-  - [Putting it all together with Anvi’o](anvio.md)
+  - Snakemake, bioconda etc?
   - A brief discussion of workflows & repeatability
 
 
