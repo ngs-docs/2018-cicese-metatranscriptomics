@@ -5,7 +5,7 @@ These are the online materials for the environmental metatranscriptomics worksho
 
 This workshop runs under a [Code of Conduct](code-of-conduct.md). Please respect it and be excellent to each other!
 
-Please use the following hackmd for notes: https://tinyurl.com/cicese-metaT
+Please use the following hackmd for notes: [https://tinyurl.com/cicese-metaT](https://tinyurl.com/cicese-metaT)
 
 
 ## Day 1: Nov 8, 2018
