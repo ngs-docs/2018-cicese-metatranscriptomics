@@ -5,36 +5,24 @@ to compare the differences in functional profiles between samples. One way
 to do this is with differential expression. To do differential expression,
 we de novo assemble a transcriptome, quantify the number of reads that "map"
 back to the transcriptome, and use those counts to find differences. However,
-as we have seen throughout this workshop, not even the majority of reads in 
-our samples assemble. How can we compare expression profiles when we are only
-looking at ~30% of the reads?
+assembly can be a long process, and often we want to get to know our data a bit
+before we launch into that process. 
 
 We can use k-mer profiles of the reads to compare samples using `sourmash compare`.
 During the `gather` lesson, we showed you how to calculate signatures for an assembly.
-The process is the same for read files. However, unlike when we ran `gather` with raw
-reads, we want to remove k-mers from our samples that are most likely errors before
-we compare our samples to each other (with gather, if a k-mer is an error, it is
-marked as uncharacterized; with compare, errors could lead samples to being less
-similar than they really are). 
+The process is the same for read files. 
 
-Because we already showed you how to error trim reads during the quality control 
-section, we have made pre-trimmed and subsampled files available for you to download.
-We will use these to calculate signatures with. 
-
-First, let's make a directory and download the k-mer trimmed reads for each of our samples:
+First, let's make a directory and download the reads for our samples:
 ```
 mkdir -p ${PROJECT}/sourmash-compare
 cd ${PROJECT}/sourmash-compare
-wget -O tara135.zip https://osf.io/zvnug/download
-wget -O tara136-137.zip https://osf.io/7eydv/download
+
+# link interleaved reads 
 ```
 
-Our read files are instead of the zipped files, so we need to uncompress them
+Our read files are inside of the zipped files, so we need to uncompress them
 ```
-for infile in *zip
-do
-   unzip $infile
-done
+unzip # add file name
 ```
 
 Now we can calculate signatures for each of the files. This will take 5 or 10 minutes to run
@@ -46,7 +34,7 @@ do
 done
 ```
 
-We can now compare our signatures
+Using these signatures, we can compare our samples. 
 
 ```
 sourmash compare -k 31 -o tara.comp *sig
@@ -75,7 +63,11 @@ wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/
 Rscript mds_plot.R tara.comp.csv tara-comp-mds.pdf 
 ```
 
-You can see what that visualization looks like [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/compare-mds-plot.pdf).
+You can see what that visualization looks like [here]
 
-We see that our samples cluster by site and then by depth. We will see if differential
-expression recapitulates this pattern!
+We see that our samples cluster by site and then by depth. 
+
+However, throughout this lesson we have been working with raw reads. 
+Raw reads contain a lot of errors, and these errors are included in the
+signatures. Next we will learn to k-mer trim our reads, and then re-run 
+`compare` to see if makes a difference!
