@@ -22,7 +22,7 @@ mkdir -p khmer_trim
 cd khmer_trim
 ```
 
-And link int the `qc` trimmed files.
+And link in the `qc` trimmed files.
 ```
 ln -s ${PROJECT}/trim/*qc.fq.gz ./
 ```
@@ -37,9 +37,9 @@ do
   echo $base
 
   #Run khmer trimming
-  (interleave-reads.py ${base}_1.qc.fq.gz ${base}_2.qc.fq.gz )| \
-  (trim-low-abund.py - -V -Z 10 -C 3 -o - --gzip -M 8e9) | \ 
-  (extract-paired-reads.py --gzip -p ${base}.khmer.pe.fq.gz -s ${base}.khmer.se.fq.gz)
+  interleave-reads.py ${base}_1.qc.fq.gz ${base}_2.qc.fq.gz | \
+  trim-low-abund.py - -V -Z 10 -C 3 -o - --gzip -M 8e9 | \
+  extract-paired-reads.py --gzip -p ${base}.khmer.pe.fq.gz -s ${base}.khmer.se.fq.gz
 
 done
 ```
