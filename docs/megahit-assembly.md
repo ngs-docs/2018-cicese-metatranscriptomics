@@ -84,3 +84,19 @@ These are the transcripts! Yay!
 
 
 
+### What can we do with an assembly?
+
+Why would we do an assembly? What advantages does an assembly have
+over the reads? And what can we do with this assembly?
+
+* assembly squashes redundant reads, so the assembly should have
+  approximately one sequence per transcript, as opposed to the reads,
+  which many have many reads per transcript.
+  
+* assembled contigs are longer than reads, so it is easier to do gene
+  search on them. We'll cover this tomorrow!
+
+* assemblies also have fewer errors than the reads do, so sample
+  comparisons and so on may be more accurate. However, assembly also may
+  eliminate some of the data if it's really low coverage, and abundance
+  information is lost as well.
