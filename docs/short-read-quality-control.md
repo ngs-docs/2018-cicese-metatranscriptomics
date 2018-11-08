@@ -25,7 +25,8 @@ wget https://osf.io/y5dfh/download -O tara136-137_1m.zip
 
 Now, let's unzip and make the files difficult to delete
 ```
-unzip tara135_1m.zip 
+unzip tara135_1m.zip
+unzip tara136-137_1m.zip
 
 chmod u-w *fq.gz
 ```
