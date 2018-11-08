@@ -163,3 +163,10 @@ when error trimming transcriptomes that real biological variation is removed.
 Because sourmash is so specific, the errors don't give false positives and so 
 keeping all of the possible real variation could improve taxonomic recall in 
 some cases.
+
+## This is a good way to detect contamination or wrong data!
+
+We recommend doing `sourmash gather` immediately after receiving your
+data from the sequencing facility. If your environmental metagenome has a
+tremendous amount of mouse sequence in it... maybe the sequencing facility
+sent you the wrong data?
