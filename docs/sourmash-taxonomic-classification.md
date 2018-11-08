@@ -1,8 +1,11 @@
 # Taxonomic Classification with Sourmash
 
 Knowing what species are in our metatranscriptome allows us to take
-advantage of other resources already developed for those species. 
-We will use a tool called [sourmash](https://sourmash.readthedocs.io/en/latest/).
+advantage of other resources already developed for those species, such
+as genome sequences and genome annotations.
+
+We will use a tool called [sourmash](https://sourmash.readthedocs.io/en/latest/) to get a first pass look at what's in our metatranscriptome.
+
 Sourmash works by calculating a "signature" for a sequence. For taxonomic 
 classification, you can then compare that signature to signatures made
 from publicly available data. To make this comparison faster, we put the
@@ -14,7 +17,7 @@ as well as the MMETSP transcriptomes that
 After making signatures for our assembly, we will search against all of 
 our databases at once. 
 
-sourmash cannot find matches across large evolutionary distances.
+Note that sourmash cannot find matches across large evolutionary distances.
 sourmash seems to work well to search and compare data sets for matches 
 at the species and genus level, but does not have much sensitivity beyond 
 that. It seems to be particularly good at strain-level analysis. You should 
@@ -24,8 +27,8 @@ use protein-based analyses to do searches across larger evolutionary distances
 
 Let's get started!
 
-First, let's make a directory and link in our assembly. You can use your assembly
-from earlier, but here we link in a copy that we placed on the cluster already. 
+First, let's make a directory and link in our assembly. We are going to work
+with a metatranscriptome assembly that we'll show you how to run later - here we link in a copy that we placed on the cluster already. 
 
 ```
 mkdir -p ${PROJECT}/sourmash-gather
@@ -120,8 +123,15 @@ the recovered matches hit 4.9% of the query
 
 This will take about 5 to 10 minutes to run.
 
+The two columns to pay attention to are `p_query` and `p_match`.
+`p_query` is the percent of the metatranscriptome assembly that is
+(estimated to be) from the named organism.  `p_match` is the percent
+of the matched transcriptome that is found in the query.  These numbers
+are decreased by both evolutionary distance AND by low coverage of the
+organism's gene set (low sequencing coverage, or little expression).
+
 sourmash also outputs a csv with this and other information. We will use this csv
-to visualize our results. 
+to visualize our results later.
 
 We just ran sourmash on our assembly to give us an idea of the taxonomic 
 make up of our sample in relation to known sequences. We could also run 
@@ -144,7 +154,7 @@ use an upset plot. Upset plots are similar to Venn diagrams, but will
 work with many samples. 
 
 ```
-wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot_gather_matches.py
+wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot-gather.py
 ```
 
 We can see that the reads have more matches than the assembly. 
