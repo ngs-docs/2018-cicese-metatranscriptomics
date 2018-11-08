@@ -531,8 +531,16 @@
                 
                 
                 <h1 id="installing-all-software-for-the-workshop">Installing all software for the workshop</h1>
-<p>After setting up conda (<a href="../working-with-bioconda/">here</a>), let's install some software.</p>
-<p>First, let's create an environment we'll use for the course:</p>
+<p>We already installed all course software for you, but you need to tell your terminal where
+to look for that software. You can do this by executing the following:</p>
+<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH&quot; &gt;&gt; ~/.bashrc
+echo &quot;export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<h1 id="installing-software-in-the-future">Installing software in the future</h1>
+<p>First, make sure you've set up conda (<a href="../working-with-bioconda/">here</a>).</p>
+<p>Then  create an environment to work in:</p>
 <pre><code>conda create -n tara
 </code></pre>
 
@@ -540,30 +548,24 @@
 <pre><code>source activate tara
 </code></pre>
 
-<p>Now, let's install the software!</p>
+<p>Now, install the software!</p>
 <pre><code>conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon r dammit
 </code></pre>
 
-<p>To make sure you have access to these conda-installed programs, run the following:</p>
-<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH&quot; &gt;&gt; ~/.bashrc
+<p>To make sure you have access to these conda-installed programs, try to execute some of them:</p>
+<pre><code>sourmash
 </code></pre>
 
-<p>and either 
-  1. logout and log back in again, or
-  2. source your bash profile to let the changes take effect: <code>source ~/.bashrc</code></p>
-<p>Conda works for most of the software we'll use in the workshop. However, there are some exceptions&gt;</p>
+<p>Conda works for most of the software we'll use in the workshop. However, there are some exceptions: notably, transrate. </p>
 <p>To install transrate, follow the instructions <a href="http://hibberdlab.com/transrate/installation.html">here</a>.</p>
-<pre><code>cd &lt;location to put transrate&gt;
+<p>You can also try the following:</p>
+<pre><code>cd &lt;location-to-put-transrate&gt;
 wget https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
 tar xvf transrate-1.0.3-linux-x86_64.tar.gz
 </code></pre>
 
-<p>We installed transrate into the <code>/LUSTRE/apps/workshop/</code> directory, so it can be used as follows:</p>
-<pre><code>/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64/transrate -h 
-</code></pre>
-
 <p>To put transrate in your path, you can execute:</p>
-<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
+<pre><code>echo &quot;export PATH=&lt;path-to-transrate&gt;/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
 source ~/.bashrc
 </code></pre>
 
