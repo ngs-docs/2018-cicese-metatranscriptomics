@@ -75,6 +75,19 @@ ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/genbank
 ln -fs /LUSTRE/bioinformatica_data/bioinformatica2018/sourmash_databases/mmetsp-k31-named.tar.gz .
 ```
 
+> Note, if you want to download these files instead, do:
+
+```
+wget -O genbank-rna-vertebrate_other-k31.tar.gz https://osf.io/qgyax/download
+wget -O genbank-rna-vertebrate_mammalian-k31.tar.gz https://osf.io/6c9uy/download
+wget -O genbank-rna-invertebrate-k31.tar.gz https://osf.io/7v8ck/download
+wget -O genbank-rna-fungi-k31.tar.gz https://osf.io/g6mcr/download
+wget -O genbank-rna-plant-k31.tar.gz https://osf.io/kctus/download
+wget -O genbank-rna-protozoa-k31.tar.gz https://osf.io/fnu2q/download
+wget -O mmetsp-k31-named.tar.gz https://osf.io/cdvqn/download
+```
+> but this will not work on the nodes on the cicese cluster!
+
 Next, we need to uncompress the databases:
 
 ```
