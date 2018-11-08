@@ -24,7 +24,7 @@ conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon tra
 To make sure you have access to these conda-installed programs, run the following:
 
 ```
-echo "export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH" >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' >> ~/.bashrc
 ```
 and either 
   1. logout and log back in again, or
@@ -48,7 +48,7 @@ We installed transrate into the `/LUSTRE/apps/workshop/` directory, so it can be
 
 To put transrate in your path, you can execute:
 ```
-echo "export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH" >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
 

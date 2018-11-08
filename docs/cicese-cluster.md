@@ -36,8 +36,9 @@ ssh <usuario>@omica.cicese.mx
 To use the software we have previously installed you'll need to execute the following:
 
 ```
-echo "export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH" >> ~/.bashrc
-echo "export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH" >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 
