@@ -50,9 +50,19 @@ To see how many k-mers we removed, you can examine the distribution as above,
 or use the `unique-kmers.py` script. Let's compare kmers for one sample.
 
 ```
-unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
-unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
+unique-kmers.py TARA_135_SRF_5-20_rep1_250k_1.qc.fq.gz TARA_135_SRF_5-20_rep1_250k_2.qc.fq.gz
+unique-kmers.py TARA_135_SRF_5-20_rep1_250k.khmer.pe.fq.gz
 ```  
+
+The first two files (the raw inputs) have a total estimated number of
+unique 32-mers of 26760613; the second (trimmed) file has a total
+estimated number of unique 32-mers 26659070.  So the trimming removed
+approximately 100,000 k-mers.
+
+These numbers are virtually the same BECAUSE WE ARE USING SMALL SUBSET
+DATA SETS. For any real data sets, the second number will be MUCH smaller
+than the first, indicating that many low-abundance k-mers were removed as
+likely errors.
 
 ## How does kmer trimming impact sample distances?
 
@@ -80,7 +90,7 @@ wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/
 Rscript mds_plot.R tara.comp.csv tara-comp-mds.pdf 
 ```
 
-You can look at the output [here]((https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/compare-mds-plot.pdf).
+You can look at the output [here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/compare-mds-plot.pdf).
 
 Are these samples any different than the untrimmed reads?
 
