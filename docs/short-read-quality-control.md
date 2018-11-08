@@ -131,8 +131,7 @@ to list the files, and you should see a number of files with the extensions `.fa
 
 Inside each of the fastqc directories you will find reports from the fastqc. 
 
-We can view one of these files [here](files/TARA_135_DCM_5-20_rep1_1_fastqc.html)
-And the second pair of that sample [here](files/TARA_135_DCM_5-20_rep1_2_fastqc.html)
+We can view one of these files [here](files/TARA_135_DCM_5-20_rep1_1_fastqc.html), and the second pair of that sample [here](files/TARA_135_DCM_5-20_rep1_2_fastqc.html)
 
 You can download these files using a technique we'll show you later.
 
