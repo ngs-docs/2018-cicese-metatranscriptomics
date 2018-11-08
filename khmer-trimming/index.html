@@ -337,18 +337,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../working-with-bioconda/" title="Bioconda" class="md-nav__link">
-      Bioconda
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../tara-sample-data/" title="TARA Sample Data" class="md-nav__link">
       TARA Sample Data
     </a>
@@ -363,6 +351,30 @@
   <li class="md-nav__item">
     <a href="../short-read-quality-control/" title="Short Read Quality Control" class="md-nav__link">
       Short Read Quality Control
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sourmash-taxonomic-classification/" title="Sourmash Taxonomic Classification" class="md-nav__link">
+      Sourmash Taxonomic Classification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sample-comparison/" title="Comparing Samples" class="md-nav__link">
+      Comparing Samples
     </a>
   </li>
 
@@ -445,32 +457,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
-      Assembly Evaluation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../read-mapping/" title="Mapping reads to the Assembly" class="md-nav__link">
-      Mapping reads to the Assembly
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../annotation/" title="Assembly Annotation" class="md-nav__link">
-      Assembly Annotation
+    <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
+      Count Transcriptomes
     </a>
   </li>
 
@@ -505,8 +493,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-nav__link">
-      Count Transcriptomes
+    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
+      Assembly Evaluation
     </a>
   </li>
 
@@ -517,8 +505,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../sourmash-taxonomic-classification/" title="Taxonomic Classification" class="md-nav__link">
-      Taxonomic Classification
+    <a href="../read-mapping/" title="Mapping reads to the Assembly" class="md-nav__link">
+      Mapping reads to the Assembly
     </a>
   </li>
 
@@ -529,8 +517,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../sample-comparison/" title="Comparing Samples" class="md-nav__link">
-      Comparing Samples
+    <a href="../annotation/" title="Assembly Annotation" class="md-nav__link">
+      Assembly Annotation
     </a>
   </li>
 
@@ -543,6 +531,18 @@
   <li class="md-nav__item">
     <a href="../anvio/" title="Visualize with anvio" class="md-nav__link">
       Visualize with anvio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../working-with-bioconda/" title="Bioconda" class="md-nav__link">
+      Bioconda
     </a>
   </li>
 
@@ -620,10 +620,18 @@ of the assembler (by removing a number of k-mers).</p>
 <pre><code>conda install khmer
 </code></pre>
 
-<p>To run error trimming, use the khmer script <code>trim-low-abund.py</code>:</p>
-<pre><code>cd ${PROJECT}/trim
+<p>Now, let's create a directory to work in:</p>
+<pre><code>cd ${PROJECT}
+mkdir -p khmer_trim
+cd khmer_trim
+</code></pre>
 
-for filename in *_1.qc.fq.gz
+<p>And link int the <code>qc</code> trimmed files.</p>
+<pre><code>ln -s ${PROJECT}/trim/*qc.fq.gz ./
+</code></pre>
+
+<p>To run error trimming, use the khmer script <code>trim-low-abund.py</code>:</p>
+<pre><code>for filename in *_1.qc.fq.gz
 do
   #Use the program basename to remove _1.qc.fq.gz to generate the base
   base=$(basename $filename _1.qc.fq.gz)
@@ -643,6 +651,8 @@ or use the <code>unique-kmers.py</code> script. Let's compare kmers for one samp
 <pre><code>unique-kmers.py TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz
 unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
 </code></pre>
+
+<p>For more info and some neat visualization of kmer trimming, go <a href="https://2017-cicese-metagenomics.readthedocs.io/en/latest/kmer_trimming.html">here</a></p>
                 
                   
                 
@@ -664,7 +674,7 @@ unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../short-read-quality-control/" title="Short Read Quality Control" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../sample-comparison/" title="Comparing Samples" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -673,7 +683,7 @@ unique-kmers.py TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Short Read Quality Control
+                Comparing Samples
               </span>
             </div>
           </a>
