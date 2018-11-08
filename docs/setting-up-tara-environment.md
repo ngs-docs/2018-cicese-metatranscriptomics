@@ -39,8 +39,8 @@ We already installed conda for you, but you will need to tell your terminal wher
 to look for that software. You can do this by executing the following:
 
 ```
-echo "export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH" >> ~/.bashrc
-echo "export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH" >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -63,9 +63,11 @@ When you want to exit this environment later, you can execute `source deactivate
 
 ## Installing this software in the future
 
-First, make sure you've set up conda ([here](working-with-bioconda.md)).
+In the future, if you want to run the tutorials on your own, you'll
+need to set up conda in your own account -
+[see instructions](working-with-bioconda.md)).
 
-Then  create an environment to work in:
+Then create an environment to work in:
 
 ``` 
 conda create -n tara
@@ -102,7 +104,7 @@ tar xvf transrate-1.0.3-linux-x86_64.tar.gz
 
 To put transrate in your path, you can execute:
 ```
-echo "export PATH=<path-to-transrate>/transrate-1.0.3-linux-x86_64:$PATH" >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -110,5 +112,3 @@ Then check that transrate is properly installed with
 ```
 transrate -h
 ```
-
-
