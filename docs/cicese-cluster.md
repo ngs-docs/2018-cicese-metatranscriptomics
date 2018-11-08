@@ -42,17 +42,6 @@ ssh <usuario>@omica.cicese.mx
 
 
 
-## Using the Installed Software
-
-To use the software we have previously installed you'll need to execute the following:
-
-```
-echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' >> ~/.bashrc
-echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' >> ~/.bashrc
-source ~/.bashrc
-```
-
-
 ## Working on the cluster
 
 After logging in, make sure to switch to a node:
@@ -68,6 +57,17 @@ Now, to enter our `conda` environment, run:
 ```
 source activate tara
 ```
+
+## Setting up the environment
+
+To set up the software we have previously installed you'll need to execute the following:
+
+```
+echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' >> ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
 
 
 ## Future Cluster Use
