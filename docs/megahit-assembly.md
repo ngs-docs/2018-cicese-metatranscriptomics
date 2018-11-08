@@ -34,7 +34,7 @@ cd assembly
 
 Link the khmer-trimmed data we prepared earlier in the newly created folder:
 ```
-ln -fs ${PROJECT}/trim/*.khmer.fq.gz .
+ln -fs ${PROJECT}/khmer_trim/*.khmer.pe.fq.gz .
 ls
 ```
 ## Run the assembler
@@ -42,7 +42,7 @@ ls
 Let's run an assembly:
 
 ```
-time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer
+time megahit --12 TARA_135_SRF_5-20_rep1_250k.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer -f
 ```
 
 This will take about 10 minutes; at the end you should see output like this:
@@ -84,3 +84,19 @@ These are the transcripts! Yay!
 
 
 
+### What can we do with an assembly?
+
+Why would we do an assembly? What advantages does an assembly have
+over the reads? And what can we do with this assembly?
+
+* assembly squashes redundant reads, so the assembly should have
+  approximately one sequence per transcript, as opposed to the reads,
+  which many have many reads per transcript.
+  
+* assembled contigs are longer than reads, so it is easier to do gene
+  search on them. We'll cover this tomorrow!
+
+* assemblies also have fewer errors than the reads do, so sample
+  comparisons and so on may be more accurate. However, assembly also may
+  eliminate some of the data if it's really low coverage, and abundance
+  information is lost as well.
