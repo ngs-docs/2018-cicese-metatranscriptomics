@@ -19,12 +19,13 @@ mkdir -p work/data
 Next, change into the data dir and download the data subsets:
 ```
 cd work/data
-curl -L https://osf.io/jqda5/download -o tara135_250k.zip
+curl -L https://osf.io/76qm3/download -o tara135_1m.zip
+curl -L https://osf.io/y5dfh/download -o tara136-137_1m.zip
 ```
 
 Now, let's unzip and make the files difficult to delete
 ```
-unzip tara135_250k.zip 
+unzip tara135_1m.zip 
 
 chmod u-w *fq.gz
 ```
@@ -46,7 +47,7 @@ If you see all the files you think you should, good!  Otherwise, debug.
 These are FASTQ files -- let's take a look at them:
 
 ```
-zless $PROJECT/data//TARA_135_DCM_5-20_rep1_250k_1.fq.gz
+zless $PROJECT/data//TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 ```
 (use the spacebar to scroll down, and type 'q' to exit 'zless')
 
