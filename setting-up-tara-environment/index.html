@@ -38,7 +38,7 @@
     
     
       
-        <title>Installing all software for the workshop - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Software setup - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#installing-all-software-for-the-workshop" tabindex="1" class="md-skip">
+      <a href="../#what-is-conda" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Installing all software for the workshop
+                Software setup
               </span>
             
           
@@ -290,10 +290,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Day 1
@@ -326,6 +328,93 @@
     <a href="../cicese-cluster/" title="Cluster login" class="md-nav__link">
       Cluster login
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Software setup
+      </label>
+    
+    <a href="./" title="Software setup" class="md-nav__link md-nav__link--active">
+      Software setup
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-conda" title="What is conda?" class="md-nav__link">
+    What is conda?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-bioconda" title="What is bioconda?" class="md-nav__link">
+    What is bioconda?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-problems-does-conda-and-therefore-bioconda-solve" title="What problems does conda (and therefore bioconda) solve?" class="md-nav__link">
+    What problems does conda (and therefore bioconda) solve?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructing-and-using-multiple-environments" title="Constructing and using multiple environments" class="md-nav__link">
+    Constructing and using multiple environments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-software-for-this-course" title="Installing the software for this course" class="md-nav__link">
+    Installing the software for this course
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
+    Installing this software in the future
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -516,8 +605,63 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-conda" title="What is conda?" class="md-nav__link">
+    What is conda?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-bioconda" title="What is bioconda?" class="md-nav__link">
+    What is bioconda?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-problems-does-conda-and-therefore-bioconda-solve" title="What problems does conda (and therefore bioconda) solve?" class="md-nav__link">
+    What problems does conda (and therefore bioconda) solve?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructing-and-using-multiple-environments" title="Constructing and using multiple environments" class="md-nav__link">
+    Constructing and using multiple environments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-software-for-this-course" title="Installing the software for this course" class="md-nav__link">
+    Installing the software for this course
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
+    Installing this software in the future
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
   
 </nav>
                   </div>
@@ -530,15 +674,48 @@
               
                 
                 
-                <h1 id="installing-all-software-for-the-workshop">Installing all software for the workshop</h1>
-<p>We already installed all course software for you, but you need to tell your terminal where
+                  <h1>Software setup</h1>
+                
+                <h2 id="what-is-conda">What is conda?</h2>
+<p>Conda is a "package manager" or software installer. See <a href="https://conda.io/docs/commands.html">the full list of commands</a>.</p>
+<p><code>conda install</code> to install a package.</p>
+<p><code>conda list</code> to list installed packages.</p>
+<p><code>conda search</code> to search packages. Note that you'll see one package for every version of the software and for every version of Python (e.g. <code>conda search sourmash</code>).</p>
+<h2 id="what-is-bioconda">What is bioconda?</h2>
+<p>See <a href="https://www.biorxiv.org/content/early/2017/10/27/207092">the bioconda paper</a> and the <a href="http://bioconda.github.io">bioconda web site</a>.</p>
+<p>Bioconda is a community-enabled repository of 3,000+ bioinformatics packages, installable via the <code>conda</code> package
+manager.  It consists of a set of recipes, <a href="https://github.com/bioconda/bioconda-recipes/blob/master/recipes/sourmash/meta.yaml">like this one, for sourmash</a>, that are maintained   by the community.</p>
+<h2 id="what-problems-does-conda-and-therefore-bioconda-solve">What problems does conda (and therefore bioconda) solve?</h2>
+<p>Conda tracks installed packages and their versions,
+and makes sure that different installed packages don't have
+conflicting dependencies. It makes software installation 
+so much better!</p>
+<h3 id="constructing-and-using-multiple-environments">Constructing and using multiple environments</h3>
+<p>A feature that we do not use much here, but that can be very handy in some circumstances, is different environments.</p>
+<p>"Environments" are multiple different collections of installed software. There are two reasons you might want to do this:</p>
+<ul>
+<li>first, you might want to try to exactly replicate a specific software install, so that you can replicate a paper or an old condition.</li>
+<li>second, you might be working with incompatible software, e.g. sometimes different software pipelines need different version of the same software. An example of this is older bioinformatics software that needs python2, while other software needs python3.</li>
+</ul>
+<h2 id="installing-the-software-for-this-course">Installing the software for this course</h2>
+<p>We already installed conda for you, but you will need to tell your terminal where
 to look for that software. You can do this by executing the following:</p>
 <pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH&quot; &gt;&gt; ~/.bashrc
 echo &quot;export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
 source ~/.bashrc
 </code></pre>
 
-<h1 id="installing-software-in-the-future">Installing software in the future</h1>
+<p>After executing this, you should be able to run <code>conda</code> and look for software environments</p>
+<p>To see the installed environments, run</p>
+<pre><code>conda info --envs
+</code></pre>
+
+<p>To activate the <code>tara</code> environment, which contains all software we'll use in the workshop, run</p>
+<pre><code>source activate tara
+</code></pre>
+
+<p>When you want to exit this environment later, you can execute <code>source deactivate</code> to return to the <code>base</code> env.</p>
+<h2 id="installing-this-software-in-the-future">Installing this software in the future</h2>
 <p>First, make sure you've set up conda (<a href="../working-with-bioconda/">here</a>).</p>
 <p>Then  create an environment to work in:</p>
 <pre><code>conda create -n tara
@@ -589,6 +766,41 @@ source ~/.bashrc
         
 <footer class="md-footer">
   
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../cicese-cluster/" title="Cluster login" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Cluster login
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../tara-sample-data/" title="TARA Sample Data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                TARA Sample Data
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
