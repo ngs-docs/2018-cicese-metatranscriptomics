@@ -553,6 +553,19 @@
     Run the assembler
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-megahit-assembly" title="from megahit assembly" class="md-nav__link">
+    from megahit assembly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -610,9 +623,10 @@ ls
 
 <h2 id="run-the-assembler">Run the assembler</h2>
 <p>Let's run an assembly:</p>
-<pre><code>time plass assemble --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer
+<pre><code>plass assemble 
 </code></pre>
 
+<h4 id="from-megahit-assembly">from megahit assembly</h4>
 <p>This will take about 10 minutes; at the end you should see output like this:</p>
 <pre><code>--- [STAT] 11733 contigs, total 5202861 bp, min 200 bp, max 4235 bp, avg 443 bp, N50 465 bp
 --- [Wed Nov  7 02:13:12 2018] ALL DONE. Time elapsed: 431.097547 seconds ---

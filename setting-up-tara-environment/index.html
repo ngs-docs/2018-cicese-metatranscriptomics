@@ -700,8 +700,8 @@ so much better!</p>
 <h2 id="installing-the-software-for-this-course">Installing the software for this course</h2>
 <p>We already installed conda for you, but you will need to tell your terminal where
 to look for that software. You can do this by executing the following:</p>
-<pre><code>echo &quot;export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH&quot; &gt;&gt; ~/.bashrc
-echo &quot;export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
+<pre><code>echo 'export PATH=/LUSTRE/apps/workshop/miniconda3/bin:$PATH' &gt;&gt; ~/.bashrc
+echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' &gt;&gt; ~/.bashrc
 source ~/.bashrc
 </code></pre>
 
@@ -716,8 +716,10 @@ source ~/.bashrc
 
 <p>When you want to exit this environment later, you can execute <code>source deactivate</code> to return to the <code>base</code> env.</p>
 <h2 id="installing-this-software-in-the-future">Installing this software in the future</h2>
-<p>First, make sure you've set up conda (<a href="../working-with-bioconda/">here</a>).</p>
-<p>Then  create an environment to work in:</p>
+<p>In the future, if you want to run the tutorials on your own, you'll
+need to set up conda in your own account -
+<a href="../working-with-bioconda/">see instructions</a>).</p>
+<p>Then create an environment to work in:</p>
 <pre><code>conda create -n tara
 </code></pre>
 
@@ -742,7 +744,7 @@ tar xvf transrate-1.0.3-linux-x86_64.tar.gz
 </code></pre>
 
 <p>To put transrate in your path, you can execute:</p>
-<pre><code>echo &quot;export PATH=&lt;path-to-transrate&gt;/transrate-1.0.3-linux-x86_64:$PATH&quot; &gt;&gt; ~/.bashrc
+<pre><code>echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' &gt;&gt; ~/.bashrc
 source ~/.bashrc
 </code></pre>
 

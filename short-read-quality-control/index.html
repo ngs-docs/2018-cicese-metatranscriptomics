@@ -729,16 +729,17 @@ from <a href="https://www.nature.com/articles/sdata201793#t1">Alberti et al., 20
 <h2 id="set-up-workspace-and-download-the-data">Set up workspace and download the data</h2>
 <p>First, make some directories to work in:</p>
 <pre><code>cd
-mdkir -p work/data
+mkdir -p work/data
 </code></pre>
 
 <p>Next, change into the data dir and download the data subsets:</p>
 <pre><code>cd work/data
-curl -L https://osf.io/jqda5/download -o tara135_250k.zip
+curl -L https://osf.io/76qm3/download -o tara135_1m.zip
+curl -L https://osf.io/y5dfh/download -o tara136-137_1m.zip
 </code></pre>
 
 <p>Now, let's unzip and make the files difficult to delete</p>
-<pre><code>unzip tara135_250k.zip 
+<pre><code>unzip tara135_1m.zip 
 
 chmod u-w *fq.gz
 </code></pre>
@@ -754,7 +755,7 @@ of this tara working directory:</p>
 
 <p>If you see all the files you think you should, good!  Otherwise, debug.</p>
 <p>These are FASTQ files -- let's take a look at them:</p>
-<pre><code>zless $PROJECT/data//TARA_135_DCM_5-20_rep1_250k_1.fq.gz
+<pre><code>zless $PROJECT/data//TARA_135_DCM_5-20_rep1_1m_1.fq.gz
 </code></pre>
 
 <p>(use the spacebar to scroll down, and type 'q' to exit 'zless')</p>
@@ -863,11 +864,11 @@ scp username@ip.address:~/work/quality/*html ~/Desktop/tara_fastqc
 <pre><code>cd $PROJECT
 mkdir -p trim
 cd trim
-ln -s ../data/*/*.fq.gz .
-cat ~/miniconda3/envs/tara/share/trimmomatic*/adapters/* &gt; combined.fa
+ln -s ../data/*.fq.gz .
+cat /LUSTRE/apps/workshop/miniconda3/envs/tara/share/trimmomatic*/adapters/* &gt; combined.fa
 </code></pre>
 
-<p>See excellent paper on trimming from <a href="http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full">MacManes 2014</a>.</p>
+<p>See this excellent paper on trimming from <a href="http://journal.frontiersin.org/article/10.3389/fgene.2014.00013/full">MacManes 2014</a>.</p>
 <p>Run:</p>
 <pre><code>for filename in *1.fq.gz
 do
