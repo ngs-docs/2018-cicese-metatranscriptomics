@@ -149,7 +149,12 @@ work with many samples.
 
 ```
 wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/plot-gather.py
+
+python plot-gather.py
 ```
+
+this will produce a file 'plot-gather.png' that we need to download in order
+to visualize.
 
 We can see that the reads have more matches than the assembly. 
 [Here](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/plot-gather.png) is a copy of the output
