@@ -35,8 +35,7 @@ Lunch
 
   - [Error Trimming](khmer-trimming.md)
   - [Metatranscriptome Assembly with Megahit](megahit-assembly.md)
-  - [Assessing assembly quality](evaluation.md)
-  - [Read mapping and quantification](read-mapping.md)
+  - [Assessing assembly quality](evaluation-and-mapping.md)
   - [Annotating your assembly](annotation.md)
   - [Counting transcriptomes](count_transcriptomes.md)
   

@@ -52,7 +52,7 @@ nav:
       - 'Count Transcriptomes': 'count_transcriptomes.md'
 
   - 'Day 2':
-      - 'Assembly Evaluation': 'evaluation.md'
+      - 'Assembly Evaluation': 'evaluation-and-mapping.md'
       - 'Mapping reads to the Assembly': 'read-mapping.md'
       - 'Assembly Annotation': 'annotation.md'
       - 'Visualize with anvio': 'anvio.md'
