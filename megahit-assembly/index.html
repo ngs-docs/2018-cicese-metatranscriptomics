@@ -290,12 +290,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       Day 1
@@ -390,6 +388,32 @@
     </a>
   </li>
 
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Day 2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Day 2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -506,38 +530,14 @@
   </li>
 
         
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      Day 2
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        Day 2
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
           
           
           
 
 
   <li class="md-nav__item">
-    <a href="../evaluation-and-mapping/" title="Assembly Evaluation" class="md-nav__link">
-      Assembly Evaluation
+    <a href="../evaluation-and-mapping/" title="Assembly Evaluation and Quantification" class="md-nav__link">
+      Assembly Evaluation and Quantification
     </a>
   </li>
 
@@ -667,7 +667,7 @@
 <p>The basic idea with any transcriptome assembly is you feed in your reads and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA. </p>
 <p>These contigs will represent transcripts that come from the eukaryotic organisms (poly-A mRNAseq reads) found in each environmental sample.</p>
 <h2 id="install-megahit">Install Megahit</h2>
-<p>We already installed megahit for you, but <a href="../setting-up-tara-environment/">setup</a>, but here's the installation command for future reference.</p>
+<p>We already installed megahit for you in <a href="../setting-up-tara-environment/">setup</a>, but here's the installation command for future reference.</p>
 <pre><code>conda install megahit
 </code></pre>
 
