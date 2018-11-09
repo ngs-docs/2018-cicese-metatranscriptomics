@@ -86,8 +86,11 @@ ln -s LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_full_mega
 * How do the two transcriptomes compare with each other?
 
 ```
-transrate --reference=tara135_SRF_full_megahit.fasta --assembly=tara135_SRF_megahit.fasta --output=full_v_subset
-transrate --reference=tara135_SRF_megahit.fasta --assembly=tara135_SRF_full_megahit.fasta --output=subset_v_full
+# full vs. subset
+transrate --reference=tara_f135_full_megahit.fasta --assembly=tara135_SRF_megahit.fasta --output=full_v_subset
+
+# subset vs. full
+transrate --assembly=tara_f135_full_megahit.fasta --reference=tara135_SRF_megahit.fasta --output=subset_v_full
 ```
 
 ## How well does this assembly represent our sequenced reads? 
