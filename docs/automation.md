@@ -1,7 +1,9 @@
 # Automation via shell scripts and snakemake
 
-# Automation via shell scripts and snakemake
+Note: This lesson was written as part of [DIBSI 2018](http://ivory.idyll.org/dibsi/) 
+by C. Titus Brown. Links to the data are all provided, so you should be able to follow along. 
 
+ 
 Learning objectives:
 
 * understand how to write shell scripts
@@ -19,7 +21,7 @@ rm -fr data rnaseq
 
 ### Install the necessary software and data
 
-You'll need to have conda and RStudio installed (see [installation instructions](jetstream-bioconda-config.html)).
+You'll need to have conda and RStudio installed (see [installation instructions](https://angus.readthedocs.io/en/2018/jetstream-bioconda-config.html)).
 
 Then install salmon and edgeR:
 
@@ -32,7 +34,7 @@ curl -L -O https://raw.githubusercontent.com/ngs-docs/angus/2018/scripts/install
 sudo Rscript --no-save install-edgeR.R
 ```
 
-You'll also need the yeast data from [trimming](quality-and-trimming.html#data-source) again:
+You'll also need the yeast data from [trimming](https://dibsi-rnaseq.readthedocs.io/en/latest/quality-trimming.html) again:
 
 ```
 cd ~/
