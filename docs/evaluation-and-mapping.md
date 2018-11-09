@@ -99,13 +99,13 @@ ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_*.qc.fq.gz ./
 ```
 
 
-# Mapping reads to a metatranscriptome
+# Quantifying reads with Salmon
 
 We will use [Salmon](http://salmon.readthedocs.org/en/latest/) to
 quantify expression. Salmon is a new breed of software for quantifying RNAseq reads that is both really fast and takes
-transcript length into consideration ([Patro et al. 2017](https://www.nature.com/articles/nmeth.4197)).
+transcript length into consideration ([Patro et al. 2017](https://www.nature.com/articles/nmeth.4197)). 
 
-For further reading, see
+You can read more about salmon-like "pseudoalignment" here: 
 
   * Intro blog post: http://robpatro.com/blog/?p=248
   * A 2016 blog post evaluating and comparing methods [here](https://cgatoxford.wordpress.com/2016/08/17/why-you-should-stop-using-featurecounts-htseq-or-cufflinks2-and-start-using-kallisto-salmon-or-sailfish/)
@@ -116,6 +116,7 @@ For further reading, see
 ## Quantification with Salmon
 
 Check that salmon is available and see run options:
+
 ```
 salmon -h
 ```
@@ -268,7 +269,7 @@ with 1 million reads, but this is still a good test.
 
 What might this say about our samples?
 
-## Another way to assess read mapping?
+## Another way to assess read mapping
 
 Transrate actually  has a `read assessment` mode that uses `salmon` to "align" reads to the transcriptome and generates some metrics on read mapping. 
 
