@@ -6,15 +6,15 @@ them below, as well as some useful observations we have found when using the
 tools.
 
 ## Finding Data
-+ [Sequence Read Archive]()
-+ [European Nucleotide Archive]()
-+ [GenBank]()
-+ [NCBI Taxonomy]()
++ [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra/docs/)
++ [European Nucleotide Archive](https://www.ebi.ac.uk/ena)
++ [GenBank](https://www.ncbi.nlm.nih.gov/genbank/)
++ [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy)
 
 ## Quality Trimming and Evalution
-+ [Trimmomatic]()
-+ [FastQC]()
-+ [MultiQC]()
-+ [CutAdapt]() -- Very good at removing polyA tails
++ [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
++ [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
++ [MultiQC](https://multiqc.info/)
++ [CutAdapt](https://cutadapt.readthedocs.io/en/stable/guide.html) -- Very good at removing polyA tails
 
 ##  
