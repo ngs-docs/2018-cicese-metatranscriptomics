@@ -25,11 +25,11 @@
       
         <meta name="lang:search.pipeline.trimmer" content="True">
       
-        <meta name="lang:search.result.none" content="No matching documents">
+        <meta name="lang:search.result.none" content="No matching pages">
       
-        <meta name="lang:search.result.one" content="1 matching document">
+        <meta name="lang:search.result.one" content="1 matching page">
       
-        <meta name="lang:search.result.other" content="# matching documents">
+        <meta name="lang:search.result.other" content="# matching page">
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
@@ -143,7 +143,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="Search this site" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -153,7 +153,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="result">
           <div class="md-search-result__meta">
-            Type to start searching
+            Type to start searching this site
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -174,12 +174,6 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -222,12 +216,6 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -511,13 +499,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#download-file-from-the-internet-to-your-remote-machine" title="Download file from the internet to your remote machine" class="md-nav__link">
-    Download file from the internet to your remote machine
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#transfer-files-from-your-instance-with-filezilla" title="Transfer Files From Your Instance with Filezilla" class="md-nav__link">
     Transfer Files From Your Instance with Filezilla
   </a>
@@ -571,25 +552,15 @@
                 <h1 id="downloading-and-transferring-files">Downloading and Transferring Files</h1>
 <p>Our goals for this lesson are:</p>
 <ul>
-<li>Download a file from the internet with wget</li>
 <li>Transfer a file from a remote machine to your computer with FileZilla</li>
 <li>Transfer a file from your computer to a remote machine with FileZilla</li>
 <li>Name other tools that can be used for file transfer</li>
 </ul>
-<h2 id="download-file-from-the-internet-to-your-remote-machine">Download file from the internet to your remote machine</h2>
-<p>One way to download files to your remote instance from a webserver is to use the command line tool, <em>wget</em>. This command supports downloading files from FTP and HTTP(s). The tool <em>wget</em> also supports recursive download (with the parameter <em>-r</em>), allowing you to download content from a directory or folder. For your information, there are other command line tools that can also be used to download data (e.g., <em>curl</em>), but <em>wget</em> should serve you well for this lesson and bioinformatic analysis.</p>
-<p>An example of this would be: </p>
-<pre><code class="bash">$ cd ~
-$ wget https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg 
-</code></pre>
-
-<p>And now, you will have a file named <code>cat-pet-animal-domestic-104827.jpeg</code> on your remote instance in our home directory. </p>
-<p>Now we have a conundrum! We have downloaded a file that we know is a cat photo, but we can't view it on our remote machine! Let's use FileZilla to facilitate the transfer so we can take a look.</p>
 <h2 id="transfer-files-from-your-instance-with-filezilla">Transfer Files From Your Instance with Filezilla</h2>
-<p>Let's pretend that we didn't just grab that cat photo from the internet, and we have something unique that we would like to view. For this, <em>wget</em> would not work. Instead, you can use FileZilla to transfer a file from your local machine to a remote instance, or vice versa. </p>
+<p>We've made a lot of plots and QC files that would be nice for us to be able to view. and we have something unique that we would like to view. We will show you have to use FileZilla to transfer a file from your local machine to the cluster, or vice versa. </p>
 <h3 id="open-the-site-manager">Open the site manager</h3>
 <p>Open <em>FileZilla</em>, and click on the File tab. Choose 'Site Manager'.</p>
-<p><img alt="FileZilla_step1" src="_static/filezilla_1.png" /></p>
+<p><img alt="FileZilla_step1" src="../files/filezilla1.png" /></p>
 <h3 id="add-your-instances-as-a-site">Add your instances as a site</h3>
 <p>Within the 'Site Manager' window, do the following: </p>
 <ol>
@@ -601,11 +572,15 @@ $ wget https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jp
 <li>Password: The password you use to log on to your instance. </li>
 <li>Click 'Connect'</li>
 </ol>
-<p><img alt="FileZilla_step2" src="_static/filezilla_site_add.png" /></p>
+<p><img alt="FileZilla_step2" src="../files/filezilla2.png" /></p>
+<p>You may see a dialogue pop up like this. Click ok!</p>
+<p><img alt="FileZilla step3" src="../files/filezilla3.png" /></p>
+<p>Then, at the top of the screen, enter your host, username, and password, and click connect.</p>
+<p><img alt="FileZilla step4" src="../files/filezilla4.png" /></p>
 <h3 id="filezilla-step-3">Filezilla - Step 3</h3>
-<p>In FileZilla, on the left side of the screen navigate to the location you would like to save the file, and on the right side of the screen navigate through your remote directory to the file <code>~/cat-pet-animal-domestic-104827.jpeg</code>. Double click on the .jpeg file to transfer a copy, or click and drag over to the right hand panel.</p>
-<p>Open the file on your local machine, and bask in the glory of the cute cat.</p>
-<p>We could also use <code>scp</code> or <code>rsync</code> to transfer files. These are command line utilities. If you're transferring a large datafile, <code>rsync</code> may be slightly better, because if the download fails it will restart from where it left off. 
+<p>In FileZilla, on the left side of the screen navigate to the location you would like to save the file, and on the right side of the screen navigate through your remote directory until you find one of the plots we made earlier. Double click on the file to transfer a copy, or click and drag over to the right hand panel.</p>
+<p>Open the file on your local machine, and bask in the glory of the plot you made!</p>
+<p>We could also use <code>scp</code> or <code>rsync</code> to transfer files. These are command line utilities. If you're transferring a large datafile, <code>rsync</code> may be slightly better, because if the download fails it will restart from where it left off. The omica cluster doesn't allow us to use these tools by default, but many other clusters or cloud machines do, so it's good to keep them in mind. 
 + <a href="https://rsync.samba.org/">rsync</a>
 + scp</p>
                 
