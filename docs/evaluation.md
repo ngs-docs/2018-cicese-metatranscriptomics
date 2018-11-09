@@ -2,7 +2,17 @@
 Let's do some basic evaluation of our assembly.
 
 
-First, let's create a folder `evaluation` to work in:
+## Set up the directory 
+
+First, make sure you have the `PROJECT` variable defined:
+
+```
+echo $PROJECT
+```
+if you don't see any output, make sure to redefine the $PROJECT variable.
+
+	
+Now, let's create a folder `evaluation` to work in:
 
 ```
 cd $PROJECT
@@ -22,13 +32,12 @@ cp $PROJECT/assembly/tara135_SRF_megahit.fasta ./
 
 We have installed transrate for you. However, if you need to install it in the future, see installation instructions [here](setting-up-tara-environment.md).
 
-
 See options for running transrate:
 ```
 transrate -h
 ```
 
-First, let's use transrate to calculate some stats on our assembly contigs:
+Let's use transrate to calculate some stats on our assembly contigs:
 
 ```
 transrate --assembly tara135_SRF_megahit.fasta
@@ -67,25 +76,9 @@ You should see output that looks like this:
 [ INFO] 2018-11-06 23:50:35 : Writing analysis results to assemblies.csv
 ```
 
-Now let's link in the reads we used to generate this assembly: 
+## Comparing Assemblies
 
-```
-ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_rep1_*.qc.fq.gz ./
-```
-
-Run transrate in `read assessment` mode:
-
-```
-transrate --assembly=tara135_SRF_megahit.fasta --threads=2 --left=*_1.qc.fq.gz --right *_2.qc.fq.gz --output=${PROJECT}/evaluation/tara135_SRF_transrate
-```
-
-Questions:
-* What is the transrate score?
-* When you run the command above again with this transcriptome assembled from all of the reads in the Nematostella data set, does the score improve?
-
-
-
-We built a transcriptome with the full set of TARA_SRF reads. Copy this into your evaluation directory
+We built a metatranscriptome with the full set of TARA_SRF reads. Copy this into your evaluation directory
 ```
 cd ${PROJECT}/evaluation
 cp tara125_SRF_full_megahit.fasta ./
@@ -98,32 +91,18 @@ transrate --reference=tara135_SRF_full_megahit.fasta --assembly=tara135_SRF_mega
 transrate --reference=tara135_SRF_megahit.fasta --assembly=tara135_SRF_full_megahit.fasta --output=subset_v_full
 ```
 
+## Assess Read Mapping
 
-## BUSCO
-
-* Eukaryota database used with 303 "BUSCO group" genes
-* Metazoa database: 982 BUSCO groups
-* "Complete" lengths are within two standard deviations of the BUSCO group mean length
-
-* Useful links:
-  * Website: [http://busco.ezlab.org/](http://busco.ezlab.org/)
-  * Paper: [Simao et al. 2015](http://bioinformatics.oxfordjournals.org/content/31/19/3210)
-  * [User Guide](http://gitlab.com/ezlab/busco/raw/master/BUSCO_v2.0_userguide.pdf)
-
-## Run BUSCO assessment:
+It's useful to know how well the transcripts represent the sequenced reads. To do this, we'll need to link in the reads we used to generate this assembly: 
 
 ```
-run_BUSCO.py -i tara135_SRF_megahit.fasta -o tara135_busco_metazoa \ 
--l /LUSTRE/apps/workshop/busco_dbs/metazoa_odb9 -m transcriptome --cpu 2
+ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_*.qc.fq.gz ./
 ```
 
-Check the output:
+Transrate actually  has a `read assessment` mode that uses `salmon` to "align" reads to the transcriptome and generates some metrics on read mapping. 
+
+We won't run this today, but you could run it via:
 
 ```
-cat run_tara135_busco_metazoa/short_summary_tara135_busco_metazoa.txt
+transrate --assembly=tara135_SRF_megahit.fasta --threads=2 --left=*_1.qc.fq.gz --right *_2.qc.fq.gz --output=${PROJECT}/evaluation/tara135_SRF_transrate
 ```
-
-How does the full transcriptome compare?
-
-
-
