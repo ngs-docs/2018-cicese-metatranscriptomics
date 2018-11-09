@@ -14,7 +14,7 @@ These contigs will represent transcripts that come from the eukaryotic organisms
 
 ## Install Megahit
 
-We already installed megahit for you, but [setup](setting-up-tara-environment.md), but here's the installation command for future reference.
+We already installed megahit for you in [setup](setting-up-tara-environment.md), but here's the installation command for future reference.
 
 ```
 conda install megahit

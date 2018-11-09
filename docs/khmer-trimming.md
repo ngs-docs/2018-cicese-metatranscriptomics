@@ -2,7 +2,7 @@
 
 ## Why (or why not) do k-mer trimming?
 
-Even after quality trimming with Trimmomatic, our reads will still contain erros. Why? 
+Even after quality trimming with Trimmomatic, our reads will still contain errors. Why? 
 
 First, Trimmomatic trims based solely on the quality score, which is a statistical statement about the correctness of a base - a Q score of 30 means that, of 1000 bases with that Q score, 1 of those bases will be wrong. So, a base can have a high Q score and still be wrong! (and many bases will have a low Q score and still be correct)
 
@@ -14,7 +14,7 @@ An alternative to trimming based on the quality scores is to trim based on k-mer
 
 The basic logic is this: if you see low abundance k-mers in a high coverage data set, those k-mers are almost certainly the result of errors. (Caveat: strain variation could also create them.)
 
-In metagenomic data sets we do have the problem that we may have very low and very high coverage data. So we don’t necessarily want to get rid of all low-abundance k-mers, because they may represent truly low abundance (but useful) data.
+In metatranscriptomic data sets we do have the problem that we may have very low and very high coverage data. So we don’t necessarily want to get rid of all low-abundance k-mers, because they may represent truly low abundance (but useful) data.
 
 As part of the khmer project in our lab, we have developed an approach that sorts reads into high abundance and low abundance reads, and only error trims the high abundance reads.
 
@@ -25,7 +25,7 @@ This does mean that many errors may get left in the data set, because we have no
 
 ## Kmer trimming with Khmer
 
-To properly compare our TARA samples, we need to remove these sequence errors. This can also speed up assembly and reduce memory 
+To properly compare our TARA samples,  it would be best to remove these sequence errors. This can also speed up assembly and reduce memory 
 requirements (although many assemblers have built in k-mer trimming mechanisms as well).
 
 
