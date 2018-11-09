@@ -626,6 +626,8 @@ derived from our de novo assembly of our metatranscriptome. We will use
 <a href="https://pfam.xfam.org/">Pfam</a> domains and a tool called <a href="http://hmmer.org/">HMMER</a> 
 to help us locate all of the matching sequences. Then, we will extract our matches and 
 filter those that are highly similar. </p>
+<p>Below is a picture representation of the HMM profile we will be working with. </p>
+<p><img alt="rpsG seq logo" src="https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/rpsg_logo_image.png" /></p>
 <p>Because we are only searching in our assembly, this method only captures the number of 
 transcriptomes that assembled.</p>
 <h2 id="_1"></h2>
@@ -634,8 +636,14 @@ transcriptomes that assembled.</p>
 cd ${PROJECT}/count-transcriptomes
 </code></pre>
 
-<p>Next let's download our Pfam domain. </p>
-<pre><code>wget -O PF00177-full.sto http://pfam.xfam.org/family/PF00177/alignment/full
+<p>Then let's link in the peptide sequences (ORFs) predicted from our 
+full transcriptome assembly.</p>
+<pre><code>ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_megahit_full.transdecoder.pep .
+</code></pre>
+
+<p>Next let's link in an alignment of a Pfam domain for RpsG. 
+In the future, you can download this alignment <a href="http://pfam.xfam.org/family/PF00177/alignment/full">here</a> </p>
+<pre><code>ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/PF00177-full.sto .
 </code></pre>
 
 <p>Next we'll build a HMM profile of the Pfam domain. </p>
@@ -644,7 +652,7 @@ hmmpress PF00177.hmm
 </code></pre>
 
 <p>We then use the HMM profile to search the proteins from our assembly</p>
-<pre><code>hmmscan -T 100 --tblout PF00177-full-tbl.txt --domtblout PF00177-full-domtbl.txt PF00177-full.hmm TARA_135_DCM_5-20_rep1_250k.contigs.fa.transdecoder.pep
+<pre><code>hmmscan -T 100 --tblout PF00177-full-tbl.txt --domtblout PF00177-full-domtbl.txt PF00177-full.hmm tara_f135_megahit_full.transdecoder.pep 
 </code></pre>
 
 <p>Let's take a look at one of the files output by this search</p>
@@ -658,9 +666,8 @@ our assembly</p>
 cat PF00177-full-tbl.txt | Rscript -e 'writeLines(noquote(read.table(&quot;stdin&quot;, stringsAsFactors = F)$V3))' &gt; PF00177-names.txt
 
 # extract the matches
-wget https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/extract-hmmscan-matches.py
-python extract-hmmscan-matches.py PF00177-names.txt TARA_135_DCM_5-20_rep1_250k.contigs.fa.transdecoder.pep &gt; PF00177.faa
-# python extract-hmmscan-matches.py PF00177-names.txt tara_f135_megahit.fasta.transdecoder_dir/longest_orfs.pep &gt; PF00177.faa
+ln -s /LUSTRE/bioinformatica_data/bioinformatica2018/extract-hmmscan-matches.py .
+python extract-hmmscan-matches.py PF00177-names.txt tara_f135_megahit_full.transdecoder.pep &gt; PF00177.faa
 </code></pre>
 
 <p>Let's count the number of sequences that matched </p>
