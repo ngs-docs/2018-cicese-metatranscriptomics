@@ -457,20 +457,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
+    <a href="../evaluation-and-mapping/" title="Assembly Evaluation" class="md-nav__link">
       Assembly Evaluation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../read-mapping/" title="Mapping reads to the Assembly" class="md-nav__link">
-      Mapping reads to the Assembly
     </a>
   </li>
 
@@ -493,18 +481,6 @@
       Assembly Annotation
     </a>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../anvio/" title="Visualize with anvio" class="md-nav__link">
-      Visualize with anvio
-    </a>
   </li>
 
         
@@ -560,15 +536,11 @@ transcripts, we must first find the most likely open reading frames (ORFs)</p>
 <h1 id="annotating-transcriptomes-and-metatranscriptomes-with-dammit">Annotating transcriptomes and metatranscriptomes with dammit</h1>
 <p>dammit!</p>
 <p><a href="http://www.camillescott.org/dammit/index.html">dammit</a> is an annotation
-pipeline written by <a href="http://www.camillescott.org/">Camille
-Scott</a>. dammit runs a relatively standard annotation
+pipeline written by <a href="http://www.camillescott.org/">Camille Scott</a>. dammit runs a relatively standard annotation
 protocol for transcriptomes: it begins by building gene models with <a href="http://transdecoder.github.io/">Transdecoder</a>,
-and then
-uses the following protein databases as evidence for annotation:
-<a href="http://pfam.xfam.org/">Pfam-A</a>, <a href="http://rfam.xfam.org/">Rfam</a>,
-<a href="http://www.orthodb.org/">OrthoDB</a>,
-<a href="http://www.uniprot.org/help/uniref">uniref90</a> (uniref is optional with
-<code>--full</code>).</p>
+and then uses the following protein databases as evidence for annotation:
+<a href="http://pfam.xfam.org/">Pfam-A</a>, <a href="http://rfam.xfam.org/">Rfam</a>, <a href="http://www.orthodb.org/">OrthoDB</a>,
+<a href="http://www.uniprot.org/help/uniref">uniref90</a> (uniref is optional with <code>--full</code>).</p>
 <p>If a protein dataset is available, this can also be supplied to the
 <code>dammit</code> pipeline with <code>--user-databases</code> as optional evidence for
 annotation.</p>
@@ -576,8 +548,7 @@ annotation.</p>
 with a lineage-specific data set. The output is a proportion of your
 transcriptome that matches with the data set, which can be used as an
 estimate of the completeness of your transcriptome based on evolutionary
-expectation (<a href="http://bioinformatics.oxfordjournals.org/content/31/19/3210.full">Simho et al.
-2015</a>).
+expectation (<a href="http://bioinformatics.oxfordjournals.org/content/31/19/3210.full">Simho et al. 2015</a>).
 There are several lineage-specific datasets available from the authors
 of BUSCO. We will use the <code>metazoa</code> dataset for this transcriptome.</p>
 <h2 id="installation">Installation</h2>
@@ -622,7 +593,7 @@ mkdir -p annotation
 cd annotation
 </code></pre>
 
-<p>We all ran megahit earlier to generate an assembly. Let's link that assembly to this directory</p>
+<p>We ran megahit earlier to generate an assembly. Let's link that assembly to this directory</p>
 <pre><code>ln -s $PROJECT/assembly/tara135_SRF_megahit.fasta ./
 </code></pre>
 
@@ -632,7 +603,7 @@ cd annotation
 </code></pre>
 
 <p>While dammit runs, it will print out which tasks its running to the terminal. dammit is
-written with a library called <a href="www.pydoit.org">pydoit</a>, which is a python workflow library similar
+written with a library called <a href="http://www.pydoit.org">pydoit</a>, which is a python workflow library similar
 to GNU Make. This not only helps organize the underlying workflow, but also means that if we
 interrupt it, it will properly resume!</p>
 <p>After a successful run, you'll have a new directory called <code>tara135_SRF_megahit.fasta.dammit</code>. If you
@@ -640,42 +611,10 @@ look inside, you'll see a lot of files:</p>
 <pre><code>ls tara135_SRF_megahit.fasta.dammit/
 </code></pre>
 
-<pre><code>    annotate.doit.db                              trinity.nema.fasta.dammit.namemap.csv  trinity.nema.fasta.transdecoder.pep
-    dammit.log                                    trinity.nema.fasta.dammit.stats.json   trinity.nema.fasta.x.nema.reference.prot.faa.crbl.csv
-    run_tara135_SRF_megahit.fasta.metazoa.busco.results  trinity.nema.fasta.transdecoder.bed    trinity.nema.fasta.x.nema.reference.prot.faa.crbl.gff3
-    tmp                                           trinity.nema.fasta.transdecoder.cds    trinity.nema.fasta.x.nema.reference.prot.faa.crbl.model.csv
-    trinity.nema.fasta                            trinity.nema.fasta.transdecoder_dir    trinity.nema.fasta.x.nema.reference.prot.faa.crbl.model.plot.pdf
-    trinity.nema.fasta.dammit.fasta               trinity.nema.fasta.transdecoder.gff3
-    trinity.nema.fasta.dammit.gff3                trinity.nema.fasta.transdecoder.mRNA
-</code></pre>
-
 <p>The most important files for you are <code>tara135_SRF_megahit.fasta.dammit.fasta</code>,
 <code>tara135_SRF_megahit.fasta.dammit.gff3</code>, and <code>tara135_SRF_megahit.fasta.dammit.stats.json</code>.</p>
 <p>If the above <code>dammit</code> command is run again, there will be a message:
 <code>**Pipeline is already completed!**</code></p>
-<h2 id="parse-dammit-output">Parse dammit output</h2>
-<p>Cammille wrote dammit in Python, which includes a library to parse gff3 dammit output. To send this output to a useful table, we will need to open the Python environemnt.</p>
-<pre><code>cd tara135_SRF_megahit.fasta.dammit
-python
-</code></pre>
-
-<p>Then, manually enter each line of code to output a list of gene ID:</p>
-<pre><code>import pandas as pd
-from dammit.fileio.gff3 import GFF3Parser
-gff_file = &quot;trinity.nema.fasta.dammit.gff3&quot;
-annotations = GFF3Parser(filename=gff_file).read()
-names = annotations.sort_values(by=['seqid', 'score'], ascending=True).query('score &lt; 1e-05').drop_duplicates(subset='seqid')[['seqid', 'Name']]
-new_file = names.dropna(axis=0,how='all')
-new_file.head()
-new_file.to_csv(&quot;nema_gene_name_id.csv&quot;)
-exit()
-</code></pre>
-
-<p>This will output a table of genes with 'seqid' and 'Name' in a .csv file: <code>nema_gene_name_id.csv</code>. Let's take a look at that file:</p>
-<pre><code>less tara135_SRF_megahit_gene_name_id.csv
-</code></pre>
-
-<p>Notice there are multiple transcripts per gene model prediction. This <code>.csv</code> file can be used in <code>tximport</code> in downstream DE analysis.</p>
 <h2 id="references">References</h2>
 <ol>
 <li>Putnam NH, Srivastava M, Hellsten U, Dirks B, Chapman J, Salamov A,
@@ -705,7 +644,7 @@ gene repertoire and genomic organization. Science. 317, 86-94.</li>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../read-mapping/" title="Mapping reads to the Assembly" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../evaluation-and-mapping/" title="Assembly Evaluation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -714,19 +653,19 @@ gene repertoire and genomic organization. Science. 317, 86-94.</li>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Mapping reads to the Assembly
+                Assembly Evaluation
               </span>
             </div>
           </a>
         
         
-          <a href="../anvio/" title="Visualize with anvio" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../working-with-bioconda/" title="Bioconda" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Visualize with anvio
+                Bioconda
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

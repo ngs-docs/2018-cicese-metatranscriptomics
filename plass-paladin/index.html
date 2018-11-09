@@ -455,20 +455,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
+    <a href="../evaluation-and-mapping/" title="Assembly Evaluation" class="md-nav__link">
       Assembly Evaluation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../read-mapping/" title="Mapping reads to the Assembly" class="md-nav__link">
-      Mapping reads to the Assembly
     </a>
   </li>
 
@@ -481,18 +469,6 @@
   <li class="md-nav__item">
     <a href="../annotation/" title="Assembly Annotation" class="md-nav__link">
       Assembly Annotation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../anvio/" title="Visualize with anvio" class="md-nav__link">
-      Visualize with anvio
     </a>
   </li>
 
@@ -672,13 +648,10 @@ done
 
 <h2 id="run-the-assembler">Run the assembler</h2>
 <p>Let's run an assembly:</p>
-<pre><code>plass assemble TARA_135_SRF_5-20_rep1_1m_1.khmer.fq.gz TARA_135_SRF_5-20_rep1_1m_2.khmer.fq.gz tara135_srf_plass.fasta --threads 2
+<pre><code>plass assemble TARA_135_SRF_5-20_rep1_1m_1.khmer.fq.gz TARA_135_SRF_5-20_rep2_1m_1.khmer.fq.gz TARA_135_SRF_5-20_rep1_1m_2.khmer.fq.gz TARA_135_SRF_5-20_rep2_1m_2.khmer.fq.gz tara135_srf_plass.fasta --threads 2
 </code></pre>
 
-<p>This will take about XX minutes; at the end you should see output like this:</p>
-<pre><code>&lt;put some output here&gt;
-</code></pre>
-
+<p>PLASS is not as fast as megahit, but not as slow as some other assemblers.</p>
 <p>The output assembly will be <code>tara135_srf_plass.fasta</code>.</p>
 <h2 id="looking-at-the-assembly">Looking at the assembly</h2>
 <p>Let's look at the beginning</p>

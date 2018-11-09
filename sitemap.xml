@@ -61,22 +61,12 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/evaluation/</loc>
-     <lastmod>2018-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/read-mapping/</loc>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/evaluation-and-mapping/</loc>
      <lastmod>2018-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/annotation/</loc>
-     <lastmod>2018-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/anvio/</loc>
      <lastmod>2018-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url>

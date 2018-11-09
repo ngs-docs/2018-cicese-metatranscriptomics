@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/read-mapping/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/evaluation-and-mapping/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Mapping reads to the Assembly - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Assembly Evaluation - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#mapping-reads-to-a-metatranscriptome" tabindex="1" class="md-skip">
+      <a href="../#set-up-the-directory" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Mapping reads to the Assembly
+                Assembly Evaluation
               </span>
             
           
@@ -455,18 +455,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../evaluation/" title="Assembly Evaluation" class="md-nav__link">
-      Assembly Evaluation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -477,59 +465,9 @@
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Mapping reads to the Assembly
-      </label>
-    
-    <a href="./" title="Mapping reads to the Assembly" class="md-nav__link md-nav__link--active">
-      Mapping reads to the Assembly
+    <a href="./" title="Assembly Evaluation" class="md-nav__link md-nav__link--active">
+      Assembly Evaluation
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quantification-with-salmon" title="Quantification with Salmon" class="md-nav__link">
-    Quantification with Salmon
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-directory-to-work-in" title="Create a directory to work in" class="md-nav__link">
-    Create a directory to work in
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#link-an-assembly" title="Link an assembly" class="md-nav__link">
-    Link an assembly
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-salmon" title="Run Salmon" class="md-nav__link">
-    Run Salmon
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
     
   </li>
 
@@ -542,18 +480,6 @@
   <li class="md-nav__item">
     <a href="../annotation/" title="Assembly Annotation" class="md-nav__link">
       Assembly Annotation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../anvio/" title="Visualize with anvio" class="md-nav__link">
-      Visualize with anvio
     </a>
   </li>
 
@@ -592,43 +518,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quantification-with-salmon" title="Quantification with Salmon" class="md-nav__link">
-    Quantification with Salmon
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-directory-to-work-in" title="Create a directory to work in" class="md-nav__link">
-    Create a directory to work in
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#link-an-assembly" title="Link an assembly" class="md-nav__link">
-    Link an assembly
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-salmon" title="Run Salmon" class="md-nav__link">
-    Run Salmon
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -640,7 +529,85 @@
               
                 
                 
-                <h1 id="mapping-reads-to-a-metatranscriptome">Mapping reads to a metatranscriptome</h1>
+                <p>How well did our assembly work?</p>
+<h2 id="set-up-the-directory">Set up the directory</h2>
+<p>First, make sure you have the <code>PROJECT</code> variable defined:</p>
+<pre><code>echo $PROJECT
+</code></pre>
+
+<p>if you don't see any output, make sure to redefine the $PROJECT variable.</p>
+<p>Now, let's create a folder <code>evaluation</code> to work in:</p>
+<pre><code>cd $PROJECT
+mkdir -p evaluation
+cd evaluation
+</code></pre>
+
+<p>Now, let's copy in the assembly we made in the previous lesson:</p>
+<pre><code>cp $PROJECT/assembly/tara135_SRF_megahit.fasta ./
+</code></pre>
+
+<h2 id="generate-assembly-statistics-with-transrate">Generate assembly statistics with Transrate</h2>
+<p><a href="http://hibberdlab.com/transrate/getting_started.html">Transrate</a> is a program that can be used for a couple different types of assembly evaluation. The first and simplest method is to calculate length-based metrics about the assembly, such as the total number of bases, and the N50 of the contigs. Transrate can also be used to compare two assemblies or give you a score which represents proportion of input reads that provide positive support for the assembly. For a further explanation of metrics and how to run the reference-based transrate, see the <a href="http://hibberdlab.com/transrate/metrics.html">documentation</a> and the paper by <a href="http://genome.cshlp.org/content/early/2016/06/01/gr.196469.115">Smith-Unna et al. 2016</a>. </p>
+<p>We have installed transrate for you. However, if you need to install it in the future, see installation instructions <a href="../setting-up-tara-environment/">here</a>.</p>
+<p>See options for running transrate:</p>
+<pre><code>transrate -h
+</code></pre>
+
+<p>Let's use transrate to calculate some stats on our assembly contigs:</p>
+<pre><code>transrate --assembly tara135_SRF_megahit.fasta
+</code></pre>
+
+<p>You should see output that looks like this:</p>
+<pre><code>[ INFO] 2018-11-06 23:50:35 : Loading assembly: /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara135_SRF_megahit.fasta
+[ INFO] 2018-11-06 23:50:35 : Analysing assembly: /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara135_SRF_megahit.fasta
+[ INFO] 2018-11-06 23:50:35 : Results will be saved in /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/transrate_results/tara135_SRF_megahit
+[ INFO] 2018-11-06 23:50:35 : Calculating contig metrics...
+[ INFO] 2018-11-06 23:50:35 : Contig metrics:
+[ INFO] 2018-11-06 23:50:35 : -----------------------------------
+[ INFO] 2018-11-06 23:50:35 : n seqs                         1502
+[ INFO] 2018-11-06 23:50:35 : smallest                        200
+[ INFO] 2018-11-06 23:50:35 : largest                        4998
+[ INFO] 2018-11-06 23:50:35 : n bases                      638347
+[ INFO] 2018-11-06 23:50:35 : mean len                      425.0
+[ INFO] 2018-11-06 23:50:35 : n under 200                       0
+[ INFO] 2018-11-06 23:50:35 : n over 1k                        40
+[ INFO] 2018-11-06 23:50:35 : n over 10k                        0
+[ INFO] 2018-11-06 23:50:35 : n with orf                      331
+[ INFO] 2018-11-06 23:50:35 : mean orf percent              83.54
+[ INFO] 2018-11-06 23:50:35 : n90                             232
+[ INFO] 2018-11-06 23:50:35 : n70                             360
+[ INFO] 2018-11-06 23:50:35 : n50                             453
+[ INFO] 2018-11-06 23:50:35 : n30                             599
+[ INFO] 2018-11-06 23:50:35 : n10                             935
+[ INFO] 2018-11-06 23:50:35 : gc                             0.51
+[ INFO] 2018-11-06 23:50:35 : bases n                           0
+[ INFO] 2018-11-06 23:50:35 : proportion n                    0.0
+[ INFO] 2018-11-06 23:50:35 : Contig metrics done in 0 seconds
+[ INFO] 2018-11-06 23:50:35 : No reads provided, skipping read diagnostics
+[ INFO] 2018-11-06 23:50:35 : No reference provided, skipping comparative diagnostics
+[ INFO] 2018-11-06 23:50:35 : Writing contig metrics for each contig to /LUSTRE/bioinformatica_data/bioinformatica2018/assembly/transrate_results/tara135_SRF_megahit/contigs.csv
+[ INFO] 2018-11-06 23:50:35 : Writing analysis results to assemblies.csv
+</code></pre>
+
+<h2 id="comparing-assemblies">Comparing Assemblies</h2>
+<p>We built a metatranscriptome with the full set of TARA_SRF reads. Copy this into your evaluation directory</p>
+<pre><code>cd ${PROJECT}/evaluation
+cp tara125_SRF_full_megahit.fasta ./
+</code></pre>
+
+<ul>
+<li>How do the two transcriptomes compare with each other?</li>
+</ul>
+<pre><code>transrate --reference=tara135_SRF_full_megahit.fasta --assembly=tara135_SRF_megahit.fasta --output=full_v_subset
+transrate --reference=tara135_SRF_megahit.fasta --assembly=tara135_SRF_full_megahit.fasta --output=subset_v_full
+</code></pre>
+
+<h2 id="how-well-does-this-assembly-represent-our-sequenced-reads">How well does this assembly represent our sequenced reads?</h2>
+<p>It's useful to know how well the transcripts represent the sequenced reads. To do this, we'll need to link in the reads we used to generate this assembly: </p>
+<pre><code>ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_*.qc.fq.gz ./
+</code></pre>
+
+<h1 id="mapping-reads-to-a-metatranscriptome">Mapping reads to a metatranscriptome</h1>
 <p>We will use <a href="http://salmon.readthedocs.org/en/latest/">Salmon</a> to
 quantify expression. Salmon is a new breed of software for quantifying RNAseq reads that is both really fast and takes
 transcript length into consideration (<a href="https://www.nature.com/articles/nmeth.4197">Patro et al. 2017</a>).</p>
@@ -753,10 +720,28 @@ the pattern we're searching for is the word 'Mapping', and we're searching in an
 ends in <code>quant</code> and has a logs directory with at least one file in it.</p>
 <p>How do the mapping rates compare? What does this tell us about our metatranscriptome?</p>
 <h2 id="how-well-does-quantification-capture-sample-distances">How well does quantification capture sample distances?</h2>
+<p>We made an MDS plot of our <code>sourmash compare</code> results yesterday. With our salmon
+<code>quant.sf</code> files, we can also make and MDS plot and see how different the two are.
+This will demonstrate how well mapping to our assembly captures the information
+in our reads. </p>
+<p>We already ran the code to do this, but if you want to see what it looks like, 
+you can find it <a href="https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/salmon_mds_plot.R">here</a>. It relies on the <code>quant.sf</code> files output by Salmon. </p>
+<p><img alt="sourmash" src="../files/tara-trimmed-comp-mds.pdf" />
+<img alt="salmon" src="../files/tara-salmon-mds.pdf" /></p>
+<p>Look how different they are! To be fair, we only mapped back to a full transcriptome
+with 1 million reads, but this is still a good test. </p>
+<h2 id="another-way-to-assess-read-mapping">Another way to assess read mapping?</h2>
+<p>Transrate actually  has a <code>read assessment</code> mode that uses <code>salmon</code> to "align" reads to the transcriptome and generates some metrics on read mapping. </p>
+<p>We won't run this today, but you could run it via:</p>
+<pre><code>transrate --assembly=tara135_SRF_megahit.fasta --threads=2 --left=*_1.qc.fq.gz --right *_2.qc.fq.gz --output=${PROJECT}/evaluation/tara135_SRF_transrate
+</code></pre>
+
 <h2 id="other-useful-tutorials-and-references">Other useful tutorials and references</h2>
-<p>https://github.com/ngs-docs/2015-nov-adv-rna/blob/master/salmon.rst
-http://angus.readthedocs.io/en/2016/rob_quant/tut.html
-https://2016-aug-nonmodel-rnaseq.readthedocs.io/en/latest/quantification.html</p>
+<ul>
+<li>https://github.com/ngs-docs/2015-nov-adv-rna/blob/master/salmon.rst</li>
+<li>http://angus.readthedocs.io/en/2016/rob_quant/tut.html</li>
+<li>https://2016-aug-nonmodel-rnaseq.readthedocs.io/en/latest/quantification.html</li>
+</ul>
                 
                   
                 
@@ -778,7 +763,7 @@ https://2016-aug-nonmodel-rnaseq.readthedocs.io/en/latest/quantification.html</p
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../evaluation/" title="Assembly Evaluation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -787,7 +772,7 @@ https://2016-aug-nonmodel-rnaseq.readthedocs.io/en/latest/quantification.html</p
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Assembly Evaluation
+                Count Transcriptomes
               </span>
             </div>
           </a>
