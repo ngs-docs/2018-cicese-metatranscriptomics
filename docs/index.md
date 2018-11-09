@@ -26,33 +26,26 @@ Lunch
   
   - [Taxonomic classification with sourmash gather](sourmash-taxonomic-classification.md)
   - [Sample Comparison](sample-comparison.md)
-  - [Error Trimming](khmer-trimming.md)
-  - [Metatranscriptome Assembly](megahit-assembly.md)
-  - [Counting transcriptomes](count_transcriptomes.md)
+  - Metatranscriptomic workflows and considerations
   
-
 
 ## Day 2: Nov 9, 2018
 
 **Morning:** 
 
-Working with Reads
-  
+  - [Error Trimming](khmer-trimming.md)
+  - [Metatranscriptome Assembly with Megahit](megahit-assembly.md)
   - [Assessing assembly quality](evaluation.md)
-  - [Read mapping and quantification](read-mapping.md)
-  - if time: [Annotating your assembly](annotation.md)
+  - [Counting transcriptomes](count_transcriptomes.md)
+  - [Annotating your assembly](annotation.md)
   
-  - Metatranscriptomic workflows and considerations
-
 Lunch 
 
 **Afternoon:** 
 
-  - tbd
+  - [Read mapping and quantification](read-mapping.md)
   - [Bioconda for software installation](working-with-bioconda.md)
-  - Snakemake, bioconda etc?
   - A brief discussion of workflows & repeatability
-
 
 
 
