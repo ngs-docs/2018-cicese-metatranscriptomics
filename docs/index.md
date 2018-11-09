@@ -36,14 +36,15 @@ Lunch
   - [Error Trimming](khmer-trimming.md)
   - [Metatranscriptome Assembly with Megahit](megahit-assembly.md)
   - [Assessing assembly quality](evaluation.md)
-  - [Counting transcriptomes](count_transcriptomes.md)
+  - [Read mapping and quantification](read-mapping.md)
   - [Annotating your assembly](annotation.md)
+  - [Counting transcriptomes](count_transcriptomes.md)
   
 Lunch 
 
 **Afternoon:** 
 
-  - [Read mapping and quantification](read-mapping.md)
+  - Filezilla
   - [Bioconda for software installation](working-with-bioconda.md)
   - A brief discussion of workflows & repeatability
 

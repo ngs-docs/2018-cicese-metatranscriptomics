@@ -42,7 +42,7 @@ ls
 Let's run an assembly:
 
 ```
-time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer -f
+time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz,TARA_135_SRF_5-20_rep2_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF --out-dir ./TARA_135_SRF_khmer -f
 ```
 
 This will take about 10 minutes; at the end you should see output like this:
@@ -52,26 +52,15 @@ This will take about 10 minutes; at the end you should see output like this:
 --- [Wed Nov  7 02:13:12 2018] ALL DONE. Time elapsed: 431.097547 seconds ---
 ```
 
-The output assembly will be `TARA_135_SRF_5-20_rep1_khmer/TARA_135_SRF_5-20.contigs.fa`.
-
-
-## If we have time, we can run all the assemblies: 
-```
-for filename in *khmer.pe.fq.gz
-do
-  base=$(basename $filename .khmer.pe.fq.gz)
-  echo $base
-  megahit --12 ${base}.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix $base --out-dir ${base}_khmer 
-done
-```
+The output assembly will be `TARA_135_SRF_khmer/TARA_135_SRF.contigs.fa`.
 
 
 ## Looking at the assembly
 
-First, let's copy the assembly to a better location:
+First, let's copy the assembly into our current directory:
 
 ```
-cp ./TARA_135_SRF_5-20_rep1_khmer/*contigs.fa tara135_SRF_megahit.fasta
+cp ./TARA_135_SRF_khmer/*contigs.fa tara135_SRF_megahit.fasta
 ```
 
 Now, look at the beginning:
@@ -81,7 +70,6 @@ head tara135_SRF_megahit.fasta
 ```
 
 These are the transcripts! Yay!
-
 
 
 ### What can we do with an assembly?
@@ -100,3 +88,12 @@ over the reads? And what can we do with this assembly?
   comparisons and so on may be more accurate. However, assembly also may
   eliminate some of the data if it's really low coverage, and abundance
   information is lost as well.
+
+
+## Further Reference
+
+There are other asssemblers you can try on your data, some of which are listed
+on our [References page](references.md). One that we are excited about is [PLASS](plass-paladin.md), 
+which does assembly at the protein level!
+
+
