@@ -76,14 +76,10 @@ done
 Let's run an assembly:
 
 ```
-plass assemble TARA_135_SRF_5-20_rep1_1m_1.khmer.fq.gz TARA_135_SRF_5-20_rep1_1m_2.khmer.fq.gz tara135_srf_plass.fasta --threads 2
+plass assemble TARA_135_SRF_5-20_rep1_1m_1.khmer.fq.gz TARA_135_SRF_5-20_rep2_1m_1.khmer.fq.gz TARA_135_SRF_5-20_rep1_1m_2.khmer.fq.gz TARA_135_SRF_5-20_rep2_1m_2.khmer.fq.gz tara135_srf_plass.fasta --threads 2
 ```
 
-This will take about XX minutes; at the end you should see output like this:
-
-```
-<put some output here>
-```
+PLASS is not as fast as megahit, but not as slow as some other assemblers.
 
 The output assembly will be `tara135_srf_plass.fasta`.
 
