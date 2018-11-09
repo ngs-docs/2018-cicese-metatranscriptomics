@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/automation-qc/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/automation/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Automatioin via shell scripts and snakemake - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Automation via shell scripts and snakemake - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#automatioin-via-shell-scripts-and-snakemake" tabindex="1" class="md-skip">
+      <a href="../#automation-via-shell-scripts-and-snakemake" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Automatioin via shell scripts and snakemake
+                Automation via shell scripts and snakemake
               </span>
             
           
@@ -495,103 +495,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#writing-a-shell-script" title="Writing a shell script" class="md-nav__link">
-    Writing a shell script
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#re-running-the-shell-script" title="Re-running the shell script" class="md-nav__link">
-    Re-running the shell script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#some-tricks-for-writing-shell-scripts" title="Some tricks for writing shell scripts" class="md-nav__link">
-    Some tricks for writing shell scripts
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#make-it-executable" title="Make it executable" class="md-nav__link">
-    Make it executable
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#another-good-addition-make-it-fail-nicely" title="Another good addition: make it fail nicely" class="md-nav__link">
-    Another good addition: make it fail nicely
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-final-good-addition-make-shell-scripts-print-out-the-commands-theyre-running" title="A final good addition: make shell scripts print out the commands they're running!" class="md-nav__link">
-    A final good addition: make shell scripts print out the commands they're running!
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-final-note-on-shell-scripts" title="A final note on shell scripts:" class="md-nav__link">
-    A final note on shell scripts:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#automation-with-snakemake" title="Automation with Snakemake!" class="md-nav__link">
-    Automation with Snakemake!
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#adding-and-environment" title="Adding and environment" class="md-nav__link">
-    Adding and environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-resources" title="Other resources" class="md-nav__link">
-    Other resources
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -603,48 +506,103 @@
               
                 
                 
-                <h1 id="automatioin-via-shell-scripts-and-snakemake">Automatioin via shell scripts and snakemake</h1>
-<p>For everything we have done so far, we have copied and pasted a lot of commands 
-to accomplish what we want. This works! But can also be time consuming, and is
-more prone to error. We will show you next how to put all of these commands into
-a shell script.</p>
-<p>A <strong>shell script</strong> is a text file full of shell commands, that run just as if you're 
-running them interactively at the command line.</p>
-<p>Here, we'll create one that takes the commands from the and runs 'em all at once.</p>
-<h2 id="writing-a-shell-script">Writing a shell script</h2>
-<p>Let's put all of our commands from the quality control lesson into one script. </p>
-<p>We'll call it <code>run_qc.sh</code>. The <code>sh</code> at the end of the tells you that this is a bash script. </p>
-<pre><code>cd ${PROJECT}
-mkdir -p quality
-cd quality
+                <h1 id="automation-via-shell-scripts-and-snakemake">Automation via shell scripts and snakemake</h1>
+<h1 id="automation-via-shell-scripts-and-snakemake_1">Automation via shell scripts and snakemake</h1>
+<p>Learning objectives:</p>
+<ul>
+<li>understand how to write shell scripts</li>
+<li>understand the differences between shell scripts and workflow engines</li>
+<li>develop a first snakemake workflow.</li>
+</ul>
+<p>We're going to reprise the RNAseq differential expression, but we're going to automate the heck out of it.</p>
+<h3 id="clean-off-old-stuff">Clean off old stuff</h3>
+<pre><code>cd ~/
+rm -fr data rnaseq
+</code></pre>
 
-ln -s ../data/*.fq.gz ./
+<h3 id="install-the-necessary-software-and-data">Install the necessary software and data</h3>
+<p>You'll need to have conda and RStudio installed (see <a href="jetstream-bioconda-config.html">installation instructions</a>).</p>
+<p>Then install salmon and edgeR:</p>
+<pre><code>cd ~/
 
-printf &quot;I see $(ls -1 *.fq.gz | wc -l) files here.\n&quot;
+conda install -y salmon
 
-fastqc *.fq.gz
+curl -L -O https://raw.githubusercontent.com/ngs-docs/angus/2018/scripts/install-edgeR.R
+sudo Rscript --no-save install-edgeR.R
+</code></pre>
 
-multiqc .
+<p>You'll also need the yeast data from <a href="quality-and-trimming.html#data-source">trimming</a> again:</p>
+<pre><code>cd ~/
+mkdir -p data
+cd data
+
+curl -L https://osf.io/5daup/download -o ERR458493.fastq.gz
+curl -L https://osf.io/8rvh5/download -o ERR458494.fastq.gz
+curl -L https://osf.io/2wvn3/download -o ERR458495.fastq.gz
+curl -L https://osf.io/xju4a/download -o ERR458500.fastq.gz
+curl -L https://osf.io/nmqe6/download -o ERR458501.fastq.gz
+curl -L https://osf.io/qfsze/download -o ERR458502.fastq.gz
+</code></pre>
+
+<p>And, finally, download the necessary analysis code into your home directory</p>
+<pre><code>cd ~/
+curl -L -O https://raw.githubusercontent.com/ngs-docs/angus/2018/scripts/gather-counts.py
+
+curl -L -O https://raw.githubusercontent.com/ngs-docs/angus/2018/scripts/yeast.salmon.R
+</code></pre>
+
+<h2 id="write-a-shell-script-to-run-rnaseq-analysis">Write a shell script to run RNAseq analysis</h2>
+<p>A <strong>shell script</strong> is a text file full of shell commands, that run just as if you're running them interactively at the command line.</p>
+<p>Here, we'll create one that takes the commands from the RNAseq differential expression tutorial and runs 'em all at once.</p>
+<h3 id="put-all-of-the-rnaseq-commands-into-a-single-text-file">Put all of the RNAseq commands into a single text file</h3>
+<p>We'll script everything but the install and data download part of <a href="https://angus.readthedocs.io/en/2018/rna-seq.html">the RNAseq differential expression tutorial</a>.</p>
+<p>Use RStudio to create a new file named <code>run-rnaseq.sh</code> in your home directory on the Jetstream computer, and write the following commands into it:</p>
+<pre><code># make an rnaseq directory and change into it
+mkdir rnaseq
+cd rnaseq
+
+# link the data in from the other directory
+ln -fs ~/data/*.fastq.gz .
+
+# download the reference transcriptome
+curl -O https://downloads.yeastgenome.org/sequence/S288C_reference/orf_dna/orf_coding.fasta.gz
+
+# index the reference transcriptome
+salmon index --index yeast_orfs --type quasi --transcripts orf_coding.fasta.gz
+
+# run salmon quant on each of the input read data sets
+for i in *.fastq.gz
+do
+   salmon quant -i yeast_orfs --libType U -r $i -o $i.quant --seqBias --gcBias
+done
+
+# collect the counts
+python2 ~/gather-counts.py
+
+# run the edgeR script!
+Rscript --no-save ~/yeast.salmon.R
 </code></pre>
 
 <p>This is now a shell script that you can use to execute all
 of those commands in <em>one</em> go -- try it out! Run:</p>
 <pre><code>cd ~/
-bash run-qc.sh
+bash run-rnaseq.sh
 </code></pre>
 
+<p>You should now have a directory <code>rnaseq/</code> containing a bunch of files, including the PDF outputs of the RNAseq pipeline, <code>yeast-edgeR-MA-plot.pdf</code>, <code>yeast-edgeR-MDS.pdf</code>, and <code>yeast-edgeR.csv</code>.</p>
+<p>Pretty cool, eh?</p>
 <h3 id="re-running-the-shell-script">Re-running the shell script</h3>
 <p>Suppose you wanted to re-run the script. How would you do that?</p>
-<p>Well, note that the <code>quality</code> directory is created at the top of the script, and everything is executed in that directory. So if you remove the quality directory like so,</p>
-<pre><code>rm -fr quality
+<p>Well, note that the <code>rnaseq</code> directory is created at the top of the script, and everything is executed in that directory. So if you remove the rnaseq directory like so,</p>
+<pre><code>rm -fr rnaseq
 </code></pre>
 
 <p>you can then do</p>
-<pre><code>bash run-qc.sh
+<pre><code>bash run-rnaseq.sh
 </code></pre>
 
-<h3 id="some-tricks-for-writing-shell-scripts">Some tricks for writing shell scripts</h3>
-<h4 id="make-it-executable">Make it executable</h4>
+<p>to just ...rerun everything.</p>
+<h3 id="a-trick-make-it-executable">A trick: make it executable</h3>
 <p>You can get rid of the <code>bash</code> part of the command above with
 some magic:</p>
 <p>Put </p>
@@ -652,19 +610,19 @@ some magic:</p>
 </code></pre>
 
 <p>at the top of the file, and then run</p>
-<pre><code>chmod +x ~/run-qc.sh
+<pre><code>chmod +x ~/run-rnaseq.sh
 </code></pre>
 
 <p>at the command line.</p>
 <p>You can now run</p>
-<pre><code>./run-qc.sh
+<pre><code>./run-rnaseq.sh
 </code></pre>
 
 <p>instead of <code>bash run-rnaseq.sh</code>.</p>
 <p>You might be thinking, ok, why is this important? Well, you can do the same with R scripts and Python scripts (but put <code>/usr/bin/env Rscript</code> or <code>/usr/bin/env python</code> at the top, instead of <code>/bin/bash</code>). This basically annotates the script with the language it's written in, so you don't have to know or remember yourself.</p>
 <p>So: it's not necessary but it's a nice trick.</p>
 <p>You can also always <em>force</em> a script to be run in a particular language by specifying <code>bash &lt;scriptname&gt;</code> or <code>Rscript &lt;Scriptname&gt;</code>, too.</p>
-<h4 id="another-good-addition-make-it-fail-nicely">Another good addition: make it fail nicely</h4>
+<h3 id="another-good-addition-make-it-fail-nicely">Another good addition: make it fail nicely</h3>
 <p>One sort of weird aspect of shell scripts is that (by default) they keep running even if there's an error.  This is bad behavior and we should turn it off.</p>
 <p>You can observe this behavior by rerunning the script above without deleting the directory <code>rnaseq/</code> - the <code>mkdir</code> command will print an error because the directory still exists, but </p>
 <p>A good addition to every shell script is to make it fail on the first error. Do this by putting</p>
@@ -672,7 +630,7 @@ some magic:</p>
 </code></pre>
 
 <p>at the top - this tells bash to exit at the first error, rather than continuing bravely onwards.</p>
-<h4 id="a-final-good-addition-make-shell-scripts-print-out-the-commands-theyre-running">A final good addition: make shell scripts print out the commands they're running!</h4>
+<h3 id="a-final-good-addition-make-shell-scripts-print-out-the-commands-theyre-running">A final good addition: make shell scripts print out the commands they're running!</h3>
 <p>You might notice that the shell script gives you the output of the commands it's running, but doesn't tell you <em>which</em> commands it's running.</p>
 <p>If you add</p>
 <pre><code>set -x
@@ -680,98 +638,249 @@ some magic:</p>
 
 <p>at the top of the shell script and then re-run it,</p>
 <pre><code>cd ~/
-rm -fr quality
-./run-qc.sh
+rm -fr rnaseq
+./run-rnaseq.sh
 </code></pre>
 
 <p>then you'll see the full set of commands being run!</p>
-<h4 id="a-final-note-on-shell-scripts">A final note on shell scripts:</h4>
+<h3 id="tracking-output-of-shell-scripts">Tracking output of shell scripts</h3>
+<p>you can do:</p>
+<pre><code>exec &gt; output.log
+exec 2&gt; error.log
+</code></pre>
+
+<p>to save all output from that point on to those files.</p>
+<p>Or, you can do:</p>
+<pre><code>nohup ./run-rnaseq.sh &gt; output.log 2&gt; error.log &amp;
+</code></pre>
+
+<p>and that will do the same thing, while putting it in the background.</p>
+<p>You can also run 'screen' or 'tmux' (google it).</p>
+<p>Torsten recommends:</p>
+<pre><code>script session.log
+</code></pre>
+
+<p>While you're at it, you should look up nohup.</p>
+<h3 id="a-final-note-on-shell-scripts">A final note on shell scripts:</h3>
 <p><code>set -e</code> and <code>set -x</code> only work in shell scripts - they're bash commands. You need to use other approaches in Python and R.</p>
-<h2 id="automation-with-snakemake">Automation with Snakemake!</h2>
+<h2 id="snakemake-for-automation">snakemake for automation</h2>
 <p>Automation via shell script is wonderful, but there are a few problems here.</p>
 <p>First, you have to run the entire workflow each time and it recomputes everything every time. If you're running a workflow that takes 4 days, and you change a command at the end, you'll have to manually go in and just run the stuff that depends on the changed command.</p>
 <p>Second, it's very <em>explicit</em> and not very <em>generalizable</em>. If you want to run it on a different RNAseq data set, you're going to have to change a lot of commands.</p>
 <p>snakemake is one of several workflow systems that help solve these problems. <a href="https://snakemake.readthedocs.io/en/stable/">(You can read the documentation here.)</a> Let's take a look!</p>
-<p>First, let's activate our snakemake environment</p>
-<pre><code>source deactivate
-source activate snake
+<h3 id="first-install-snakemake">First, install snakemake.</h3>
+<p>Run:</p>
+<pre><code>conda install -y snakemake
 </code></pre>
 
-<p>We're going to automate the same script for trimming, but in snakemake. </p>
-<pre><code>rule all:
-    input:
-        &quot;trim/TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz&quot;,
-        &quot;trim/TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz&quot;
-
-rule trim_reads:
-    input:
-        r1=&quot;data/TARA_135_SRF_5-20_rep1_1m_1.fq.gz&quot;,
-        r2=&quot;data/TARA_135_SRF_5-20_rep1_1m_2.fq.gz&quot;,
-        adapters=&quot;trim/combined.fa&quot;
-    ouput:
-        p1=&quot;trim/TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz&quot;,
-        p2=&quot;trim/TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz&quot;,
-        s1=&quot;trim/TARA_135_SRF_5-20_rep1_1m_1_s1.qc.fq.gz&quot;,
-        s2=&quot;trim/TARA_135_SRF_5-20_rep1_1m_2_s2.qc.fq.gz&quot;
-    shell:'''
-    trimmomatic PE {input.r1} \
-              {input.r2} \
-     {output.p1} {output.s1} \
-     {output.p2} {output.s2} \
-     ILLUMINACLIP:{input.adapters}:2:40:15 \
-     LEADING:2 TRAILING:2 \
-     SLIDINGWINDOW:4:2 \
-     MINLEN:25
-    '''
+<h2 id="writing-your-first-snakemake-rule">Writing your first snakemake rule</h2>
+<p>We're going to automate the R script at the end of the shell
+script in snakemake.</p>
+<p>So, run the rnaseq pipeline:</p>
+<pre><code>cd ~/
+rm -fr rnaseq
+./run-rnaseq.sh
 </code></pre>
 
-<p>Now we can run this</p>
-<pre><code>cd $PROJECT
-snakemake
+<p>Now, using RStudio, create a new text file, and put the following text in it:</p>
+<pre><code>rule make_plots:
+  input:
+  output:
+    &quot;yeast-edgeR-MA-plot.pdf&quot;,
+    &quot;yeast-edgeR-MDS.pdf&quot;,
+    &quot;yeast-edgeR.csv&quot;
+  shell:
+    &quot;Rscript --no-save ~/yeast.salmon.R&quot;
+</code></pre>
+
+<p>This rule says:
+<em> to make the list of outputs (the PDFs and CSV file),
+</em> you need the list of inputs (currently lbank)
+* and then you run the shell command.</p>
+<p>Save this with the name <code>Snakefile</code> in the <code>rnaseq/</code> directory, and run <code>snakemake make_plots</code>:</p>
+<pre><code>cd ~/rnaseq
+snakemake make_plots
 </code></pre>
 
 <p>you should see "Nothing to be done."</p>
-<p>That's because the trimmed files already exist!</p>
+<p>That's because the PDFs and CSV file already exist!</p>
 <p>Let's fix that:</p>
-<pre><code>rm trim/TARA_135_SRF_5-20_rep1*
+<pre><code>rm yeast-*.pdf yeast-*.csv
 </code></pre>
 
-<p>and now, when you run <code>snakemake</code>, you should see the Trimmomatic being run. Yay w00t! Then if you run <code>snakemake</code> again, you will see that it doesn't need to do anything - all the files are "up to date".</p>
-<h3 id="adding-and-environment">Adding and environment</h3>
-<p>We've been using conda environments throughout our workshop. We showed you have to export your tara environment in the bioconda lesson using
-<code>conda env export -n tara -f $PROJECT/tara_conda_environment.yaml</code>.
-We can use this environment in our snakemake rule as well!</p>
-<pre><code>rule all:
-    input:
-        &quot;trim/TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz&quot;,
-        &quot;trim/TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz&quot;
-
-rule trim_reads:
-    input:
-        r1=&quot;data/TARA_135_SRF_5-20_rep1_1m_1.fq.gz&quot;,
-        r2=&quot;data/TARA_135_SRF_5-20_rep1_1m_2.fq.gz&quot;,
-        adapters=&quot;trim/combined.fa&quot;
-    ouput:
-        p1=&quot;trim/TARA_135_SRF_5-20_rep1_1m_1.qc.fq.gz&quot;,
-        p2=&quot;trim/TARA_135_SRF_5-20_rep1_1m_2.qc.fq.gz&quot;,
-        s1=&quot;trim/TARA_135_SRF_5-20_rep1_1m_1_s1.qc.fq.gz&quot;,
-        s2=&quot;trim/TARA_135_SRF_5-20_rep1_1m_2_s2.qc.fq.gz&quot;
-    conda: &quot;tara_conda_environment.yaml&quot;
-    shell:'''
-    trimmomatic PE {input.r1} \
-              {input.r2} \
-     {output.p1} {output.s1} \
-     {output.p2} {output.s2} \
-     ILLUMINACLIP:{input.adapters}:2:40:15 \
-     LEADING:2 TRAILING:2 \
-     SLIDINGWINDOW:4:2 \
-     MINLEN:25
-     '''
+<p>and now, when you run <code>snakemake make_plots</code>, you should see the R script being run. Yay w00t! Then if you run <code>snakemake make_plots</code> again, you will see that it doesn't need to do anything - all the files are "up to date".</p>
+<h4 id="challenge-add-the-explicit-list-of-inputs">Challenge: add the explicit list of inputs.</h4>
+<p>What does the <code>make_plots</code> rule take as input? List them!</p>
+<p>Hint: what does the <code>yeast.salmon.R</code> script take in?</p>
+<hr />
+<p>Once you're done, you can also update the timestamp on the counts files and it will regenerate the PDFs --</p>
+<pre><code>touch *.counts
+snakemake make_plots
 </code></pre>
 
-<p>We aren't going to run this on the cluster right now, because it requires you to be able to download things and we can't do that on nodo. However, this is the syntax to do this in the future. </p>
-<h3 id="other-resources">Other resources</h3>
-<p>We've covered some basics of snakemake today, but if you want another tutorial, we've add one <a href="../automation/">here</a>. </p>
+<p>because it knows that the files the rule depends on have changed!</p>
+<h4 id="challenge-write-a-rule-that-generates-the-counts-files">Challenge: write a rule that generates the .counts files.</h4>
+<p>Looking at the shell script, write a new Snakemake rule that generates the counts files as outputs.</p>
+<p>You can start by adding a new blank rule:</p>
+<pre><code>rule make_counts:
+  input:
+  output:
+  shell:
+    &quot;&quot;
+</code></pre>
+
+<p>and filling in from there. Note that rule order does not matter in the Snakefile!</p>
+<p>Hints:</p>
+<ul>
+<li>you should list each .counts file separately.</li>
+</ul>
+<p>To test the rule, do</p>
+<pre><code>rm *.counts yeast-*.pdf
+</code></pre>
+
+<p>and it will regenerate everything needed to build the PDF!</p>
+<h3 id="writing-rules-with-wildcards">Writing rules with wildcards</h3>
+<p>Let's suppose we want to write a rule that takes a FASTQ file (say, <code>ERR458501.fastq.gz</code>) and runs salmon on it to generate the directory <code>ERR458501.fastq.gz.quant</code>. How would we do that?</p>
+<p>We could write the rule as follows:</p>
+<pre><code>rule generate_quant_dir_ERR458501:
+    input:
+        &quot;ERR458501.fastq.gz&quot;
+    output:
+        directory(&quot;ERR458501.fastq.gz.quant&quot;)
+    shell:
+        &quot;salmon quant -i yeast_orfs --libType U -r ERR458501.fastq.gz -o ERR458501.fastq.gz.quant --seqBias --gcBias&quot;
+</code></pre>
+
+<p>and that will work just fine -- you can run,</p>
+<pre><code>rm -fr ERR458501.fastq.gz.quant
+snakemake ERR458501.fastq.gz.quant
+</code></pre>
+
+<p>and it will happily run salmon for you.</p>
+<p>But there's a lot of repeated stuff in there. Can we do cool computer things to fix that? Yes! We can use wildcards!</p>
+<p>Try replacing <code>ERR458501</code> with <code>{accession}</code> - this makes it into a <em>wildcard</em> that snakemake can automatically fill in:</p>
+<pre><code>rule generate_quant_dir:
+  input:
+    &quot;{accession}.fastq.gz&quot;
+  output:
+    directory(&quot;{accession}.fastq.gz.quant&quot;)
+  shell:
+    &quot;salmon quant -i yeast_orfs --libType U -r {wildcards.accession}.fastq.gz -o {wildcards.accession}.fastq.gz.quant --seqBias --gcBias&quot;
+</code></pre>
+
+<p>Now, you can run</p>
+<pre><code>snakemake ERR458501.fastq.gz.quant
+</code></pre>
+
+<p>and it will work - but you can <em>also</em> run</p>
+<pre><code>snakemake ERR458493.fastq.gz.quant
+</code></pre>
+
+<p>and it will do the right thing there, as well.</p>
+<h3 id="using-expand-to-work-with-lists-of-files">Using 'expand' to work with lists of files</h3>
+<p>The challenge to write a rule that generates the .counts files should have left you with a list of six input files (<code>.quant</code> directories), and <code>make_plots</code> has a very similar of six input files (<code>.quant.counts</code>).</p>
+<p>Can we make this more succinct? Yep. You can have a list that you <strong>expand</strong> in various ways.  First, define the list of files at the top of the Snakefile:</p>
+<pre><code>input_files=[&quot;ERR458493.fastq.gz&quot;,
+  &quot;ERR458494.fastq.gz&quot;,
+  &quot;ERR458495.fastq.gz&quot;,
+  &quot;ERR458500.fastq.gz&quot;,
+  &quot;ERR458501.fastq.gz&quot;,
+  &quot;ERR458502.fastq.gz&quot;]
+</code></pre>
+
+<p>now, modify the <code>make_plots</code> rule to have the input be:</p>
+<pre><code>rule make_plots:
+   input:
+      expand(&quot;{input_files}.quant.counts&quot;, input_files=input_files)
+</code></pre>
+
+<h4 id="challenge">Challenge:</h4>
+<p>Update the other rules that have lists of six files using <code>expand</code>.</p>
+<h3 id="visualizing-workflow-diagrams">Visualizing workflow diagrams</h3>
+<p>Try running:</p>
+<pre><code>snakemake --dag yeast-edgeR.csv |  dot -Tpng &gt; dag.png
+</code></pre>
+
+<h3 id="challenge-extend-the-snakemake-rules-to-download-and-prepare-the-reference">Challenge: Extend the snakemake rules to download and prepare the reference</h3>
+<p>'nuff said'</p>
+<h3 id="other-things-snakemake-can-do">Other things snakemake can do</h3>
+<p>You can specify what programs your pipeline depends in on your snakemake setup! snakemake interfaces well with conda (in fact, the authors of snakemake are also leads on the bioconda project) so you can pretty much just list your packages.</p>
+<h2 id="reproducibility-and-provenance">Reproducibility and provenance</h2>
+<p>If you write all your workflows like this, all you need to do is give readers your data files, your Snakefile, and your list of software... and they can reproduce everything you did!</p>
+<h3 id="answer-to-first-challenge">Answer to first challenge:</h3>
+<pre><code>rule make_plots:
+  input:
+    &quot;ERR458493.fastq.gz.quant.counts&quot;,
+    &quot;ERR458500.fastq.gz.quant.counts&quot;,
+    &quot;ERR458494.fastq.gz.quant.counts&quot;, 
+    &quot;ERR458501.fastq.gz.quant.counts&quot;,
+    &quot;ERR458495.fastq.gz.quant.counts&quot;,
+    &quot;ERR458502.fastq.gz.quant.counts&quot;
+  output:
+    &quot;yeast-edgeR-MA-plot.pdf&quot;,
+    &quot;yeast-edgeR-MDS.pdf&quot;,
+    &quot;yeast-edgeR.csv&quot;
+  shell:
+    &quot;Rscript --no-save ~/yeast.salmon.R&quot;
+</code></pre>
+
+<h3 id="answer-to-second-challenge">Answer to second challenge</h3>
+<pre><code># make the .counts files
+rule make_counts:
+  input:
+    &quot;ERR458493.fastq.gz.quant&quot;,
+    &quot;ERR458500.fastq.gz.quant&quot;,
+    &quot;ERR458494.fastq.gz.quant&quot;, 
+    &quot;ERR458501.fastq.gz.quant&quot;,
+    &quot;ERR458495.fastq.gz.quant&quot;,
+    &quot;ERR458502.fastq.gz.quant&quot;
+  output:
+    &quot;ERR458493.fastq.gz.quant.counts&quot;,
+    &quot;ERR458500.fastq.gz.quant.counts&quot;,
+    &quot;ERR458494.fastq.gz.quant.counts&quot;, 
+    &quot;ERR458501.fastq.gz.quant.counts&quot;,
+    &quot;ERR458495.fastq.gz.quant.counts&quot;,
+    &quot;ERR458502.fastq.gz.quant.counts&quot;
+  shell:
+    &quot;python2 ~/gather-counts.py&quot;
+</code></pre>
+
+<h3 id="final-snakemake-file">Final snakemake file</h3>
+<pre><code>input_files=[&quot;ERR458493.fastq.gz&quot;,
+  &quot;ERR458494.fastq.gz&quot;,
+  &quot;ERR458495.fastq.gz&quot;,
+  &quot;ERR458500.fastq.gz&quot;,
+  &quot;ERR458501.fastq.gz&quot;,
+  &quot;ERR458502.fastq.gz&quot;]
+
+rule make_plots:
+  input:
+    expand(&quot;{input_files}.quant.counts&quot;, input_files=input_files)
+  output:
+    &quot;yeast-edgeR-MA-plot.pdf&quot;,
+    &quot;yeast-edgeR-MDS.pdf&quot;,
+    &quot;yeast-edgeR.csv&quot;
+  shell:
+    &quot;Rscript --no-save ~/yeast.salmon.R&quot;
+
+
+# make the .counts files
+rule make_counts:
+  input:
+    expand(&quot;{input_files}.quant&quot;, input_files=input_files)
+  output:
+    expand(&quot;{input_files}.quant.counts&quot;, input_files=input_files)
+  shell:
+    &quot;python2 ~/gather-counts.py&quot;
+
+rule generate_quant_dir:
+  input:
+    &quot;{accession}.fastq.gz&quot;
+  output:
+    &quot;{accession}.fastq.gz.quant&quot;
+  shell:
+    &quot;salmon quant -i yeast_orfs --libType U -r {wildcards.accession}.fastq.gz -o {wildcards.accession}.fastq.gz.quant --seqBias --gcBias&quot;
+</code></pre>
                 
                   
                 
