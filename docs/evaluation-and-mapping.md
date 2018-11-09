@@ -260,8 +260,8 @@ in our reads.
 We already ran the code to do this, but if you want to see what it looks like, 
 you can find it [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/salmon_mds_plot.R). It relies on the `quant.sf` files output by Salmon. 
 
-![sourmash](files/tara-trimmed-comp-mds.pdf)
-![salmon](files/tara-salmon-mds.pdf)
+![sourmash](files/tara-trimmed-comp-mds.png)
+![salmon](files/tara-salmon-mds.png)
 
 Look how different they are! To be fair, we only mapped back to a full transcriptome
 with 1 million reads, but this is still a good test. 
