@@ -43,14 +43,14 @@ Lunch
 
 **Afternoon:** 
 
-  - Filezilla
+  - [Filezilla](filezilla.md)
   - [Bioconda for software installation](working-with-bioconda.md)
-  - A brief discussion of workflows & repeatability
+  - [A brief discussion of workflows & repeatability](automation-qc.md)
 
 
 
 #### Additional Resources:  
-
+  - [References](references.md)
   - SEQ Answers
   - Biostars
   - Data Carpentry
