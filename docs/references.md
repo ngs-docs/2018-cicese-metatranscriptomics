@@ -17,4 +17,27 @@ tools.
 + [MultiQC](https://multiqc.info/)
 + [CutAdapt](https://cutadapt.readthedocs.io/en/stable/guide.html) -- Very good at removing polyA tails
 
-##  
+## Transcriptome and Metatranscriptome assembly
+
++ [MEGAHIT](https://www.ncbi.nlm.nih.gov/pubmed/25609793)
++ [Trinity](https://github.com/trinityrnaseq/trinityrnaseq/wiki)
++ [PLASS](https://www.biorxiv.org/content/early/2018/08/07/386110)
+
+## Assembly Evaluation
+
++ [BUSCO](https://busco.ezlab.org/)
++ [Transrate](http://hibberdlab.com/transrate/)
+
+## Read Mapping and Quantification
+
++ [Salmon](https://www.nature.com/articles/nmeth.4197)
++ [STAR](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4631051/)
++ [BWA](http://bio-bwa.sourceforge.net/bwa.shtml)
++ [Bowtie2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3322381/)
+
+## Amplicon Sequencing
+
++ [QIIME](http://qiime.org/)
+
+
+
