@@ -149,8 +149,11 @@ ends in `quant` and has a logs directory with at least one file in it.
 
 How do the mapping rates compare? What does this tell us about our metatranscriptome?
 
+## How well does quantification capture sample distances?
 
-# Other useful tutorials and references
+ 
+
+## Other useful tutorials and references
 https://github.com/ngs-docs/2015-nov-adv-rna/blob/master/salmon.rst
 http://angus.readthedocs.io/en/2016/rob_quant/tut.html
 https://2016-aug-nonmodel-rnaseq.readthedocs.io/en/latest/quantification.html
