@@ -554,14 +554,15 @@ will perform that installation and preparation. If you just run <code>dammit dat
 own, you should get a notification that some database tasks are not up-to-date -- we need
 to install them!</p>
 <p>We're going to run a <code>quick</code> version of the pipeline, add a parameter, <code>--quick</code>, to omit OrthoDB, Uniref, Pfam, and Rfam. In the future, running <code>full</code> run would take longer to install and run, but you'll have access to the full annotation pipeline.</p>
-<pre><code>dammit databases --install --busco-group metazoa  --quick --database-dir /LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
+<pre><code>export DAMMIT_DB_DIR=/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
+dammit databases --install --busco-group eukaryota --quick
 </code></pre>
 
 <p>We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
 them with the <code>dammit databases</code> subcommand. You can see the whole list by running
 <code>dammit databases -h</code>. You should try to match your species as closely as possible for the best
 results. If we want to install another, for example:</p>
-<pre><code>dammit databases --install --busco-group eukaryota  --quick
+<pre><code>dammit databases --install --busco-group metazoa  --quick
 </code></pre>
 
 <p>Note: By default, <code>dammit</code> installs databases in the <code>home</code> directory. However, when you have limited space, as we do here, we can choose to install the databases in another location (e.g. <code>/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases</code>)  </p>
@@ -587,7 +588,7 @@ cd annotation
 
 <p>Make sure you run <code>ls</code> and see the assembly file.</p>
 <h2 id="just-annotate-it-dammit">Just annotate it, Dammit!</h2>
-<pre><code>dammit annotate trinity.nema.fasta --busco-group metazoa --user-databases nema.reference.prot.faa --n_threads 6 # --quick
+<pre><code>dammit annotate tara135_SRF_megahit.fasta --busco-group eukaryota --n_threads 6
 </code></pre>
 
 <p>While dammit runs, it will print out which tasks its running to the terminal. dammit is
