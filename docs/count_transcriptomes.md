@@ -21,7 +21,7 @@ filter those that are highly similar.
 
 Below is a picture representation of the HMM profile we will be working with. 
 
-![rpsG seq logo](https://github.com/ngs-docs/2018-cicese-metatranscriptomics/blob/master/docs/files/rpsg_logo_image.png)
+![rpsG seq logo](files/rpsg_logo_image.png)
 
 Because we are only searching in our assembly, this method only captures the number of 
 transcriptomes that assembled.
