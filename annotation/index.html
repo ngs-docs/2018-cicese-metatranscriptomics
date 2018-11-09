@@ -25,11 +25,11 @@
       
         <meta name="lang:search.pipeline.trimmer" content="True">
       
-        <meta name="lang:search.result.none" content="No matching pages">
+        <meta name="lang:search.result.none" content="No matching documents">
       
-        <meta name="lang:search.result.one" content="1 matching page">
+        <meta name="lang:search.result.one" content="1 matching document">
       
-        <meta name="lang:search.result.other" content="# matching page">
+        <meta name="lang:search.result.other" content="# matching documents">
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
@@ -143,7 +143,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search this site" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -153,7 +153,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="result">
           <div class="md-search-result__meta">
-            Type to start searching this site
+            Type to start searching
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -174,6 +174,12 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -216,6 +222,12 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -545,7 +557,133 @@
 <p>Our assembly contains a set of contigs that represent transcripts, or 
 fragments of transcripts. To get at the functional content of these 
 transcripts, we must first find the most likely open reading frames (ORFs)</p>
-<p>dammit annotation: modify from https://github.com/ngs-docs/2017-dibsi-rnaseq/blob/master/dammit_annotation.md</p>
+<h1 id="annotating-transcriptomes-and-metatranscriptomes-with-dammit">Annotating transcriptomes and metatranscriptomes with dammit</h1>
+<p>dammit!</p>
+<p><a href="http://www.camillescott.org/dammit/index.html">dammit</a> is an annotation
+pipeline written by <a href="http://www.camillescott.org/">Camille
+Scott</a>. dammit runs a relatively standard annotation
+protocol for transcriptomes: it begins by building gene models with <a href="http://transdecoder.github.io/">Transdecoder</a>,
+and then
+uses the following protein databases as evidence for annotation:
+<a href="http://pfam.xfam.org/">Pfam-A</a>, <a href="http://rfam.xfam.org/">Rfam</a>,
+<a href="http://www.orthodb.org/">OrthoDB</a>,
+<a href="http://www.uniprot.org/help/uniref">uniref90</a> (uniref is optional with
+<code>--full</code>).</p>
+<p>If a protein dataset is available, this can also be supplied to the
+<code>dammit</code> pipeline with <code>--user-databases</code> as optional evidence for
+annotation.</p>
+<p>In addition, <a href="http://busco.ezlab.org/">BUSCO</a> v3 is run, which will compare the gene content in your transcriptome
+with a lineage-specific data set. The output is a proportion of your
+transcriptome that matches with the data set, which can be used as an
+estimate of the completeness of your transcriptome based on evolutionary
+expectation (<a href="http://bioinformatics.oxfordjournals.org/content/31/19/3210.full">Simho et al.
+2015</a>).
+There are several lineage-specific datasets available from the authors
+of BUSCO. We will use the <code>metazoa</code> dataset for this transcriptome.</p>
+<h2 id="installation">Installation</h2>
+<p>Annotation necessarily requires a lot of software! dammit attempts to simplify this and
+make it as reliable as possible, and now conda makes it even easier. We've already
+installed <code>dammit</code> int eh <code>tara</code> environment, but if you need to install it in the future,
+here's the command:</p>
+<pre><code>conda install dammit
+</code></pre>
+
+<h2 id="database-preparation">Database Preparation</h2>
+<p>dammit has two major subcommands: <code>dammit databases</code> and <code>dammit annotate</code>. <code>databases</code>
+checks that the databases are installed and prepared, and if run with the <code>--install</code> flag,
+will perform that installation and preparation. If you just run <code>dammit databases</code> on its
+own, you should get a notification that some database tasks are not up-to-date -- we need
+to install them!</p>
+<p>We're going to run a <code>quick</code> version of the pipeline, add a parameter, <code>--quick</code>, to omit OrthoDB, Uniref, Pfam, and Rfam. In the future, running <code>full</code> run would take longer to install and run, but you'll have access to the full annotation pipeline.</p>
+<pre><code>dammit databases --install --busco-group metazoa  --quick --database-dir /LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
+</code></pre>
+
+<p>We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
+them with the <code>dammit databases</code> subcommand. You can see the whole list by running
+<code>dammit databases -h</code>. You should try to match your species as closely as possible for the best
+results. If we want to install another, for example:</p>
+<pre><code>dammit databases --install --busco-group eukaryota  --quick
+</code></pre>
+
+<p>Note: By default, <code>dammit</code> installs databases in the <code>home</code> directory. However, when you have limited space, as we do here, we can choose to install the databases in another location (e.g. <code>/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases</code>)  </p>
+<h2 id="annotating-your-metatranscriptome">Annotating your metatranscriptome</h2>
+<p>Keep things organized! Let's make a project directory:</p>
+<p>Make sure you still have the <code>PROJECT</code> variable:</p>
+<pre><code>echo $PROJECT
+</code></pre>
+
+<p>If you don't see any output, set the <code>PROJECT</code> variable again:</p>
+<pre><code>export PROJECT=~/work
+</code></pre>
+
+<p>Now let's make a directory for annotation</p>
+<pre><code>cd $PROJECT
+mkdir -p annotation
+cd annotation
+</code></pre>
+
+<p>We all ran megahit earlier to generate an assembly. Let's link that assembly to this directory</p>
+<pre><code>ln -s $PROJECT/assembly/tara135_SRF_megahit.fasta ./
+</code></pre>
+
+<p>Make sure you run <code>ls</code> and see the assembly file.</p>
+<h2 id="just-annotate-it-dammit">Just annotate it, Dammit!</h2>
+<pre><code>dammit annotate trinity.nema.fasta --busco-group metazoa --user-databases nema.reference.prot.faa --n_threads 6 # --quick
+</code></pre>
+
+<p>While dammit runs, it will print out which tasks its running to the terminal. dammit is
+written with a library called <a href="www.pydoit.org">pydoit</a>, which is a python workflow library similar
+to GNU Make. This not only helps organize the underlying workflow, but also means that if we
+interrupt it, it will properly resume!</p>
+<p>After a successful run, you'll have a new directory called <code>tara135_SRF_megahit.fasta.dammit</code>. If you
+look inside, you'll see a lot of files:</p>
+<pre><code>ls tara135_SRF_megahit.fasta.dammit/
+</code></pre>
+
+<pre><code>    annotate.doit.db                              trinity.nema.fasta.dammit.namemap.csv  trinity.nema.fasta.transdecoder.pep
+    dammit.log                                    trinity.nema.fasta.dammit.stats.json   trinity.nema.fasta.x.nema.reference.prot.faa.crbl.csv
+    run_tara135_SRF_megahit.fasta.metazoa.busco.results  trinity.nema.fasta.transdecoder.bed    trinity.nema.fasta.x.nema.reference.prot.faa.crbl.gff3
+    tmp                                           trinity.nema.fasta.transdecoder.cds    trinity.nema.fasta.x.nema.reference.prot.faa.crbl.model.csv
+    trinity.nema.fasta                            trinity.nema.fasta.transdecoder_dir    trinity.nema.fasta.x.nema.reference.prot.faa.crbl.model.plot.pdf
+    trinity.nema.fasta.dammit.fasta               trinity.nema.fasta.transdecoder.gff3
+    trinity.nema.fasta.dammit.gff3                trinity.nema.fasta.transdecoder.mRNA
+</code></pre>
+
+<p>The most important files for you are <code>tara135_SRF_megahit.fasta.dammit.fasta</code>,
+<code>tara135_SRF_megahit.fasta.dammit.gff3</code>, and <code>tara135_SRF_megahit.fasta.dammit.stats.json</code>.</p>
+<p>If the above <code>dammit</code> command is run again, there will be a message:
+<code>**Pipeline is already completed!**</code></p>
+<h2 id="parse-dammit-output">Parse dammit output</h2>
+<p>Cammille wrote dammit in Python, which includes a library to parse gff3 dammit output. To send this output to a useful table, we will need to open the Python environemnt.</p>
+<pre><code>cd tara135_SRF_megahit.fasta.dammit
+python
+</code></pre>
+
+<p>Then, manually enter each line of code to output a list of gene ID:</p>
+<pre><code>import pandas as pd
+from dammit.fileio.gff3 import GFF3Parser
+gff_file = &quot;trinity.nema.fasta.dammit.gff3&quot;
+annotations = GFF3Parser(filename=gff_file).read()
+names = annotations.sort_values(by=['seqid', 'score'], ascending=True).query('score &lt; 1e-05').drop_duplicates(subset='seqid')[['seqid', 'Name']]
+new_file = names.dropna(axis=0,how='all')
+new_file.head()
+new_file.to_csv(&quot;nema_gene_name_id.csv&quot;)
+exit()
+</code></pre>
+
+<p>This will output a table of genes with 'seqid' and 'Name' in a .csv file: <code>nema_gene_name_id.csv</code>. Let's take a look at that file:</p>
+<pre><code>less tara135_SRF_megahit_gene_name_id.csv
+</code></pre>
+
+<p>Notice there are multiple transcripts per gene model prediction. This <code>.csv</code> file can be used in <code>tximport</code> in downstream DE analysis.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Putnam NH, Srivastava M, Hellsten U, Dirks B, Chapman J, Salamov A,
+Terry A, Shapiro H, Lindquist E, Kapitonov VV, Jurka J, Genikhovich G,
+Grigoriev IV, Lucas SM, Steele RE, Finnerty JR, Technau U, Martindale
+MQ, Rokhsar DS. (2007) Sea anemone genome reveals ancestral eumetazoan
+gene repertoire and genomic organization. Science. 317, 86-94.</li>
+</ol>
                 
                   
                 
