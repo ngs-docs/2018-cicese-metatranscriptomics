@@ -121,12 +121,3 @@ The most important files for you are `tara135_SRF_megahit.fasta.dammit.fasta`,
 
 If the above `dammit` command is run again, there will be a message:
 `**Pipeline is already completed!**`
-
-
-## References
-
-1. Putnam NH, Srivastava M, Hellsten U, Dirks B, Chapman J, Salamov A,
-Terry A, Shapiro H, Lindquist E, Kapitonov VV, Jurka J, Genikhovich G,
-Grigoriev IV, Lucas SM, Steele RE, Finnerty JR, Technau U, Martindale
-MQ, Rokhsar DS. (2007) Sea anemone genome reveals ancestral eumetazoan
-gene repertoire and genomic organization. Science. 317, 86-94.
