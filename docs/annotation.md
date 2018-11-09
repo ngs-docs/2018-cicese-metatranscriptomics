@@ -51,7 +51,7 @@ We're going to run a `quick` version of the pipeline, add a parameter, `--quick`
 
 ```
 export DAMMIT_DB_DIR=/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
-dammit databases --install --busco-group metazoa  --quick
+dammit databases --install --busco-group eukaryota --quick
 ```
 
 We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
@@ -60,7 +60,7 @@ them with the `dammit databases` subcommand. You can see the whole list by runni
 results. If we want to install another, for example:
 
 ```
-dammit databases --install --busco-group eukaryota  --quick
+dammit databases --install --busco-group metazoa  --quick
 ```
 
 Note: By default, `dammit` installs databases in the `home` directory. However, when you have limited space, as we do here, we can choose to install the databases in another location (e.g. `/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases`)  
