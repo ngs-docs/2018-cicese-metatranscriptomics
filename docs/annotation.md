@@ -53,6 +53,9 @@ We're going to run a `quick` version of the pipeline, add a parameter, `--quick`
 export DAMMIT_DB_DIR=/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
 dammit databases --install --busco-group eukaryota --quick
 ```
+Note: the dammit databases can be quite large, so make sure you have a lot of space for them. Don't put them in 
+your home directory on a cluster, for example!
+
 
 We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
 them with the `dammit databases` subcommand. You can see the whole list by running
