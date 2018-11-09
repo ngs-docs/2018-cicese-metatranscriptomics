@@ -50,7 +50,8 @@ to install them!
 We're going to run a `quick` version of the pipeline, add a parameter, `--quick`, to omit OrthoDB, Uniref, Pfam, and Rfam. In the future, running `full` run would take longer to install and run, but you'll have access to the full annotation pipeline.
 
 ```
-dammit databases --install --busco-group metazoa  --quick --database-dir /LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
+export DAMMIT_DB_DIR=/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
+dammit databases --install --busco-group metazoa  --quick
 ```
 
 We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
@@ -100,7 +101,7 @@ Make sure you run `ls` and see the assembly file.
 ## Just annotate it, Dammit! 
 
 ```
-dammit annotate trinity.nema.fasta --busco-group metazoa --user-databases nema.reference.prot.faa --n_threads 6 # --quick
+dammit annotate tara135_SRF_megahit.fasta --busco-group metazoa --n_threads 6
 ```
 
 While dammit runs, it will print out which tasks its running to the terminal. dammit is
