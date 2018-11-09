@@ -42,7 +42,7 @@ ls
 Let's run an assembly:
 
 ```
-time megahit --12 TARA_135_SRF_5-20_rep1_250k.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer -f
+time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer -f
 ```
 
 This will take about 10 minutes; at the end you should see output like this:
