@@ -32,7 +32,7 @@ eukaryotic organisms found in each environmental sample.
 
 ## Install PLASS
 
-We already installed plass for you, but [setup](setting-up-tara-environment.md), but here's the installation command for future reference.
+We already installed plass for you, but here's the installation command for future reference.
 
 ```
 conda install plass
@@ -131,6 +131,6 @@ paladin index -r3  tara135_srf_plass.fasta
  paladin align -f 125 -t 2 tara135_srf_plass.fasta TARA_135_SRF_5-20_rep1_1m_1.khmer.fq.gz 
 ```
 
-This will output a BAM file with the names of the reads that mapped, 
+This will output a SAM file with the names of the reads that mapped, 
 as well as the amino acid sequences that have been translated into
 amino acid space. 
