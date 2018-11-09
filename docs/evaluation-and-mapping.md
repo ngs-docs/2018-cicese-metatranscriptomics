@@ -169,7 +169,7 @@ Build an index for the metatranscriptome:
 Next, link in the QC reads (produced in [quality](short-read-quality-control.md):
 
 ```
-   ln -s ../quality/*.qc.fq.gz ./
+   ln -s ../trim/*.qc.fq.gz ./
 ```
 
 
