@@ -80,7 +80,7 @@ You should see output that looks like this:
 We built a metatranscriptome with the full set of TARA_SRF reads. Copy this into your evaluation directory
 ```
 cd ${PROJECT}/evaluation
-cp tara125_SRF_full_megahit.fasta ./
+ln -s LUSTRE/bioinformatica_data/bioinformatica2018/assembly/tara_f135_full_megahit.fasta
 ```
 
 * How do the two transcriptomes compare with each other?
