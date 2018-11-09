@@ -101,7 +101,7 @@ Make sure you run `ls` and see the assembly file.
 ## Just annotate it, Dammit! 
 
 ```
-dammit annotate tara135_SRF_megahit.fasta --busco-group metazoa --n_threads 6
+dammit annotate tara135_SRF_megahit.fasta --busco-group eukaryota --n_threads 6
 ```
 
 While dammit runs, it will print out which tasks its running to the terminal. dammit is
