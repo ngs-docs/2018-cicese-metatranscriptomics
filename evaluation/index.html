@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#generate-assembly-statistics-with-transrate" tabindex="1" class="md-skip">
+      <a href="../#set-up-the-directory" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -480,6 +480,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#set-up-the-directory" title="Set up the directory" class="md-nav__link">
+    Set up the directory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#generate-assembly-statistics-with-transrate" title="Generate assembly statistics with Transrate" class="md-nav__link">
     Generate assembly statistics with Transrate
   </a>
@@ -487,15 +494,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#busco" title="BUSCO" class="md-nav__link">
-    BUSCO
+  <a href="#comparing-assemblies" title="Comparing Assemblies" class="md-nav__link">
+    Comparing Assemblies
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-busco-assessment" title="Run BUSCO assessment:" class="md-nav__link">
-    Run BUSCO assessment:
+  <a href="#assess-read-mapping" title="Assess Read Mapping" class="md-nav__link">
+    Assess Read Mapping
   </a>
   
 </li>
@@ -583,6 +590,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#set-up-the-directory" title="Set up the directory" class="md-nav__link">
+    Set up the directory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#generate-assembly-statistics-with-transrate" title="Generate assembly statistics with Transrate" class="md-nav__link">
     Generate assembly statistics with Transrate
   </a>
@@ -590,15 +604,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#busco" title="BUSCO" class="md-nav__link">
-    BUSCO
+  <a href="#comparing-assemblies" title="Comparing Assemblies" class="md-nav__link">
+    Comparing Assemblies
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-busco-assessment" title="Run BUSCO assessment:" class="md-nav__link">
-    Run BUSCO assessment:
+  <a href="#assess-read-mapping" title="Assess Read Mapping" class="md-nav__link">
+    Assess Read Mapping
   </a>
   
 </li>
@@ -623,7 +637,13 @@
                   <h1>Assembly Evaluation</h1>
                 
                 <p>Let's do some basic evaluation of our assembly.</p>
-<p>First, let's create a folder <code>evaluation</code> to work in:</p>
+<h2 id="set-up-the-directory">Set up the directory</h2>
+<p>First, make sure you have the <code>PROJECT</code> variable defined:</p>
+<pre><code>echo $PROJECT
+</code></pre>
+
+<p>if you don't see any output, make sure to redefine the $PROJECT variable.</p>
+<p>Now, let's create a folder <code>evaluation</code> to work in:</p>
 <pre><code>cd $PROJECT
 mkdir -p evaluation
 cd evaluation
@@ -640,7 +660,7 @@ cd evaluation
 <pre><code>transrate -h
 </code></pre>
 
-<p>First, let's use transrate to calculate some stats on our assembly contigs:</p>
+<p>Let's use transrate to calculate some stats on our assembly contigs:</p>
 <pre><code>transrate --assembly tara135_SRF_megahit.fasta
 </code></pre>
 
@@ -676,18 +696,8 @@ cd evaluation
 [ INFO] 2018-11-06 23:50:35 : Writing analysis results to assemblies.csv
 </code></pre>
 
-<p>Now let's link in the reads we used to generate this assembly: </p>
-<pre><code>ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_rep1_*.qc.fq.gz ./
-</code></pre>
-
-<p>Run transrate in <code>read assessment</code> mode:</p>
-<pre><code>transrate --assembly=tara135_SRF_megahit.fasta --threads=2 --left=*_1.qc.fq.gz --right *_2.qc.fq.gz --output=${PROJECT}/evaluation/tara135_SRF_transrate
-</code></pre>
-
-<p>Questions:
-<em> What is the transrate score?
-</em> When you run the command above again with this transcriptome assembled from all of the reads in the Nematostella data set, does the score improve?</p>
-<p>We built a transcriptome with the full set of TARA_SRF reads. Copy this into your evaluation directory</p>
+<h2 id="comparing-assemblies">Comparing Assemblies</h2>
+<p>We built a metatranscriptome with the full set of TARA_SRF reads. Copy this into your evaluation directory</p>
 <pre><code>cd ${PROJECT}/evaluation
 cp tara125_SRF_full_megahit.fasta ./
 </code></pre>
@@ -699,30 +709,15 @@ cp tara125_SRF_full_megahit.fasta ./
 transrate --reference=tara135_SRF_megahit.fasta --assembly=tara135_SRF_full_megahit.fasta --output=subset_v_full
 </code></pre>
 
-<h2 id="busco">BUSCO</h2>
-<ul>
-<li>Eukaryota database used with 303 "BUSCO group" genes</li>
-<li>Metazoa database: 982 BUSCO groups</li>
-<li>
-<p>"Complete" lengths are within two standard deviations of the BUSCO group mean length</p>
-</li>
-<li>
-<p>Useful links:</p>
-</li>
-<li>Website: <a href="http://busco.ezlab.org/">http://busco.ezlab.org/</a></li>
-<li>Paper: <a href="http://bioinformatics.oxfordjournals.org/content/31/19/3210">Simao et al. 2015</a></li>
-<li><a href="http://gitlab.com/ezlab/busco/raw/master/BUSCO_v2.0_userguide.pdf">User Guide</a></li>
-</ul>
-<h2 id="run-busco-assessment">Run BUSCO assessment:</h2>
-<pre><code>run_BUSCO.py -i tara135_SRF_megahit.fasta -o tara135_busco_metazoa \ 
--l /LUSTRE/apps/workshop/busco_dbs/metazoa_odb9 -m transcriptome --cpu 2
+<h2 id="assess-read-mapping">Assess Read Mapping</h2>
+<p>It's useful to know how well the transcripts represent the sequenced reads. To do this, we'll need to link in the reads we used to generate this assembly: </p>
+<pre><code>ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_*.qc.fq.gz ./
 </code></pre>
 
-<p>Check the output:</p>
-<pre><code>cat run_tara135_busco_metazoa/short_summary_tara135_busco_metazoa.txt
+<p>Transrate actually  has a <code>read assessment</code> mode that uses <code>salmon</code> to "align" reads to the transcriptome and generates some metrics on read mapping. </p>
+<p>We won't run this today, but you could run it via:</p>
+<pre><code>transrate --assembly=tara135_SRF_megahit.fasta --threads=2 --left=*_1.qc.fq.gz --right *_2.qc.fq.gz --output=${PROJECT}/evaluation/tara135_SRF_transrate
 </code></pre>
-
-<p>How does the full transcriptome compare?</p>
                 
                   
                 

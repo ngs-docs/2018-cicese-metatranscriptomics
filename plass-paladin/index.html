@@ -614,11 +614,33 @@
                 
                 
                 <h1 id="assembling-with-plass">Assembling with PLASS</h1>
-<p>The basic idea with any transcriptome assembly is you feed in your reads and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches of RNA present in the reads that don't have any long repeats or much significant polymorphism. You run a transcriptome assembly program using the trimmed reads as input and get out a pile of assembled RNA. We used Megahit earlier to build this sort of assembly.</p>
-<p><a href="https://plass.mmseqs.org">PLASS</a> is a new type of assembler tha works in protein space. First, </p>
-<p>These contigs will represent protein sequences that come from the eukaryotic organisms found in each environmental sample.</p>
+<p>The basic idea with any (meta)transcriptome assembly is you feed in your reads 
+and you get out a bunch of <em>contigs</em> that represent transcripts, or stretches 
+of RNA present in the reads. You run a transcriptome assembly program using the 
+adapter &amp; k-mer trimmed reads as input and get out a pile of assembled RNA. We 
+used MEGAHIT earlier to build this sort of assembly.</p>
+<p>MEGAHIT and many other assemblers work in <em>nucleotide</em> space. This means that 
+they find direct overlaps between the As, Ts, Cs, and Gs in the reads and use 
+information about those overlaps to make contigs. Although this is a powerful 
+method, it often fails when:</p>
+<ol>
+<li>There is sequencing errors</li>
+<li>There are repetitive regions</li>
+<li>There is strain variation</li>
+</ol>
+<p>When assembly fails, contigs either break or don't assemble at all. </p>
+<p>Given that nucleotide sequences are far more variable than protein sequences 
+(third base pair wobble in strain variation in particular), assembling in amino acid space can overcome 
+a lot of the difficulties encountered when assembling in nucleotide space. </p>
+<p><a href="https://plass.mmseqs.org">PLASS</a> is a new assembler that assembles in amino acid space. 
+Unlike MEGAHIT, it does not have built in error correction and so it is best to
+adapter and k-mer trim the reads before using it. It sometimes performs better than 
+nucleotide assemblers and so is good to test on samples to see what type of
+improvement it can give. </p>
+<p>The contigs output by PLASS will represent protein sequences that come from the 
+eukaryotic organisms found in each environmental sample.</p>
 <h2 id="install-plass">Install PLASS</h2>
-<p>We already installed plass for you, but <a href="../setting-up-tara-environment/">setup</a>, but here's the installation command for future reference.</p>
+<p>We already installed plass for you, but here's the installation command for future reference.</p>
 <pre><code>conda install plass
 </code></pre>
 
@@ -666,7 +688,9 @@ done
 <p>How is this assembly different from the <code>megahit</code> transcripts?</p>
 <h2 id="mapping-to-the-plass-assembly">Mapping to the PLASS Assembly</h2>
 <h3 id="set-up-the-workspace">Set up the workspace</h3>
-<p>We'll be using <code>Paladin</code> to map back to the plass assembly</p>
+<p>We'll be using <code>Paladin</code> to map back to the plass assembly.
+<code>Paladin</code> solves the problem of mapping <em>nucleotide</em> sequences
+back to <em>amino acid</em> sequences. </p>
 <p>Let's make a directory to work in</p>
 <pre><code>cd $PROJECT
 mkdir -p paladin_mapping
@@ -684,6 +708,10 @@ cd paladin_mapping
 <h3 id="run-the-mapping">Run the mapping:</h3>
 <pre><code> paladin align -f 125 -t 2 tara135_srf_plass.fasta TARA_135_SRF_5-20_rep1_1m_1.khmer.fq.gz 
 </code></pre>
+
+<p>This will output a SAM file with the names of the reads that mapped, 
+as well as the amino acid sequences that have been translated into
+amino acid space. </p>
                 
                   
                 

@@ -457,13 +457,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#if-we-have-time-we-can-run-all-the-assemblies" title="If we have time, we can run all the assemblies:" class="md-nav__link">
-    If we have time, we can run all the assemblies:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#looking-at-the-assembly" title="Looking at the assembly" class="md-nav__link">
     Looking at the assembly
   </a>
@@ -480,6 +473,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reference" title="Further Reference" class="md-nav__link">
+    Further Reference
+  </a>
   
 </li>
       
@@ -637,13 +637,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#if-we-have-time-we-can-run-all-the-assemblies" title="If we have time, we can run all the assemblies:" class="md-nav__link">
-    If we have time, we can run all the assemblies:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#looking-at-the-assembly" title="Looking at the assembly" class="md-nav__link">
     Looking at the assembly
   </a>
@@ -660,6 +653,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reference" title="Further Reference" class="md-nav__link">
+    Further Reference
+  </a>
   
 </li>
       
@@ -710,7 +710,7 @@ ls
 
 <h2 id="run-the-assembler">Run the assembler</h2>
 <p>Let's run an assembly:</p>
-<pre><code>time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF_5-20 --out-dir ./TARA_135_SRF_5-20_rep1_khmer -f
+<pre><code>time megahit --12 TARA_135_SRF_5-20_rep1_1m.khmer.pe.fq.gz,TARA_135_SRF_5-20_rep2_1m.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix TARA_135_SRF --out-dir ./TARA_135_SRF_khmer -f
 </code></pre>
 
 <p>This will take about 10 minutes; at the end you should see output like this:</p>
@@ -718,19 +718,10 @@ ls
 --- [Wed Nov  7 02:13:12 2018] ALL DONE. Time elapsed: 431.097547 seconds ---
 </code></pre>
 
-<p>The output assembly will be <code>TARA_135_SRF_5-20_rep1_khmer/TARA_135_SRF_5-20.contigs.fa</code>.</p>
-<h2 id="if-we-have-time-we-can-run-all-the-assemblies">If we have time, we can run all the assemblies:</h2>
-<pre><code>for filename in *khmer.pe.fq.gz
-do
-  base=$(basename $filename .khmer.pe.fq.gz)
-  echo $base
-  megahit --12 ${base}.khmer.pe.fq.gz  --memory 8e9 --num-cpu-threads 2 --out-prefix $base --out-dir ${base}_khmer 
-done
-</code></pre>
-
+<p>The output assembly will be <code>TARA_135_SRF_khmer/TARA_135_SRF.contigs.fa</code>.</p>
 <h2 id="looking-at-the-assembly">Looking at the assembly</h2>
-<p>First, let's copy the assembly to a better location:</p>
-<pre><code>cp ./TARA_135_SRF_5-20_rep1_khmer/*contigs.fa tara135_SRF_megahit.fasta
+<p>First, let's copy the assembly into our current directory:</p>
+<pre><code>cp ./TARA_135_SRF_khmer/*contigs.fa tara135_SRF_megahit.fasta
 </code></pre>
 
 <p>Now, look at the beginning:</p>
@@ -758,6 +749,10 @@ over the reads? And what can we do with this assembly?</p>
   information is lost as well.</p>
 </li>
 </ul>
+<h2 id="further-reference">Further Reference</h2>
+<p>There are other asssemblers you can try on your data, some of which are listed
+on our <a href="references.md">References page</a>. One that we are excited about is <a href="../plass-paladin/">PLASS</a>, 
+which does assembly at the protein level!</p>
                 
                   
                 
