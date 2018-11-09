@@ -51,8 +51,13 @@ nav:
   - 'Day 2':
       - 'Khmer Error Trimming': 'khmer-trimming.md'
       - 'Assembly with Megahit': 'megahit-assembly.md'
-      - 'Count Transcriptomes': 'count_transcriptomes.md'
       - 'Assembly Evaluation and Quantification': 'evaluation-and-mapping.md'
       - 'Assembly Annotation': 'annotation.md'
+      - 'Count Transcriptomes': 'count_transcriptomes.md'
+      - 'Filezilla': 'filezilla.md'
       - 'Bioconda': 'working-with-bioconda.md'
+      - 'Workflows and Repeatability': 'automation-qc.md'
+
+  - References:
+     -  'References': 'references.md'
 
