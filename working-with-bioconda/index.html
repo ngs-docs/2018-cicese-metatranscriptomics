@@ -766,6 +766,12 @@ conda config --add channels conda-forge
 <p><code>conda install</code> to install a package.</p>
 <p><code>conda list</code> to list installed packages.</p>
 <p><code>conda search</code> to search packages. Note that you'll see one package for every version of the software and for every version of Python (e.g. <code>conda search sourmash</code>).</p>
+<p>During this workshop, we have been using the <code>tara</code> environment. We can expor this environment into a "yaml" text file to keep track 
+of everything we have installed, including versions!</p>
+<pre><code>`conda env export -n tara -f $PROJECT/tara_conda_environment.yaml`
+</code></pre>
+
+<p>You can read more about exporting environments <a href="https://conda.io/docs/commands/env/conda-env-export.html">here</a></p>
 <h2 id="using-bioconda">Using bioconda</h2>
 <p>bioconda is a channel for conda, which just means that you
 can "add" it to conda as a source of packages. That's what the <code>conda config</code> above does.</p>
