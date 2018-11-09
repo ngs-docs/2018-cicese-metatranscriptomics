@@ -50,7 +50,7 @@ to install them!
 We're going to run a `quick` version of the pipeline, add a parameter, `--quick`, to omit OrthoDB, Uniref, Pfam, and Rfam. In the future, running `full` run would take longer to install and run, but you'll have access to the full annotation pipeline.
 
 ```
-dammit databases --install --busco-group metazoa  --quick --database-dir /LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
+dammit databases --install --busco-group eukaryota  --quick --database-dir /LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
 ```
 
 We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
