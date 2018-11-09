@@ -71,7 +71,22 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/filezilla/</loc>
+     <lastmod>2018-11-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/working-with-bioconda/</loc>
+     <lastmod>2018-11-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/automation-qc/</loc>
+     <lastmod>2018-11-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://ngs-docs.github.io/2018-cicese-metatranscriptomics/references/</loc>
      <lastmod>2018-11-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
