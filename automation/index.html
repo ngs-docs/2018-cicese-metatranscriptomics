@@ -495,6 +495,220 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#clean-off-old-stuff" title="Clean off old stuff" class="md-nav__link">
+    Clean off old stuff
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-necessary-software-and-data" title="Install the necessary software and data" class="md-nav__link">
+    Install the necessary software and data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-a-shell-script-to-run-rnaseq-analysis" title="Write a shell script to run RNAseq analysis" class="md-nav__link">
+    Write a shell script to run RNAseq analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put-all-of-the-rnaseq-commands-into-a-single-text-file" title="Put all of the RNAseq commands into a single text file" class="md-nav__link">
+    Put all of the RNAseq commands into a single text file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-running-the-shell-script" title="Re-running the shell script" class="md-nav__link">
+    Re-running the shell script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-trick-make-it-executable" title="A trick: make it executable" class="md-nav__link">
+    A trick: make it executable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#another-good-addition-make-it-fail-nicely" title="Another good addition: make it fail nicely" class="md-nav__link">
+    Another good addition: make it fail nicely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-final-good-addition-make-shell-scripts-print-out-the-commands-theyre-running" title="A final good addition: make shell scripts print out the commands they're running!" class="md-nav__link">
+    A final good addition: make shell scripts print out the commands they're running!
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracking-output-of-shell-scripts" title="Tracking output of shell scripts" class="md-nav__link">
+    Tracking output of shell scripts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-final-note-on-shell-scripts" title="A final note on shell scripts:" class="md-nav__link">
+    A final note on shell scripts:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snakemake-for-automation" title="snakemake for automation" class="md-nav__link">
+    snakemake for automation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-install-snakemake" title="First, install snakemake." class="md-nav__link">
+    First, install snakemake.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-first-snakemake-rule" title="Writing your first snakemake rule" class="md-nav__link">
+    Writing your first snakemake rule
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#challenge-add-the-explicit-list-of-inputs" title="Challenge: add the explicit list of inputs." class="md-nav__link">
+    Challenge: add the explicit list of inputs.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenge-write-a-rule-that-generates-the-counts-files" title="Challenge: write a rule that generates the .counts files." class="md-nav__link">
+    Challenge: write a rule that generates the .counts files.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-rules-with-wildcards" title="Writing rules with wildcards" class="md-nav__link">
+    Writing rules with wildcards
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-expand-to-work-with-lists-of-files" title="Using 'expand' to work with lists of files" class="md-nav__link">
+    Using 'expand' to work with lists of files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#challenge" title="Challenge:" class="md-nav__link">
+    Challenge:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-workflow-diagrams" title="Visualizing workflow diagrams" class="md-nav__link">
+    Visualizing workflow diagrams
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenge-extend-the-snakemake-rules-to-download-and-prepare-the-reference" title="Challenge: Extend the snakemake rules to download and prepare the reference" class="md-nav__link">
+    Challenge: Extend the snakemake rules to download and prepare the reference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-things-snakemake-can-do" title="Other things snakemake can do" class="md-nav__link">
+    Other things snakemake can do
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducibility-and-provenance" title="Reproducibility and provenance" class="md-nav__link">
+    Reproducibility and provenance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#answer-to-first-challenge" title="Answer to first challenge:" class="md-nav__link">
+    Answer to first challenge:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#answer-to-second-challenge" title="Answer to second challenge" class="md-nav__link">
+    Answer to second challenge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-snakemake-file" title="Final snakemake file" class="md-nav__link">
+    Final snakemake file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -507,7 +721,8 @@
                 
                 
                 <h1 id="automation-via-shell-scripts-and-snakemake">Automation via shell scripts and snakemake</h1>
-<h1 id="automation-via-shell-scripts-and-snakemake_1">Automation via shell scripts and snakemake</h1>
+<p>Note: This lesson was written as part of <a href="http://ivory.idyll.org/dibsi/">DIBSI 2018</a> 
+by C. Titus Brown. Links to the data are all provided, so you should be able to follow along. </p>
 <p>Learning objectives:</p>
 <ul>
 <li>understand how to write shell scripts</li>
@@ -521,7 +736,7 @@ rm -fr data rnaseq
 </code></pre>
 
 <h3 id="install-the-necessary-software-and-data">Install the necessary software and data</h3>
-<p>You'll need to have conda and RStudio installed (see <a href="jetstream-bioconda-config.html">installation instructions</a>).</p>
+<p>You'll need to have conda and RStudio installed (see <a href="https://angus.readthedocs.io/en/2018/jetstream-bioconda-config.html">installation instructions</a>).</p>
 <p>Then install salmon and edgeR:</p>
 <pre><code>cd ~/
 
@@ -531,7 +746,7 @@ curl -L -O https://raw.githubusercontent.com/ngs-docs/angus/2018/scripts/install
 sudo Rscript --no-save install-edgeR.R
 </code></pre>
 
-<p>You'll also need the yeast data from <a href="quality-and-trimming.html#data-source">trimming</a> again:</p>
+<p>You'll also need the yeast data from <a href="https://dibsi-rnaseq.readthedocs.io/en/latest/quality-trimming.html">trimming</a> again:</p>
 <pre><code>cd ~/
 mkdir -p data
 cd data
