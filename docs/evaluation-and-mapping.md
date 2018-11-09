@@ -252,6 +252,20 @@ How do the mapping rates compare? What does this tell us about our metatranscrip
 
 ## How well does quantification capture sample distances?
 
+We made an MDS plot of our `sourmash compare` results yesterday. With our salmon
+`quant.sf` files, we can also make and MDS plot and see how different the two are.
+This will demonstrate how well mapping to our assembly captures the information
+in our reads. 
+
+We already ran the code to do this, but if you want to see what it looks like, 
+you can find it [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-metatranscriptomics/master/scripts/salmon_mds_plot.R). It relies on the `quant.sf` files output by Salmon. 
+
+![sourmash](files/tara-trimmed-comp-mds.pdf)
+![salmon](files/tara-salmon-mds.pdf)
+
+Look how different they are! To be fair, we only mapped back to a full transcriptome
+with 1 million reads, but this is still a good test. 
+
 ## Another way to assess read mapping?
 
 Transrate actually  has a `read assessment` mode that uses `salmon` to "align" reads to the transcriptome and generates some metrics on read mapping. 
