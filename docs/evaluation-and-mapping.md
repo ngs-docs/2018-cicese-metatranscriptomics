@@ -98,7 +98,7 @@ transrate --assembly=tara_f135_full_megahit.fasta --reference=tara135_SRF_megahi
 It's useful to know how well the transcripts represent the sequenced reads. To do this, we'll need to link in the reads we used to generate this assembly: 
 
 ```
-ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_*.qc.fq.gz ./
+ln -s ${PROJECT}/trim/TARA_135_SRF_5-20_*.qc.fq.gz ./
 ```
 
 
