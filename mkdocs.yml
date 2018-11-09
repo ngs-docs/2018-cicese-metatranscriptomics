@@ -54,5 +54,10 @@ nav:
       - 'Count Transcriptomes': 'count_transcriptomes.md'
       - 'Assembly Evaluation and Quantification': 'evaluation-and-mapping.md'
       - 'Assembly Annotation': 'annotation.md'
+      - 'Filezilla': 'filezilla.md'
       - 'Bioconda': 'working-with-bioconda.md'
+      - 'Workflows and Repeatability': 'automation-qc.md'
+
+  - References:
+     -  'References': 'references.md'
 
