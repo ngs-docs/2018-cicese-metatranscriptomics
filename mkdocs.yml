@@ -47,12 +47,12 @@ nav:
       - 'Short Read Quality Control': 'short-read-quality-control.md'
       - 'Sourmash Taxonomic Classification': 'sourmash-taxonomic-classification.md'
       - 'Comparing Samples': 'sample-comparison.md'
+
+  - 'Day 2':
       - 'Khmer Error Trimming': 'khmer-trimming.md'
       - 'Assembly with Megahit': 'megahit-assembly.md'
       - 'Count Transcriptomes': 'count_transcriptomes.md'
-
-  - 'Day 2':
-      - 'Assembly Evaluation': 'evaluation-and-mapping.md'
+      - 'Assembly Evaluation and Quantification': 'evaluation-and-mapping.md'
       - 'Assembly Annotation': 'annotation.md'
       - 'Bioconda': 'working-with-bioconda.md'
 
