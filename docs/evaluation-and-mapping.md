@@ -178,7 +178,7 @@ Then, run the salmon mapping:
 ```
 for sample in *1.qc.fq.gz
 do
-  base=$(basename $sample _1.fq.gz)
+  base=$(basename $sample _1.qc.fq.gz)
   echo $base
   salmon quant -i tara135 -p 2 -l A -1 ${base}_1.qc.fq.gz -2 ${base}_2.qc.fq.gz -o ${base}_quant
 done
