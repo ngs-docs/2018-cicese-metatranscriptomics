@@ -607,11 +607,11 @@ transrate --reference=tara135_SRF_megahit.fasta --assembly=tara135_SRF_full_mega
 <pre><code>ln -s ${PROJECT}/trimmed/TARA_135_SRF_5-20_*.qc.fq.gz ./
 </code></pre>
 
-<h1 id="mapping-reads-to-a-metatranscriptome">Mapping reads to a metatranscriptome</h1>
+<h1 id="quantifying-reads-with-salmon">Quantifying reads with Salmon</h1>
 <p>We will use <a href="http://salmon.readthedocs.org/en/latest/">Salmon</a> to
 quantify expression. Salmon is a new breed of software for quantifying RNAseq reads that is both really fast and takes
-transcript length into consideration (<a href="https://www.nature.com/articles/nmeth.4197">Patro et al. 2017</a>).</p>
-<p>For further reading, see</p>
+transcript length into consideration (<a href="https://www.nature.com/articles/nmeth.4197">Patro et al. 2017</a>). </p>
+<p>You can read more about salmon-like "pseudoalignment" here: </p>
 <ul>
 <li>Intro blog post: http://robpatro.com/blog/?p=248</li>
 <li>A 2016 blog post evaluating and comparing methods <a href="https://cgatoxford.wordpress.com/2016/08/17/why-you-should-stop-using-featurecounts-htseq-or-cufflinks2-and-start-using-kallisto-salmon-or-sailfish/">here</a></li>
@@ -702,7 +702,7 @@ k119_22 308 136.790 0.000000    0.000
 fifth column is the "raw counts", which is what many 
 differential expression programs need.</p>
 <h1 id="assess-mapping-rate">Assess Mapping rate</h1>
-<p>Okay, we got some numbers for woo much the transcripts were expressed, but how well did the reads map overall? 
+<p>Okay, we got some numbers for how much the transcripts were expressed, but how well did the reads map overall? 
 Let's go look at one of the log files to see.</p>
 <pre><code>less TARA_135_SRF_5-20_rep1_1m_quant/logs/salmon_quant.log
 
@@ -730,7 +730,8 @@ you can find it <a href="https://raw.githubusercontent.com/ngs-docs/2018-cicese-
 <img alt="salmon" src="../files/tara-salmon-mds.png" /></p>
 <p>Look how different they are! To be fair, we only mapped back to a full transcriptome
 with 1 million reads, but this is still a good test. </p>
-<h2 id="another-way-to-assess-read-mapping">Another way to assess read mapping?</h2>
+<p>What might this say about our samples?</p>
+<h2 id="another-way-to-assess-read-mapping">Another way to assess read mapping</h2>
 <p>Transrate actually  has a <code>read assessment</code> mode that uses <code>salmon</code> to "align" reads to the transcriptome and generates some metrics on read mapping. </p>
 <p>We won't run this today, but you could run it via:</p>
 <pre><code>transrate --assembly=tara135_SRF_megahit.fasta --threads=2 --left=*_1.qc.fq.gz --right *_2.qc.fq.gz --output=${PROJECT}/evaluation/tara135_SRF_transrate

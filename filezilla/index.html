@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/references/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/filezilla/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Some other useful references - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Downloading and Transferring Files - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#some-other-useful-references" tabindex="1" class="md-skip">
+      <a href="../#downloading-and-transferring-files" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Some other useful references
+                Downloading and Transferring Files
               </span>
             
           
@@ -511,16 +511,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#finding-data" title="Finding Data" class="md-nav__link">
-    Finding Data
+  <a href="#download-file-from-the-internet-to-your-remote-machine" title="Download file from the internet to your remote machine" class="md-nav__link">
+    Download file from the internet to your remote machine
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#quality-trimming-and-evalution" title="Quality Trimming and Evalution" class="md-nav__link">
-    Quality Trimming and Evalution
+  <a href="#transfer-files-from-your-instance-with-filezilla" title="Transfer Files From Your Instance with Filezilla" class="md-nav__link">
+    Transfer Files From Your Instance with Filezilla
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-the-site-manager" title="Open the site manager" class="md-nav__link">
+    Open the site manager
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-your-instances-as-a-site" title="Add your instances as a site" class="md-nav__link">
+    Add your instances as a site
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filezilla-step-3" title="Filezilla - Step 3" class="md-nav__link">
+    Filezilla - Step 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -541,26 +568,46 @@
               
                 
                 
-                <h1 id="some-other-useful-references">Some other useful references</h1>
-<p>We've covered some tools during this workshop that we often use in our workflows, 
-but there are others that may suit your purposes better. We have listed some of 
-them below, as well as some useful observations we have found when using the 
-tools.</p>
-<h2 id="finding-data">Finding Data</h2>
+                <h1 id="downloading-and-transferring-files">Downloading and Transferring Files</h1>
+<p>Our goals for this lesson are:</p>
 <ul>
-<li><a href="">Sequence Read Archive</a></li>
-<li><a href="">European Nucleotide Archive</a></li>
-<li><a href="">GenBank</a></li>
-<li><a href="">NCBI Taxonomy</a></li>
+<li>Download a file from the internet with wget</li>
+<li>Transfer a file from a remote machine to your computer with FileZilla</li>
+<li>Transfer a file from your computer to a remote machine with FileZilla</li>
+<li>Name other tools that can be used for file transfer</li>
 </ul>
-<h2 id="quality-trimming-and-evalution">Quality Trimming and Evalution</h2>
-<ul>
-<li><a href="">Trimmomatic</a></li>
-<li><a href="">FastQC</a></li>
-<li><a href="">MultiQC</a></li>
-<li><a href="">CutAdapt</a> -- Very good at removing polyA tails</li>
-</ul>
-<h2 id="_1"></h2>
+<h2 id="download-file-from-the-internet-to-your-remote-machine">Download file from the internet to your remote machine</h2>
+<p>One way to download files to your remote instance from a webserver is to use the command line tool, <em>wget</em>. This command supports downloading files from FTP and HTTP(s). The tool <em>wget</em> also supports recursive download (with the parameter <em>-r</em>), allowing you to download content from a directory or folder. For your information, there are other command line tools that can also be used to download data (e.g., <em>curl</em>), but <em>wget</em> should serve you well for this lesson and bioinformatic analysis.</p>
+<p>An example of this would be: </p>
+<pre><code class="bash">$ cd ~
+$ wget https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg 
+</code></pre>
+
+<p>And now, you will have a file named <code>cat-pet-animal-domestic-104827.jpeg</code> on your remote instance in our home directory. </p>
+<p>Now we have a conundrum! We have downloaded a file that we know is a cat photo, but we can't view it on our remote machine! Let's use FileZilla to facilitate the transfer so we can take a look.</p>
+<h2 id="transfer-files-from-your-instance-with-filezilla">Transfer Files From Your Instance with Filezilla</h2>
+<p>Let's pretend that we didn't just grab that cat photo from the internet, and we have something unique that we would like to view. For this, <em>wget</em> would not work. Instead, you can use FileZilla to transfer a file from your local machine to a remote instance, or vice versa. </p>
+<h3 id="open-the-site-manager">Open the site manager</h3>
+<p>Open <em>FileZilla</em>, and click on the File tab. Choose 'Site Manager'.</p>
+<p><img alt="FileZilla_step1" src="_static/filezilla_1.png" /></p>
+<h3 id="add-your-instances-as-a-site">Add your instances as a site</h3>
+<p>Within the 'Site Manager' window, do the following: </p>
+<ol>
+<li>Click on 'New Site', and name it something intuitive (e.g. omica)</li>
+<li>Host: address of the omica cluster: 158.97.9.9 (or omica.cicese.mx)</li>
+<li>Protocol: SFTP - SSH File Transfer Protocol</li>
+<li>Logon Type: Ask for password</li>
+<li>User: <code>curso</code></li>
+<li>Password: The password you use to log on to your instance. </li>
+<li>Click 'Connect'</li>
+</ol>
+<p><img alt="FileZilla_step2" src="_static/filezilla_site_add.png" /></p>
+<h3 id="filezilla-step-3">Filezilla - Step 3</h3>
+<p>In FileZilla, on the left side of the screen navigate to the location you would like to save the file, and on the right side of the screen navigate through your remote directory to the file <code>~/cat-pet-animal-domestic-104827.jpeg</code>. Double click on the .jpeg file to transfer a copy, or click and drag over to the right hand panel.</p>
+<p>Open the file on your local machine, and bask in the glory of the cute cat.</p>
+<p>We could also use <code>scp</code> or <code>rsync</code> to transfer files. These are command line utilities. If you're transferring a large datafile, <code>rsync</code> may be slightly better, because if the download fails it will restart from where it left off. 
++ <a href="https://rsync.samba.org/">rsync</a>
++ scp</p>
                 
                   
                 
