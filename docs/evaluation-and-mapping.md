@@ -226,7 +226,7 @@ differential expression programs need.
 
 # Assess Mapping rate
 
-Okay, we got some numbers for woo much the transcripts were expressed, but how well did the reads map overall? 
+Okay, we got some numbers for how much the transcripts were expressed, but how well did the reads map overall? 
 Let's go look at one of the log files to see.
 
 ```
@@ -265,6 +265,8 @@ you can find it [here](https://raw.githubusercontent.com/ngs-docs/2018-cicese-me
 
 Look how different they are! To be fair, we only mapped back to a full transcriptome
 with 1 million reads, but this is still a good test. 
+
+What might this say about our samples?
 
 ## Another way to assess read mapping?
 
