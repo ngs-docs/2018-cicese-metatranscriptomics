@@ -128,9 +128,8 @@ Now let's check that we still have the trimmed data we created day 1:
 
 ```
 set -u
-printf "\nMy trimmed data is in $PROJECT/quality/, and consists of $(ls -1 ${PROJECT}/quality/*.qc.fq.gz | wc -l) files\n\n"
+printf "\nMy trimmed data is in $PROJECT/trim/, and consists of $(ls -1 ${PROJECT}/trim/*.qc.fq.gz | wc -l) files\n\n"
 set +u
-
 ```
 where set -u should let you know if you have any unset variables, i.e. if the `$PROJECT` variable is not defined. 
 
