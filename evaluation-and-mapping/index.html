@@ -616,9 +616,8 @@ transcript length into consideration (<a href="https://www.nature.com/articles/n
 
 <p>Now let's check that we still have the trimmed data we created day 1:</p>
 <pre><code>set -u
-printf &quot;\nMy trimmed data is in $PROJECT/quality/, and consists of $(ls -1 ${PROJECT}/quality/*.qc.fq.gz | wc -l) files\n\n&quot;
+printf &quot;\nMy trimmed data is in $PROJECT/trim/, and consists of $(ls -1 ${PROJECT}/trim/*.qc.fq.gz | wc -l) files\n\n&quot;
 set +u
-
 </code></pre>
 
 <p>where set -u should let you know if you have any unset variables, i.e. if the <code>$PROJECT</code> variable is not defined. </p>
