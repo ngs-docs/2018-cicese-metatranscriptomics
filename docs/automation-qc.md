@@ -1,4 +1,4 @@
-# Automatioin via shell scripts and snakemake
+# Automation via shell scripts and snakemake
 
 For everything we have done so far, we have copied and pasted a lot of commands 
 to accomplish what we want. This works! But can also be time consuming, and is
