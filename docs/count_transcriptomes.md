@@ -50,7 +50,7 @@ Next we'll build a HMM profile of the Pfam domain.
 
 ```
 hmmbuild PF00177-full.hmm PF00177-full.sto
-hmmpress PF00177.hmm
+hmmpress PF00177-full.hmm
 ```
 
 We then use the HMM profile to search the proteins from our assembly
