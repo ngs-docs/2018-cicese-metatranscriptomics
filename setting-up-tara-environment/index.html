@@ -407,33 +407,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
-    Installing this software in the future
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-1-installing-from-a-file" title="Option 1: Installing from a file" class="md-nav__link">
-    Option 1: Installing from a file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-installing-manualling" title="Option 2: Installing Manualling" class="md-nav__link">
-    Option 2: Installing Manualling
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
       
       
       
@@ -623,10 +596,46 @@
       
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      References
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../future-installation/" title="Installing this software in the future" class="md-nav__link">
+      Installing this software in the future
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../references/" title="References" class="md-nav__link">
       References
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -693,33 +702,6 @@
   <a href="#finally-" title="Finally --" class="md-nav__link">
     Finally --
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
-    Installing this software in the future
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-1-installing-from-a-file" title="Option 1: Installing from a file" class="md-nav__link">
-    Option 1: Installing from a file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-installing-manualling" title="Option 2: Installing Manualling" class="md-nav__link">
-    Option 2: Installing Manualling
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -792,60 +774,6 @@ source ~/.bashrc
 
 <p>so that we are all working on different distinct computers on the
 <code>omica</code> cluster.</p>
-<h2 id="installing-this-software-in-the-future">Installing this software in the future</h2>
-<p>In the future, if you want to run the tutorials on your own, you'll
-need to set up conda in your own account -
-<a href="../working-with-bioconda/">see instructions</a>).</p>
-<p>We can do this one of two ways: by installing tools individually, or by
-installing from a file containing all of the software info.</p>
-<h3 id="option-1-installing-from-a-file">Option 1: Installing from a file</h3>
-<p>At the end of the course, we exported info from the <code>tara</code> environment using:</p>
-<pre><code>conda env export -n tara -f $PROJECT/tara_conda_environment.yaml
-</code></pre>
-
-<p>You can find download this file <a href="../files/tara_conda_environment.yaml">here</a></p>
-<p>To make a new conda env like this, download that file, then run:</p>
-<pre><code>conda env create -f tara_conda_environment.yaml
-</code></pre>
-
-<p>you shuld then be able to:</p>
-<pre><code>source activate tara
-</code></pre>
-
-<p>and you remember you can exit this environment with <code>source deactivate</code></p>
-<h3 id="option-2-installing-manualling">Option 2: Installing Manualling</h3>
-<p>Then create an environment to work in:</p>
-<pre><code>conda create -n tara
-</code></pre>
-
-<p>and activate it:</p>
-<pre><code>source activate tara
-</code></pre>
-
-<p>Now, install the software!</p>
-<pre><code>conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon r dammit
-</code></pre>
-
-<p>To make sure you have access to these conda-installed programs, try to execute some of them:</p>
-<pre><code>sourmash
-</code></pre>
-
-<p>Conda works for most of the software we'll use in the workshop. However, there are some exceptions: notably, transrate. </p>
-<p>To install transrate, follow the instructions <a href="http://hibberdlab.com/transrate/installation.html">here</a>.</p>
-<p>You can also try the following:</p>
-<pre><code>cd &lt;location-to-put-transrate&gt;
-wget https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
-tar xvf transrate-1.0.3-linux-x86_64.tar.gz
-</code></pre>
-
-<p>To put transrate in your path, you can execute:</p>
-<pre><code>echo 'export PATH=/LUSTRE/apps/workshop/transrate-1.0.3-linux-x86_64:$PATH' &gt;&gt; ~/.bashrc
-source ~/.bashrc
-</code></pre>
-
-<p>Then check that transrate is properly installed with </p>
-<pre><code>transrate -h
-</code></pre>
                 
                   
                 
