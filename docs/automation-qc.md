@@ -16,6 +16,8 @@ Let's put all of our commands from the quality control lesson into one script.
 
 We'll call it `run_qc.sh`. The `sh` at the end of the tells you that this is a bash script. 
 
+Using nano, edit the file `run-qc.sh` and put the following content there:
+
 ```
 cd ${PROJECT}
 mkdir -p quality
