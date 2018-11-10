@@ -32,6 +32,8 @@ tools.
 + [Dammit](https://dammit.readthedocs.io/)
 + [HMMER](http://hmmer.org/)
 + [NCBI-BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
++ [Prokka](https://www.ncbi.nlm.nih.gov/pubmed/24642063)
++ [GhostKOALA](https://www.sciencedirect.com/science/article/pii/S002228361500649X)
 
 ## Read Mapping and Quantification
 + [Salmon](https://www.nature.com/articles/nmeth.4197)

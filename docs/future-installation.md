@@ -49,7 +49,7 @@ source activate tara
 Now, install the software!
 
 ```
-conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon r dammit
+conda install fastqc multiqc trimmomatic khmer busco megahit sourmash salmon r dammit cd-hit
 ```
 
 To make sure you have access to these conda-installed programs, try to execute some of them:
