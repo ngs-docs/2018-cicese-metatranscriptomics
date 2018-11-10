@@ -58,6 +58,5 @@ nav:
       - 'Bioconda': 'working-with-bioconda.md'
       - 'Workflows and Repeatability': 'automation-qc.md'
 
-  - References:
-     -  'References': 'references.md'
+  -  'References': 'references.md'
 
