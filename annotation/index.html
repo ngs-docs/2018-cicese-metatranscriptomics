@@ -630,6 +630,8 @@ to install them!</p>
 dammit databases --install --busco-group eukaryota --quick
 </code></pre>
 
+<p>Note: the dammit databases can be quite large, so make sure you have a lot of space for them. Don't put them in 
+your home directory on a cluster, for example!</p>
 <p>We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
 them with the <code>dammit databases</code> subcommand. You can see the whole list by running
 <code>dammit databases -h</code>. You should try to match your species as closely as possible for the best
@@ -676,14 +678,6 @@ look inside, you'll see a lot of files:</p>
 <code>tara135_SRF_megahit.fasta.dammit.gff3</code>, and <code>tara135_SRF_megahit.fasta.dammit.stats.json</code>.</p>
 <p>If the above <code>dammit</code> command is run again, there will be a message:
 <code>**Pipeline is already completed!**</code></p>
-<h2 id="references">References</h2>
-<ol>
-<li>Putnam NH, Srivastava M, Hellsten U, Dirks B, Chapman J, Salamov A,
-Terry A, Shapiro H, Lindquist E, Kapitonov VV, Jurka J, Genikhovich G,
-Grigoriev IV, Lucas SM, Steele RE, Finnerty JR, Technau U, Martindale
-MQ, Rokhsar DS. (2007) Sea anemone genome reveals ancestral eumetazoan
-gene repertoire and genomic organization. Science. 317, 86-94.</li>
-</ol>
                 
                   
                 
