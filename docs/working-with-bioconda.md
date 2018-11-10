@@ -75,7 +75,7 @@ During this workshop, we have been using the `tara` environment. We can expor th
 of everything we have installed, including versions!
 
 ```
-`conda env export -n tara -f $PROJECT/tara_conda_environment.yaml`
+conda env export -n tara -f $PROJECT/tara_conda_environment.yaml
 ```
 
 You can read more about exporting environments [here](https://conda.io/docs/commands/env/conda-env-export.html)

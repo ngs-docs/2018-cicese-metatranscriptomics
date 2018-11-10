@@ -48,8 +48,9 @@ Lunch
   - [A brief discussion of workflows & repeatability](automation-qc.md)
 
 
-
 #### Additional Resources:  
+
+  - [Installing this software in the future](setting-up-tara-environment.md)
   - [References](references.md)
   - SEQ Answers
   - Biostars

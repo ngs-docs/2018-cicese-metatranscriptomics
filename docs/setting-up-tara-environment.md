@@ -59,12 +59,61 @@ source activate tara
 
 When you want to exit this environment later, you can execute `source deactivate` to return to the `base` env.
 
+## Finally --
+
+Run 
+
+```
+~/works18
+```
+
+and then
+
+```
+source activate tara
+```
+
+so that we are all working on different distinct computers on the
+`omica` cluster.
+
+
 
 ## Installing this software in the future
 
 In the future, if you want to run the tutorials on your own, you'll
 need to set up conda in your own account -
 [see instructions](working-with-bioconda.md)).
+
+
+We can do this one of two ways: by installing tools individually, or by
+installing from a file containing all of the software info.
+
+### Option 1: Installing from a file
+
+At the end of the course, we exported info from the `tara` environment using:
+```
+conda env export -n tara -f $PROJECT/tara_conda_environment.yaml
+```
+You can find download this file [here](files/tara_conda_environment.yaml)
+
+
+To make a new conda env like this, download that file, then run:
+
+```
+conda env create -f tara_conda_environment.yaml
+```
+
+you shuld then be able to:
+
+```
+source activate tara
+```
+
+and you remember you can exit this environment with `source deactivate`
+
+
+### Option 2: Installing Manualling
+
 
 Then create an environment to work in:
 
@@ -112,19 +161,3 @@ Then check that transrate is properly installed with
 transrate -h
 ```
 
-## Finally --
-
-Run 
-
-```
-~/works18
-```
-
-and then
-
-```
-source activate tara
-```
-
-so that we are all working on different distinct computers on the
-`omica` cluster.
