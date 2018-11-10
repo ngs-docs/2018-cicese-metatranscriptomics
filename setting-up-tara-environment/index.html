@@ -25,11 +25,11 @@
       
         <meta name="lang:search.pipeline.trimmer" content="True">
       
-        <meta name="lang:search.result.none" content="No matching pages">
+        <meta name="lang:search.result.none" content="No matching documents">
       
-        <meta name="lang:search.result.one" content="1 matching page">
+        <meta name="lang:search.result.one" content="1 matching document">
       
-        <meta name="lang:search.result.other" content="# matching page">
+        <meta name="lang:search.result.other" content="# matching documents">
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
@@ -143,7 +143,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search this site" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -153,7 +153,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="result">
           <div class="md-search-result__meta">
-            Type to start searching this site
+            Type to start searching
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -174,6 +174,12 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -216,6 +222,12 @@
 
 
   <a href="https://github.com/ngs-docs/2018-cicese-metatranscriptomics" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
     
     <div class="md-source__repository">
       2018-cicese-metatranscriptomics
@@ -389,16 +401,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
-    Installing this software in the future
+  <a href="#finally-" title="Finally --" class="md-nav__link">
+    Finally --
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#finally-" title="Finally --" class="md-nav__link">
-    Finally --
+  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
+    Installing this software in the future
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-installing-from-a-file" title="Option 1: Installing from a file" class="md-nav__link">
+    Option 1: Installing from a file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-installing-manualling" title="Option 2: Installing Manualling" class="md-nav__link">
+    Option 2: Installing Manualling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -658,16 +690,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
-    Installing this software in the future
+  <a href="#finally-" title="Finally --" class="md-nav__link">
+    Finally --
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#finally-" title="Finally --" class="md-nav__link">
-    Finally --
+  <a href="#installing-this-software-in-the-future" title="Installing this software in the future" class="md-nav__link">
+    Installing this software in the future
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-installing-from-a-file" title="Option 1: Installing from a file" class="md-nav__link">
+    Option 1: Installing from a file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-installing-manualling" title="Option 2: Installing Manualling" class="md-nav__link">
+    Option 2: Installing Manualling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -729,10 +781,39 @@ source ~/.bashrc
 </code></pre>
 
 <p>When you want to exit this environment later, you can execute <code>source deactivate</code> to return to the <code>base</code> env.</p>
+<h2 id="finally-">Finally --</h2>
+<p>Run </p>
+<pre><code>~/works18
+</code></pre>
+
+<p>and then</p>
+<pre><code>source activate tara
+</code></pre>
+
+<p>so that we are all working on different distinct computers on the
+<code>omica</code> cluster.</p>
 <h2 id="installing-this-software-in-the-future">Installing this software in the future</h2>
 <p>In the future, if you want to run the tutorials on your own, you'll
 need to set up conda in your own account -
 <a href="../working-with-bioconda/">see instructions</a>).</p>
+<p>We can do this one of two ways: by installing tools individually, or by
+installing from a file containing all of the software info.</p>
+<h3 id="option-1-installing-from-a-file">Option 1: Installing from a file</h3>
+<p>At the end of the course, we exported info from the <code>tara</code> environment using:</p>
+<pre><code>conda env export -n tara -f $PROJECT/tara_conda_environment.yaml
+</code></pre>
+
+<p>You can find download this file <a href="../files/tara_conda_environment.yaml">here</a></p>
+<p>To make a new conda env like this, download that file, then run:</p>
+<pre><code>conda env create -f tara_conda_environment.yaml
+</code></pre>
+
+<p>you shuld then be able to:</p>
+<pre><code>source activate tara
+</code></pre>
+
+<p>and you remember you can exit this environment with <code>source deactivate</code></p>
+<h3 id="option-2-installing-manualling">Option 2: Installing Manualling</h3>
 <p>Then create an environment to work in:</p>
 <pre><code>conda create -n tara
 </code></pre>
@@ -765,18 +846,6 @@ source ~/.bashrc
 <p>Then check that transrate is properly installed with </p>
 <pre><code>transrate -h
 </code></pre>
-
-<h2 id="finally-">Finally --</h2>
-<p>Run </p>
-<pre><code>~/works18
-</code></pre>
-
-<p>and then</p>
-<pre><code>source activate tara
-</code></pre>
-
-<p>so that we are all working on different distinct computers on the
-<code>omica</code> cluster.</p>
                 
                   
                 

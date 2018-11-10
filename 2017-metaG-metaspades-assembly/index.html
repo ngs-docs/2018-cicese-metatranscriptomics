@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/annotation/">
+        <link rel="canonical" href="https://ngs-docs.github.io/2018-cicese-metatranscriptomics/2017-metaG-metaspades-assembly/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Assembly Annotation - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Assembly with metaSPAdes - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#annotating-a-metatranscriptome" tabindex="1" class="md-skip">
+      <a href="../#assembly-with-metaspades" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                Assembly Annotation
+                Assembly with metaSPAdes
               </span>
             
           
@@ -398,12 +398,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Day 2
@@ -455,20 +453,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Assembly Annotation" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../annotation/" title="Assembly Annotation" class="md-nav__link">
       Assembly Annotation
     </a>
-    
   </li>
 
         
@@ -565,95 +554,32 @@
               
                 
                 
-                <h1 id="annotating-a-metatranscriptome">Annotating a Metatranscriptome</h1>
-<p>Our assembly contains a set of contigs that represent transcripts, or 
-fragments of transcripts. To get at the functional content of these 
-transcripts, we must first find the most likely open reading frames (ORFs)</p>
-<h1 id="annotating-transcriptomes-and-metatranscriptomes-with-dammit">Annotating transcriptomes and metatranscriptomes with dammit</h1>
-<p>dammit!</p>
-<p><a href="http://www.camillescott.org/dammit/index.html">dammit</a> is an annotation
-pipeline written by <a href="http://www.camillescott.org/">Camille Scott</a>. dammit runs a relatively standard annotation
-protocol for transcriptomes: it begins by building gene models with <a href="http://transdecoder.github.io/">Transdecoder</a>,
-and then uses the following protein databases as evidence for annotation:
-<a href="http://pfam.xfam.org/">Pfam-A</a>, <a href="http://rfam.xfam.org/">Rfam</a>, <a href="http://www.orthodb.org/">OrthoDB</a>,
-<a href="http://www.uniprot.org/help/uniref">uniref90</a> (uniref is optional with <code>--full</code>).</p>
-<p>If a protein dataset is available, this can also be supplied to the
-<code>dammit</code> pipeline with <code>--user-databases</code> as optional evidence for
-annotation.</p>
-<p>In addition, <a href="http://busco.ezlab.org/">BUSCO</a> v3 is run, which will compare the gene content in your transcriptome
-with a lineage-specific data set. The output is a proportion of your
-transcriptome that matches with the data set, which can be used as an
-estimate of the completeness of your transcriptome based on evolutionary
-expectation (<a href="http://bioinformatics.oxfordjournals.org/content/31/19/3210.full">Simho et al. 2015</a>).
-There are several lineage-specific datasets available from the authors
-of BUSCO. We will use the <code>metazoa</code> dataset for this transcriptome.</p>
-<h2 id="installation">Installation</h2>
-<p>Annotation necessarily requires a lot of software! dammit attempts to simplify this and
-make it as reliable as possible, and now conda makes it even easier. We've already
-installed <code>dammit</code> int eh <code>tara</code> environment, but if you need to install it in the future,
-here's the command:</p>
-<pre><code>conda install dammit
+                <h1 id="assembly-with-metaspades">Assembly with metaSPAdes</h1>
+<p>Here are the instructions for assembling the metagenomic data with a different assembler. Here we are showing <a href="https://www.ncbi.nlm.nih.gov/pubmed/28298430">metaSPAdes</a>, one of the  assembler options highlighted in the <a href="https://www.biorxiv.org/content/early/2017/06/12/099127">CAMI</a> paper.</p>
+<p>metaSPAdes takes longer than MEGAHIT to run the assembly, so we will not be running it during the course. Rather it is available for download <a href="LINK">here</a>. If you are interested in running the assembly yourself, however, please see below.</p>
+<p>Install metaSPAdes:</p>
+<pre><code>wget http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz
+tar -xzf SPAdes-3.10.1-Linux.tar.gz
+export PATH=$PATH:~/SPAdes-3.10.1-Linux/bin/
 </code></pre>
 
-<h2 id="database-preparation">Database Preparation</h2>
-<p>dammit has two major subcommands: <code>dammit databases</code> and <code>dammit annotate</code>. <code>databases</code>
-checks that the databases are installed and prepared, and if run with the <code>--install</code> flag,
-will perform that installation and preparation. If you just run <code>dammit databases</code> on its
-own, you should get a notification that some database tasks are not up-to-date -- we need
-to install them!</p>
-<p>We're going to run a <code>quick</code> version of the pipeline, add a parameter, <code>--quick</code>, to omit OrthoDB, Uniref, Pfam, and Rfam. In the future, running <code>full</code> run would take longer to install and run, but you'll have access to the full annotation pipeline.</p>
-<pre><code>export DAMMIT_DB_DIR=/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases
-dammit databases --install --busco-group eukaryota --quick
+<p>Concatenate the two sets of reads:</p>
+<pre><code>cd ~/data
+for x in *gz
+do
+  gunzip $x
+done
+
+cat *fq &gt; coassembly.fq
+
+cd ~
+mkdir assembly-spades
+cd assembly-spades
 </code></pre>
 
-<p>Note: the dammit databases can be quite large, so make sure you have a lot of space for them. Don't put them in 
-your home directory on a cluster, for example!</p>
-<p>We used the "metazoa" BUSCO group. We can use any of the BUSCO databases, so long as we install
-them with the <code>dammit databases</code> subcommand. You can see the whole list by running
-<code>dammit databases -h</code>. You should try to match your species as closely as possible for the best
-results. If we want to install another, for example:</p>
-<pre><code>dammit databases --install --busco-group metazoa  --quick
+<p>And assemble with metaSPAdes:</p>
+<pre><code>metaspades.py --12 ~/data/coassembly.fq -o metaS-assembly
 </code></pre>
-
-<p>Note: By default, <code>dammit</code> installs databases in the <code>home</code> directory. However, when you have limited space, as we do here, we can choose to install the databases in another location (e.g. <code>/LUSTRE/bioinformatica_data/bioinformatica2018/dammit_databases</code>)  </p>
-<h2 id="annotating-your-metatranscriptome">Annotating your metatranscriptome</h2>
-<p>Keep things organized! Let's make a project directory:</p>
-<p>Make sure you still have the <code>PROJECT</code> variable:</p>
-<pre><code>echo $PROJECT
-</code></pre>
-
-<p>If you don't see any output, set the <code>PROJECT</code> variable again:</p>
-<pre><code>export PROJECT=~/work
-</code></pre>
-
-<p>Now let's make a directory for annotation</p>
-<pre><code>cd $PROJECT
-mkdir -p annotation
-cd annotation
-</code></pre>
-
-<p>We ran megahit earlier to generate an assembly. Let's link that assembly to this directory</p>
-<pre><code>ln -s $PROJECT/assembly/tara135_SRF_megahit.fasta ./
-</code></pre>
-
-<p>Make sure you run <code>ls</code> and see the assembly file.</p>
-<h2 id="just-annotate-it-dammit">Just annotate it, Dammit!</h2>
-<pre><code>dammit annotate tara135_SRF_megahit.fasta --busco-group eukaryota --n_threads 6
-</code></pre>
-
-<p>While dammit runs, it will print out which tasks its running to the terminal. dammit is
-written with a library called <a href="http://www.pydoit.org">pydoit</a>, which is a python workflow library similar
-to GNU Make. This not only helps organize the underlying workflow, but also means that if we
-interrupt it, it will properly resume!</p>
-<p>After a successful run, you'll have a new directory called <code>tara135_SRF_megahit.fasta.dammit</code>. If you
-look inside, you'll see a lot of files:</p>
-<pre><code>ls tara135_SRF_megahit.fasta.dammit/
-</code></pre>
-
-<p>The most important files for you are <code>tara135_SRF_megahit.fasta.dammit.fasta</code>,
-<code>tara135_SRF_megahit.fasta.dammit.gff3</code>, and <code>tara135_SRF_megahit.fasta.dammit.stats.json</code>.</p>
-<p>If the above <code>dammit</code> command is run again, there will be a message:
-<code>**Pipeline is already completed!**</code></p>
                 
                   
                 
@@ -671,41 +597,6 @@ look inside, you'll see a lot of files:</p>
         
 <footer class="md-footer">
   
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../evaluation-and-mapping/" title="Assembly Evaluation and Quantification" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Assembly Evaluation and Quantification
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../count_transcriptomes/" title="Count Transcriptomes" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Count Transcriptomes
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
