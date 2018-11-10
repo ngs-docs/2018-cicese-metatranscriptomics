@@ -16,13 +16,13 @@ tools.
 + [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 + [MultiQC](https://multiqc.info/)
 + [CutAdapt](https://cutadapt.readthedocs.io/en/stable/guide.html) -- Very good at removing polyA tails
++ [khmer](https://khmer.readthedocs.io/en/v2.1.1/) - also many other functions
 
 ## Transcriptome and Metatranscriptome assembly
 + [MEGAHIT](https://www.ncbi.nlm.nih.gov/pubmed/25609793)
 + [Trinity](https://github.com/trinityrnaseq/trinityrnaseq/wiki)
 + [PLASS](https://www.biorxiv.org/content/early/2018/08/07/386110)
 + [rnaSPADES](http://cab.spbu.ru/software/spades/)
-
 
 ## Assembly Evaluation
 + [BUSCO](https://busco.ezlab.org/)
@@ -32,7 +32,6 @@ tools.
 + [Dammit](https://dammit.readthedocs.io/en/refactor-1.0/)
 + [HMMER](http://hmmer.org/)
 + [NCBI-BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
-
 
 ## Read Mapping and Quantification
 + [Salmon](https://www.nature.com/articles/nmeth.4197)
@@ -52,9 +51,11 @@ tools.
 + [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html)
 + [CLUST](https://www.biorxiv.org/content/early/2017/11/17/221309)
 
-
 ## Variant Analysis
 + [BCFtools](https://samtools.github.io/bcftools/bcftools.html)
+
+## Taxonomic Classification
++ [Sourmash](https://sourmash.readthedocs.io/en/latest/)
 
 ## Amplicon Sequencing
 + [QIIME2](http://qiime.org/)
