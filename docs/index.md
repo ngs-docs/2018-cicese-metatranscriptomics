@@ -50,7 +50,7 @@ Lunch
 
 #### Additional Resources:  
 
-  - [Installing this software in the future](setting-up-tara-environment.md)
+  - [Installing this software in the future](future-installation.md)
   - [References](references.md)
   - SEQ Answers
   - Biostars

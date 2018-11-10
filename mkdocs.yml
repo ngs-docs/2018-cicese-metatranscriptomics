@@ -57,6 +57,7 @@ nav:
       - 'Filezilla': 'filezilla.md'
       - 'Bioconda': 'working-with-bioconda.md'
       - 'Workflows and Repeatability': 'automation-qc.md'
-
-  -  'References': 'references.md'
-
+  
+  - 'References':
+      - 'Installing this software in the future': 'future-installation.md'
+      - 'References': 'references.md'
