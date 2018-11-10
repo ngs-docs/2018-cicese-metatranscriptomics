@@ -11,7 +11,7 @@ tools.
 + [GenBank](https://www.ncbi.nlm.nih.gov/genbank/)
 + [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy)
 
-## Quality Trimming and Evalution
+## Quality Trimming and Evaluation
 + [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
 + [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 + [MultiQC](https://multiqc.info/)
@@ -29,7 +29,7 @@ tools.
 + [Transrate](http://hibberdlab.com/transrate/)
 
 ## Annotation and Finding Genes
-+ [Dammit](https://dammit.readthedocs.io/en/refactor-1.0/)
++ [Dammit](https://dammit.readthedocs.io/)
 + [HMMER](http://hmmer.org/)
 + [NCBI-BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 
@@ -57,7 +57,7 @@ tools.
 ## Taxonomic Classification
 + [Sourmash](https://sourmash.readthedocs.io/en/latest/)
 
-## Amplicon Sequencing
+## Amplicon Sequencing/16S analysis
 + [QIIME2](http://qiime.org/)
 + [DADA2](https://benjjneb.github.io/dada2/tutorial.html)
 + [MOTHUR](https://www.mothur.org/)
