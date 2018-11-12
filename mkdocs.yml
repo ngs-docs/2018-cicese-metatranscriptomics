@@ -61,4 +61,8 @@ nav:
   - 'References':
       - 'Installing this software in the future': 'future-installation.md'
       - 'References': 'references.md'
+  
+  - 'For Instructors':
+      - 'Editing this site': 'for-instructors.md'
+      - 'Setting up MkDocs in a new repo': 'setting-up-mkdocs.md'
 
