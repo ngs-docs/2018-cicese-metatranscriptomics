@@ -628,8 +628,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#if-cloning-a-repo-with-a-mkdocs-submodule" title="If cloning a repo with a mkdocs submodule:" class="md-nav__link">
-    If cloning a repo with a mkdocs submodule:
+  <a href="#install-mkdocs-and-ghp-import-if-necessary" title="Install mkdocs and ghp-import if necessary:" class="md-nav__link">
+    Install mkdocs and ghp-import if necessary:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit-site-info-and-create-docs" title="Edit site info and create docs" class="md-nav__link">
+    Edit site info and create docs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-site" title="Deploy the site" class="md-nav__link">
+    Deploy the site
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-youre-cloning-a-repo-with-a-mkdocs-submodule" title="If you're cloning a repo with a mkdocs submodule:" class="md-nav__link">
+    If you're cloning a repo with a mkdocs submodule:
   </a>
   
 </li>
@@ -671,8 +692,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#if-cloning-a-repo-with-a-mkdocs-submodule" title="If cloning a repo with a mkdocs submodule:" class="md-nav__link">
-    If cloning a repo with a mkdocs submodule:
+  <a href="#install-mkdocs-and-ghp-import-if-necessary" title="Install mkdocs and ghp-import if necessary:" class="md-nav__link">
+    Install mkdocs and ghp-import if necessary:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit-site-info-and-create-docs" title="Edit site info and create docs" class="md-nav__link">
+    Edit site info and create docs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-site" title="Deploy the site" class="md-nav__link">
+    Deploy the site
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-youre-cloning-a-repo-with-a-mkdocs-submodule" title="If you're cloning a repo with a mkdocs submodule:" class="md-nav__link">
+    If you're cloning a repo with a mkdocs submodule:
   </a>
   
 </li>
@@ -706,12 +748,19 @@ echo &quot;site/&quot; &gt;&gt; .gitignore
 git commit .gitmodules .gitignore mkdocs-material-dib -m 'Add mkdocs-material-dib submodule'
 </code></pre>
 
+<h2 id="install-mkdocs-and-ghp-import-if-necessary">Install <code>mkdocs</code> and <code>ghp-import</code> if necessary:</h2>
+<pre><code>conda install  -c conda-forge mkdocs
+conda install -c conda-forge ghp-import
+</code></pre>
+
+<h2 id="edit-site-info-and-create-docs">Edit site info and create docs</h2>
 <p>Edit the info in <code>mkdocs.yml</code> to reflect your repo name and address, color, and sidebar navigation. You'll also see that you can change the names for your docs directory and built web pages, but I assume here that they are <code>docs</code> and <code>site</code>, respectively.</p>
 <p>Make a <code>docs</code> directory where you'll add the markdown docs for the website. Commit a simple <code>hello world</code> or similar md file to start. </p>
 <pre><code>mkdir -p docs
 echo '# Hello World' &gt; docs/index.md
 </code></pre>
 
+<h2 id="deploy-the-site">Deploy the site</h2>
 <p>Go to <code>Settings</code> in your repo, and enable Github Pages for your repository.</p>
 <p>In your repo, build the site:</p>
 <pre><code>mkdocs build
@@ -729,8 +778,8 @@ echo '# Hello World' &gt; docs/index.md
 <pre><code>https://&lt;repo-owner&gt;.github.io/&lt;repo-name&gt;
 </code></pre>
 
-<p>Continue to edit your docs, using <code>mkdocs build</code> to build <code>html</code> and <code>ghp-import</code> to push to <code>gh-pages</code>. Voila! </p>
-<h2 id="if-cloning-a-repo-with-a-mkdocs-submodule">If cloning a repo with a mkdocs submodule:</h2>
+<p>Continue to edit your docs, using <code>mkdocs build</code> to build the html version of the site, and <code>ghp-import</code> to push to <code>gh-pages</code>. Voila! </p>
+<h2 id="if-youre-cloning-a-repo-with-a-mkdocs-submodule">If you're cloning a repo with a mkdocs submodule:</h2>
 <p>If you want to edit the docs, you'll need to grab the <code>mkdocs-material-dib</code> submodule.</p>
 <p>If cloning the repo for the first time:</p>
 <pre><code>git clone --recursive https://github.com/ngs-docs/2018-cicese-metatranscriptomics.git
