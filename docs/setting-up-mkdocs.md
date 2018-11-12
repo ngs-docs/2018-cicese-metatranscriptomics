@@ -20,6 +20,11 @@ Edit the info in `mkdocs.yml` to reflect your repo name and address, color, and 
 
 Make a `docs` directory where you'll add the markdown docs for the website. Commit a simple `hello world` or similar md file to start. 
 
+```
+echo '# Hello World' > index.md
+```
+
+
 Go to `Settings` in your repo, and enable Github Pages for your repository.
 
 In your repo, build the site:
