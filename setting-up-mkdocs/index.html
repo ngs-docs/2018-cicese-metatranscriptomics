@@ -708,6 +708,9 @@ git commit .gitmodules .gitignore mkdocs-material-dib -m 'Add mkdocs-material-di
 
 <p>Edit the info in <code>mkdocs.yml</code> to reflect your repo name and address, color, and sidebar navigation. You'll also see that you can change the names for your docs directory and built web pages, but I assume here that they are <code>docs</code> and <code>site</code>, respectively.</p>
 <p>Make a <code>docs</code> directory where you'll add the markdown docs for the website. Commit a simple <code>hello world</code> or similar md file to start. </p>
+<pre><code>echo '# Hello World' &gt; index.md
+</code></pre>
+
 <p>Go to <code>Settings</code> in your repo, and enable Github Pages for your repository.</p>
 <p>In your repo, build the site:</p>
 <pre><code>mkdocs build
