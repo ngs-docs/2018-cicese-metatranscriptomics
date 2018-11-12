@@ -1,7 +1,7 @@
 Environmental Metatranscriptomics, Nov 2018 
 ======
 
-These are the online materials for the environmental metatranscriptomics workshop to be run at [CICESE](https://www.cicese.edu.mx/).
+These are the online materials for the environmental metatranscriptomics workshop run at [CICESE](https://www.cicese.edu.mx/) in November 2018.
 
 This workshop runs under a [Code of Conduct](code-of-conduct.md). Please respect it and be excellent to each other!
 
