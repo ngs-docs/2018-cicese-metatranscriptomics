@@ -21,7 +21,7 @@ Edit the info in `mkdocs.yml` to reflect your repo name and address, color, and 
 Make a `docs` directory where you'll add the markdown docs for the website. Commit a simple `hello world` or similar md file to start. 
 
 ```
-mkdir docs
+mkdir -p docs
 echo '# Hello World' > docs/index.md
 ```
 
