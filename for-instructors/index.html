@@ -38,7 +38,7 @@
     
     
       
-        <title>For Instructors: - 2018 CICESE Metatranscriptomics workshop</title>
+        <title>Editing this site - 2018 CICESE Metatranscriptomics workshop</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#for-instructors" tabindex="1" class="md-skip">
+      <a href="../#to-edit-these-docs" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 2018 CICESE Metatranscriptomics workshop
               </span>
               <span class="md-header-nav__topic">
-                For Instructors:
+                Editing this site
               </span>
             
           
@@ -562,6 +562,101 @@
   </li>
 
     
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      For Instructors
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        For Instructors
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Editing this site
+      </label>
+    
+    <a href="./" title="Editing this site" class="md-nav__link md-nav__link--active">
+      Editing this site
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#editing-and-creating-new-docs" title="Editing and creating new docs" class="md-nav__link">
+    Editing and creating new docs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#after-editing-the-docs-use-mkdocs-to-deploy" title="After editing the docs, use mkdocs to deploy:" class="md-nav__link">
+    After editing the docs, use mkdocs to deploy:
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-mkdocs/" title="Setting up MkDocs in a new repo" class="md-nav__link">
+      Setting up MkDocs in a new repo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -583,22 +678,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#editing-schedule-and-sidebar-navigation" title="Editing Schedule and Sidebar Navigation:" class="md-nav__link">
-    Editing Schedule and Sidebar Navigation:
+  <a href="#editing-and-creating-new-docs" title="Editing and creating new docs" class="md-nav__link">
+    Editing and creating new docs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#if-mkdocs-is-already-set-up" title="If mkdocs is already set up" class="md-nav__link">
-    If mkdocs is already set up
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#if-setting-up-mkdocs-for-a-new-repo" title="If setting up mkdocs for a new repo:" class="md-nav__link">
-    If setting up mkdocs for a new repo:
+  <a href="#after-editing-the-docs-use-mkdocs-to-deploy" title="After editing the docs, use mkdocs to deploy:" class="md-nav__link">
+    After editing the docs, use mkdocs to deploy:
   </a>
   
 </li>
@@ -620,24 +708,33 @@
               
                 
                 
-                <h1 id="for-instructors">For Instructors:</h1>
-<h2 id="editing-schedule-and-sidebar-navigation">Editing Schedule and Sidebar Navigation:</h2>
-<ul>
-<li>schedule: edit <code>docs/index.md</code></li>
-<li>side nav: edit <code>mkdocs.yml</code></li>
-</ul>
-<p>To use mkdocs to deploy lessons:</p>
-<h2 id="if-mkdocs-is-already-set-up">If mkdocs is already set up</h2>
+                <h1 id="to-edit-these-docs">To edit these docs:</h1>
+<p>If you want to edit the docs, you'll need to grab the <code>mkdocs-material-dib</code> submodule. </p>
+<p>If cloning the repo for the first time:</p>
+<pre><code>git clone --recursive https://github.com/ngs-docs/2018-cicese-metatranscriptomics.git
+</code></pre>
+
+<p><code>recursive</code> will pull the submodule as well as the main git repo.</p>
+<p>If you already have the repo, and need to pull in the submodule:</p>
+<pre><code>git submodule update --init
+</code></pre>
+
+<h2 id="editing-and-creating-new-docs">Editing and creating new docs</h2>
 <p>All docs should be written in md in the <code>docs</code> folder,
 and committed to the repo as usual. If you added new 
 documentation, be sure to add it into the site navigation 
 in <code>mkdocs.yml</code>, or link to it from another doc.</p>
+<ul>
+<li>sidebar navigation: edit <code>mkdocs.yml</code></li>
+</ul>
+<p>For the 2018 cicese workshop, also edit the schedule in <code>docs/index.md</code></p>
+<h2 id="after-editing-the-docs-use-mkdocs-to-deploy">After editing the docs, use mkdocs to deploy:</h2>
 <p>Install <code>mkdocs</code> and <code>ghp-import</code> if necessary:</p>
 <pre><code>conda install  -c conda-forge mkdocs
 conda install -c conda-forge ghp-import
 </code></pre>
 
-<p>Build docs folder into site/</p>
+<p>Build <code>docs</code> folder into <code>site</code>:</p>
 <pre><code>mkdocs build
 </code></pre>
 
@@ -645,13 +742,8 @@ conda install -c conda-forge ghp-import
 <pre><code>mkdocs serve
 </code></pre>
 
-<p>Push docs changes to gh-pages branch</p>
+<p>When satisfyed, push <code>docs</code> changes to <code>gh-pages</code> branch:</p>
 <pre><code>ghp-import site -p
-</code></pre>
-
-<h2 id="if-setting-up-mkdocs-for-a-new-repo">If setting up mkdocs for a new repo:</h2>
-<p>Grab the mkdocs repo, dib lab flavor, and follow setup instructions</p>
-<pre><code>git clone https://github.com/dib-lab/mkdocs-material-dib.git
 </code></pre>
                 
                   
@@ -670,6 +762,41 @@ conda install -c conda-forge ghp-import
         
 <footer class="md-footer">
   
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../references/" title="References" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                References
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../setting-up-mkdocs/" title="Setting up MkDocs in a new repo" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Setting up MkDocs in a new repo
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
